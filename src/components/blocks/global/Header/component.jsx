@@ -11,7 +11,7 @@ const Header = () => {
         <Toolbar>
           <LogoWrapper>
             <LogoIcon />
-            <LogoTitle variant="h6" component="h1">
+            <LogoTitle variant="h6" component="h2">
               simple eShop
             </LogoTitle>
           </LogoWrapper>

@@ -11,7 +11,10 @@ const StandardLayout = ({ children }) => (
 )
 
 StandardLayout.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.element.isRequired]),
+  children: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.element.isRequired,
+  ]),
 }
 
 export default StandardLayout

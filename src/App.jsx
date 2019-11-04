@@ -2,11 +2,14 @@ import React from 'react'
 
 import ThemeProviderWrapper from './components/wrappers/ThemeProvider'
 import StandardLayout from './components/layouts/Standard'
+import CatalogPage from './components/pages/Catalog'
 
 function App() {
   return (
     <ThemeProviderWrapper>
-      <StandardLayout>Main content should be here...</StandardLayout>
+      <StandardLayout>
+        <CatalogPage />
+      </StandardLayout>
     </ThemeProviderWrapper>
   )
 }
