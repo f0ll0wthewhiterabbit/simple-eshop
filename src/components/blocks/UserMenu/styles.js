@@ -3,7 +3,7 @@ import { Button, ListItemIcon } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 const UserMenuButton = styled(Button)`
-  color: ${props => props.theme.colors.fontLight};
+  color: ${props => props.theme.palette.primary.contrastText};
   text-transform: none;
 `
 

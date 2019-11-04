@@ -1,8 +1,8 @@
 import React from 'react'
 import { AppBar, Toolbar, Container } from '@material-ui/core'
 
-import { LogoWrapper, LogoIcon, LogoTitle } from './styles'
 import UserMenu from '../../UserMenu'
+import { LogoWrapper, LogoIcon, LogoTitle } from './styles'
 
 const Header = () => {
   return (

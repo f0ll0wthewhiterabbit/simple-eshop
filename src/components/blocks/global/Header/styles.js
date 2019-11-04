@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import ShopTwoRoundedIcon from '@material-ui/icons/ShopTwoRounded'
-import { Typography, FormControl } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 
 const LogoWrapper = styled.a`
   display: block;
@@ -10,20 +10,14 @@ const LogoWrapper = styled.a`
 `
 
 const LogoIcon = styled(ShopTwoRoundedIcon)`
-  margin-right: ${props => props.theme.unit.single};
+  margin-right: ${props => props.theme.spacing(1)}px;
 `
 
 const LogoTitle = styled(Typography)`
   display: none;
 
-  @media (min-width: ${props => props.theme.width.tablet}) {
+  ${props => props.theme.breakpoints.up('sm')} {
     display: block;
   }
 `
-
-const UserMenu = styled(FormControl)`
-  margin: ${props => props.theme.unit.single};
-  min-width: 110px;
-`
-
-export { LogoIcon, LogoTitle, UserMenu, LogoWrapper }
+export { LogoIcon, LogoTitle, LogoWrapper }
