@@ -14,6 +14,7 @@ export default {
     secondary: '#26499d',
     secondaryLight: 'rgba(38, 73, 157, 0.73)',
     font: '#222222',
+    fontLight: '#fff',
   },
   fontSizes: {
     werySmall: '12px',
@@ -33,7 +34,7 @@ export default {
   },
   width: {
     mobile: '320px',
-    tablet: '768px',
+    tablet: '600px',
     desktop: '992px',
     desktopLarge: '1200px',
     mobileOnly: '767px',
