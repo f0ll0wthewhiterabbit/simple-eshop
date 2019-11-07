@@ -18,13 +18,13 @@ const Content = styled(CardContent)`
 `
 
 const TagsWrapper = styled(CardActions)`
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: ${props => props.theme.spacing(2)}px;
+  padding-right: ${props => props.theme.spacing(2)}px;
 `
 
 const ActionsWrapper = styled(CardActions)`
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: ${props => props.theme.spacing(2)}px;
+  padding-right: ${props => props.theme.spacing(2)}px;
   justify-content: space-between;
 `
 

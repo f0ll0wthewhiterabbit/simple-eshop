@@ -6,8 +6,8 @@ const Wrapper = styled(Container)`
   padding-bottom: ${props => props.theme.spacing(6)}px;
 `
 
-const Header = styled(Typography)`
+const Heading = styled(Typography)`
   margin-bottom: ${props => props.theme.spacing(4)}px;
 `
 
-export { Wrapper, Header }
+export { Wrapper, Heading }

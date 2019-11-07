@@ -1,16 +1,16 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 
-import ProductCard from '../../blocks/ProductCard'
+import ProductCard from './components/ProductCard'
 import mockProductList from '../../../data/products.json'
-import { Wrapper, Header } from './styles'
+import { Wrapper, Heading } from './styles'
 
 const CatalogPage = () => {
   return (
     <Wrapper maxWidth="lg">
-      <Header variant="h4" component="h1" align="center">
+      <Heading variant="h4" component="h1" align="center">
         Catalog
-      </Header>
+      </Heading>
       <Grid container spacing={4}>
         {mockProductList.map(product => {
           const { id, title, description, tags, price, rating, image } = product
