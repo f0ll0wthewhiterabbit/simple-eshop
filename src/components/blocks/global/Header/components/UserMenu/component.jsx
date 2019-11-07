@@ -1,13 +1,24 @@
 import React from 'react'
-import { Menu, MenuItem, ListItemText } from '@material-ui/core'
+import PropTypes from 'prop-types'
+import { withTheme } from 'styled-components'
+import { Menu, MenuItem, ListItemText, useMediaQuery } from '@material-ui/core'
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined'
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined'
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
+import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
-import { UserMenuButton, ArrowIcon, IconWrapper } from './styles'
+import {
+  Wrapper,
+  UserMenuButtonNormal,
+  UserMenuButtonSmall,
+  ArrowIcon,
+  IconWrapper,
+} from './styles'
 
-const UserMenu = () => {
+const UserMenu = ({ theme }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const isMobileDevice = !useMediaQuery(theme.breakpoints.up('sm'))
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget)
@@ -17,15 +28,19 @@ const UserMenu = () => {
     setAnchorEl(null)
   }
 
+  const userMenuButton = isMobileDevice ? (
+    <UserMenuButtonSmall aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+      <AccountBoxIcon />
+    </UserMenuButtonSmall>
+  ) : (
+    <UserMenuButtonNormal aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+      Username <ArrowIcon />
+    </UserMenuButtonNormal>
+  )
+
   return (
-    <div>
-      <UserMenuButton
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        Username <ArrowIcon />
-      </UserMenuButton>
+    <Wrapper>
+      {userMenuButton}
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -52,8 +67,14 @@ const UserMenu = () => {
           <ListItemText primary="Logout" />
         </MenuItem>
       </Menu>
-    </div>
+    </Wrapper>
   )
 }
 
-export default UserMenu
+UserMenu.propTypes = {
+  theme: PropTypes.shape({
+    breakpoints: PropTypes.object.isRequired,
+  }).isRequired,
+}
+
+export default withTheme(UserMenu)

@@ -1,23 +1,14 @@
 import styled from 'styled-components'
-import ShopTwoRoundedIcon from '@material-ui/icons/ShopTwoRounded'
-import { Typography } from '@material-ui/core'
+import { AppBar } from '@material-ui/core'
 
-const LogoWrapper = styled.a`
-  display: block;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-`
-
-const LogoIcon = styled(ShopTwoRoundedIcon)`
-  margin-right: ${props => props.theme.spacing(1)}px;
-`
-
-const LogoTitle = styled(Typography)`
-  display: none;
+const Wrapper = styled(AppBar)`
+  height: ${props => props.theme.sizing.headerHeight.xs};
+  position: relative;
+  z-index: 2;
 
   ${props => props.theme.breakpoints.up('sm')} {
-    display: block;
+    height: ${props => props.theme.sizing.headerHeight.sm};
   }
 `
-export { LogoIcon, LogoTitle, LogoWrapper }
+
+export default Wrapper

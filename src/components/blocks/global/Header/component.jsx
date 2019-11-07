@@ -1,24 +1,20 @@
 import React from 'react'
-import { AppBar, Toolbar, Container } from '@material-ui/core'
+import { Toolbar, Container } from '@material-ui/core'
 
-import UserMenu from '../../UserMenu'
-import { LogoWrapper, LogoIcon, LogoTitle } from './styles'
+import Logo from './components/Logo'
+import UserMenu from './components/UserMenu'
+import Wrapper from './styles'
 
 const Header = () => {
   return (
-    <AppBar position="static">
+    <Wrapper position="static">
       <Container maxWidth="lg">
         <Toolbar>
-          <LogoWrapper>
-            <LogoIcon />
-            <LogoTitle variant="h6" component="h2">
-              simple eShop
-            </LogoTitle>
-          </LogoWrapper>
+          <Logo />
           <UserMenu />
         </Toolbar>
       </Container>
-    </AppBar>
+    </Wrapper>
   )
 }
 
