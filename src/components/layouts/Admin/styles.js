@@ -18,6 +18,7 @@ const Sidebar = styled(Drawer)`
 
     ${props => props.theme.breakpoints.up('lg')} {
       z-index: 1;
+      position: absolute;
     }
   }
 `

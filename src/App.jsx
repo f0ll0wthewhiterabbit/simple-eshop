@@ -4,6 +4,8 @@ import ThemeProviderWrapper from './components/wrappers/ThemeProvider'
 // import StandardLayout from './components/layouts/Standard'
 // import CatalogPage from './components/pages/Catalog'
 import AdminLayout from './components/layouts/Admin'
+// import UsersPage from './components/pages/admin/Users'
+import ProductsPage from './components/pages/admin/Products'
 
 function App() {
   return (
@@ -11,12 +13,13 @@ function App() {
       {/* <StandardLayout>
         <CatalogPage />
       </StandardLayout> */}
+
+      {/* <AdminLayout>
+        <UsersPage />
+      </AdminLayout> */}
+
       <AdminLayout>
-        <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae beatae, eveniet eaque
-          ab unde illum, id, consectetur maxime eius a repudiandae voluptatibus natus nulla ipsam
-          sit asperiores provident dignissimos quidem!
-        </div>
+        <ProductsPage />
       </AdminLayout>
     </ThemeProviderWrapper>
   )
