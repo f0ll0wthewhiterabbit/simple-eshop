@@ -5,7 +5,7 @@ import { LogoWrapper, LogoIcon, LogoTitle } from './styles'
 const Logo = () => {
   return (
     <LogoWrapper>
-      <LogoIcon />
+      <LogoIcon fontSize="large" />
       <LogoTitle variant="h6" component="h2">
         simple eShop
       </LogoTitle>

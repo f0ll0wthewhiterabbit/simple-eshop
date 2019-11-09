@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ShopTwoRoundedIcon from '@material-ui/icons/ShopTwoRounded'
+import ExplicitIcon from '@material-ui/icons/Explicit'
 import { Typography } from '@material-ui/core'
 
 const LogoWrapper = styled.a`
@@ -14,7 +14,7 @@ const LogoWrapper = styled.a`
   }
 `
 
-const LogoIcon = styled(ShopTwoRoundedIcon)`
+const LogoIcon = styled(ExplicitIcon)`
   margin-right: ${props => props.theme.spacing(1)}px;
 `
 
