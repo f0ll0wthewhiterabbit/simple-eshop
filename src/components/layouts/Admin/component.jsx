@@ -5,9 +5,10 @@ import { useMediaQuery, Divider } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 
 import Header from '../../blocks/global/Header'
+import Footer from '../../blocks/global/Footer'
 import Profile from './components/Profile/component'
 import SidebarNav from './components/SidebarNav'
-import { Wrapper, Navigation, MenuButton, Sidebar, SidebarRoot, Main } from './styles'
+import { Root, Wrapper, Navigation, MenuButton, Sidebar, SidebarRoot, Main } from './styles'
 
 const AdminLayout = ({ theme, children }) => {
   const [openSidebar, setOpenSidebar] = useState(false)
@@ -24,7 +25,7 @@ const AdminLayout = ({ theme, children }) => {
   }
 
   return (
-    <>
+    <Root>
       <Header />
       <Wrapper>
         <MenuButton color="secondary" aria-label="open sidebar" onClick={handleSidebarOpen}>
@@ -47,7 +48,8 @@ const AdminLayout = ({ theme, children }) => {
         </Navigation>
         <Main>{children}</Main>
       </Wrapper>
-    </>
+      <Footer />
+    </Root>
   )
 }
 

@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 import { IconButton, Drawer } from '@material-ui/core'
 
+const Root = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`
+
 const Wrapper = styled.div`
   display: flex;
 `
@@ -57,4 +63,4 @@ const Main = styled.main`
   padding: ${props => props.theme.spacing(3)}px;
 `
 
-export { Wrapper, Navigation, MenuButton, Sidebar, SidebarRoot, Main }
+export { Root, Wrapper, Navigation, MenuButton, Sidebar, SidebarRoot, Main }
