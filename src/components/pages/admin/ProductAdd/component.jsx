@@ -7,6 +7,7 @@ import {
   Root,
   Wrapper,
   IconWrapper,
+  Heading,
   Form,
   SubmitButton,
   TagsInput,
@@ -37,9 +38,9 @@ const ProductAddPage = () => {
         <IconWrapper>
           <LibraryAddIcon />
         </IconWrapper>
-        <Typography component="h1" variant="h5" gutterBottom>
+        <Heading component="h1" variant="h5" gutterBottom>
           Add Product
-        </Typography>
+        </Heading>
         <Form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={8}>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ProductsToolbar from './components/ProductsToolbar'
-import Table from '../../../blocks/global/Table'
+import Table from '../../../global/Table'
 import mockProductList from '../../../../data/products.json'
 
 const ProductsPage = () => {

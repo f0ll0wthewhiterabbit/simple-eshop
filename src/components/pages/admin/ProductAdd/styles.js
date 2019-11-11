@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Container, Avatar, Button } from '@material-ui/core'
+import { Container, Avatar, Button, Typography } from '@material-ui/core'
 import ChipInput from 'material-ui-chip-input'
 
 const Root = styled(Container)`
@@ -16,6 +16,10 @@ const Wrapper = styled.div`
 const IconWrapper = styled(Avatar)`
   margin: ${props => props.theme.spacing(1)}px;
   background-color: ${props => props.theme.palette.primary.main};
+`
+
+const Heading = styled(Typography)`
+  margin-bottom: ${props => props.theme.spacing(3)}px;
 `
 
 const Form = styled.form`
@@ -48,4 +52,15 @@ const UploadButton = styled(Button)`
   margin-right: ${props => props.theme.spacing(1)}px;
 `
 
-export { Root, Wrapper, IconWrapper, Form, SubmitButton, TagsInput, FileInput, Label, UploadButton }
+export {
+  Root,
+  Wrapper,
+  IconWrapper,
+  Heading,
+  Form,
+  SubmitButton,
+  TagsInput,
+  FileInput,
+  Label,
+  UploadButton,
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Table from '../../../blocks/global/Table'
+import Table from '../../../global/Table'
 import mockUserList from '../../../../data/users.json'
 
 const UsersPage = () => {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import Header from '../../blocks/global/Header'
-import Footer from '../../blocks/global/Footer'
-import AlertDialog from '../../blocks/global/AlertDialog'
+import Header from '../../global/Header'
+import Footer from '../../global/Footer'
+import AlertDialog from '../../global/AlertDialog'
 import Root from './styles'
 
 const StandardLayout = ({ children }) => {

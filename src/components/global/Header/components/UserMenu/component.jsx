@@ -75,7 +75,7 @@ UserMenu.propTypes = {
   theme: PropTypes.shape({
     breakpoints: PropTypes.object.isRequired,
   }).isRequired,
-  handleModalOpen: PropTypes.func.isRequired,
+  handleModalOpen: PropTypes.func,
 }
 
 export default withTheme(UserMenu)

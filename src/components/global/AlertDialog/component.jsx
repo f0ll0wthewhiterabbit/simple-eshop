@@ -36,7 +36,7 @@ const AlertDialog = ({ title, children, show, handleModalClose }) => {
 AlertDialog.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  show: PropTypes.string.isRequired,
+  show: PropTypes.bool.isRequired,
   handleModalClose: PropTypes.func.isRequired,
 }
 
