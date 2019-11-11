@@ -20,14 +20,16 @@ const SidebarNav = () => {
   ]
 
   return (
-    <PagesList>
-      {pages.map(page => (
-        <ListItem key={page.title} button>
-          <PageIcon>{page.icon}</PageIcon>
-          <PageText primary={page.title} />
-        </ListItem>
-      ))}
-    </PagesList>
+    <nav aria-label="navigation">
+      <PagesList>
+        {pages.map(page => (
+          <ListItem key={page.title} button>
+            <PageIcon>{page.icon}</PageIcon>
+            <PageText primary={page.title} />
+          </ListItem>
+        ))}
+      </PagesList>
+    </nav>
   )
 }
 

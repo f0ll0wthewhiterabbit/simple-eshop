@@ -5,20 +5,18 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 `
 
 const Wrapper = styled.div`
   display: flex;
 `
 
-const Navigation = styled.nav`
-  ${props => props.theme.breakpoints.up('lg')} {
-    width: ${props => props.theme.sizing.sidebarWidth};
-    flex-shrink: 0;
-  }
-`
-
 const Sidebar = styled(Drawer)`
+  height: 100%;
+  width: ${props => props.theme.sizing.sidebarWidth};
+  flex-shrink: 0;
+
   .MuiDrawer-paper {
     width: ${props => props.theme.sizing.sidebarWidth};
 
@@ -63,4 +61,4 @@ const Main = styled.main`
   padding: ${props => props.theme.spacing(3)}px;
 `
 
-export { Root, Wrapper, Navigation, MenuButton, Sidebar, SidebarRoot, Main }
+export { Root, Wrapper, MenuButton, Sidebar, SidebarRoot, Main }

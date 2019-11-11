@@ -8,7 +8,7 @@ import Header from '../../blocks/global/Header'
 import Footer from '../../blocks/global/Footer'
 import Profile from './components/Profile/component'
 import SidebarNav from './components/SidebarNav'
-import { Root, Wrapper, Navigation, MenuButton, Sidebar, SidebarRoot, Main } from './styles'
+import { Root, Wrapper, MenuButton, Sidebar, SidebarRoot, Main } from './styles'
 
 const AdminLayout = ({ theme, children }) => {
   const [openSidebar, setOpenSidebar] = useState(false)
@@ -32,20 +32,18 @@ const AdminLayout = ({ theme, children }) => {
           <MenuIcon />
         </MenuButton>
 
-        <Navigation aria-label="navigation">
-          <Sidebar
-            variant={isDesktop ? 'persistent' : 'temporary'}
-            onClose={handleSidebarClose}
-            open={shouldOpenSidebar}
-            ModalProps={isDesktop ? {} : { keepMounted: true }} // Better open performance on mobile.
-          >
-            <SidebarRoot>
-              <Profile />
-              <Divider />
-              <SidebarNav />
-            </SidebarRoot>
-          </Sidebar>
-        </Navigation>
+        <Sidebar
+          variant={isDesktop ? 'persistent' : 'temporary'}
+          onClose={handleSidebarClose}
+          open={shouldOpenSidebar}
+          ModalProps={isDesktop ? {} : { keepMounted: true }} // Better open performance on mobile.
+        >
+          <SidebarRoot>
+            <Profile />
+            <Divider />
+            <SidebarNav />
+          </SidebarRoot>
+        </Sidebar>
         <Main>{children}</Main>
       </Wrapper>
       <Footer />

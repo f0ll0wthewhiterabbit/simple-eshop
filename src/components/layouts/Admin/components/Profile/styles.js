@@ -5,7 +5,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: ${props => props.theme.spacing(2)}px;
+  padding-top: ${props => props.theme.spacing(4)}px;
+  padding-bottom: ${props => props.theme.spacing(4)}px;
 `
 
 const ProfileAvatar = styled(Avatar)`
