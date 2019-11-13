@@ -10,6 +10,7 @@ const Root = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
+  flex-grow: 1;
 `
 
 const Sidebar = styled(Drawer)`
@@ -59,6 +60,7 @@ const MenuButton = styled(IconButton)`
 const Main = styled.main`
   flex-grow: 1;
   padding: ${props => props.theme.spacing(3)}px;
+  position: relative;
 `
 
 export { Root, Wrapper, MenuButton, Sidebar, SidebarRoot, Main }

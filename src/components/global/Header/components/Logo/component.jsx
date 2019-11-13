@@ -1,15 +1,16 @@
 import React from 'react'
 
-import { LogoWrapper, LogoIcon, LogoTitle } from './styles'
+import { MAIN_PAGE_PATH } from '../../../../../constants'
+import { SiteLink, LogoIcon, LogoTitle } from './styles'
 
 const Logo = () => {
   return (
-    <LogoWrapper>
+    <SiteLink to={MAIN_PAGE_PATH}>
       <LogoIcon fontSize="large" />
       <LogoTitle variant="h6" component="h2">
         simple eShop
       </LogoTitle>
-    </LogoWrapper>
+    </SiteLink>
   )
 }
 

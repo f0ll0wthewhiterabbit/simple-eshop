@@ -1,12 +1,15 @@
 import styled from 'styled-components'
-import { Avatar, Button } from '@material-ui/core'
+import { Avatar, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
-  margin-top: ${props => props.theme.spacing(8)}px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 
 const IconWrapper = styled(Avatar)`
@@ -14,16 +17,15 @@ const IconWrapper = styled(Avatar)`
   background-color: ${props => props.theme.palette.secondary.main};
 `
 
-const Form = styled.form`
-  width: 100%; /* Fix IE 11 issue */
-  margin-top: ${props => props.theme.spacing(1)}px;
+const Heading = styled(Typography)`
+  margin: ${props => props.theme.spacing(1)}px;
 `
 
-const SubmitButton = styled(Button)`
-  margin: ${props => props.theme.spacing(3, 0, 2)};
+const LinkWrapper = styled(Typography)`
+  margin: ${props => props.theme.spacing(1)}px;
 `
 
-const SignUpLink = styled(Link)`
+const BackLink = styled(Link)`
   text-decoration: none;
   color: ${props => props.theme.palette.primary.main};
 
@@ -32,4 +34,4 @@ const SignUpLink = styled(Link)`
   }
 `
 
-export { Wrapper, IconWrapper, Form, SubmitButton, SignUpLink }
+export { Wrapper, IconWrapper, LinkWrapper, Heading, BackLink }

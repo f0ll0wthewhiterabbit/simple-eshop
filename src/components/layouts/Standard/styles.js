@@ -6,4 +6,9 @@ const Root = styled.div`
   min-height: 100vh;
 `
 
-export default Root
+const Main = styled.main`
+  position: relative;
+  flex-grow: 1;
+`
+
+export { Root, Main }

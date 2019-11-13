@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Header from '../../global/Header'
 import Footer from '../../global/Footer'
 import AlertDialog from '../../global/AlertDialog'
-import Root from './styles'
+import { Root, Main } from './styles'
 
 const StandardLayout = ({ children }) => {
   const [isModalOpened, setIsModalOpened] = useState(false)
@@ -28,7 +28,7 @@ const StandardLayout = ({ children }) => {
         deleted soon.
       </AlertDialog>
       <Header handleModalOpen={handleModalOpen} />
-      <main>{children}</main>
+      <Main>{children}</Main>
       <Footer />
     </Root>
   )

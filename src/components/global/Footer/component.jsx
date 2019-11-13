@@ -1,16 +1,14 @@
 import React from 'react'
 import { Container, Typography, Link } from '@material-ui/core'
 
-import { Wrapper, Info, Logo } from './styles'
+import { MAIN_PAGE_PATH } from '../../../constants'
+import { Wrapper, Info, Logo, SiteLink } from './styles'
 
 const Footer = () => {
   const copyright = (
     <Typography variant="body2" color="textSecondary" align="center">
       {'© '}
-      <Link color="inherit" href="/">
-        simple eShop
-      </Link>{' '}
-      {new Date().getFullYear()}
+      <SiteLink to={MAIN_PAGE_PATH}>simple eShop</SiteLink> {new Date().getFullYear()}
     </Typography>
   )
 

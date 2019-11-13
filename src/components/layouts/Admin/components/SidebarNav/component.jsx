@@ -1,20 +1,20 @@
 import React from 'react'
-import ListItem from '@material-ui/core/ListItem'
 import PeopleIcon from '@material-ui/icons/People'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 
-import { PagesList, PageIcon, PageText } from './styles'
+import { ADMIN_USERS_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH } from '../../../../../constants'
+import { PagesList, NavigationLink, NavigationItem, PageIcon, PageText } from './styles'
 
 const SidebarNav = () => {
   const pages = [
     {
       title: 'Users',
-      href: '/admin/users',
+      href: ADMIN_USERS_PAGE_PATH,
       icon: <PeopleIcon />,
     },
     {
       title: 'Products',
-      href: '/admin/products',
+      href: ADMIN_PRODUCTS_PAGE_PATH,
       icon: <ShoppingBasketIcon />,
     },
   ]
@@ -23,10 +23,12 @@ const SidebarNav = () => {
     <nav aria-label="navigation">
       <PagesList>
         {pages.map(page => (
-          <ListItem key={page.title} button>
-            <PageIcon>{page.icon}</PageIcon>
-            <PageText primary={page.title} />
-          </ListItem>
+          <NavigationItem key={page.title} button>
+            <NavigationLink to={page.href}>
+              <PageIcon>{page.icon}</PageIcon>
+              <PageText primary={page.title} />
+            </NavigationLink>
+          </NavigationItem>
         ))}
       </PagesList>
     </nav>

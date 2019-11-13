@@ -1,8 +1,9 @@
 import React from 'react'
-import { TextField, Link, Typography, Container } from '@material-ui/core'
+import { TextField, Typography, Container } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
-import { Wrapper, IconWrapper, Form, SubmitButton } from './styles'
+import { SING_UP_PAGE_PATH } from '../../../constants'
+import { Wrapper, IconWrapper, Form, SubmitButton, SignUpLink } from './styles'
 
 const SingInPage = () => {
   return (
@@ -41,10 +42,7 @@ const SingInPage = () => {
             Sign In
           </SubmitButton>
           <Typography color="textSecondary" variant="body2" align="center">
-            Don&apos;t have an account?{' '}
-            <Link href="#sign-up" variant="body2">
-              Sign Up
-            </Link>
+            Don&apos;t have an account? <SignUpLink to={SING_UP_PAGE_PATH}>Sign Up</SignUpLink>
           </Typography>
         </Form>
       </Wrapper>

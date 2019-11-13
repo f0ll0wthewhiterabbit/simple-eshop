@@ -1,8 +1,9 @@
 import React from 'react'
-import { TextField, Link, Grid, Typography, Container } from '@material-ui/core'
+import { TextField, Grid, Typography, Container } from '@material-ui/core'
 import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded'
 
-import { Wrapper, IconWrapper, Form, SubmitButton } from './styles'
+import { SING_IN_PAGE_PATH } from '../../../constants'
+import { Wrapper, IconWrapper, Form, SubmitButton, SignInLink } from './styles'
 
 const SignUpPage = () => {
   return (
@@ -67,10 +68,7 @@ const SignUpPage = () => {
             Sign Up
           </SubmitButton>
           <Typography color="textSecondary" variant="body2" align="center">
-            Already have an account?{' '}
-            <Link href="#sign-in" variant="body2">
-              Sign in
-            </Link>
+            Already have an account? <SignInLink to={SING_IN_PAGE_PATH}>Sign In</SignInLink>
           </Typography>
         </Form>
       </Wrapper>

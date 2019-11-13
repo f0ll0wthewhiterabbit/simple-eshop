@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Typography } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.footer`
   margin-top: auto;
@@ -29,4 +30,13 @@ const Logo = styled.img`
   margin-right: 5px;
 `
 
-export { Wrapper, Info, Logo }
+const SiteLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+export { Wrapper, Info, Logo, SiteLink }

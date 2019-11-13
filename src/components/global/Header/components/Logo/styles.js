@@ -1,13 +1,16 @@
 import styled from 'styled-components'
 import ExplicitIcon from '@material-ui/icons/Explicit'
 import { Typography } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
-const LogoWrapper = styled.a`
+const SiteLink = styled(Link)`
   display: block;
   flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
+  color: ${props => props.theme.palette.primary.contrastText};
 
   ${props => props.theme.breakpoints.up('lg')} {
     justify-content: flex-start;
@@ -28,4 +31,4 @@ const LogoTitle = styled(Typography)`
   }
 `
 
-export { LogoIcon, LogoTitle, LogoWrapper }
+export { LogoIcon, LogoTitle, SiteLink }
