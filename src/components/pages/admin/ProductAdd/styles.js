@@ -43,7 +43,9 @@ const FileInput = styled.input`
   display: none;
 `
 
-const Label = styled.label`
+const Label = styled.label``
+
+const FileInputWrapper = styled.div`
   display: flex;
   align-items: center;
 `
@@ -62,5 +64,6 @@ export {
   TagsInput,
   FileInput,
   Label,
+  FileInputWrapper,
   UploadButton,
 }

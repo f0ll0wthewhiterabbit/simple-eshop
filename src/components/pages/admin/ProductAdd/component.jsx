@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { TextField, Typography, Grid } from '@material-ui/core'
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd'
 import ImageIcon from '@material-ui/icons/Image'
@@ -13,12 +13,14 @@ import {
   TagsInput,
   FileInput,
   Label,
+  FileInputWrapper,
   UploadButton,
 } from './styles'
 
 const ProductAddPage = () => {
   const [tags, setTags] = useState(['Foo', 'Bar'])
   const [imageLabel, setImageLabel] = useState('')
+  const hiddenFileInput = useRef(null)
 
   const handleAddTag = tag => {
     setTags([...tags, tag])
@@ -29,7 +31,20 @@ const ProductAddPage = () => {
   }
 
   const handleImageChange = evt => {
-    setImageLabel(evt.target.files[0].name)
+    if (evt.target.files[0].name) {
+      setImageLabel(evt.target.files[0].name)
+    }
+  }
+
+  const handleButtonKeyDown = evt => {
+    const KeyCode = {
+      ENTER: 13,
+      SPACE: 32,
+    }
+
+    if (evt.keyCode === KeyCode.ENTER || evt.keyCode === KeyCode.SPACE) {
+      hiddenFileInput.current.click()
+    }
   }
 
   return (
@@ -94,24 +109,28 @@ const ProductAddPage = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Label htmlFor="file-button">
-                <FileInput
-                  accept="image/*"
-                  id="file-button"
-                  type="file"
-                  onChange={handleImageChange}
-                  required
-                />
-                <UploadButton
-                  variant="contained"
-                  color="default"
-                  startIcon={<ImageIcon />}
-                  component="span"
-                >
-                  Upload
-                </UploadButton>
+              <FileInputWrapper>
+                <Label htmlFor="file-button">
+                  <FileInput
+                    accept="image/*"
+                    id="file-button"
+                    type="file"
+                    onChange={handleImageChange}
+                    required
+                    ref={hiddenFileInput}
+                  />
+                  <UploadButton
+                    variant="contained"
+                    color="default"
+                    startIcon={<ImageIcon />}
+                    component="span"
+                    onKeyDown={handleButtonKeyDown}
+                  >
+                    Upload
+                  </UploadButton>
+                </Label>
                 <Typography variant="body2">{imageLabel}</Typography>
-              </Label>
+              </FileInputWrapper>
             </Grid>
             <SubmitButton type="submit" fullWidth variant="contained" color="primary">
               Add Product
