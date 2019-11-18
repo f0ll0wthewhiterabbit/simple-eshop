@@ -15,7 +15,7 @@ import {
   IconWrapper,
 } from './styles'
 
-const UserMenu = ({ theme, handleModalOpen }) => {
+const UserMenu = ({ theme, showModal }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const isMobileDevice = !useMediaQuery(theme.breakpoints.up('sm'))
@@ -26,6 +26,11 @@ const UserMenu = ({ theme, handleModalOpen }) => {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleDeleteAccountClick = () => {
+    showModal()
+    handleClose()
   }
 
   const userMenuButton = isMobileDevice ? (
@@ -54,7 +59,7 @@ const UserMenu = ({ theme, handleModalOpen }) => {
           </IconWrapper>
           <ListItemText primary="Username" />
         </MenuItem>
-        <MenuItem onClick={handleModalOpen}>
+        <MenuItem onClick={handleDeleteAccountClick}>
           <IconWrapper>
             <HighlightOffOutlinedIcon fontSize="small" />
           </IconWrapper>
@@ -75,7 +80,7 @@ UserMenu.propTypes = {
   theme: PropTypes.shape({
     breakpoints: PropTypes.object.isRequired,
   }).isRequired,
-  handleModalOpen: PropTypes.func,
+  showModal: PropTypes.func,
 }
 
 export default withTheme(UserMenu)

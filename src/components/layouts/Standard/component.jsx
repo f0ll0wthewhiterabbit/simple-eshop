@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import Header from '../../global/Header'
@@ -7,27 +7,13 @@ import AlertDialog from '../../global/AlertDialog'
 import { Root, Main } from './styles'
 
 const StandardLayout = ({ children }) => {
-  const [isModalOpened, setIsModalOpened] = useState(false)
-
-  const handleModalOpen = () => {
-    setIsModalOpened(true)
-  }
-
-  const handleModalClose = () => {
-    setIsModalOpened(false)
-  }
-
   return (
     <Root>
-      <AlertDialog
-        show={isModalOpened}
-        handleModalClose={handleModalClose}
-        title="Delete your account?"
-      >
+      <AlertDialog title="Delete your account?">
         The remove request will be sent to the administrator. Unfortunately, your account will be
         deleted soon.
       </AlertDialog>
-      <Header handleModalOpen={handleModalOpen} />
+      <Header />
       <Main>{children}</Main>
       <Footer />
     </Root>

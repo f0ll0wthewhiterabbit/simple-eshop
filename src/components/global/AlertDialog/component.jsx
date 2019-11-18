@@ -7,11 +7,11 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
-const AlertDialog = ({ title, children, show, handleModalClose }) => {
+const AlertDialog = ({ isModalOpened, title, children, closeModal }) => {
   return (
     <Dialog
-      open={show}
-      onClose={handleModalClose}
+      open={isModalOpened}
+      onClose={closeModal}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
@@ -22,10 +22,10 @@ const AlertDialog = ({ title, children, show, handleModalClose }) => {
         </DialogContent>
       )}
       <DialogActions>
-        <Button onClick={handleModalClose} color="primary">
+        <Button onClick={closeModal} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleModalClose} color="primary" autoFocus>
+        <Button onClick={closeModal} color="primary" autoFocus>
           Confirm
         </Button>
       </DialogActions>
@@ -34,10 +34,10 @@ const AlertDialog = ({ title, children, show, handleModalClose }) => {
 }
 
 AlertDialog.propTypes = {
+  isModalOpened: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  show: PropTypes.bool.isRequired,
-  handleModalClose: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 }
 
 export default AlertDialog

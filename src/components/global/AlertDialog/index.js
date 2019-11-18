@@ -1,3 +1,3 @@
-import AlertDialog from './component'
+import AlertDialog from './container'
 
 export default AlertDialog

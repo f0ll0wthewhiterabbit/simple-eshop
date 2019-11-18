@@ -1,3 +1,3 @@
-import UserMenu from './component'
+import UserMenu from './container'
 
 export default UserMenu

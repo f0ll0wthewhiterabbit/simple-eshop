@@ -1,8 +1,10 @@
 import {
   FETCH_DATABASE_TO_STORAGE,
-  TURN_ON_ADMIN_MODE,
   FETCH_DATABASE_TO_STORAGE_SUCCESS,
   FETCH_DATABASE_TO_STORAGE_ERROR,
+  SHOW_MODAL,
+  CLOSE_MODAL,
+  TURN_ON_ADMIN_MODE,
 } from '../../constants'
 
 export const fetchDatabaseToStorage = () => ({
@@ -15,6 +17,14 @@ export const fetchDatabaseToStorageSuccess = () => ({
 
 export const fetchDatabaseToStorageError = () => ({
   type: FETCH_DATABASE_TO_STORAGE_ERROR,
+})
+
+export const showModal = () => ({
+  type: SHOW_MODAL,
+})
+
+export const closeModal = () => ({
+  type: CLOSE_MODAL,
 })
 
 export const turnOnAdminMode = () => ({
