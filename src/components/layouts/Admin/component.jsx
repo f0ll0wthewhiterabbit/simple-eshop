@@ -53,7 +53,7 @@ const AdminLayout = ({ theme, children }) => {
 
 AdminLayout.propTypes = {
   theme: PropTypes.shape({ breakpoints: PropTypes.object.isRequired }).isRequired,
-  children: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.element.isRequired]),
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 }
 
 export default withTheme(AdminLayout)

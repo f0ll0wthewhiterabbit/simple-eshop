@@ -1,3 +1,3 @@
-import ProductsPage from './component'
+import ProductsPage from './container'
 
 export default ProductsPage

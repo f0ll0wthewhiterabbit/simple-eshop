@@ -1,3 +1,3 @@
-import UsersPage from './component'
+import UsersPage from './container'
 
 export default UsersPage

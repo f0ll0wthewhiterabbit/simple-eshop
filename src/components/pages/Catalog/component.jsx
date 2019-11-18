@@ -1,18 +1,30 @@
-import React from 'react'
-import { Grid } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { Grid, Typography } from '@material-ui/core'
 
 import ProductCard from './components/ProductCard'
-import mockProductList from '../../../data/products.json'
+import Loader from '../../global/Loader'
 import { Wrapper, Heading } from './styles'
 
-const CatalogPage = () => {
-  return (
-    <Wrapper maxWidth="lg">
-      <Heading variant="h4" component="h1" align="center">
-        Catalog
-      </Heading>
+const CatalogPage = ({ products, isErrorInLoad, fetchProducts }) => {
+  useEffect(() => {
+    fetchProducts()
+  }, [fetchProducts])
+
+  let content
+
+  if (isErrorInLoad) {
+    content = (
+      <Typography variant="body1" align="center">
+        Sorry, there are no products yet
+      </Typography>
+    )
+  } else if (products.length === 0) {
+    content = <Loader />
+  } else {
+    content = (
       <Grid container spacing={4}>
-        {mockProductList.map(product => {
+        {products.map(product => {
           const { id, title, description, tags, price, rating, image } = product
 
           return (
@@ -29,8 +41,23 @@ const CatalogPage = () => {
           )
         })}
       </Grid>
+    )
+  }
+
+  return (
+    <Wrapper maxWidth="lg">
+      <Heading variant="h4" component="h1" align="center">
+        Catalog
+      </Heading>
+      {content}
     </Wrapper>
   )
+}
+
+CatalogPage.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isErrorInLoad: PropTypes.bool.isRequired,
+  fetchProducts: PropTypes.func.isRequired,
 }
 
 export default CatalogPage
