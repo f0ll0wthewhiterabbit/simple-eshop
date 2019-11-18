@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Avatar, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
@@ -10,15 +10,6 @@ const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`
-
-const IconWrapper = styled(Avatar)`
-  margin: ${props => props.theme.spacing(1)}px;
-  background-color: ${props => props.theme.palette.secondary.main};
-`
-
-const Heading = styled(Typography)`
-  margin: ${props => props.theme.spacing(1)}px;
 `
 
 const LinkWrapper = styled(Typography)`
@@ -34,4 +25,4 @@ const BackLink = styled(Link)`
   }
 `
 
-export { Wrapper, IconWrapper, LinkWrapper, Heading, BackLink }
+export { Wrapper, LinkWrapper, BackLink }
