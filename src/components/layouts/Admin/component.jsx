@@ -8,6 +8,7 @@ import Header from '../../global/Header'
 import Footer from '../../global/Footer'
 import Profile from './components/Profile/component'
 import SidebarNav from './components/SidebarNav'
+import AlertDialog from '../../global/AlertDialog'
 import { Root, Wrapper, MenuButton, Sidebar, SidebarRoot, Main } from './styles'
 
 const AdminLayout = ({ theme, children }) => {
@@ -26,6 +27,7 @@ const AdminLayout = ({ theme, children }) => {
 
   return (
     <Root>
+      <AlertDialog title="Do you really want to delete selected items from database?" />
       <Header />
       <Wrapper>
         <MenuButton color="secondary" aria-label="open sidebar" onClick={handleSidebarOpen}>

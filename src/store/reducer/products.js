@@ -1,8 +1,16 @@
-import { FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_ERROR } from '../../constants'
+import {
+  FETCH_PRODUCTS_SUCCESS,
+  FETCH_PRODUCTS_ERROR,
+  SET_SELECTED_PRODUCTS,
+  DELETE_SELECTED_PRODUCTS,
+  DELETE_SELECTED_PRODUCTS_ERROR,
+} from '../../constants'
 
 const initialState = {
   data: [],
+  selected: [],
   isErrorInLoad: false,
+  isErrorInDeletetion: true,
 }
 
 const products = (state = initialState, action) => {
@@ -17,6 +25,24 @@ const products = (state = initialState, action) => {
       return {
         ...state,
         isErrorInLoad: true,
+      }
+
+    case SET_SELECTED_PRODUCTS:
+      return {
+        ...state,
+        selected: [...action.payload],
+      }
+
+    case DELETE_SELECTED_PRODUCTS:
+      return {
+        ...state,
+        data: state.data.filter(product => !state.selected.includes(product.id)),
+      }
+
+    case DELETE_SELECTED_PRODUCTS_ERROR:
+      return {
+        ...state,
+        isErrorInDeletetion: true,
       }
 
     default:

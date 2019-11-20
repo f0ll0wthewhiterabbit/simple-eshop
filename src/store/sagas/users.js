@@ -1,10 +1,12 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 
 import { FETCH_USERS, STORAGE_FIELD_USERS } from '../../constants'
-import getDataFromStorage from '../../utils/storage'
-import { fetchUsersSuccess, fetchUsersError } from '../actions'
+import { getDataFromStorage } from '../../utils/storage'
+import { fetchUsersSuccess, fetchUsersError, startLoading, stopLoading } from '../actions'
 
 function* fetchUsersSaga() {
+  yield put(startLoading())
+
   try {
     const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
 
@@ -16,6 +18,8 @@ function* fetchUsersSaga() {
   } catch (error) {
     yield put(fetchUsersError())
   }
+
+  yield put(stopLoading())
 }
 
 function* watchFetchUsers() {

@@ -4,7 +4,7 @@ import UsersPage from './component'
 import { fetchUsers } from '../../../../store/actions'
 
 const mapStateToProps = state => ({
-  usersList: state.users.data,
+  isLoading: state.app.isLoading,
   isErrorInLoad: state.users.isErrorInLoad,
   storageSetupError: state.app.storageSetupError,
 })

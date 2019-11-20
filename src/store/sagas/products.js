@@ -1,10 +1,12 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 
 import { FETCH_PRODUCTS, STORAGE_FIELD_PRODUCTS } from '../../constants'
-import getDataFromStorage from '../../utils/storage'
-import { fetchProductsSuccess, fetchProductsError } from '../actions'
+import { getDataFromStorage } from '../../utils/storage'
+import { fetchProductsSuccess, fetchProductsError, startLoading, stopLoading } from '../actions'
 
 function* fetchProductsSaga() {
+  yield put(startLoading())
+
   try {
     const productsList = yield call(getDataFromStorage, STORAGE_FIELD_PRODUCTS)
 
@@ -16,6 +18,8 @@ function* fetchProductsSaga() {
   } catch (error) {
     yield put(fetchProductsError())
   }
+
+  yield put(stopLoading())
 }
 
 function* watchFetchProducts() {

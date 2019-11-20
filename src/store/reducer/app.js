@@ -3,13 +3,19 @@ import {
   FETCH_DATABASE_TO_STORAGE_ERROR,
   SHOW_MODAL,
   CLOSE_MODAL,
+  START_LOADING,
+  STOP_LOADING,
 } from '../../constants'
 
 const initialState = {
   isAdminMode: false,
+  isLoading: false,
   isStorageDataReady: false,
   storageSetupError: false,
-  isModalOpened: false,
+  modal: {
+    isOpened: false,
+    storeFieldName: '',
+  },
 }
 
 const app = (state = initialState, action) => {
@@ -31,13 +37,33 @@ const app = (state = initialState, action) => {
     case SHOW_MODAL:
       return {
         ...state,
-        isModalOpened: true,
+        modal: {
+          ...state.modal,
+          isOpened: true,
+          storeFieldName: action.payload,
+        },
       }
 
     case CLOSE_MODAL:
       return {
         ...state,
-        isModalOpened: false,
+        modal: {
+          ...state.modal,
+          isOpened: false,
+          storeFieldName: '',
+        },
+      }
+
+    case START_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      }
+
+    case STOP_LOADING:
+      return {
+        ...state,
+        isLoading: false,
       }
 
     default:

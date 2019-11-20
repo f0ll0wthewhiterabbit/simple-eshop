@@ -4,7 +4,7 @@ import ProductsPage from './component'
 import { fetchProducts } from '../../../../store/actions'
 
 const mapStateToProps = state => ({
-  productsList: state.products.data,
+  isLoading: state.app.isLoading,
   isErrorInLoad: state.products.isErrorInLoad,
   storageSetupError: state.app.storageSetupError,
 })

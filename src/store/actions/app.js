@@ -5,6 +5,9 @@ import {
   SHOW_MODAL,
   CLOSE_MODAL,
   TURN_ON_ADMIN_MODE,
+  DELETE_SELECTED_ITEMS,
+  START_LOADING,
+  STOP_LOADING,
 } from '../../constants'
 
 export const fetchDatabaseToStorage = () => ({
@@ -19,8 +22,9 @@ export const fetchDatabaseToStorageError = () => ({
   type: FETCH_DATABASE_TO_STORAGE_ERROR,
 })
 
-export const showModal = () => ({
+export const showModal = storeFieldNameForModal => ({
   type: SHOW_MODAL,
+  payload: storeFieldNameForModal,
 })
 
 export const closeModal = () => ({
@@ -29,4 +33,17 @@ export const closeModal = () => ({
 
 export const turnOnAdminMode = () => ({
   type: TURN_ON_ADMIN_MODE,
+})
+
+export const deleteSelectedItems = storeFieldName => ({
+  type: DELETE_SELECTED_ITEMS,
+  payload: storeFieldName,
+})
+
+export const startLoading = () => ({
+  type: START_LOADING,
+})
+
+export const stopLoading = () => ({
+  type: STOP_LOADING,
 })

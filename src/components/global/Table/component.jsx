@@ -14,22 +14,30 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
 
-const Table = ({ rows, headCells, title }) => {
-  const [selected, setSelected] = React.useState([])
+const Table = ({
+  rows,
+  headCells,
+  title,
+  storeFieldName,
+  showModal,
+  selectedItems,
+  setSelectedItems,
+}) => {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
-  const numSelected = selected.length
+  const numSelected = selectedItems.length
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
   const removableRowsCount = rows.filter(row => row.isRemovable).length
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
       const newSelecteds = rows.filter(n => n.isRemovable).map(n => n.id)
-      setSelected(newSelecteds)
+      setSelectedItems(newSelecteds)
       return
     }
-    setSelected([])
+
+    setSelectedItems([])
   }
 
   const handleClick = (event, id, isRemovable) => {
@@ -37,23 +45,23 @@ const Table = ({ rows, headCells, title }) => {
       return
     }
 
-    const selectedIndex = selected.indexOf(id)
+    const selectedIndex = selectedItems.indexOf(id)
     let newSelected = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id)
+      newSelected = newSelected.concat(selectedItems, id)
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1))
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1))
+      newSelected = newSelected.concat(selectedItems.slice(1))
+    } else if (selectedIndex === selectedItems.length - 1) {
+      newSelected = newSelected.concat(selectedItems.slice(0, -1))
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        selectedItems.slice(0, selectedIndex),
+        selectedItems.slice(selectedIndex + 1)
       )
     }
 
-    setSelected(newSelected)
+    setSelectedItems(newSelected)
   }
 
   const handleChangePage = (event, newPage) => {
@@ -65,7 +73,7 @@ const Table = ({ rows, headCells, title }) => {
     setPage(0)
   }
 
-  const isSelected = id => selected.indexOf(id) !== -1
+  const isSelected = id => selectedItems.indexOf(id) !== -1
 
   const mapRowToTableCellContent = (id, row) => {
     if (id === 'tags') {
@@ -77,6 +85,10 @@ const Table = ({ rows, headCells, title }) => {
     }
 
     return row[id]
+  }
+
+  const handleDeleteButtonClick = () => {
+    showModal(storeFieldName)
   }
 
   const tableToolbar = (
@@ -92,7 +104,7 @@ const Table = ({ rows, headCells, title }) => {
       )}
 
       {numSelected > 0 && (
-        <Tooltip title="Delete">
+        <Tooltip title="Delete" onClick={handleDeleteButtonClick}>
           <IconButton aria-label="delete">
             <DeleteIcon />
           </IconButton>
@@ -112,9 +124,10 @@ const Table = ({ rows, headCells, title }) => {
         <TableCell padding="checkbox">
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < removableRowsCount}
-            checked={numSelected === removableRowsCount}
+            checked={numSelected > 0 && numSelected === removableRowsCount}
             onChange={handleSelectAllClick}
             inputProps={{ 'aria-label': 'select all' }}
+            disabled={removableRowsCount === 0}
           />
         </TableCell>
       </TableRow>
@@ -197,6 +210,10 @@ Table.propTypes = {
     })
   ).isRequired,
   title: PropTypes.string.isRequired,
+  storeFieldName: PropTypes.string.isRequired,
+  showModal: PropTypes.func.isRequired,
+  selectedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  setSelectedItems: PropTypes.func.isRequired,
 }
 
 export default Table

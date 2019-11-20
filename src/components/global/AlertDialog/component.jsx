@@ -7,7 +7,18 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
-const AlertDialog = ({ isModalOpened, title, children, closeModal }) => {
+const AlertDialog = ({
+  isModalOpened,
+  title,
+  children,
+  closeModal,
+  storeFieldName,
+  deleteSelectedItems,
+}) => {
+  const handleConfirmButton = () => {
+    deleteSelectedItems(storeFieldName)
+  }
+
   return (
     <Dialog
       open={isModalOpened}
@@ -25,7 +36,7 @@ const AlertDialog = ({ isModalOpened, title, children, closeModal }) => {
         <Button onClick={closeModal} color="primary">
           Cancel
         </Button>
-        <Button onClick={closeModal} color="primary" autoFocus>
+        <Button onClick={handleConfirmButton} color="primary" autoFocus>
           Confirm
         </Button>
       </DialogActions>
@@ -38,6 +49,8 @@ AlertDialog.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   closeModal: PropTypes.func.isRequired,
+  storeFieldName: PropTypes.string.isRequired,
+  deleteSelectedItems: PropTypes.func.isRequired,
 }
 
 export default AlertDialog

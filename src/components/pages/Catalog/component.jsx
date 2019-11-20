@@ -6,7 +6,7 @@ import ProductCard from './components/ProductCard'
 import Loader from '../../global/Loader'
 import { Wrapper, Heading } from './styles'
 
-const CatalogPage = ({ products, isErrorInLoad, fetchProducts }) => {
+const CatalogPage = ({ products, isErrorInLoad, isLoading, fetchProducts }) => {
   useEffect(() => {
     fetchProducts()
   }, [fetchProducts])
@@ -19,7 +19,7 @@ const CatalogPage = ({ products, isErrorInLoad, fetchProducts }) => {
         Sorry, there are no products yet
       </Typography>
     )
-  } else if (products.length === 0) {
+  } else if (isLoading) {
     content = <Loader />
   } else {
     content = (
@@ -57,6 +57,7 @@ const CatalogPage = ({ products, isErrorInLoad, fetchProducts }) => {
 CatalogPage.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   isErrorInLoad: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   fetchProducts: PropTypes.func.isRequired,
 }
 

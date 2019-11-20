@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import Table from '../../../global/Table'
 import ErrorMessage from '../../../global/ErrorMessage'
 import Loader from '../../../global/Loader'
+import UsersTable from '../../../tables/Users'
 
-const UsersPage = ({ usersList, isErrorInLoad, storageSetupError, fetchUsers }) => {
+const UsersPage = ({ isLoading, isErrorInLoad, storageSetupError, fetchUsers }) => {
   useEffect(() => {
     fetchUsers()
   }, [fetchUsers])
@@ -18,21 +18,15 @@ const UsersPage = ({ usersList, isErrorInLoad, storageSetupError, fetchUsers }) 
     return <ErrorMessage>Database setup error!</ErrorMessage>
   }
 
-  if (usersList.length === 0) {
+  if (isLoading) {
     return <Loader />
   }
 
-  const headCells = [
-    { id: 'firstName', label: 'First Name', isNumeric: false },
-    { id: 'lastName', label: 'Last Name', isNumeric: false },
-    { id: 'email', label: 'Email', isNumeric: false },
-  ]
-
-  return <Table rows={usersList} headCells={headCells} title="Users" />
+  return <UsersTable />
 }
 
 UsersPage.propTypes = {
-  usersList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isLoading: PropTypes.bool.isRequired,
   isErrorInLoad: PropTypes.bool.isRequired,
   storageSetupError: PropTypes.bool.isRequired,
   fetchUsers: PropTypes.func.isRequired,
