@@ -9,8 +9,7 @@ import {
 const initialState = {
   data: [],
   selected: [],
-  isErrorInLoad: false,
-  isErrorInDeletetion: true,
+  error: null,
 }
 
 const products = (state = initialState, action) => {
@@ -19,12 +18,13 @@ const products = (state = initialState, action) => {
       return {
         ...state,
         data: action.payload,
+        error: null,
       }
 
     case FETCH_PRODUCTS_ERROR:
       return {
         ...state,
-        isErrorInLoad: true,
+        error: action.payload,
       }
 
     case SET_SELECTED_PRODUCTS:
@@ -42,7 +42,7 @@ const products = (state = initialState, action) => {
     case DELETE_SELECTED_PRODUCTS_ERROR:
       return {
         ...state,
-        isErrorInDeletetion: true,
+        error: action.payload,
       }
 
     default:

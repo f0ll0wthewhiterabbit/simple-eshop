@@ -5,8 +5,7 @@ import { fetchUsers } from '../../../../store/actions'
 
 const mapStateToProps = state => ({
   isLoading: state.app.isLoading,
-  isErrorInLoad: state.users.isErrorInLoad,
-  storageSetupError: state.app.storageSetupError,
+  error: state.users.error,
 })
 
 const mapDispatchToProps = dispatch => ({

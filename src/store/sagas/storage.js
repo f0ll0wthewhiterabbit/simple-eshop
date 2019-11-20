@@ -16,7 +16,7 @@ function* fetchDatabaseToStorageSaga() {
       const productsList = yield call([response, response.json])
       yield localStorage.setItem(STORAGE_FIELD_PRODUCTS, JSON.stringify(productsList))
     } catch (error) {
-      yield put(fetchDatabaseToStorageError())
+      yield put(fetchDatabaseToStorageError('Database setup error!'))
       return
     }
   }
@@ -27,7 +27,7 @@ function* fetchDatabaseToStorageSaga() {
       const usersList = yield call([response, response.json])
       yield localStorage.setItem(STORAGE_FIELD_USERS, JSON.stringify(usersList))
     } catch (error) {
-      yield put(fetchDatabaseToStorageError())
+      yield put(fetchDatabaseToStorageError('Database setup error!'))
       return
     }
   }

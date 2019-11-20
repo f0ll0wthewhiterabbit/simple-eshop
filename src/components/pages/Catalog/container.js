@@ -5,7 +5,7 @@ import { fetchProducts } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   products: state.products.data,
-  isErrorInLoad: state.products.isErrorInLoad,
+  error: state.products.error,
   isLoading: state.app.isLoading,
 })
 

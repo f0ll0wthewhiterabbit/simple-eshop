@@ -11,7 +11,7 @@ const initialState = {
   isAdminMode: false,
   isLoading: false,
   isStorageDataReady: false,
-  storageSetupError: false,
+  error: null,
   modal: {
     isOpened: false,
     storeFieldName: '',
@@ -24,14 +24,14 @@ const app = (state = initialState, action) => {
       return {
         ...state,
         isStorageDataReady: true,
-        storageSetupError: false,
+        error: null,
       }
 
     case FETCH_DATABASE_TO_STORAGE_ERROR:
       return {
         ...state,
         isStorageDataReady: false,
-        storageSetupError: true,
+        error: action.payload,
       }
 
     case SHOW_MODAL:

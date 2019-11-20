@@ -16,8 +16,9 @@ export const fetchProductsSuccess = productsList => ({
   payload: productsList,
 })
 
-export const fetchProductsError = () => ({
+export const fetchProductsError = error => ({
   type: FETCH_PRODUCTS_ERROR,
+  payload: error,
 })
 
 export const setSelectedProducts = selectedProductsList => ({
@@ -29,6 +30,7 @@ export const deleteSelectedProducts = () => ({
   type: DELETE_SELECTED_PRODUCTS,
 })
 
-export const deleteSelectedProductsError = () => ({
+export const deleteSelectedProductsError = error => ({
   type: DELETE_SELECTED_PRODUCTS_ERROR,
+  payload: error,
 })

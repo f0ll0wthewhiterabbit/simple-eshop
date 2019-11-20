@@ -22,7 +22,7 @@ function* deleteSelectedItemsSaga(action) {
       const data = yield select(state => state.users.data)
       updateStorageData(STORAGE_FIELD_USERS, data)
     } catch (error) {
-      yield put(deleteSelectedUsersError())
+      yield put(deleteSelectedUsersError('Delete users error!'))
     }
 
     yield put(setSelectedUsers([]))
@@ -32,7 +32,7 @@ function* deleteSelectedItemsSaga(action) {
       const data = yield select(state => state.products.data)
       updateStorageData(STORAGE_FIELD_PRODUCTS, data)
     } catch (error) {
-      yield put(deleteSelectedProductsError())
+      yield put(deleteSelectedProductsError('Delete products error!'))
     }
   }
 

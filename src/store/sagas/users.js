@@ -11,12 +11,12 @@ function* fetchUsersSaga() {
     const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
 
     if (!usersList) {
-      throw new Error('Users data not recieved')
+      throw new Error('Users data not recieved!')
     }
 
     yield put(fetchUsersSuccess(usersList))
   } catch (error) {
-    yield put(fetchUsersError())
+    yield put(fetchUsersError('Users data not recieved!'))
   }
 
   yield put(stopLoading())

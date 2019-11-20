@@ -16,8 +16,9 @@ export const fetchUsersSuccess = usersList => ({
   payload: usersList,
 })
 
-export const fetchUsersError = () => ({
+export const fetchUsersError = error => ({
   type: FETCH_USERS_ERROR,
+  payload: error,
 })
 
 export const setSelectedUsers = selectedUsersList => ({
@@ -29,6 +30,7 @@ export const deleteSelectedUsers = () => ({
   type: DELETE_SELECTED_USERS,
 })
 
-export const deleteSelectedUsersError = () => ({
+export const deleteSelectedUsersError = error => ({
   type: DELETE_SELECTED_USERS_ERROR,
+  payload: error,
 })

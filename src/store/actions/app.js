@@ -18,8 +18,9 @@ export const fetchDatabaseToStorageSuccess = () => ({
   type: FETCH_DATABASE_TO_STORAGE_SUCCESS,
 })
 
-export const fetchDatabaseToStorageError = () => ({
+export const fetchDatabaseToStorageError = error => ({
   type: FETCH_DATABASE_TO_STORAGE_ERROR,
+  payload: error,
 })
 
 export const showModal = storeFieldNameForModal => ({

@@ -9,8 +9,7 @@ import {
 const initialState = {
   data: [],
   selected: [],
-  isErrorInLoad: false,
-  isErrorInDeletetion: false,
+  error: null,
 }
 
 const users = (state = initialState, action) => {
@@ -19,12 +18,13 @@ const users = (state = initialState, action) => {
       return {
         ...state,
         data: action.payload,
+        error: null,
       }
 
     case FETCH_USERS_ERROR:
       return {
         ...state,
-        isErrorInLoad: true,
+        error: action.payload,
       }
 
     case SET_SELECTED_USERS:
@@ -42,7 +42,7 @@ const users = (state = initialState, action) => {
     case DELETE_SELECTED_USERS_ERROR:
       return {
         ...state,
-        isErrorInDeletetion: true,
+        error: action.payload,
       }
 
     default:

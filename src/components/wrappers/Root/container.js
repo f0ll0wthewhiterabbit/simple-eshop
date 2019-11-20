@@ -5,7 +5,7 @@ import { fetchDatabaseToStorage } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   isStorageDataReady: state.app.isStorageDataReady,
-  storageSetupError: state.app.storageSetupError,
+  error: state.app.error,
 })
 
 const mapDispatchToProps = dispatch => ({

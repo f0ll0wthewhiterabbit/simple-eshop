@@ -11,12 +11,12 @@ function* fetchProductsSaga() {
     const productsList = yield call(getDataFromStorage, STORAGE_FIELD_PRODUCTS)
 
     if (!productsList) {
-      throw new Error('Products data not recieved')
+      throw new Error('Products data not recieved!')
     }
 
     yield put(fetchProductsSuccess(productsList))
   } catch (error) {
-    yield put(fetchProductsError())
+    yield put(fetchProductsError('Products data not recieved!'))
   }
 
   yield put(stopLoading())

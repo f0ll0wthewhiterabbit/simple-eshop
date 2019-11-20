@@ -6,17 +6,13 @@ import Loader from '../../../global/Loader'
 import ErrorMessage from '../../../global/ErrorMessage'
 import ProductsTable from '../../../tables/Products'
 
-const ProductsPage = ({ isLoading, isErrorInLoad, storageSetupError, fetchProducts }) => {
+const ProductsPage = ({ isLoading, error, fetchProducts }) => {
   useEffect(() => {
     fetchProducts()
   }, [fetchProducts])
 
-  if (isErrorInLoad) {
-    return <ErrorMessage>Error in fetching products!</ErrorMessage>
-  }
-
-  if (storageSetupError) {
-    return <ErrorMessage>Database setup error!</ErrorMessage>
+  if (error) {
+    return <ErrorMessage>{error}</ErrorMessage>
   }
 
   if (isLoading) {
@@ -33,8 +29,7 @@ const ProductsPage = ({ isLoading, isErrorInLoad, storageSetupError, fetchProduc
 
 ProductsPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  isErrorInLoad: PropTypes.bool.isRequired,
-  storageSetupError: PropTypes.bool.isRequired,
+  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   fetchProducts: PropTypes.func.isRequired,
 }
 
