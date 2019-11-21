@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import AlertDialog from './component'
-import { closeModal, deleteSelectedItems } from '../../../store/actions'
+import { closeModal, deleteItems } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   isModalOpened: state.app.modal.isOpened,
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal()),
-  deleteSelectedItems: storeFieldName => dispatch(deleteSelectedItems(storeFieldName)),
+  deleteItems: storeFieldName => dispatch(deleteItems(storeFieldName)),
 })
 
 export default connect(

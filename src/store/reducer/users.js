@@ -2,13 +2,18 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_ERROR,
   SET_SELECTED_USERS,
-  DELETE_SELECTED_USERS,
-  DELETE_SELECTED_USERS_ERROR,
+  DELETE_USERS,
+  DELETE_USERS_ERROR,
+  DELETE_CURRENT_USER,
+  DELETE_CURRENT_USER_ERROR,
 } from '../../constants'
 
 const initialState = {
   data: [],
   selected: [],
+  current: {
+    id: 1, // FIXME:
+  },
   error: null,
 }
 
@@ -33,13 +38,27 @@ const users = (state = initialState, action) => {
         selected: [...action.payload],
       }
 
-    case DELETE_SELECTED_USERS:
+    case DELETE_USERS:
       return {
         ...state,
         data: state.data.filter(user => !state.selected.includes(user.id)),
       }
 
-    case DELETE_SELECTED_USERS_ERROR:
+    case DELETE_USERS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      }
+
+    case DELETE_CURRENT_USER:
+      return {
+        ...state,
+        data: state.data.map(user => {
+          return user.id !== state.current.id ? user : { ...user, isRemovable: true }
+        }),
+      }
+
+    case DELETE_CURRENT_USER_ERROR:
       return {
         ...state,
         error: action.payload,

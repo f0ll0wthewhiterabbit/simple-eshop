@@ -13,10 +13,10 @@ const AlertDialog = ({
   children,
   closeModal,
   storeFieldName,
-  deleteSelectedItems,
+  deleteItems,
 }) => {
   const handleConfirmButton = () => {
-    deleteSelectedItems(storeFieldName)
+    deleteItems(storeFieldName)
   }
 
   return (
@@ -49,8 +49,8 @@ AlertDialog.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   closeModal: PropTypes.func.isRequired,
-  storeFieldName: PropTypes.string.isRequired,
-  deleteSelectedItems: PropTypes.func.isRequired,
+  storeFieldName: PropTypes.string,
+  deleteItems: PropTypes.func.isRequired,
 }
 
 export default AlertDialog

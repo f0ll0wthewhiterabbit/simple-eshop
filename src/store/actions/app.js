@@ -5,7 +5,7 @@ import {
   SHOW_MODAL,
   CLOSE_MODAL,
   TURN_ON_ADMIN_MODE,
-  DELETE_SELECTED_ITEMS,
+  DELETE_ITEMS,
   START_LOADING,
   STOP_LOADING,
 } from '../../constants'
@@ -36,8 +36,8 @@ export const turnOnAdminMode = () => ({
   type: TURN_ON_ADMIN_MODE,
 })
 
-export const deleteSelectedItems = storeFieldName => ({
-  type: DELETE_SELECTED_ITEMS,
+export const deleteItems = storeFieldName => ({
+  type: DELETE_ITEMS,
   payload: storeFieldName,
 })
 

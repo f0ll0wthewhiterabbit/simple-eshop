@@ -3,8 +3,10 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_ERROR,
   SET_SELECTED_USERS,
-  DELETE_SELECTED_USERS,
-  DELETE_SELECTED_USERS_ERROR,
+  DELETE_USERS,
+  DELETE_USERS_ERROR,
+  DELETE_CURRENT_USER,
+  DELETE_CURRENT_USER_ERROR,
 } from '../../constants'
 
 export const fetchUsers = () => ({
@@ -26,11 +28,20 @@ export const setSelectedUsers = selectedUsersList => ({
   payload: selectedUsersList,
 })
 
-export const deleteSelectedUsers = () => ({
-  type: DELETE_SELECTED_USERS,
+export const deleteUsers = () => ({
+  type: DELETE_USERS,
 })
 
-export const deleteSelectedUsersError = error => ({
-  type: DELETE_SELECTED_USERS_ERROR,
+export const deleteUsersError = error => ({
+  type: DELETE_USERS_ERROR,
+  payload: error,
+})
+
+export const deleteCurrentUser = () => ({
+  type: DELETE_CURRENT_USER,
+})
+
+export const deleteCurrentUserError = error => ({
+  type: DELETE_CURRENT_USER_ERROR,
   payload: error,
 })

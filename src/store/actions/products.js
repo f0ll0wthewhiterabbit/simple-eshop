@@ -3,8 +3,8 @@ import {
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_ERROR,
   SET_SELECTED_PRODUCTS,
-  DELETE_SELECTED_PRODUCTS,
-  DELETE_SELECTED_PRODUCTS_ERROR,
+  DELETE_PRODUCTS,
+  DELETE_PRODUCTS_ERROR,
 } from '../../constants'
 
 export const fetchProducts = () => ({
@@ -26,11 +26,11 @@ export const setSelectedProducts = selectedProductsList => ({
   payload: selectedProductsList,
 })
 
-export const deleteSelectedProducts = () => ({
-  type: DELETE_SELECTED_PRODUCTS,
+export const deleteProducts = () => ({
+  type: DELETE_PRODUCTS,
 })
 
-export const deleteSelectedProductsError = error => ({
-  type: DELETE_SELECTED_PRODUCTS_ERROR,
+export const deleteProductsError = error => ({
+  type: DELETE_PRODUCTS_ERROR,
   payload: error,
 })

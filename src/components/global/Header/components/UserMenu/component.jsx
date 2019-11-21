@@ -14,6 +14,7 @@ import {
   ArrowIcon,
   IconWrapper,
 } from './styles'
+import { STORE_FIELD_CURRENT_USER } from '../../../../../constants'
 
 const UserMenu = ({ theme, showModal }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -29,7 +30,7 @@ const UserMenu = ({ theme, showModal }) => {
   }
 
   const handleDeleteAccountClick = () => {
-    showModal()
+    showModal(STORE_FIELD_CURRENT_USER)
     handleClose()
   }
 

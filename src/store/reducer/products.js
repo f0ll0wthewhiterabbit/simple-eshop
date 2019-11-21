@@ -2,8 +2,8 @@ import {
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_ERROR,
   SET_SELECTED_PRODUCTS,
-  DELETE_SELECTED_PRODUCTS,
-  DELETE_SELECTED_PRODUCTS_ERROR,
+  DELETE_PRODUCTS,
+  DELETE_PRODUCTS_ERROR,
 } from '../../constants'
 
 const initialState = {
@@ -33,13 +33,13 @@ const products = (state = initialState, action) => {
         selected: [...action.payload],
       }
 
-    case DELETE_SELECTED_PRODUCTS:
+    case DELETE_PRODUCTS:
       return {
         ...state,
         data: state.data.filter(product => !state.selected.includes(product.id)),
       }
 
-    case DELETE_SELECTED_PRODUCTS_ERROR:
+    case DELETE_PRODUCTS_ERROR:
       return {
         ...state,
         error: action.payload,

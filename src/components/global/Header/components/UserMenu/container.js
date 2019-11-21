@@ -4,7 +4,7 @@ import UserMenu from './component'
 import { showModal } from '../../../../../store/actions'
 
 const mapDispatchToProps = dispatch => ({
-  showModal: () => dispatch(showModal()),
+  showModal: storeFieldNameForModal => dispatch(showModal(storeFieldNameForModal)),
 })
 
 export default connect(
