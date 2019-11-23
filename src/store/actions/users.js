@@ -10,6 +10,9 @@ import {
   ADD_USER,
   ADD_USER_SUCCESS,
   ADD_USER_ERROR,
+  SIGN_IN_USER,
+  SIGN_IN_USER_SUCCESS,
+  SIGN_IN_USER_ERROR,
 } from '../../constants'
 
 export const fetchUsers = () => ({
@@ -61,5 +64,20 @@ export const addUserSuccess = userData => ({
 
 export const addUserError = error => ({
   type: ADD_USER_ERROR,
+  payload: error,
+})
+
+export const signInUser = userData => ({
+  type: SIGN_IN_USER,
+  payload: userData,
+})
+
+export const signInUserSuccess = userData => ({
+  type: SIGN_IN_USER_SUCCESS,
+  payload: userData,
+})
+
+export const signInUserError = error => ({
+  type: SIGN_IN_USER_ERROR,
   payload: error,
 })

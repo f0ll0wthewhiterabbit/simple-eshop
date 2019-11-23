@@ -1,16 +1,27 @@
-import React from 'react'
-import { TextField } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
+import { TextField, Typography } from '@material-ui/core'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
+import { MAIN_PAGE_PATH } from '../../../constants'
 import { StyledForm, SubmitButton, Progress } from './styles'
 
-const SingInPage = () => {
-  const handleFormSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2))
-      setSubmitting(false)
-    }, 400)
+const SingInPage = ({ signInUser, isUserSignedUp, error, deleteUserDataFromStorage }) => {
+  useEffect(() => {
+    deleteUserDataFromStorage()
+  }, [deleteUserDataFromStorage])
+
+  const handleFormSubmit = values => {
+    signInUser({
+      email: values.email,
+      password: values.password,
+    })
+  }
+
+  if (isUserSignedUp) {
+    return <Redirect to={MAIN_PAGE_PATH} />
   }
 
   return (
@@ -20,9 +31,7 @@ const SingInPage = () => {
         email: Yup.string()
           .email('Invalid email address')
           .required('Email is required'),
-        password: Yup.string()
-          .min(6, 'Password must be 6 characters or more')
-          .required('Password is required'),
+        password: Yup.string().required('Password is required'),
       })}
       onSubmit={handleFormSubmit}
     >
@@ -65,14 +74,26 @@ const SingInPage = () => {
             fullWidth
             variant="contained"
             color="primary"
-            disabled={isSubmitting}
+            disabled={isSubmitting && error === null}
           >
-            {isSubmitting ? <Progress size={20} /> : 'Sign In'}
+            {isSubmitting && error === null ? <Progress size={20} /> : 'Sign In'}
           </SubmitButton>
+          {error && (
+            <Typography color="error" variant="body1" align="center" gutterBottom>
+              {error}
+            </Typography>
+          )}
         </StyledForm>
       )}
     </Formik>
   )
+}
+
+SingInPage.propTypes = {
+  signInUser: PropTypes.func.isRequired,
+  deleteUserDataFromStorage: PropTypes.func.isRequired,
+  isUserSignedUp: PropTypes.bool.isRequired,
+  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
 }
 
 export default SingInPage

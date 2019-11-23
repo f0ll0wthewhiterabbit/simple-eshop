@@ -2,6 +2,7 @@ import {
   FETCH_DATABASE_TO_STORAGE,
   FETCH_DATABASE_TO_STORAGE_SUCCESS,
   FETCH_DATABASE_TO_STORAGE_ERROR,
+  DELETE_USER_DATA_FROM_STORAGE,
   SHOW_MODAL,
   CLOSE_MODAL,
   TURN_ON_ADMIN_MODE,
@@ -21,6 +22,10 @@ export const fetchDatabaseToStorageSuccess = () => ({
 export const fetchDatabaseToStorageError = error => ({
   type: FETCH_DATABASE_TO_STORAGE_ERROR,
   payload: error,
+})
+
+export const deleteUserDataFromStorage = () => ({
+  type: DELETE_USER_DATA_FROM_STORAGE,
 })
 
 export const showModal = storeFieldNameForModal => ({

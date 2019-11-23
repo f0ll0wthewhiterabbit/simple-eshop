@@ -6,6 +6,7 @@ import {
   ADD_USER,
   STORAGE_FIELD_TOKEN,
   STORAGE_FIELD_USER_ID,
+  SIGN_IN_USER,
 } from '../../constants'
 import { getDataFromStorage, updateStorageData, generateUserToken } from '../../utils'
 import {
@@ -15,6 +16,8 @@ import {
   stopLoading,
   addUserSuccess,
   addUserError,
+  signInUserSuccess,
+  signInUserError,
 } from '../actions'
 
 function* fetchUsersSaga() {
@@ -80,6 +83,56 @@ function* addUserSaga(action) {
   }
 }
 
+function* signInUserSaga(action) {
+  let currentUser
+
+  try {
+    const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
+
+    if (!usersList) {
+      throw new Error('Something went wrong!')
+    }
+
+    const token = localStorage.getItem(STORAGE_FIELD_TOKEN)
+    const userId = Number(localStorage.getItem(STORAGE_FIELD_USER_ID))
+
+    if (token && userId) {
+      currentUser = usersList.find(user => user.id === userId)
+
+      if (currentUser.token !== token) {
+        throw new Error('Sign in please to continue!')
+      }
+    } else {
+      const userData = action.payload
+
+      if (!userData.email) {
+        throw new Error('Sign in please to continue!')
+      }
+
+      currentUser = usersList.find(user => user.email === userData.email)
+
+      if (!currentUser || currentUser.password !== userData.password) {
+        throw new Error('Wrong email or password!')
+      } else {
+        yield localStorage.setItem(STORAGE_FIELD_USER_ID, currentUser.id)
+        yield localStorage.setItem(STORAGE_FIELD_TOKEN, currentUser.token)
+      }
+    }
+  } catch (error) {
+    const errorMessage = error.message || 'Wrong email or password!'
+    yield put(signInUserError(errorMessage))
+    return
+  }
+
+  yield put(
+    signInUserSuccess({
+      id: currentUser.id,
+      firstName: currentUser.firstName,
+      lastName: currentUser.lastName,
+    })
+  )
+}
+
 function* watchFetchUsers() {
   yield takeEvery(FETCH_USERS, fetchUsersSaga)
 }
@@ -88,4 +141,8 @@ function* watchAddUser() {
   yield takeEvery(ADD_USER, addUserSaga)
 }
 
-export { watchFetchUsers, watchAddUser }
+function* watchSignInUser() {
+  yield takeEvery(SIGN_IN_USER, signInUserSaga)
+}
+
+export { watchFetchUsers, watchAddUser, watchSignInUser }

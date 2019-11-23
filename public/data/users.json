@@ -4,7 +4,7 @@
     "firstName": "Carter",
     "lastName": "Simpson",
     "email": "Carter_Simpson4917@muall.tech",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "7e3774652e674d77acd149eb3c45c7"
   },
@@ -13,7 +13,7 @@
     "firstName": "Hayden",
     "lastName": "Radcliffe",
     "email": "Hayden_Radcliffe8431@elnee.tech",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "bb2d8448e9d44f1c9536334a29816e"
   },
@@ -22,7 +22,7 @@
     "firstName": "Martin",
     "lastName": "Kennedy",
     "email": "Martin_Kennedy5050@eirey.tech",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": true,
     "token": "b326e23588bf4981a854f8c3b13c84"
   },
@@ -31,7 +31,7 @@
     "firstName": "Freya",
     "lastName": "Farrant",
     "email": "Freya_Farrant2030@ovock.tech",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "02ebe234abdc4a3a880c462bbca456"
   },
@@ -40,7 +40,7 @@
     "firstName": "Lexi",
     "lastName": "Tutton",
     "email": "Lexi_Tutton2552@kideod.biz",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": true,
     "token": "0ded3cece1d94654aaa82fee1633f9"
   },
@@ -49,7 +49,7 @@
     "firstName": "Anne",
     "lastName": "Eagle",
     "email": "Anne_Eagle654@muall.tech",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "14b79fc993fd4891b2e970563518f9"
   },
@@ -58,7 +58,7 @@
     "firstName": "Chris",
     "lastName": "Lindsay",
     "email": "Chris_Lindsay9229@liret.org",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "b329a4dd6d2d4a7cac328f66846a4a"
   },
@@ -67,7 +67,7 @@
     "firstName": "Alex",
     "lastName": "Fox",
     "email": "Alex_Fox2494@extex.org",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "c5f5bed9d1644e93a2f13d566d0df0"
   },
@@ -76,7 +76,7 @@
     "firstName": "Adelaide",
     "lastName": "Cox",
     "email": "Adelaide_Cx9398@gmail.com",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "6e94a0abaeb04509a29c871bc164df"
   },
@@ -85,7 +85,7 @@
     "firstName": "Miriam",
     "lastName": "Alcroft",
     "email": "Miriam_Alcroft3418@ovock.tech",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "0ae857e35f75484fafa17928ae4864"
   },
@@ -94,7 +94,7 @@
     "firstName": "Lucas",
     "lastName": "Goodman",
     "email": "Lucas_Goodman9398@deavo.com",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": true,
     "token": "3076eb98101e4ab6824a08fe500abe"
   },
@@ -103,7 +103,7 @@
     "firstName": "Mike",
     "lastName": "Mitchell",
     "email": "Mike_Mitchell6718@guentu.biz",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "c4a34a47733543b6b5eed96937b253"
   },
@@ -112,7 +112,7 @@
     "firstName": "William",
     "lastName": "Vass",
     "email": "William_Vass3718@joiniaa.com",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "bf468003c9a94d3fac65511336aa7a"
   },
@@ -121,7 +121,7 @@
     "firstName": "Josephine",
     "lastName": "Vangness",
     "email": "Josephine_Vangness8467@gmail.com",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "7e20aa83c166484083645bd3899a32"
   },
@@ -130,7 +130,7 @@
     "firstName": "Maxwell",
     "lastName": "Tobin",
     "email": "Maxwell_Tobin2467@infotech44.tech",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "bfe7b909338d48fc9e698bd98bd69a"
   },
@@ -139,7 +139,7 @@
     "firstName": "Brad",
     "lastName": "Walsh",
     "email": "Brad_Walsh6434@joiniaa.com",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "594e80193fac4b449c15547db4af8c"
   },
@@ -148,7 +148,7 @@
     "firstName": "Marigold",
     "lastName": "Harrington",
     "email": "Marigold_Harrington8572@tonsy.org",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "31eb714eb25d4ba1989cf48d4d0f9b"
   },
@@ -157,7 +157,7 @@
     "firstName": "Bristol",
     "lastName": "Rigg",
     "email": "Bristol_Rigg2904@hourpy.biz",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "300550d8dd724e55a11974eb69b9a9"
   },
@@ -166,7 +166,7 @@
     "firstName": "Julian",
     "lastName": "Donovan",
     "email": "Julian_Donovan8265@acrit.org",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "603f037b74684fa0925a71c17682f6"
   },
@@ -175,7 +175,7 @@
     "firstName": "Ron",
     "lastName": "Rust",
     "email": "Ron_Rust6474@dionrab.com",
-    "password": 123456,
+    "password": "123456",
     "isRemovable": false,
     "token": "24a7c5b7d3434c0dacb3ff9de6a65f"
   }

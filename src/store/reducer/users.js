@@ -8,6 +8,8 @@ import {
   DELETE_CURRENT_USER_ERROR,
   ADD_USER_SUCCESS,
   ADD_USER_ERROR,
+  SIGN_IN_USER_SUCCESS,
+  SIGN_IN_USER_ERROR,
 } from '../../constants'
 
 const initialState = {
@@ -81,6 +83,24 @@ const users = (state = initialState, action) => {
       }
 
     case ADD_USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      }
+
+    case SIGN_IN_USER_SUCCESS:
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          id: action.payload.id,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+        },
+        error: null,
+      }
+
+    case SIGN_IN_USER_ERROR:
       return {
         ...state,
         error: action.payload,

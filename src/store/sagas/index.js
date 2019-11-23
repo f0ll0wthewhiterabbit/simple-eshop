@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects'
 
 import watchFetchProducts from './products'
-import { watchFetchUsers, watchAddUser } from './users'
-import watchFetchDatabaseToStorage from './storage'
+import { watchFetchUsers, watchAddUser, watchSignInUser } from './users'
+import { watchFetchDatabaseToStorage, watchDeleteUserDataFromStorage } from './storage'
 import watchDeleteItems from './app'
 
 export default function*() {
@@ -12,5 +12,7 @@ export default function*() {
     watchFetchUsers(),
     watchDeleteItems(),
     watchAddUser(),
+    watchSignInUser(),
+    watchDeleteUserDataFromStorage(),
   ])
 }
