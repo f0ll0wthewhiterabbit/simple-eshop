@@ -7,6 +7,9 @@ import {
   DELETE_USERS_ERROR,
   DELETE_CURRENT_USER,
   DELETE_CURRENT_USER_ERROR,
+  ADD_USER,
+  ADD_USER_SUCCESS,
+  ADD_USER_ERROR,
 } from '../../constants'
 
 export const fetchUsers = () => ({
@@ -43,5 +46,20 @@ export const deleteCurrentUser = () => ({
 
 export const deleteCurrentUserError = error => ({
   type: DELETE_CURRENT_USER_ERROR,
+  payload: error,
+})
+
+export const addUser = userData => ({
+  type: ADD_USER,
+  payload: userData,
+})
+
+export const addUserSuccess = userData => ({
+  type: ADD_USER_SUCCESS,
+  payload: userData,
+})
+
+export const addUserError = error => ({
+  type: ADD_USER_ERROR,
   payload: error,
 })

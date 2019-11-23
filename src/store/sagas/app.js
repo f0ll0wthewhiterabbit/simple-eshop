@@ -22,7 +22,7 @@ import {
   deleteCurrentUserError,
   fetchUsers,
 } from '../actions'
-import { updateStorageData } from '../../utils/storage'
+import { updateStorageData } from '../../utils'
 
 function* deleteItemsSaga(action) {
   yield put(startLoading())

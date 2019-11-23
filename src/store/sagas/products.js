@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 
 import { FETCH_PRODUCTS, STORAGE_FIELD_PRODUCTS } from '../../constants'
-import { getDataFromStorage } from '../../utils/storage'
+import { getDataFromStorage } from '../../utils'
 import { fetchProductsSuccess, fetchProductsError, startLoading, stopLoading } from '../actions'
 
 function* fetchProductsSaga() {

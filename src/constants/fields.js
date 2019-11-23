@@ -1,5 +1,7 @@
 export const STORAGE_FIELD_PRODUCTS = 'products'
 export const STORAGE_FIELD_USERS = 'users'
+export const STORAGE_FIELD_USER_ID = 'userId'
+export const STORAGE_FIELD_TOKEN = 'token'
 export const STORE_FIELD_PRODUCTS = 'products'
 export const STORE_FIELD_USERS = 'users'
 export const STORE_FIELD_CURRENT_USER = 'usersCurrent'

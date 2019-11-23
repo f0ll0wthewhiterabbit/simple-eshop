@@ -6,13 +6,17 @@ import {
   DELETE_USERS_ERROR,
   DELETE_CURRENT_USER,
   DELETE_CURRENT_USER_ERROR,
+  ADD_USER_SUCCESS,
+  ADD_USER_ERROR,
 } from '../../constants'
 
 const initialState = {
   data: [],
   selected: [],
   current: {
-    id: 1, // FIXME:
+    id: null,
+    firstName: '',
+    lastName: '',
   },
   error: null,
 }
@@ -59,6 +63,24 @@ const users = (state = initialState, action) => {
       }
 
     case DELETE_CURRENT_USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      }
+
+    case ADD_USER_SUCCESS:
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          id: action.payload.id,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+        },
+        error: null,
+      }
+
+    case ADD_USER_ERROR:
       return {
         ...state,
         error: action.payload,
