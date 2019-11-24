@@ -13,10 +13,10 @@ import {
 import SignInForm from '../../forms/SignIn'
 import { Wrapper, IconWrapper, SignUpLink } from './styles'
 
-const SingInPage = ({ isUserSignedUp, userRole }) => {
+const SingInPage = ({ isUserSignedUp, userRole, signOut }) => {
   useEffect(() => {
-    // TODO: logout
-  }, [])
+    signOut()
+  }, [signOut])
 
   if (isUserSignedUp) {
     return (
@@ -47,6 +47,7 @@ const SingInPage = ({ isUserSignedUp, userRole }) => {
 SingInPage.propTypes = {
   isUserSignedUp: PropTypes.bool.isRequired,
   userRole: PropTypes.string.isRequired,
+  signOut: PropTypes.func.isRequired,
 }
 
 export default SingInPage

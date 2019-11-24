@@ -3,11 +3,12 @@ import { takeEvery, call, put } from 'redux-saga/effects'
 import {
   FETCH_USERS,
   STORAGE_FIELD_USERS,
-  ADD_USER,
+  SIGN_UP,
   STORAGE_FIELD_TOKEN,
   STORAGE_FIELD_USER_ID,
-  SIGN_IN_USER,
+  SIGN_IN,
   DATABASE_FIELD_ROLE_USER,
+  SIGN_OUT,
 } from '../../constants'
 import { getDataFromStorage, updateStorageData, generateUserToken } from '../../utils'
 import {
@@ -15,10 +16,11 @@ import {
   fetchUsersError,
   startLoading,
   stopLoading,
-  addUserSuccess,
-  addUserError,
-  signInUserSuccess,
-  signInUserError,
+  signUpSuccess,
+  signUpError,
+  signInSuccess,
+  signInError,
+  signOutSuccess,
 } from '../actions'
 
 function* fetchUsersSaga() {
@@ -39,7 +41,7 @@ function* fetchUsersSaga() {
   yield put(stopLoading())
 }
 
-function* addUserSaga(action) {
+function* signUpSaga(action) {
   const userData = action.payload
 
   try {
@@ -72,7 +74,7 @@ function* addUserSaga(action) {
       yield localStorage.setItem(STORAGE_FIELD_TOKEN, token)
 
       yield put(
-        addUserSuccess({
+        signUpSuccess({
           id: userId,
           firstName: userData.firstName,
           lastName: userData.lastName,
@@ -83,11 +85,11 @@ function* addUserSaga(action) {
     }
   } catch (error) {
     const errorMessage = error.message || 'Something went wrong registering the user!'
-    yield put(addUserError(errorMessage))
+    yield put(signUpError(errorMessage))
   }
 }
 
-function* signInUserSaga(action) {
+function* signInSaga(action) {
   let currentUser
 
   try {
@@ -124,12 +126,12 @@ function* signInUserSaga(action) {
     }
   } catch (error) {
     const errorMessage = error.message || ''
-    yield put(signInUserError(errorMessage))
+    yield put(signInError(errorMessage))
     return
   }
 
   yield put(
-    signInUserSuccess({
+    signInSuccess({
       id: currentUser.id,
       firstName: currentUser.firstName,
       lastName: currentUser.lastName,
@@ -139,16 +141,26 @@ function* signInUserSaga(action) {
   )
 }
 
+function* signOutSaga() {
+  yield localStorage.removeItem(STORAGE_FIELD_USER_ID)
+  yield localStorage.removeItem(STORAGE_FIELD_TOKEN)
+  yield put(signOutSuccess())
+}
+
 function* watchFetchUsers() {
   yield takeEvery(FETCH_USERS, fetchUsersSaga)
 }
 
-function* watchAddUser() {
-  yield takeEvery(ADD_USER, addUserSaga)
+function* watchSignUp() {
+  yield takeEvery(SIGN_UP, signUpSaga)
 }
 
-function* watchSignInUser() {
-  yield takeEvery(SIGN_IN_USER, signInUserSaga)
+function* watchSignIn() {
+  yield takeEvery(SIGN_IN, signInSaga)
 }
 
-export { watchFetchUsers, watchAddUser, watchSignInUser }
+function* watchSignOut() {
+  yield takeEvery(SIGN_OUT, signOutSaga)
+}
+
+export { watchFetchUsers, watchSignUp, watchSignIn, watchSignOut }

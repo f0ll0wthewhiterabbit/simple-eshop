@@ -6,11 +6,12 @@ import {
   DELETE_USERS_ERROR,
   DELETE_CURRENT_USER,
   DELETE_CURRENT_USER_ERROR,
-  ADD_USER_SUCCESS,
-  ADD_USER_ERROR,
-  SIGN_IN_USER_SUCCESS,
-  SIGN_IN_USER_ERROR,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_ERROR,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_ERROR,
   DATABASE_FIELD_ROLE_GUEST,
+  SIGN_OUT_SUCCESS,
 } from '../../constants'
 
 const initialState = {
@@ -77,7 +78,7 @@ const users = (state = initialState, action) => {
         error: action.payload,
       }
 
-    case ADD_USER_SUCCESS:
+    case SIGN_UP_SUCCESS:
       return {
         ...state,
         current: {
@@ -91,13 +92,13 @@ const users = (state = initialState, action) => {
         error: null,
       }
 
-    case ADD_USER_ERROR:
+    case SIGN_UP_ERROR:
       return {
         ...state,
         error: action.payload,
       }
 
-    case SIGN_IN_USER_SUCCESS:
+    case SIGN_IN_SUCCESS:
       return {
         ...state,
         current: {
@@ -111,10 +112,23 @@ const users = (state = initialState, action) => {
         error: null,
       }
 
-    case SIGN_IN_USER_ERROR:
+    case SIGN_IN_ERROR:
       return {
         ...state,
         error: action.payload,
+      }
+
+    case SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          id: null,
+          firstName: '',
+          lastName: '',
+          role: DATABASE_FIELD_ROLE_GUEST,
+          isRemovable: false,
+        },
       }
 
     default:

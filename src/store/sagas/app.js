@@ -24,7 +24,7 @@ import {
   deleteCurrentUserError,
   fetchUsers,
   fetchDatabaseToStorage,
-  signInUser,
+  signIn,
 } from '../actions'
 import { updateStorageData } from '../../utils'
 
@@ -68,7 +68,7 @@ function* deleteItemsSaga(action) {
 function* initializeSaga() {
   yield put(fetchDatabaseToStorage())
   yield take(FETCH_DATABASE_TO_STORAGE_SUCCESS)
-  yield put(signInUser())
+  yield put(signIn())
 }
 
 function* watchDeleteItems() {

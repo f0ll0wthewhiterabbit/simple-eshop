@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 
 import SignUpForm from './component'
-import { addUser } from '../../../store/actions'
+import { signUp } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   error: state.users.error,
 })
 
 const mapDispatchToProps = dispatch => ({
-  addUser: userData => dispatch(addUser(userData)),
+  signUp: userData => dispatch(signUp(userData)),
 })
 
 export default connect(

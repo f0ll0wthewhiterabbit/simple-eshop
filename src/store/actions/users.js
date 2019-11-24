@@ -7,12 +7,14 @@ import {
   DELETE_USERS_ERROR,
   DELETE_CURRENT_USER,
   DELETE_CURRENT_USER_ERROR,
-  ADD_USER,
-  ADD_USER_SUCCESS,
-  ADD_USER_ERROR,
-  SIGN_IN_USER,
-  SIGN_IN_USER_SUCCESS,
-  SIGN_IN_USER_ERROR,
+  SIGN_UP,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_ERROR,
+  SIGN_IN,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_ERROR,
+  SIGN_OUT,
+  SIGN_OUT_SUCCESS,
 } from '../../constants'
 
 export const fetchUsers = () => ({
@@ -52,32 +54,40 @@ export const deleteCurrentUserError = error => ({
   payload: error,
 })
 
-export const addUser = userData => ({
-  type: ADD_USER,
+export const signUp = userData => ({
+  type: SIGN_UP,
   payload: userData,
 })
 
-export const addUserSuccess = userData => ({
-  type: ADD_USER_SUCCESS,
+export const signUpSuccess = userData => ({
+  type: SIGN_UP_SUCCESS,
   payload: userData,
 })
 
-export const addUserError = error => ({
-  type: ADD_USER_ERROR,
+export const signUpError = error => ({
+  type: SIGN_UP_ERROR,
   payload: error,
 })
 
-export const signInUser = userData => ({
-  type: SIGN_IN_USER,
+export const signIn = userData => ({
+  type: SIGN_IN,
   payload: userData,
 })
 
-export const signInUserSuccess = userData => ({
-  type: SIGN_IN_USER_SUCCESS,
+export const signInSuccess = userData => ({
+  type: SIGN_IN_SUCCESS,
   payload: userData,
 })
 
-export const signInUserError = error => ({
-  type: SIGN_IN_USER_ERROR,
+export const signInError = error => ({
+  type: SIGN_IN_ERROR,
   payload: error,
+})
+
+export const signOut = () => ({
+  type: SIGN_OUT,
+})
+
+export const signOutSuccess = () => ({
+  type: SIGN_OUT_SUCCESS,
 })

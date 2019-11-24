@@ -16,7 +16,7 @@ import {
 } from './styles'
 import { STORE_FIELD_CURRENT_USER } from '../../../../../constants'
 
-const UserMenu = ({ theme, userName, isAdminMode, isDeleteRequestSent, showModal }) => {
+const UserMenu = ({ theme, userName, isAdminMode, isDeleteRequestSent, showModal, signOut }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const isMobileDevice = !useMediaQuery(theme.breakpoints.up('sm'))
@@ -32,6 +32,10 @@ const UserMenu = ({ theme, userName, isAdminMode, isDeleteRequestSent, showModal
   const handleDeleteAccountClick = () => {
     showModal(STORE_FIELD_CURRENT_USER)
     handleClose()
+  }
+
+  const handleSignOutClick = () => {
+    signOut()
   }
 
   const userMenuButton = isMobileDevice ? (
@@ -68,11 +72,11 @@ const UserMenu = ({ theme, userName, isAdminMode, isDeleteRequestSent, showModal
             <ListItemText primary="Delete Account" />
           </MenuItem>
         )}
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleSignOutClick}>
           <IconWrapper>
             <ExitToAppOutlinedIcon fontSize="small" />
           </IconWrapper>
-          <ListItemText primary="Logout" />
+          <ListItemText primary="Sign Out" />
         </MenuItem>
       </Menu>
     </Wrapper>
@@ -83,10 +87,11 @@ UserMenu.propTypes = {
   theme: PropTypes.shape({
     breakpoints: PropTypes.object.isRequired,
   }).isRequired,
-  showModal: PropTypes.func,
   userName: PropTypes.string.isRequired,
   isAdminMode: PropTypes.bool.isRequired,
   isDeleteRequestSent: PropTypes.bool.isRequired,
+  showModal: PropTypes.func,
+  signOut: PropTypes.func,
 }
 
 export default withTheme(UserMenu)

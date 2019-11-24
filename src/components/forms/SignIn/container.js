@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import SignInForm from './component'
-import { signInUser } from '../../../store/actions'
+import { signIn } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   isUserSignedUp: state.users.current.id !== null,
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  signInUser: userData => dispatch(signInUser(userData)),
+  signIn: userData => dispatch(signIn(userData)),
 })
 
 export default connect(
