@@ -7,6 +7,7 @@ import {
   STORAGE_FIELD_TOKEN,
   STORAGE_FIELD_USER_ID,
   SIGN_IN_USER,
+  DATABASE_FIELD_ROLE_USER,
 } from '../../constants'
 import { getDataFromStorage, updateStorageData, generateUserToken } from '../../utils'
 import {
@@ -63,6 +64,7 @@ function* addUserSaga(action) {
         password: userData.password,
         isRemovable: false,
         token,
+        role: DATABASE_FIELD_ROLE_USER,
       })
 
       yield call(updateStorageData, STORAGE_FIELD_USERS, usersList)
@@ -74,6 +76,8 @@ function* addUserSaga(action) {
           id: userId,
           firstName: userData.firstName,
           lastName: userData.lastName,
+          role: userData.role,
+          isRemovable: false,
         })
       )
     }
@@ -105,8 +109,8 @@ function* signInUserSaga(action) {
     } else {
       const userData = action.payload
 
-      if (!userData.email) {
-        throw new Error('Sign in please to continue!')
+      if (!userData || !userData.email) {
+        throw new Error()
       }
 
       currentUser = usersList.find(user => user.email === userData.email)
@@ -119,7 +123,7 @@ function* signInUserSaga(action) {
       }
     }
   } catch (error) {
-    const errorMessage = error.message || 'Wrong email or password!'
+    const errorMessage = error.message || ''
     yield put(signInUserError(errorMessage))
     return
   }
@@ -129,6 +133,8 @@ function* signInUserSaga(action) {
       id: currentUser.id,
       firstName: currentUser.firstName,
       lastName: currentUser.lastName,
+      role: currentUser.role,
+      isRemovable: currentUser.isRemovable,
     })
   )
 }

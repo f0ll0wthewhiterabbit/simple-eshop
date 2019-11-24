@@ -2,13 +2,14 @@ import {
   FETCH_DATABASE_TO_STORAGE,
   FETCH_DATABASE_TO_STORAGE_SUCCESS,
   FETCH_DATABASE_TO_STORAGE_ERROR,
-  DELETE_USER_DATA_FROM_STORAGE,
   SHOW_MODAL,
   CLOSE_MODAL,
-  TURN_ON_ADMIN_MODE,
   DELETE_ITEMS,
   START_LOADING,
   STOP_LOADING,
+  INITIALIZE,
+  OPEN_SIDEBAR,
+  CLOSE_SIDEBAR,
 } from '../../constants'
 
 export const fetchDatabaseToStorage = () => ({
@@ -24,10 +25,6 @@ export const fetchDatabaseToStorageError = error => ({
   payload: error,
 })
 
-export const deleteUserDataFromStorage = () => ({
-  type: DELETE_USER_DATA_FROM_STORAGE,
-})
-
 export const showModal = storeFieldNameForModal => ({
   type: SHOW_MODAL,
   payload: storeFieldNameForModal,
@@ -35,10 +32,6 @@ export const showModal = storeFieldNameForModal => ({
 
 export const closeModal = () => ({
   type: CLOSE_MODAL,
-})
-
-export const turnOnAdminMode = () => ({
-  type: TURN_ON_ADMIN_MODE,
 })
 
 export const deleteItems = storeFieldName => ({
@@ -52,4 +45,16 @@ export const startLoading = () => ({
 
 export const stopLoading = () => ({
   type: STOP_LOADING,
+})
+
+export const initialize = () => ({
+  type: INITIALIZE,
+})
+
+export const openSidebar = () => ({
+  type: OPEN_SIDEBAR,
+})
+
+export const closeSidebar = () => ({
+  type: CLOSE_SIDEBAR,
 })

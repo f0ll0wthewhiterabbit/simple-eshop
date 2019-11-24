@@ -1,18 +1,19 @@
 import { connect } from 'react-redux'
 
-import SignInForm from './component'
-import { signInUser } from '../../../store/actions'
+import AdminLayout from './component'
+import { closeSidebar } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   isUserSignedUp: state.users.current.id !== null,
-  error: state.users.error,
+  userRole: state.users.current.role,
+  isSidebarOpened: state.app.isSidebarOpened,
 })
 
 const mapDispatchToProps = dispatch => ({
-  signInUser: userData => dispatch(signInUser(userData)),
+  closeSidebar: () => dispatch(closeSidebar()),
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignInForm)
+)(AdminLayout)

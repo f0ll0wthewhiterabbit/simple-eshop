@@ -5,10 +5,11 @@ import {
   CLOSE_MODAL,
   START_LOADING,
   STOP_LOADING,
+  OPEN_SIDEBAR,
+  CLOSE_SIDEBAR,
 } from '../../constants'
 
 const initialState = {
-  isAdminMode: false,
   isLoading: false,
   isStorageDataReady: false,
   error: null,
@@ -16,6 +17,7 @@ const initialState = {
     isOpened: false,
     storeFieldName: '',
   },
+  isSidebarOpened: false,
 }
 
 const app = (state = initialState, action) => {
@@ -64,6 +66,18 @@ const app = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+      }
+
+    case OPEN_SIDEBAR:
+      return {
+        ...state,
+        isSidebarOpened: true,
+      }
+
+    case CLOSE_SIDEBAR:
+      return {
+        ...state,
+        isSidebarOpened: false,
       }
 
     default:

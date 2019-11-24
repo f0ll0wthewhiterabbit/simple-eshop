@@ -1,27 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
 import { TextField, Typography } from '@material-ui/core'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
-import { MAIN_PAGE_PATH } from '../../../constants'
 import { StyledForm, SubmitButton, Progress } from './styles'
 
-const SingInPage = ({ signInUser, isUserSignedUp, error, deleteUserDataFromStorage }) => {
-  useEffect(() => {
-    deleteUserDataFromStorage()
-  }, [deleteUserDataFromStorage])
-
+const SignInForm = ({ signInUser, error }) => {
   const handleFormSubmit = values => {
     signInUser({
       email: values.email,
       password: values.password,
     })
-  }
-
-  if (isUserSignedUp) {
-    return <Redirect to={MAIN_PAGE_PATH} />
   }
 
   return (
@@ -89,11 +79,9 @@ const SingInPage = ({ signInUser, isUserSignedUp, error, deleteUserDataFromStora
   )
 }
 
-SingInPage.propTypes = {
+SignInForm.propTypes = {
   signInUser: PropTypes.func.isRequired,
-  deleteUserDataFromStorage: PropTypes.func.isRequired,
-  isUserSignedUp: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
 }
 
-export default SingInPage
+export default SignInForm

@@ -1,3 +1,3 @@
-import Logo from './component'
+import Logo from './container'
 
 export default Logo

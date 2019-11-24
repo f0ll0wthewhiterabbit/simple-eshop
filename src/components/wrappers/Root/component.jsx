@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import Loader from '../../global/Loader'
 
-const Root = ({ isStorageDataReady, error, fetchDatabaseToStorage, children }) => {
+const Root = ({ initialize, isStorageDataReady, error, children }) => {
   useEffect(() => {
-    fetchDatabaseToStorage()
-  }, [fetchDatabaseToStorage])
+    initialize()
+  }, [initialize])
 
   if (isStorageDataReady || error) {
     return children
@@ -18,7 +18,7 @@ const Root = ({ isStorageDataReady, error, fetchDatabaseToStorage, children }) =
 Root.propTypes = {
   isStorageDataReady: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
-  fetchDatabaseToStorage: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 }
 

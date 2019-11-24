@@ -16,7 +16,7 @@ import {
 } from './styles'
 import { STORE_FIELD_CURRENT_USER } from '../../../../../constants'
 
-const UserMenu = ({ theme, showModal }) => {
+const UserMenu = ({ theme, userName, isAdminMode, isDeleteRequestSent, showModal }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const isMobileDevice = !useMediaQuery(theme.breakpoints.up('sm'))
@@ -40,7 +40,7 @@ const UserMenu = ({ theme, showModal }) => {
     </UserMenuButtonSmall>
   ) : (
     <UserMenuButtonNormal aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-      Username <ArrowIcon />
+      {userName} <ArrowIcon />
     </UserMenuButtonNormal>
   )
 
@@ -58,14 +58,16 @@ const UserMenu = ({ theme, showModal }) => {
           <IconWrapper>
             <PersonOutlineOutlinedIcon fontSize="small" />
           </IconWrapper>
-          <ListItemText primary="Username" />
+          <ListItemText primary={userName} />
         </MenuItem>
-        <MenuItem onClick={handleDeleteAccountClick}>
-          <IconWrapper>
-            <HighlightOffOutlinedIcon fontSize="small" />
-          </IconWrapper>
-          <ListItemText primary="Delete Account" />
-        </MenuItem>
+        {!isAdminMode && (
+          <MenuItem onClick={handleDeleteAccountClick} disabled={isDeleteRequestSent}>
+            <IconWrapper>
+              <HighlightOffOutlinedIcon fontSize="small" />
+            </IconWrapper>
+            <ListItemText primary="Delete Account" />
+          </MenuItem>
+        )}
         <MenuItem onClick={handleClose}>
           <IconWrapper>
             <ExitToAppOutlinedIcon fontSize="small" />
@@ -82,6 +84,9 @@ UserMenu.propTypes = {
     breakpoints: PropTypes.object.isRequired,
   }).isRequired,
   showModal: PropTypes.func,
+  userName: PropTypes.string.isRequired,
+  isAdminMode: PropTypes.bool.isRequired,
+  isDeleteRequestSent: PropTypes.bool.isRequired,
 }
 
 export default withTheme(UserMenu)

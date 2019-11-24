@@ -1,21 +1,23 @@
 [
   {
     "id": 1,
-    "firstName": "Carter",
-    "lastName": "Simpson",
-    "email": "Carter_Simpson4917@muall.tech",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "admin@g.com",
     "password": "123456",
     "isRemovable": false,
-    "token": "7e3774652e674d77acd149eb3c45c7"
+    "token": "7e3774652e674d77acd149eb3c45c7",
+    "role": "admin"
   },
   {
     "id": 2,
-    "firstName": "Hayden",
-    "lastName": "Radcliffe",
-    "email": "Hayden_Radcliffe8431@elnee.tech",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "user@g.com",
     "password": "123456",
     "isRemovable": false,
-    "token": "bb2d8448e9d44f1c9536334a29816e"
+    "token": "bb2d8448e9d44f1c9536334a29816e",
+    "role": "user"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "email": "Martin_Kennedy5050@eirey.tech",
     "password": "123456",
     "isRemovable": true,
-    "token": "b326e23588bf4981a854f8c3b13c84"
+    "token": "b326e23588bf4981a854f8c3b13c84",
+    "role": "user"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "email": "Freya_Farrant2030@ovock.tech",
     "password": "123456",
     "isRemovable": false,
-    "token": "02ebe234abdc4a3a880c462bbca456"
+    "token": "02ebe234abdc4a3a880c462bbca456",
+    "role": "user"
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "email": "Lexi_Tutton2552@kideod.biz",
     "password": "123456",
     "isRemovable": true,
-    "token": "0ded3cece1d94654aaa82fee1633f9"
+    "token": "0ded3cece1d94654aaa82fee1633f9",
+    "role": "user"
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "email": "Anne_Eagle654@muall.tech",
     "password": "123456",
     "isRemovable": false,
-    "token": "14b79fc993fd4891b2e970563518f9"
+    "token": "14b79fc993fd4891b2e970563518f9",
+    "role": "user"
   },
   {
     "id": 7,
@@ -60,7 +66,8 @@
     "email": "Chris_Lindsay9229@liret.org",
     "password": "123456",
     "isRemovable": false,
-    "token": "b329a4dd6d2d4a7cac328f66846a4a"
+    "token": "b329a4dd6d2d4a7cac328f66846a4a",
+    "role": "user"
   },
   {
     "id": 8,
@@ -69,7 +76,8 @@
     "email": "Alex_Fox2494@extex.org",
     "password": "123456",
     "isRemovable": false,
-    "token": "c5f5bed9d1644e93a2f13d566d0df0"
+    "token": "c5f5bed9d1644e93a2f13d566d0df0",
+    "role": "user"
   },
   {
     "id": 9,
@@ -78,7 +86,8 @@
     "email": "Adelaide_Cx9398@gmail.com",
     "password": "123456",
     "isRemovable": false,
-    "token": "6e94a0abaeb04509a29c871bc164df"
+    "token": "6e94a0abaeb04509a29c871bc164df",
+    "role": "user"
   },
   {
     "id": 10,
@@ -87,7 +96,8 @@
     "email": "Miriam_Alcroft3418@ovock.tech",
     "password": "123456",
     "isRemovable": false,
-    "token": "0ae857e35f75484fafa17928ae4864"
+    "token": "0ae857e35f75484fafa17928ae4864",
+    "role": "user"
   },
   {
     "id": 11,
@@ -96,7 +106,8 @@
     "email": "Lucas_Goodman9398@deavo.com",
     "password": "123456",
     "isRemovable": true,
-    "token": "3076eb98101e4ab6824a08fe500abe"
+    "token": "3076eb98101e4ab6824a08fe500abe",
+    "role": "user"
   },
   {
     "id": 12,
@@ -105,7 +116,8 @@
     "email": "Mike_Mitchell6718@guentu.biz",
     "password": "123456",
     "isRemovable": false,
-    "token": "c4a34a47733543b6b5eed96937b253"
+    "token": "c4a34a47733543b6b5eed96937b253",
+    "role": "user"
   },
   {
     "id": 13,
@@ -114,7 +126,8 @@
     "email": "William_Vass3718@joiniaa.com",
     "password": "123456",
     "isRemovable": false,
-    "token": "bf468003c9a94d3fac65511336aa7a"
+    "token": "bf468003c9a94d3fac65511336aa7a",
+    "role": "user"
   },
   {
     "id": 14,
@@ -123,7 +136,8 @@
     "email": "Josephine_Vangness8467@gmail.com",
     "password": "123456",
     "isRemovable": false,
-    "token": "7e20aa83c166484083645bd3899a32"
+    "token": "7e20aa83c166484083645bd3899a32",
+    "role": "user"
   },
   {
     "id": 15,
@@ -132,7 +146,8 @@
     "email": "Maxwell_Tobin2467@infotech44.tech",
     "password": "123456",
     "isRemovable": false,
-    "token": "bfe7b909338d48fc9e698bd98bd69a"
+    "token": "bfe7b909338d48fc9e698bd98bd69a",
+    "role": "user"
   },
   {
     "id": 16,
@@ -141,7 +156,8 @@
     "email": "Brad_Walsh6434@joiniaa.com",
     "password": "123456",
     "isRemovable": false,
-    "token": "594e80193fac4b449c15547db4af8c"
+    "token": "594e80193fac4b449c15547db4af8c",
+    "role": "user"
   },
   {
     "id": 17,
@@ -150,7 +166,8 @@
     "email": "Marigold_Harrington8572@tonsy.org",
     "password": "123456",
     "isRemovable": false,
-    "token": "31eb714eb25d4ba1989cf48d4d0f9b"
+    "token": "31eb714eb25d4ba1989cf48d4d0f9b",
+    "role": "user"
   },
   {
     "id": 18,
@@ -159,7 +176,8 @@
     "email": "Bristol_Rigg2904@hourpy.biz",
     "password": "123456",
     "isRemovable": false,
-    "token": "300550d8dd724e55a11974eb69b9a9"
+    "token": "300550d8dd724e55a11974eb69b9a9",
+    "role": "user"
   },
   {
     "id": 19,
@@ -168,7 +186,8 @@
     "email": "Julian_Donovan8265@acrit.org",
     "password": "123456",
     "isRemovable": false,
-    "token": "603f037b74684fa0925a71c17682f6"
+    "token": "603f037b74684fa0925a71c17682f6",
+    "role": "user"
   },
   {
     "id": 20,
@@ -177,6 +196,7 @@
     "email": "Ron_Rust6474@dionrab.com",
     "password": "123456",
     "isRemovable": false,
-    "token": "24a7c5b7d3434c0dacb3ff9de6a65f"
+    "token": "24a7c5b7d3434c0dacb3ff9de6a65f",
+    "role": "user"
   }
 ]

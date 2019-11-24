@@ -8,6 +8,8 @@ import {
   STORE_FIELD_PRODUCTS,
   STORE_FIELD_CURRENT_USER,
   FETCH_USERS_SUCCESS,
+  INITIALIZE,
+  FETCH_DATABASE_TO_STORAGE_SUCCESS,
 } from '../../constants'
 import {
   setSelectedUsers,
@@ -21,6 +23,8 @@ import {
   deleteCurrentUser,
   deleteCurrentUserError,
   fetchUsers,
+  fetchDatabaseToStorage,
+  signInUser,
 } from '../actions'
 import { updateStorageData } from '../../utils'
 
@@ -61,8 +65,18 @@ function* deleteItemsSaga(action) {
   yield put(closeModal())
 }
 
+function* initializeSaga() {
+  yield put(fetchDatabaseToStorage())
+  yield take(FETCH_DATABASE_TO_STORAGE_SUCCESS)
+  yield put(signInUser())
+}
+
 function* watchDeleteItems() {
   yield takeEvery(DELETE_ITEMS, deleteItemsSaga)
 }
 
-export default watchDeleteItems
+function* watchInitialize() {
+  yield takeEvery(INITIALIZE, initializeSaga)
+}
+
+export { watchDeleteItems, watchInitialize }

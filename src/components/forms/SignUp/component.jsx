@@ -1,14 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
 import { TextField, Grid, Typography } from '@material-ui/core'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
-import { MAIN_PAGE_PATH } from '../../../constants'
 import { StyledForm, SubmitButton, Progress } from './styles'
 
-const SignUpForm = ({ addUser, isUserAdded, error }) => {
+const SignUpForm = ({ addUser, error }) => {
   const handleFormSubmit = values => {
     addUser({
       email: values.email,
@@ -16,10 +14,6 @@ const SignUpForm = ({ addUser, isUserAdded, error }) => {
       lastName: values.lastName,
       password: values.password,
     })
-  }
-
-  if (isUserAdded) {
-    return <Redirect to={MAIN_PAGE_PATH} />
   }
 
   return (
@@ -157,7 +151,6 @@ const SignUpForm = ({ addUser, isUserAdded, error }) => {
 
 SignUpForm.propTypes = {
   addUser: PropTypes.func.isRequired,
-  isUserAdded: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
 }
 

@@ -16,6 +16,7 @@ import {
 } from './constants'
 
 const AdminLayout = React.lazy(() => import('./components/layouts/Admin'))
+const UserLayout = React.lazy(() => import('./components/layouts/User'))
 const CatalogPage = React.lazy(() => import('./components/pages/Catalog'))
 const SignInPage = React.lazy(() => import('./components/pages/SignIn'))
 const SignUpPage = React.lazy(() => import('./components/pages/SignUp'))
@@ -35,9 +36,9 @@ export default () => (
     >
       <Switch>
         <Route exact path={MAIN_PAGE_PATH}>
-          <StandardLayout>
+          <UserLayout>
             <CatalogPage />
-          </StandardLayout>
+          </UserLayout>
         </Route>
 
         <Route exact path={SING_IN_PAGE_PATH}>
@@ -74,11 +75,15 @@ export default () => (
           </AdminLayout>
         </Route>
 
-        <Route exact path={ERROR_PAGE_PATH}>
-          <StandardLayout>
-            <ErrorPage />
-          </StandardLayout>
-        </Route>
+        <Route
+          exact
+          path={ERROR_PAGE_PATH}
+          render={props => (
+            <StandardLayout>
+              <ErrorPage {...props} />
+            </StandardLayout>
+          )}
+        />
 
         <Route>
           <StandardLayout>
@@ -89,5 +94,3 @@ export default () => (
     </React.Suspense>
   </Router>
 )
-
-// TODO: move layouts to the upper scope?

@@ -6,9 +6,6 @@ import {
   USERS_API,
   STORAGE_FIELD_PRODUCTS,
   STORAGE_FIELD_USERS,
-  STORAGE_FIELD_TOKEN,
-  STORAGE_FIELD_USER_ID,
-  DELETE_USER_DATA_FROM_STORAGE,
 } from '../../constants'
 import { fetchDatabaseToStorageSuccess, fetchDatabaseToStorageError } from '../actions'
 
@@ -38,17 +35,8 @@ function* fetchDatabaseToStorageSaga() {
   yield put(fetchDatabaseToStorageSuccess())
 }
 
-function* deleteUserDataFromStorageSaga() {
-  yield localStorage.removeItem(STORAGE_FIELD_TOKEN)
-  yield localStorage.removeItem(STORAGE_FIELD_USER_ID)
-}
-
 function* watchFetchDatabaseToStorage() {
   yield takeEvery(FETCH_DATABASE_TO_STORAGE, fetchDatabaseToStorageSaga)
 }
 
-function* watchDeleteUserDataFromStorage() {
-  yield takeEvery(DELETE_USER_DATA_FROM_STORAGE, deleteUserDataFromStorageSaga)
-}
-
-export { watchFetchDatabaseToStorage, watchDeleteUserDataFromStorage }
+export default watchFetchDatabaseToStorage

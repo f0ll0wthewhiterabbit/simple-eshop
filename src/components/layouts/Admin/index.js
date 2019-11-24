@@ -1,3 +1,3 @@
-import AdminLayout from './component'
+import AdminLayout from './container'
 
 export default AdminLayout

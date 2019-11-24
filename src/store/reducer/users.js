@@ -10,6 +10,7 @@ import {
   ADD_USER_ERROR,
   SIGN_IN_USER_SUCCESS,
   SIGN_IN_USER_ERROR,
+  DATABASE_FIELD_ROLE_GUEST,
 } from '../../constants'
 
 const initialState = {
@@ -19,6 +20,8 @@ const initialState = {
     id: null,
     firstName: '',
     lastName: '',
+    role: DATABASE_FIELD_ROLE_GUEST,
+    isRemovable: false,
   },
   error: null,
 }
@@ -62,6 +65,10 @@ const users = (state = initialState, action) => {
         data: state.data.map(user => {
           return user.id !== state.current.id ? user : { ...user, isRemovable: true }
         }),
+        current: {
+          ...state.current,
+          isRemovable: true,
+        },
       }
 
     case DELETE_CURRENT_USER_ERROR:
@@ -78,6 +85,8 @@ const users = (state = initialState, action) => {
           id: action.payload.id,
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
+          role: action.payload.role,
+          isRemovable: action.payload.isRemovable,
         },
         error: null,
       }
@@ -96,6 +105,8 @@ const users = (state = initialState, action) => {
           id: action.payload.id,
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
+          role: action.payload.role,
+          isRemovable: action.payload.isRemovable,
         },
         error: null,
       }

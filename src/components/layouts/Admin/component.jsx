@@ -1,28 +1,38 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 import { withTheme } from 'styled-components'
 import { useMediaQuery, Divider } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
 
 import Header from '../../global/Header'
 import Footer from '../../global/Footer'
 import Profile from './components/Profile/component'
 import SidebarNav from './components/SidebarNav'
 import AlertDialog from '../../global/AlertDialog'
-import { Root, Wrapper, MenuButton, Sidebar, SidebarRoot, Main } from './styles'
+import { SING_IN_PAGE_PATH, ERROR_PAGE_PATH, DATABASE_FIELD_ROLE_ADMIN } from '../../../constants'
+import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 
-const AdminLayout = ({ theme, children }) => {
-  const [openSidebar, setOpenSidebar] = useState(false)
-
+const AdminLayout = ({
+  isUserSignedUp,
+  isSidebarOpened,
+  userRole,
+  theme,
+  closeSidebar,
+  children,
+}) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), { defaultMatches: true })
-  const shouldOpenSidebar = isDesktop ? true : openSidebar
-
-  const handleSidebarOpen = () => {
-    setOpenSidebar(true)
-  }
+  const shouldOpenSidebar = isDesktop ? true : isSidebarOpened
 
   const handleSidebarClose = () => {
-    setOpenSidebar(false)
+    closeSidebar()
+  }
+
+  if (!isUserSignedUp) {
+    return <Redirect to={SING_IN_PAGE_PATH} />
+  }
+
+  if (userRole !== DATABASE_FIELD_ROLE_ADMIN) {
+    return <Redirect to={ERROR_PAGE_PATH} />
   }
 
   return (
@@ -30,10 +40,6 @@ const AdminLayout = ({ theme, children }) => {
       <AlertDialog title="Do you really want to delete selected items from database?" />
       <Header />
       <Wrapper>
-        <MenuButton color="secondary" aria-label="open sidebar" onClick={handleSidebarOpen}>
-          <MenuIcon />
-        </MenuButton>
-
         <Sidebar
           variant={isDesktop ? 'persistent' : 'temporary'}
           onClose={handleSidebarClose}
@@ -54,7 +60,11 @@ const AdminLayout = ({ theme, children }) => {
 }
 
 AdminLayout.propTypes = {
+  isUserSignedUp: PropTypes.bool.isRequired,
+  isSidebarOpened: PropTypes.bool.isRequired,
+  userRole: PropTypes.string.isRequired,
   theme: PropTypes.shape({ breakpoints: PropTypes.object.isRequired }).isRequired,
+  closeSidebar: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 }
 

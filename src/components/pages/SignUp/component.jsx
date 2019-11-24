@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 import { Typography, Container } from '@material-ui/core'
 import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded'
 
-import { SING_IN_PAGE_PATH } from '../../../constants'
+import {
+  SING_IN_PAGE_PATH,
+  DATABASE_FIELD_ROLE_ADMIN,
+  MAIN_PAGE_PATH,
+  ADMIN_USERS_PAGE_PATH,
+} from '../../../constants'
 import SignUpForm from '../../forms/SignUp'
 import { Wrapper, IconWrapper, SignInLink } from './styles'
 
-const SignUpPage = () => {
+const SignUpPage = ({ isUserAdded, userRole }) => {
+  useEffect(() => {
+    // TODO: logout
+  }, [])
+
+  if (isUserAdded) {
+    return (
+      <Redirect
+        to={userRole === DATABASE_FIELD_ROLE_ADMIN ? ADMIN_USERS_PAGE_PATH : MAIN_PAGE_PATH}
+      />
+    )
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <Wrapper>
@@ -23,6 +42,11 @@ const SignUpPage = () => {
       </Wrapper>
     </Container>
   )
+}
+
+SignUpPage.propTypes = {
+  isUserAdded: PropTypes.bool.isRequired,
+  userRole: PropTypes.string.isRequired,
 }
 
 export default SignUpPage

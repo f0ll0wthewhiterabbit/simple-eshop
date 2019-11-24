@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import Root from './component'
-import { fetchDatabaseToStorage } from '../../../store/actions'
+import { initialize } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   isStorageDataReady: state.app.isStorageDataReady,
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchDatabaseToStorage: () => dispatch(fetchDatabaseToStorage()),
+  initialize: () => dispatch(initialize()),
 })
 
 export default connect(

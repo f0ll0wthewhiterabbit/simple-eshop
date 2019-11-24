@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { IconButton, Drawer } from '@material-ui/core'
+import { Drawer } from '@material-ui/core'
 
 const Root = styled.div`
   display: flex;
@@ -38,29 +38,10 @@ const SidebarRoot = styled.div`
     padding-top: ${props => props.theme.spacing(8)}px;
   }
 `
-const MenuButton = styled(IconButton)`
-  position: absolute;
-  top: 3px;
-  left: 20px;
-  color: ${props => props.theme.palette.primary.contrastText};
-  z-index: 3;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-  }
-
-  ${props => props.theme.breakpoints.up('sm')} {
-    top: 7px;
-  }
-
-  ${props => props.theme.breakpoints.up('lg')} {
-    display: none;
-  }
-`
 const Main = styled.main`
   flex-grow: 1;
   padding: ${props => props.theme.spacing(3)}px;
   position: relative;
 `
 
-export { Root, Wrapper, MenuButton, Sidebar, SidebarRoot, Main }
+export { Root, Wrapper, Sidebar, SidebarRoot, Main }

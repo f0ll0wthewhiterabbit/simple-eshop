@@ -1,3 +1,3 @@
-import SignUpPage from './component'
+import SignUpPage from './container'
 
 export default SignUpPage
