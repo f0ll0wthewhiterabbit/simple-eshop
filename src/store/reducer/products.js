@@ -6,6 +6,8 @@ import {
   DELETE_PRODUCTS_ERROR,
   CHANGE_PRODUCT_RATING_SUCCESS,
   CHANGE_PRODUCT_RATING_ERROR,
+  DELETE_PRODUCT_RATING_SUCCESS,
+  DELETE_PRODUCT_RATING_ERROR,
 } from '../../constants'
 
 const initialState = {
@@ -56,6 +58,19 @@ const products = (state = initialState, action) => {
       }
 
     case CHANGE_PRODUCT_RATING_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      }
+
+    case DELETE_PRODUCT_RATING_SUCCESS:
+      return {
+        ...state,
+        data: [...action.payload],
+        error: null,
+      }
+
+    case DELETE_PRODUCT_RATING_ERROR:
       return {
         ...state,
         error: action.payload,

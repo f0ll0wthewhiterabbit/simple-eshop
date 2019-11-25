@@ -8,6 +8,9 @@ import {
   CHANGE_PRODUCT_RATING,
   CHANGE_PRODUCT_RATING_SUCCESS,
   CHANGE_PRODUCT_RATING_ERROR,
+  DELETE_PRODUCT_RATING,
+  DELETE_PRODUCT_RATING_SUCCESS,
+  DELETE_PRODUCT_RATING_ERROR,
 } from '../../constants'
 
 export const fetchProducts = () => ({
@@ -51,5 +54,20 @@ export const changeProductRatingSuccess = productsList => ({
 
 export const changeProductRatingError = error => ({
   type: CHANGE_PRODUCT_RATING_ERROR,
+  payload: error,
+})
+
+export const deleteProductRating = ratingId => ({
+  type: DELETE_PRODUCT_RATING,
+  payload: ratingId,
+})
+
+export const deleteProductRatingSuccess = productsList => ({
+  type: DELETE_PRODUCT_RATING_SUCCESS,
+  payload: productsList,
+})
+
+export const deleteProductRatingError = error => ({
+  type: DELETE_PRODUCT_RATING_ERROR,
   payload: error,
 })
