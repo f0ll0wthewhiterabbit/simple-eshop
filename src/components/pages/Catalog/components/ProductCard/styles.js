@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Card, CardMedia, CardContent, CardActions } from '@material-ui/core'
+import Rating from '@material-ui/lab/Rating'
 
 const Wrapper = styled(Card)`
   height: 100%;
@@ -28,4 +29,27 @@ const ActionsWrapper = styled(CardActions)`
   justify-content: space-between;
 `
 
-export { Wrapper, ImageWrapper, Content, TagsWrapper, ActionsWrapper }
+const Stars = styled(Rating)`
+  margin-right: 5px;
+`
+
+const RaitingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const RaitingsCount = styled.span`
+  color: ${props => props['data-color']};
+  font-size: 13px;
+`
+
+export {
+  Wrapper,
+  ImageWrapper,
+  Content,
+  TagsWrapper,
+  ActionsWrapper,
+  Stars,
+  RaitingWrapper,
+  RaitingsCount,
+}

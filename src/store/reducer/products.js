@@ -2,8 +2,10 @@ import {
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_ERROR,
   SET_SELECTED_PRODUCTS,
-  DELETE_PRODUCTS_ERROR,
   DELETE_PRODUCTS_SUCCESS,
+  DELETE_PRODUCTS_ERROR,
+  CHANGE_PRODUCT_RATING_SUCCESS,
+  CHANGE_PRODUCT_RATING_ERROR,
 } from '../../constants'
 
 const initialState = {
@@ -37,9 +39,23 @@ const products = (state = initialState, action) => {
       return {
         ...state,
         data: [...action.payload],
+        error: null,
       }
 
     case DELETE_PRODUCTS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      }
+
+    case CHANGE_PRODUCT_RATING_SUCCESS:
+      return {
+        ...state,
+        data: [...action.payload],
+        error: null,
+      }
+
+    case CHANGE_PRODUCT_RATING_ERROR:
       return {
         ...state,
         error: action.payload,

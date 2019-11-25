@@ -1,12 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Typography, Button, Chip } from '@material-ui/core'
-import Rating from '@material-ui/lab/Rating'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 
-import { Wrapper, ImageWrapper, Content, TagsWrapper, ActionsWrapper } from './styles'
+import {
+  Wrapper,
+  ImageWrapper,
+  Content,
+  TagsWrapper,
+  ActionsWrapper,
+  Stars,
+  RaitingWrapper,
+  RaitingsCount,
+} from './styles'
 
-const ProductCard = ({ title, description, tags, price, rating, imageSrc }) => {
+const ProductCard = ({
+  id,
+  title,
+  description,
+  tags,
+  price,
+  rating,
+  imageSrc,
+  currentUserId,
+  changeProductRating,
+}) => {
+  const ratingsAmount = rating.length
+  const averageRating = Math.round(rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
+  const isUserRatedProduct = rating.some(it => it.userId === currentUserId)
+
+  const handleRatingChange = (event, userRating) => {
+    changeProductRating({
+      productId: id,
+      userRating,
+    })
+  }
+
   return (
     <Wrapper>
       <ImageWrapper image={imageSrc} title={title} />
@@ -22,7 +51,17 @@ const ProductCard = ({ title, description, tags, price, rating, imageSrc }) => {
         ))}
       </TagsWrapper>
       <ActionsWrapper>
-        <Rating value={rating} size="small" readOnly />
+        <RaitingWrapper>
+          <Stars
+            value={averageRating}
+            name={`simple-controlled-${id}`}
+            size="small"
+            onChange={handleRatingChange}
+          />{' '}
+          <RaitingsCount data-color={isUserRatedProduct ? '#f50057' : '#bdbdbd'}>
+            ({ratingsAmount})
+          </RaitingsCount>
+        </RaitingWrapper>
         <Button size="small" color="primary" startIcon={<ShoppingCartOutlinedIcon />} disabled>
           {price} $
         </Button>
@@ -32,12 +71,20 @@ const ProductCard = ({ title, description, tags, price, rating, imageSrc }) => {
 }
 
 ProductCard.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   price: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.arrayOf(
+    PropTypes.shape({
+      userId: PropTypes.number.isRequired,
+      stars: PropTypes.number.isRequired,
+    })
+  ).isRequired,
   imageSrc: PropTypes.string.isRequired,
+  currentUserId: PropTypes.number.isRequired,
+  changeProductRating: PropTypes.func.isRequired,
 }
 
 export default ProductCard

@@ -5,6 +5,9 @@ import {
   SET_SELECTED_PRODUCTS,
   DELETE_PRODUCTS_ERROR,
   DELETE_PRODUCTS_SUCCESS,
+  CHANGE_PRODUCT_RATING,
+  CHANGE_PRODUCT_RATING_SUCCESS,
+  CHANGE_PRODUCT_RATING_ERROR,
 } from '../../constants'
 
 export const fetchProducts = () => ({
@@ -33,5 +36,20 @@ export const deleteProductsSuccess = productsList => ({
 
 export const deleteProductsError = error => ({
   type: DELETE_PRODUCTS_ERROR,
+  payload: error,
+})
+
+export const changeProductRating = ratingData => ({
+  type: CHANGE_PRODUCT_RATING,
+  payload: ratingData,
+})
+
+export const changeProductRatingSuccess = productsList => ({
+  type: CHANGE_PRODUCT_RATING_SUCCESS,
+  payload: productsList,
+})
+
+export const changeProductRatingError = error => ({
+  type: CHANGE_PRODUCT_RATING_ERROR,
   payload: error,
 })

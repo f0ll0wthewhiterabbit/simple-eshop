@@ -7,7 +7,24 @@
       "Mataano"
     ],
     "price": 89,
-    "rating": 2,
+    "rating": [
+      {
+        "userId": 1,
+        "stars": 3
+      },
+      {
+        "userId": 11,
+        "stars": 4
+      },
+      {
+        "userId": 3,
+        "stars": 5
+      },
+      {
+        "userId": 2,
+        "stars": 4
+      }
+    ],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   },
@@ -19,7 +36,20 @@
       "Levis"
     ],
     "price": 41,
-    "rating": 0,
+    "rating": [
+      {
+        "userId": 4,
+        "stars": 5
+      },
+      {
+        "userId": 9,
+        "stars": 5
+      },
+      {
+        "userId": 2,
+        "stars": 2
+      }
+    ],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   },
@@ -32,7 +62,32 @@
       "Navy"
     ],
     "price": 126,
-    "rating": 5,
+    "rating": [
+      {
+        "userId": 2,
+        "stars": 2
+      },
+      {
+        "userId": 9,
+        "stars": 1
+      },
+      {
+        "userId": 4,
+        "stars": 1
+      },
+      {
+        "userId": 5,
+        "stars": 3
+      },
+      {
+        "userId": 1,
+        "stars": 3
+      },
+      {
+        "userId": 7,
+        "stars": 4
+      }
+    ],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   },
@@ -45,7 +100,16 @@
       "Colours"
     ],
     "price": 36,
-    "rating": 4,
+    "rating": [
+      {
+        "userId": 1,
+        "stars": 5
+      },
+      {
+        "userId": 2,
+        "stars": 5
+      }
+    ],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   },
@@ -58,7 +122,12 @@
       "Deuce"
     ],
     "price": 155,
-    "rating": 3,
+    "rating": [
+      {
+        "userId": 5,
+        "stars": 4
+      }
+    ],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   },
@@ -71,7 +140,7 @@
       "Jeanswear"
     ],
     "price": 174,
-    "rating": 0,
+    "rating": [],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   },
@@ -84,7 +153,7 @@
       "Avirex"
     ],
     "price": 157,
-    "rating": 3,
+    "rating": [],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   },
@@ -96,7 +165,24 @@
       "Avirex"
     ],
     "price": 47,
-    "rating": 2,
+    "rating": [
+      {
+        "userId": 3,
+        "stars": 5
+      },
+      {
+        "userId": 2,
+        "stars": 5
+      },
+      {
+        "userId": 1,
+        "stars": 4
+      },
+      {
+        "userId": 10,
+        "stars": 4
+      }
+    ],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   },
@@ -109,7 +195,24 @@
       "Marc"
     ],
     "price": 73,
-    "rating": 1,
+    "rating": [
+      {
+        "userId": 1,
+        "stars": 4
+      },
+      {
+        "userId": 2,
+        "stars": 4
+      },
+      {
+        "userId": 3,
+        "stars": 4
+      },
+      {
+        "userId": 5,
+        "stars": 4
+      }
+    ],
     "image": "https://source.unsplash.com/random/320x180",
     "isRemovable": true
   }

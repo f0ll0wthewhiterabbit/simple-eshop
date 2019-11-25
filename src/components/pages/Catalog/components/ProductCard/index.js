@@ -1,3 +1,3 @@
-import ProductCard from './component'
+import ProductCard from './container'
 
 export default ProductCard

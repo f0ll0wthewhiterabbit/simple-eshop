@@ -1,8 +1,15 @@
-import { takeEvery, call, put } from 'redux-saga/effects'
+import { takeEvery, call, put, select } from 'redux-saga/effects'
 
-import { FETCH_PRODUCTS, STORAGE_FIELD_PRODUCTS } from '../../constants'
-import { getDataFromStorage } from '../../utils'
-import { fetchProductsSuccess, fetchProductsError, startLoading, stopLoading } from '../actions'
+import { FETCH_PRODUCTS, STORAGE_FIELD_PRODUCTS, CHANGE_PRODUCT_RATING } from '../../constants'
+import { getDataFromStorage, updateStorageData } from '../../utils'
+import {
+  fetchProductsSuccess,
+  fetchProductsError,
+  startLoading,
+  stopLoading,
+  changeProductRatingSuccess,
+  changeProductRatingError,
+} from '../actions'
 
 function* fetchProductsSaga() {
   yield put(startLoading())
@@ -22,8 +29,33 @@ function* fetchProductsSaga() {
   yield put(stopLoading())
 }
 
+function* changeProductRatingSaga(action) {
+  try {
+    const { productId, userRating } = action.payload
+    const productsList = yield call(getDataFromStorage, STORAGE_FIELD_PRODUCTS)
+    const productIndex = productsList.findIndex(product => product.id === productId)
+    const userId = yield select(state => state.users.current.id)
+    const userRatingIndex = productsList[productIndex].rating.findIndex(
+      rating => rating.userId === userId
+    )
+    if (userRatingIndex !== -1) {
+      productsList[productIndex].rating[userRatingIndex].stars = userRating
+    } else {
+      productsList[productIndex].rating.push({ userId, stars: userRating })
+    }
+    yield call(updateStorageData, STORAGE_FIELD_PRODUCTS, productsList)
+    yield put(changeProductRatingSuccess(productsList))
+  } catch (error) {
+    yield put(changeProductRatingError('Product rating change error!'))
+  }
+}
+
 function* watchFetchProducts() {
   yield takeEvery(FETCH_PRODUCTS, fetchProductsSaga)
 }
 
-export default watchFetchProducts
+function* watchChangeProductRating() {
+  yield takeEvery(CHANGE_PRODUCT_RATING, changeProductRatingSaga)
+}
+
+export { watchFetchProducts, watchChangeProductRating }

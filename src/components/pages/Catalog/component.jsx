@@ -30,6 +30,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
           return (
             <Grid key={id} item xs={12} sm={6} md={4}>
               <ProductCard
+                id={id}
                 title={title}
                 description={description}
                 tags={tags}
