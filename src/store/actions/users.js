@@ -3,9 +3,7 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_ERROR,
   SET_SELECTED_USERS,
-  DELETE_USERS,
   DELETE_USERS_ERROR,
-  DELETE_CURRENT_USER,
   DELETE_CURRENT_USER_ERROR,
   SIGN_UP,
   SIGN_UP_SUCCESS,
@@ -15,6 +13,8 @@ import {
   SIGN_IN_ERROR,
   SIGN_OUT,
   SIGN_OUT_SUCCESS,
+  DELETE_USERS_SUCCESS,
+  DELETE_CURRENT_USER_SUCCESS,
 } from '../../constants'
 
 export const fetchUsers = () => ({
@@ -36,8 +36,9 @@ export const setSelectedUsers = selectedUsersList => ({
   payload: selectedUsersList,
 })
 
-export const deleteUsers = () => ({
-  type: DELETE_USERS,
+export const deleteUsersSuccess = usersList => ({
+  type: DELETE_USERS_SUCCESS,
+  payload: usersList,
 })
 
 export const deleteUsersError = error => ({
@@ -45,8 +46,9 @@ export const deleteUsersError = error => ({
   payload: error,
 })
 
-export const deleteCurrentUser = () => ({
-  type: DELETE_CURRENT_USER,
+export const deleteCurrentUserSuccess = usersList => ({
+  type: DELETE_CURRENT_USER_SUCCESS,
+  payload: usersList,
 })
 
 export const deleteCurrentUserError = error => ({

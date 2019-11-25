@@ -2,9 +2,7 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_ERROR,
   SET_SELECTED_USERS,
-  DELETE_USERS,
   DELETE_USERS_ERROR,
-  DELETE_CURRENT_USER,
   DELETE_CURRENT_USER_ERROR,
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR,
@@ -12,6 +10,8 @@ import {
   SIGN_IN_ERROR,
   DATABASE_FIELD_ROLE_GUEST,
   SIGN_OUT_SUCCESS,
+  DELETE_USERS_SUCCESS,
+  DELETE_CURRENT_USER_SUCCESS,
 } from '../../constants'
 
 const initialState = {
@@ -32,7 +32,7 @@ const users = (state = initialState, action) => {
     case FETCH_USERS_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        data: [...action.payload],
         error: null,
       }
 
@@ -48,10 +48,10 @@ const users = (state = initialState, action) => {
         selected: [...action.payload],
       }
 
-    case DELETE_USERS:
+    case DELETE_USERS_SUCCESS:
       return {
         ...state,
-        data: state.data.filter(user => !state.selected.includes(user.id)),
+        data: [...action.payload],
       }
 
     case DELETE_USERS_ERROR:
@@ -60,12 +60,10 @@ const users = (state = initialState, action) => {
         error: action.payload,
       }
 
-    case DELETE_CURRENT_USER:
+    case DELETE_CURRENT_USER_SUCCESS:
       return {
         ...state,
-        data: state.data.map(user => {
-          return user.id !== state.current.id ? user : { ...user, isRemovable: true }
-        }),
+        data: [...action.payload],
         current: {
           ...state.current,
           isRemovable: true,

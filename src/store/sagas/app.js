@@ -1,4 +1,4 @@
-import { takeEvery, put, select, take } from 'redux-saga/effects'
+import { takeEvery, put, select, take, call } from 'redux-saga/effects'
 
 import {
   DELETE_ITEMS,
@@ -7,35 +7,36 @@ import {
   STORE_FIELD_USERS,
   STORE_FIELD_PRODUCTS,
   STORE_FIELD_CURRENT_USER,
-  FETCH_USERS_SUCCESS,
   INITIALIZE,
   FETCH_DATABASE_TO_STORAGE_SUCCESS,
 } from '../../constants'
 import {
   setSelectedUsers,
   closeModal,
-  deleteUsers,
+  deleteUsersSuccess,
   deleteUsersError,
-  deleteProducts,
+  deleteProductsSuccess,
   deleteProductsError,
+  deleteCurrentUserSuccess,
+  deleteCurrentUserError,
   startLoading,
   stopLoading,
-  deleteCurrentUser,
-  deleteCurrentUserError,
-  fetchUsers,
   fetchDatabaseToStorage,
   signIn,
+  setSelectedProducts,
 } from '../actions'
-import { updateStorageData } from '../../utils'
+import { updateStorageData, getDataFromStorage } from '../../utils'
 
 function* deleteItemsSaga(action) {
   yield put(startLoading())
 
   if (action.payload === STORE_FIELD_USERS) {
     try {
-      yield put(deleteUsers())
-      const data = yield select(state => state.users.data)
-      updateStorageData(STORAGE_FIELD_USERS, data)
+      const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
+      const selectedUsers = yield select(state => state.users.selected)
+      const newUsersList = usersList.filter(user => !selectedUsers.includes(user.id))
+      yield call(updateStorageData, STORAGE_FIELD_USERS, newUsersList)
+      yield put(deleteUsersSuccess(newUsersList))
     } catch (error) {
       yield put(deleteUsersError('Delete users error!'))
     }
@@ -43,19 +44,25 @@ function* deleteItemsSaga(action) {
     yield put(setSelectedUsers([]))
   } else if (action.payload === STORE_FIELD_PRODUCTS) {
     try {
-      yield put(deleteProducts())
-      const data = yield select(state => state.products.data)
-      updateStorageData(STORAGE_FIELD_PRODUCTS, data)
+      const productsList = yield call(getDataFromStorage, STORAGE_FIELD_PRODUCTS)
+      const selectedProducts = yield select(state => state.products.selected)
+      const newProductsList = productsList.filter(product => !selectedProducts.includes(product.id))
+      yield call(updateStorageData, STORAGE_FIELD_PRODUCTS, newProductsList)
+      yield put(deleteProductsSuccess(newProductsList))
     } catch (error) {
       yield put(deleteProductsError('Delete products error!'))
     }
+
+    yield put(setSelectedProducts([]))
   } else if (action.payload === STORE_FIELD_CURRENT_USER) {
     try {
-      yield put(fetchUsers())
-      yield take(FETCH_USERS_SUCCESS)
-      yield put(deleteCurrentUser())
-      const data = yield select(state => state.users.data)
-      updateStorageData(STORAGE_FIELD_USERS, data)
+      const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
+      const currentUserId = yield select(state => state.users.current.id)
+      const newUsersList = usersList.map(user => {
+        return user.id !== currentUserId ? user : { ...user, isRemovable: true }
+      })
+      yield call(updateStorageData, STORAGE_FIELD_USERS, newUsersList)
+      yield put(deleteCurrentUserSuccess(newUsersList))
     } catch (error) {
       yield put(deleteCurrentUserError('Delete current user error!'))
     }
