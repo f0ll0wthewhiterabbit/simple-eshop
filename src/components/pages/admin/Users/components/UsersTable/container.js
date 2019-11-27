@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import UsersTable from './component'
-import { setSelectedUsers } from '../../../store/actions'
+import { setSelectedUsers } from '../../../../../../store/actions'
 
 const mapStateToProps = state => ({
   usersList: state.users.data,

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import SignInForm from './component'
-import { signIn } from '../../../store/actions'
+import { signIn } from '../../../../../store/actions'
 
 const mapStateToProps = state => ({
   isUserSignedUp: state.users.current.id !== null,

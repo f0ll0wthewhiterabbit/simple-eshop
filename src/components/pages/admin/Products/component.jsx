@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import ProductsToolbar from './components/ProductsToolbar'
+import ProductsTable from './components/ProductsTable'
 import Loader from '../../../global/Loader'
 import ErrorMessage from '../../../global/ErrorMessage'
-import ProductsTable from '../../../tables/Products'
 
 const ProductsPage = ({ isLoading, error, fetchProducts }) => {
   useEffect(() => {

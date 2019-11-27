@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Typography, Button, Chip } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
@@ -17,18 +17,10 @@ import {
   RatingCount,
 } from './styles'
 
-const ProductCard = ({
-  id,
-  title,
-  description,
-  tags,
-  price,
-  rating,
-  imageSrc,
-  currentUserId,
-  changeProductRating,
-  deleteProductRating,
-}) => {
+const ProductCard = ({ productData, currentUserId, changeProductRating, deleteProductRating }) => {
+  const [isUserChangedRatign, setIsUserChangedRating] = useState(false)
+
+  const { id, title, description, tags, price, rating, image: imageSrc } = productData
   const ratingsAmount = rating.length
   const averageRating = Math.round(rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
   const currentUserRating = rating.find(it => it.userId === currentUserId)
@@ -39,10 +31,15 @@ const ProductCard = ({
       productId: id,
       userRating,
     })
+
+    setTimeout(() => {
+      setIsUserChangedRating(true)
+    }, 500)
   }
 
   const handleDeleteButtonClick = () => {
     deleteProductRating(id)
+    setIsUserChangedRating(false)
   }
 
   return (
@@ -67,6 +64,7 @@ const ProductCard = ({
             name={`simple-controlled-${id}`}
             size="small"
             onChange={handleRatingChange}
+            readOnly={isUserChangedRatign}
           />{' '}
           <RaitingsCount data-color={isUserRatedProduct ? '#f50057' : '#bdbdbd'} active>
             ({ratingsAmount})
@@ -86,18 +84,20 @@ const ProductCard = ({
 }
 
 ProductCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.arrayOf(
-    PropTypes.shape({
-      userId: PropTypes.number.isRequired,
-      stars: PropTypes.number.isRequired,
-    })
-  ).isRequired,
-  imageSrc: PropTypes.string.isRequired,
+  productData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.arrayOf(
+      PropTypes.shape({
+        userId: PropTypes.number.isRequired,
+        stars: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+    image: PropTypes.string.isRequired,
+  }).isRequired,
   currentUserId: PropTypes.number.isRequired,
   changeProductRating: PropTypes.func.isRequired,
   deleteProductRating: PropTypes.func.isRequired,

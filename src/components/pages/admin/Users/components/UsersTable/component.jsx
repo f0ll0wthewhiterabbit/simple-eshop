@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Table from '../../global/Table'
-import { STORE_FIELD_USERS } from '../../../constants'
+import Table from '../../../../../global/Table'
+import { STORE_FIELD_USERS } from '../../../../../../constants'
 
 const UsersTable = ({ usersList, selectedUsers, setSelectedUsers }) => {
   const headCells = [

@@ -10,7 +10,7 @@ import {
   DATABASE_FIELD_ROLE_ADMIN,
   ADMIN_USERS_PAGE_PATH,
 } from '../../../constants'
-import SignInForm from '../../forms/SignIn'
+import SignInForm from './components/SignInForm'
 import { Wrapper, IconWrapper, SignUpLink } from './styles'
 
 const SingInPage = ({ isUserSignedUp, userRole, signOut }) => {

@@ -78,7 +78,7 @@ function* signUpSaga(action) {
           id: userId,
           firstName: userData.firstName,
           lastName: userData.lastName,
-          role: userData.role,
+          role: DATABASE_FIELD_ROLE_USER,
           isRemovable: false,
         })
       )

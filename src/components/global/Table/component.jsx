@@ -84,6 +84,18 @@ const Table = ({
       return <Image src={row[id]} alt={row.title} />
     }
 
+    if (id === 'rating') {
+      const ratingsAmount = row.rating.length
+
+      if (ratingsAmount === 0) {
+        return '-'
+      }
+
+      const averageRating = Math.round(row.rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
+
+      return averageRating
+    }
+
     return row[id]
   }
 

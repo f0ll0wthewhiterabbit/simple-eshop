@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ProductsTable from './component'
-import { setSelectedProducts } from '../../../store/actions'
+import { setSelectedProducts } from '../../../../../../store/actions'
 
 const mapStateToProps = state => ({
   productsList: state.products.data,

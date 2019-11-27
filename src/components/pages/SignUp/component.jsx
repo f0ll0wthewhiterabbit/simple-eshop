@@ -10,7 +10,7 @@ import {
   MAIN_PAGE_PATH,
   ADMIN_USERS_PAGE_PATH,
 } from '../../../constants'
-import SignUpForm from '../../forms/SignUp'
+import SignUpForm from './components/SignUpForm'
 import { Wrapper, IconWrapper, SignInLink } from './styles'
 
 const SignUpPage = ({ isUserAdded, userRole, signOut }) => {

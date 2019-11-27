@@ -25,19 +25,9 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
     content = (
       <Grid container spacing={4}>
         {products.map(product => {
-          const { id, title, description, tags, price, rating, image } = product
-
           return (
-            <Grid key={id} item xs={12} sm={6} md={4}>
-              <ProductCard
-                id={id}
-                title={title}
-                description={description}
-                tags={tags}
-                price={price}
-                rating={rating}
-                imageSrc={image}
-              />
+            <Grid key={product.id} item xs={12} sm={6} md={4}>
+              <ProductCard productData={product} />
             </Grid>
           )
         })}

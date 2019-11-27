@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import ErrorMessage from '../../../global/ErrorMessage'
 import Loader from '../../../global/Loader'
-import UsersTable from '../../../tables/Users'
+import UsersTable from './components/UsersTable'
 
 const UsersPage = ({ isLoading, error, fetchUsers }) => {
   useEffect(() => {
