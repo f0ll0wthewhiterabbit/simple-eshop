@@ -1,5 +1,13 @@
 import styled from 'styled-components'
-import { Card, CardMedia, CardContent, CardActions, IconButton } from '@material-ui/core'
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  IconButton,
+  Button,
+  Typography,
+} from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 
 const Wrapper = styled(Card)`
@@ -16,6 +24,17 @@ const ImageWrapper = styled(CardMedia)`
 
 const Content = styled(CardContent)`
   flex-grow: 1;
+  position: relative;
+`
+
+const Title = styled(Typography)`
+  padding-right: ${props => props.theme.spacing(10)}px;
+`
+
+const PriceButton = styled(Button)`
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `
 
 const TagsWrapper = styled(CardActions)`
@@ -23,55 +42,64 @@ const TagsWrapper = styled(CardActions)`
   padding-right: ${props => props.theme.spacing(2)}px;
 `
 
-const ActionsWrapper = styled(CardActions)`
-  padding-left: ${props => props.theme.spacing(2)}px;
-  padding-right: ${props => props.theme.spacing(2)}px;
-  padding-top: 12px;
-  justify-content: space-between;
-`
-
-const Stars = styled(Rating)`
-  margin-right: 4px;
-`
-
-const RaitingWrapper = styled.div`
+const RaitingsRoot = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: ${props => props.theme.spacing(1, 2, 2)};
+`
+
+const RaitingWrapper = styled(CardActions)`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 0;
+  width: 50%;
+  min-height: 42px;
   position: relative;
 `
 
+const Stars = styled(Rating)`
+  margin-left: 0;
+  min-height: 18px;
+`
+
 const RaitingsCount = styled.span`
-  color: ${props => props['data-color']};
+  color: #bdbdbd;
   font-size: 13px;
-  margin-right: 2px;
+  margin-left: 2px;
 `
 
 const DeleteButton = styled(IconButton)`
   color: rgba(0, 0, 0, 0.26);
-  margin-right: 5px;
+  margin-left: 3px;
+  position: absolute;
+  top: 20px;
+  left: 87px;
 
   &:hover {
     color: rgba(0, 0, 0, 0.54);
   }
 `
 
-const RatingCount = styled.span`
+const RatingTitle = styled.span`
   color: #bdbdbd;
   font-size: 13px;
-  position: absolute;
-  top: -16px;
-  left: 3px;
+  width: 100%;
+  margin-left: 2px;
 `
 
 export {
   Wrapper,
   ImageWrapper,
   Content,
+  Title,
+  PriceButton,
   TagsWrapper,
-  ActionsWrapper,
   Stars,
+  RaitingsRoot,
   RaitingWrapper,
   RaitingsCount,
   DeleteButton,
-  RatingCount,
+  RatingTitle,
 }

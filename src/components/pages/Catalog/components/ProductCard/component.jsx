@@ -1,54 +1,52 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Typography, Button, Chip } from '@material-ui/core'
+import { Typography, Chip } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
-import CancelIcon from '@material-ui/icons/Cancel'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import {
   Wrapper,
   ImageWrapper,
   Content,
+  Title,
+  PriceButton,
   TagsWrapper,
-  ActionsWrapper,
   Stars,
+  RaitingsRoot,
   RaitingWrapper,
   RaitingsCount,
   DeleteButton,
-  RatingCount,
+  RatingTitle,
 } from './styles'
 
 const ProductCard = ({ productData, currentUserId, changeProductRating, deleteProductRating }) => {
-  const [isUserChangedRatign, setIsUserChangedRating] = useState(false)
-
   const { id, title, description, tags, price, rating, image: imageSrc } = productData
   const ratingsAmount = rating.length
   const averageRating = Math.round(rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
   const currentUserRating = rating.find(it => it.userId === currentUserId)
-  const isUserRatedProduct = Boolean(currentUserRating)
+  const isUserRatedProduct = Boolean(currentUserRating) && currentUserRating.stars > 0
 
   const handleRatingChange = (event, userRating) => {
     changeProductRating({
       productId: id,
       userRating,
     })
-
-    setTimeout(() => {
-      setIsUserChangedRating(true)
-    }, 500)
   }
 
   const handleDeleteButtonClick = () => {
     deleteProductRating(id)
-    setIsUserChangedRating(false)
   }
 
   return (
     <Wrapper>
       <ImageWrapper image={imageSrc} title={title} />
       <Content>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Title gutterBottom variant="h5" component="h2">
           {title}
-        </Typography>
+        </Title>
+        <PriceButton size="small" color="primary" startIcon={<ShoppingCartOutlinedIcon />} disabled>
+          {price} $
+        </PriceButton>
         <Typography>{description}</Typography>
       </Content>
       <TagsWrapper>
@@ -56,29 +54,34 @@ const ProductCard = ({ productData, currentUserId, changeProductRating, deletePr
           <Chip key={tag} label={tag} color="secondary" size="small" />
         ))}
       </TagsWrapper>
-      <ActionsWrapper>
+      <RaitingsRoot>
         <RaitingWrapper>
-          {isUserRatedProduct && <RatingCount>Your rating: {currentUserRating.stars}</RatingCount>}
+          <RatingTitle>Your rating:</RatingTitle>
           <Stars
-            value={averageRating}
-            name={`simple-controlled-${id}`}
+            value={isUserRatedProduct ? currentUserRating.stars : 0}
+            name={`simple-controlled-user-${id}`}
             size="small"
             onChange={handleRatingChange}
-            readOnly={isUserChangedRatign}
-          />{' '}
-          <RaitingsCount data-color={isUserRatedProduct ? '#f50057' : '#bdbdbd'} active>
-            ({ratingsAmount})
-          </RaitingsCount>
+            readOnly={isUserRatedProduct}
+          />
           {isUserRatedProduct && (
             <DeleteButton aria-label="delete" size="small" onClick={handleDeleteButtonClick}>
-              <CancelIcon fontSize="inherit" />
+              <DeleteIcon fontSize="inherit" />
             </DeleteButton>
           )}
         </RaitingWrapper>
-        <Button size="small" color="primary" startIcon={<ShoppingCartOutlinedIcon />} disabled>
-          {price} $
-        </Button>
-      </ActionsWrapper>
+        <RaitingWrapper>
+          <RatingTitle>Average rating:</RatingTitle>
+          <Stars
+            value={averageRating}
+            name={`simple-controlled-average-${id}`}
+            onChange={handleRatingChange}
+            readOnly
+            size="small"
+          />
+          <RaitingsCount active>({ratingsAmount})</RaitingsCount>
+        </RaitingWrapper>
+      </RaitingsRoot>
     </Wrapper>
   )
 }
@@ -98,7 +101,10 @@ ProductCard.propTypes = {
     ).isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
-  currentUserId: PropTypes.number.isRequired,
+  currentUserId: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
   changeProductRating: PropTypes.func.isRequired,
   deleteProductRating: PropTypes.func.isRequired,
 }
