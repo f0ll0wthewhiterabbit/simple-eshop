@@ -29,8 +29,9 @@ import { updateStorageData, getDataFromStorage } from '../../utils'
 
 function* deleteItemsSaga(action) {
   yield put(startLoading())
+  const { storeFieldName } = action.payload
 
-  if (action.payload === STORE_FIELD_USERS) {
+  if (storeFieldName === STORE_FIELD_USERS) {
     try {
       const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
       const selectedUsers = yield select(state => state.users.selected)
@@ -42,7 +43,7 @@ function* deleteItemsSaga(action) {
     }
 
     yield put(setSelectedUsers([]))
-  } else if (action.payload === STORE_FIELD_PRODUCTS) {
+  } else if (storeFieldName === STORE_FIELD_PRODUCTS) {
     try {
       const productsList = yield call(getDataFromStorage, STORAGE_FIELD_PRODUCTS)
       const selectedProducts = yield select(state => state.products.selected)
@@ -54,7 +55,7 @@ function* deleteItemsSaga(action) {
     }
 
     yield put(setSelectedProducts([]))
-  } else if (action.payload === STORE_FIELD_CURRENT_USER) {
+  } else if (storeFieldName === STORE_FIELD_CURRENT_USER) {
     try {
       const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
       const currentUserId = yield select(state => state.users.current.id)

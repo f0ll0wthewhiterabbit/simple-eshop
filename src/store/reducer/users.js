@@ -30,90 +30,52 @@ const initialState = {
 const users = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_USERS_SUCCESS:
+    case DELETE_USERS_SUCCESS:
       return {
         ...state,
-        data: [...action.payload],
+        data: [...action.payload.usersList],
         error: null,
       }
 
     case FETCH_USERS_ERROR:
+    case DELETE_USERS_ERROR:
+    case DELETE_CURRENT_USER_ERROR:
+    case SIGN_UP_ERROR:
+    case SIGN_IN_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: action.payload.error,
       }
 
     case SET_SELECTED_USERS:
       return {
         ...state,
-        selected: [...action.payload],
-      }
-
-    case DELETE_USERS_SUCCESS:
-      return {
-        ...state,
-        data: [...action.payload],
-      }
-
-    case DELETE_USERS_ERROR:
-      return {
-        ...state,
-        error: action.payload,
+        selected: [...action.payload.selectedUsersList],
       }
 
     case DELETE_CURRENT_USER_SUCCESS:
       return {
         ...state,
-        data: [...action.payload],
+        data: [...action.payload.usersList],
         current: {
           ...state.current,
           isRemovable: true,
         },
       }
 
-    case DELETE_CURRENT_USER_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      }
-
     case SIGN_UP_SUCCESS:
-      return {
-        ...state,
-        current: {
-          ...state.current,
-          id: action.payload.id,
-          firstName: action.payload.firstName,
-          lastName: action.payload.lastName,
-          role: action.payload.role,
-          isRemovable: action.payload.isRemovable,
-        },
-        error: null,
-      }
-
-    case SIGN_UP_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      }
-
     case SIGN_IN_SUCCESS:
       return {
         ...state,
         current: {
           ...state.current,
-          id: action.payload.id,
-          firstName: action.payload.firstName,
-          lastName: action.payload.lastName,
-          role: action.payload.role,
-          isRemovable: action.payload.isRemovable,
+          id: action.payload.userData.id,
+          firstName: action.payload.userData.firstName,
+          lastName: action.payload.userData.lastName,
+          role: action.payload.userData.role,
+          isRemovable: action.payload.userData.isRemovable,
         },
         error: null,
-      }
-
-    case SIGN_IN_ERROR:
-      return {
-        ...state,
-        error: action.payload,
       }
 
     case SIGN_OUT_SUCCESS:

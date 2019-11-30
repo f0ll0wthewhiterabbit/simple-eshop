@@ -33,7 +33,7 @@ const app = (state = initialState, action) => {
       return {
         ...state,
         isStorageDataReady: false,
-        error: action.payload,
+        error: action.payload.error,
       }
 
     case SHOW_MODAL:
@@ -42,7 +42,7 @@ const app = (state = initialState, action) => {
         modal: {
           ...state.modal,
           isOpened: true,
-          storeFieldName: action.payload,
+          storeFieldName: action.payload.storeFieldNameForModal,
         },
       }
 

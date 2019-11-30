@@ -19,55 +19,55 @@ export const fetchProducts = () => ({
 
 export const fetchProductsSuccess = productsList => ({
   type: FETCH_PRODUCTS_SUCCESS,
-  payload: productsList,
+  payload: { productsList },
 })
 
 export const fetchProductsError = error => ({
   type: FETCH_PRODUCTS_ERROR,
-  payload: error,
+  payload: { error },
 })
 
 export const setSelectedProducts = selectedProductsList => ({
   type: SET_SELECTED_PRODUCTS,
-  payload: selectedProductsList,
+  payload: { selectedProductsList },
 })
 
 export const deleteProductsSuccess = productsList => ({
   type: DELETE_PRODUCTS_SUCCESS,
-  payload: productsList,
+  payload: { productsList },
 })
 
 export const deleteProductsError = error => ({
   type: DELETE_PRODUCTS_ERROR,
-  payload: error,
+  payload: { error },
 })
 
 export const changeProductRating = ratingData => ({
   type: CHANGE_PRODUCT_RATING,
-  payload: ratingData,
+  payload: { ratingData },
 })
 
 export const changeProductRatingSuccess = productsList => ({
   type: CHANGE_PRODUCT_RATING_SUCCESS,
-  payload: productsList,
+  payload: { productsList },
 })
 
 export const changeProductRatingError = error => ({
   type: CHANGE_PRODUCT_RATING_ERROR,
-  payload: error,
+  payload: { error },
 })
 
-export const deleteProductRating = ratingId => ({
+export const deleteProductRating = productId => ({
   type: DELETE_PRODUCT_RATING,
-  payload: ratingId,
+  payload: { productId },
 })
 
 export const deleteProductRatingSuccess = productsList => ({
   type: DELETE_PRODUCT_RATING_SUCCESS,
-  payload: productsList,
+  payload: { productsList },
 })
 
 export const deleteProductRatingError = error => ({
   type: DELETE_PRODUCT_RATING_ERROR,
-  payload: error,
+  payload: { error },
 })

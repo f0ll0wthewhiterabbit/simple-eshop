@@ -44,7 +44,7 @@ function* fetchUsersSaga() {
 }
 
 function* signUpSaga(action) {
-  const userData = action.payload
+  const { userData } = action.payload
 
   try {
     const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
@@ -111,7 +111,7 @@ function* signInSaga(action) {
         throw new Error('Sign in please to continue!')
       }
     } else {
-      const userData = action.payload
+      const { userData } = action.payload
 
       if (!userData || !userData.email) {
         throw new Error()

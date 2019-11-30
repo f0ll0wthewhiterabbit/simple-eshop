@@ -38,7 +38,7 @@ function* fetchProductsSaga() {
 
 function* changeProductRatingSaga(action) {
   try {
-    const { productId, userRating } = action.payload
+    const { productId, userRating } = action.payload.ratingData
     const productsList = yield call(getDataFromStorage, STORAGE_FIELD_PRODUCTS)
     const productIndex = productsList.findIndex(product => product.id === productId)
     const userId = yield select(state => state.users.current.id)
@@ -59,7 +59,7 @@ function* changeProductRatingSaga(action) {
 
 function* deleteProductRatingSaga(action) {
   try {
-    const productId = action.payload
+    const { productId } = action.payload
     const productsList = yield call(getDataFromStorage, STORAGE_FIELD_PRODUCTS)
     const productIndex = productsList.findIndex(product => product.id === productId)
     const userId = yield select(state => state.users.current.id)

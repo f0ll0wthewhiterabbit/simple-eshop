@@ -19,61 +19,28 @@ const initialState = {
 const products = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PRODUCTS_SUCCESS:
+    case DELETE_PRODUCTS_SUCCESS:
+    case CHANGE_PRODUCT_RATING_SUCCESS:
+    case DELETE_PRODUCT_RATING_SUCCESS:
       return {
         ...state,
-        data: [...action.payload],
+        data: [...action.payload.productsList],
         error: null,
       }
 
     case FETCH_PRODUCTS_ERROR:
+    case DELETE_PRODUCTS_ERROR:
+    case CHANGE_PRODUCT_RATING_ERROR:
+    case DELETE_PRODUCT_RATING_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: action.payload.error,
       }
 
     case SET_SELECTED_PRODUCTS:
       return {
         ...state,
-        selected: [...action.payload],
-      }
-
-    case DELETE_PRODUCTS_SUCCESS:
-      return {
-        ...state,
-        data: [...action.payload],
-        error: null,
-      }
-
-    case DELETE_PRODUCTS_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      }
-
-    case CHANGE_PRODUCT_RATING_SUCCESS:
-      return {
-        ...state,
-        data: [...action.payload],
-        error: null,
-      }
-
-    case CHANGE_PRODUCT_RATING_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      }
-
-    case DELETE_PRODUCT_RATING_SUCCESS:
-      return {
-        ...state,
-        data: [...action.payload],
-        error: null,
-      }
-
-    case DELETE_PRODUCT_RATING_ERROR:
-      return {
-        ...state,
-        error: action.payload,
+        selected: [...action.payload.selectedProductsList],
       }
 
     default:

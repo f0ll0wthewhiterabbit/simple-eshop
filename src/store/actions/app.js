@@ -22,12 +22,12 @@ export const fetchDatabaseToStorageSuccess = () => ({
 
 export const fetchDatabaseToStorageError = error => ({
   type: FETCH_DATABASE_TO_STORAGE_ERROR,
-  payload: error,
+  payload: { error },
 })
 
 export const showModal = storeFieldNameForModal => ({
   type: SHOW_MODAL,
-  payload: storeFieldNameForModal,
+  payload: { storeFieldNameForModal },
 })
 
 export const closeModal = () => ({
@@ -36,7 +36,7 @@ export const closeModal = () => ({
 
 export const deleteItems = storeFieldName => ({
   type: DELETE_ITEMS,
-  payload: storeFieldName,
+  payload: { storeFieldName },
 })
 
 export const startLoading = () => ({
