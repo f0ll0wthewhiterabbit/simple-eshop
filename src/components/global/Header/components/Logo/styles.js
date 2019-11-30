@@ -3,7 +3,7 @@ import ExplicitIcon from '@material-ui/icons/Explicit'
 import { Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   flex-grow: 1;
   display: flex;
   justify-content: ${props => props['data-justify']};
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   }
 `
 
-const SiteLink = styled(Link)`
+export const SiteLink = styled(Link)`
   display: block;
   display: flex;
   align-items: center;
@@ -22,11 +22,11 @@ const SiteLink = styled(Link)`
   color: ${props => props.theme.palette.primary.contrastText};
 `
 
-const LogoIcon = styled(ExplicitIcon)`
+export const LogoIcon = styled(ExplicitIcon)`
   margin-right: ${props => props.theme.spacing(1)}px;
 `
 
-const LogoTitle = styled(Typography)`
+export const LogoTitle = styled(Typography)`
   display: block;
   font-size: 1rem;
 
@@ -35,5 +35,3 @@ const LogoTitle = styled(Typography)`
     font-size: 1.25rem;
   }
 `
-
-export { Wrapper, LogoIcon, LogoTitle, SiteLink }

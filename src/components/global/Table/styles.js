@@ -1,25 +1,25 @@
 import styled, { css } from 'styled-components'
 import { Paper, Table, Toolbar, Typography } from '@material-ui/core'
 
-const Root = styled.div`
+export const Root = styled.div`
   width: 100%;
   margin-top: ${props => props.theme.spacing(3)}px;
 `
 
-const Wrapper = styled(Paper)`
+export const Wrapper = styled(Paper)`
   width: 100%;
   margin-bottom: ${props => props.theme.spacing(2)}px;
 `
 
-const TableWrapper = styled.div`
+export const TableWrapper = styled.div`
   overflow-x: auto;
 `
 
-const TableRoot = styled(Table)`
+export const TableRoot = styled(Table)`
   min-width: 750px;
 `
 
-const ToolbarRoot = styled(Toolbar)`
+export const ToolbarRoot = styled(Toolbar)`
   padding-left: ${props => props.theme.spacing(2)}px;
   padding-right: ${props => props.theme.spacing(1)}px;
 
@@ -31,13 +31,11 @@ const ToolbarRoot = styled(Toolbar)`
     `}
 `
 
-const ToolbarTitle = styled(Typography)`
+export const ToolbarTitle = styled(Typography)`
   flex: 1 1 100%;
 `
 
-const Image = styled.img`
+export const Image = styled.img`
   width: ${props => props.theme.spacing(10)}px;
   height: auto;
 `
-
-export { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image }

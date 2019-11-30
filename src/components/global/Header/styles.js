@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { IconButton, AppBar } from '@material-ui/core'
 
-const Wrapper = styled(AppBar)`
+export const Wrapper = styled(AppBar)`
   height: ${props => props.theme.sizing.headerHeight.xs};
   position: relative;
   z-index: 2;
@@ -11,7 +11,7 @@ const Wrapper = styled(AppBar)`
   }
 `
 
-const MenuButton = styled(IconButton)`
+export const MenuButton = styled(IconButton)`
   color: ${props => props.theme.palette.primary.contrastText};
 
   &:hover {
@@ -22,5 +22,3 @@ const MenuButton = styled(IconButton)`
     display: none;
   }
 `
-
-export { Wrapper, MenuButton }

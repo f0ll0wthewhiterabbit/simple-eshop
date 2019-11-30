@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
-const Wrapper = styled.footer`
+export const Wrapper = styled.footer`
   margin-top: auto;
   position: relative;
   z-index: 2;
@@ -10,7 +10,7 @@ const Wrapper = styled.footer`
   padding: ${props => props.theme.spacing(2, 0, 4)};
 `
 
-const Info = styled(Typography)`
+export const Info = styled(Typography)`
   font-size: 0.9rem;
   line-height: 27px;
   display: flex;
@@ -23,14 +23,14 @@ const Info = styled(Typography)`
   }
 `
 
-const Logo = styled.img`
+export const Logo = styled.img`
   width: 100px;
   height: auto;
   margin-left: 5px;
   margin-right: 5px;
 `
 
-const SiteLink = styled(Link)`
+export const SiteLink = styled(Link)`
   color: inherit;
   text-decoration: none;
 
@@ -38,5 +38,3 @@ const SiteLink = styled(Link)`
     text-decoration: underline;
   }
 `
-
-export { Wrapper, Info, Logo, SiteLink }

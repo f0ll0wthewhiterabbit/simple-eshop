@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,11 +12,11 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
 `
 
-const LinkWrapper = styled(Typography)`
+export const LinkWrapper = styled(Typography)`
   margin: ${props => props.theme.spacing(1)}px;
 `
 
-const BackLink = styled(Link)`
+export const BackLink = styled(Link)`
   text-decoration: none;
   color: ${props => props.theme.palette.primary.main};
 
@@ -24,5 +24,3 @@ const BackLink = styled(Link)`
     text-decoration: underline;
   }
 `
-
-export { Wrapper, LinkWrapper, BackLink }

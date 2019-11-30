@@ -3,16 +3,16 @@ import { List, ListItemIcon, ListItemText, ListItem } from '@material-ui/core'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import { NavLink } from 'react-router-dom'
 
-const PagesList = styled(List)`
+export const PagesList = styled(List)`
   padding-top: ${props => props.theme.spacing(2)}px;
   padding-bottom: ${props => props.theme.spacing(2)}px;
 `
 
-const NavigationItem = styled(ListItem)`
+export const NavigationItem = styled(ListItem)`
   padding: 0;
 `
 
-const NavigationLink = styled(NavLink)`
+export const NavigationLink = styled(NavLink)`
   padding: ${props => props.theme.spacing(1, 2)};
   width: 100%;
   display: flex;
@@ -29,12 +29,12 @@ const NavigationLink = styled(NavLink)`
   }
 `
 
-const PageIcon = styled(ListItemIcon)`
+export const PageIcon = styled(ListItemIcon)`
   color: inherit;
   min-width: ${props => props.theme.spacing(5)}px;
 `
 
-const PageText = styled(ListItemText)`
+export const PageText = styled(ListItemText)`
   color: inherit;
 
   .MuiListItemText-primary {
@@ -42,5 +42,3 @@ const PageText = styled(ListItemText)`
     font-size: 0.875rem;
   }
 `
-
-export { PagesList, NavigationLink, NavigationItem, PageIcon, PageText }

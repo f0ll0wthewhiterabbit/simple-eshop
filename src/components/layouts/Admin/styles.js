@@ -1,19 +1,19 @@
 import styled from 'styled-components'
 import { Drawer } from '@material-ui/core'
 
-const Root = styled.div`
+export const Root = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   position: relative;
 `
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-grow: 1;
 `
 
-const Sidebar = styled(Drawer)`
+export const Sidebar = styled(Drawer)`
   height: 100%;
   width: ${props => props.theme.sizing.sidebarWidth};
   flex-shrink: 0;
@@ -28,7 +28,7 @@ const Sidebar = styled(Drawer)`
   }
 `
 
-const SidebarRoot = styled.div`
+export const SidebarRoot = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -38,10 +38,8 @@ const SidebarRoot = styled.div`
     padding-top: ${props => props.theme.spacing(8)}px;
   }
 `
-const Main = styled.main`
+export const Main = styled.main`
   flex-grow: 1;
   padding: ${props => props.theme.spacing(3)}px;
   position: relative;
 `
-
-export { Root, Wrapper, Sidebar, SidebarRoot, Main }
