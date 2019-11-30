@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   showModal: storeFieldNameForModal => dispatch(showModal(storeFieldNameForModal)),
-  signOut: () => dispatch(signOut()),
+  signOut: (history, location) => dispatch(signOut(history, location)),
 })
 
 export default connect(

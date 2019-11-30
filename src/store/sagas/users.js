@@ -9,6 +9,8 @@ import {
   SIGN_IN,
   DATABASE_FIELD_ROLE_USER,
   SIGN_OUT,
+  SING_IN_PAGE_PATH,
+  ADMIN_PAGE_PATH,
 } from '../../constants'
 import { getDataFromStorage, updateStorageData, generateUserToken } from '../../utils'
 import {
@@ -141,10 +143,15 @@ function* signInSaga(action) {
   )
 }
 
-function* signOutSaga() {
+function* signOutSaga(action) {
+  const { history, location } = action.payload
   yield localStorage.removeItem(STORAGE_FIELD_USER_ID)
   yield localStorage.removeItem(STORAGE_FIELD_TOKEN)
   yield put(signOutSuccess())
+
+  if (location.pathname.indexOf(ADMIN_PAGE_PATH) !== -1) {
+    history.push(SING_IN_PAGE_PATH)
+  }
 }
 
 function* watchFetchUsers() {

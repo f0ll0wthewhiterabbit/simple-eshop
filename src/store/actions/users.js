@@ -86,8 +86,9 @@ export const signInError = error => ({
   payload: error,
 })
 
-export const signOut = () => ({
+export const signOut = (history, location) => ({
   type: SIGN_OUT,
+  payload: { history, location },
 })
 
 export const signOutSuccess = () => ({

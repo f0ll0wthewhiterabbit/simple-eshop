@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { Typography, Container } from '@material-ui/core'
 import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded'
 
@@ -13,10 +13,10 @@ import {
 import SignUpForm from './components/SignUpForm'
 import { Wrapper, IconWrapper, SignInLink } from './styles'
 
-const SignUpPage = ({ isUserAdded, userRole, signOut }) => {
+const SignUpPage = ({ isUserAdded, userRole, signOut, history, location }) => {
   useEffect(() => {
-    signOut()
-  }, [signOut])
+    signOut(history, location)
+  }, [history, location, signOut])
 
   if (isUserAdded) {
     return (
@@ -48,6 +48,8 @@ SignUpPage.propTypes = {
   isUserAdded: PropTypes.bool.isRequired,
   userRole: PropTypes.string.isRequired,
   signOut: PropTypes.func.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
 }
 
-export default SignUpPage
+export default withRouter(SignUpPage)

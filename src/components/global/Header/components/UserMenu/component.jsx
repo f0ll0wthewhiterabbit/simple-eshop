@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import { withTheme } from 'styled-components'
 import { Menu, MenuItem, ListItemText, useMediaQuery } from '@material-ui/core'
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined'
@@ -16,7 +17,16 @@ import {
 } from './styles'
 import { STORE_FIELD_CURRENT_USER } from '../../../../../constants'
 
-const UserMenu = ({ theme, userName, isAdminMode, isDeleteRequestSent, showModal, signOut }) => {
+const UserMenu = ({
+  theme,
+  userName,
+  isAdminMode,
+  isDeleteRequestSent,
+  showModal,
+  signOut,
+  history,
+  location,
+}) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const isMobileDevice = !useMediaQuery(theme.breakpoints.up('sm'))
@@ -35,7 +45,7 @@ const UserMenu = ({ theme, userName, isAdminMode, isDeleteRequestSent, showModal
   }
 
   const handleSignOutClick = () => {
-    signOut()
+    signOut(history, location)
   }
 
   const userMenuButton = isMobileDevice ? (
@@ -92,6 +102,8 @@ UserMenu.propTypes = {
   isDeleteRequestSent: PropTypes.bool.isRequired,
   showModal: PropTypes.func,
   signOut: PropTypes.func,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
 }
 
-export default withTheme(UserMenu)
+export default withRouter(withTheme(UserMenu))

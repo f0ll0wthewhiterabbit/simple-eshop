@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { Typography, Container } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
@@ -13,10 +13,10 @@ import {
 import SignInForm from './components/SignInForm'
 import { Wrapper, IconWrapper, SignUpLink } from './styles'
 
-const SingInPage = ({ isUserSignedUp, userRole, signOut }) => {
+const SingInPage = ({ isUserSignedUp, userRole, signOut, history, location }) => {
   useEffect(() => {
-    signOut()
-  }, [signOut])
+    signOut(history, location)
+  }, [history, location, signOut])
 
   if (isUserSignedUp) {
     return (
@@ -48,6 +48,8 @@ SingInPage.propTypes = {
   isUserSignedUp: PropTypes.bool.isRequired,
   userRole: PropTypes.string.isRequired,
   signOut: PropTypes.func.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
 }
 
-export default SingInPage
+export default withRouter(SingInPage)

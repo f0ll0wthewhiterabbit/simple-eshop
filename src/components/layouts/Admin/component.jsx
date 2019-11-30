@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { withTheme } from 'styled-components'
 import { useMediaQuery, Divider } from '@material-ui/core'
 
 import Header from '../../global/Header'
 import Footer from '../../global/Footer'
-import Profile from './components/Profile/component'
+import Profile from './components/Profile'
 import SidebarNav from './components/SidebarNav'
 import AlertDialog from '../../global/AlertDialog'
-import { SING_IN_PAGE_PATH, ERROR_PAGE_PATH, DATABASE_FIELD_ROLE_ADMIN } from '../../../constants'
+import { ERROR_PAGE_PATH, DATABASE_FIELD_ROLE_ADMIN } from '../../../constants'
 import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 
 const AdminLayout = ({
@@ -27,11 +27,7 @@ const AdminLayout = ({
     closeSidebar()
   }
 
-  if (!isUserSignedUp) {
-    return <Redirect to={SING_IN_PAGE_PATH} />
-  }
-
-  if (userRole !== DATABASE_FIELD_ROLE_ADMIN) {
+  if (!isUserSignedUp || userRole !== DATABASE_FIELD_ROLE_ADMIN) {
     return <Redirect to={ERROR_PAGE_PATH} />
   }
 
@@ -68,4 +64,4 @@ AdminLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 }
 
-export default withTheme(AdminLayout)
+export default withRouter(withTheme(AdminLayout))
