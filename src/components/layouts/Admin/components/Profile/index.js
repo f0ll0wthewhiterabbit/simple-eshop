@@ -1,3 +1,3 @@
-import Profile from './component'
+import Profile from './container'
 
 export default Profile

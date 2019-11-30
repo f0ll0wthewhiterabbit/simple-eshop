@@ -13,7 +13,7 @@ import {
 } from '../../../constants'
 import { Root, Main } from './styles'
 
-const StandardLayout = ({ isUserSignedUp, userRole, children }) => {
+const UserLayout = ({ isUserSignedUp, userRole, children }) => {
   if (!isUserSignedUp) {
     return <Redirect to={SING_IN_PAGE_PATH} />
   }
@@ -46,10 +46,10 @@ const StandardLayout = ({ isUserSignedUp, userRole, children }) => {
   )
 }
 
-StandardLayout.propTypes = {
+UserLayout.propTypes = {
   isUserSignedUp: PropTypes.bool.isRequired,
   userRole: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 }
 
-export default StandardLayout
+export default UserLayout
