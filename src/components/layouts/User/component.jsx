@@ -9,7 +9,7 @@ import {
   SING_IN_PAGE_PATH,
   DATABASE_FIELD_ROLE_ADMIN,
   ERROR_PAGE_PATH,
-  ADMIN_USERS_PAGE_PATH,
+  ADMIN_PRODUCTS_PAGE_PATH,
 } from '../../../constants'
 import { Root, Main } from './styles'
 
@@ -26,7 +26,7 @@ const UserLayout = ({ isUserSignedUp, userRole, children }) => {
           state: {
             title: 'Forbidden',
             message: 'Sign in as user if you want to see catalog page',
-            backTo: ADMIN_USERS_PAGE_PATH,
+            backTo: ADMIN_PRODUCTS_PAGE_PATH,
           },
         }}
       />

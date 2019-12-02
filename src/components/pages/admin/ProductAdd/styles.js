@@ -1,69 +1,22 @@
 import styled from 'styled-components'
-import { Container, Avatar, Button, Typography } from '@material-ui/core'
-import ChipInput from 'material-ui-chip-input'
+import { Container, Avatar, Typography } from '@material-ui/core'
 
-const Root = styled(Container)`
+export const Root = styled(Container)`
   max-width: 550px;
 `
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   margin-top: ${props => props.theme.spacing(8)}px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
-const IconWrapper = styled(Avatar)`
+export const IconWrapper = styled(Avatar)`
   margin: ${props => props.theme.spacing(1)}px;
   background-color: ${props => props.theme.palette.primary.main};
 `
 
-const Heading = styled(Typography)`
+export const Heading = styled(Typography)`
   margin-bottom: ${props => props.theme.spacing(3)}px;
 `
-
-const Form = styled.form`
-  width: 100%; /* Fix IE 11 issue */
-  margin-top: ${props => props.theme.spacing(1)}px;
-`
-
-const SubmitButton = styled(Button)`
-  margin: ${props => props.theme.spacing(3, 0, 2)};
-`
-
-const TagsInput = styled(ChipInput)`
-  margin-bottom: 20px;
-
-  .MuiInputBase-root {
-    padding-bottom: 6px;
-  }
-`
-
-const FileInput = styled.input`
-  display: none;
-`
-
-const Label = styled.label``
-
-const FileInputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const UploadButton = styled(Button)`
-  margin-right: ${props => props.theme.spacing(1)}px;
-`
-
-export {
-  Root,
-  Wrapper,
-  IconWrapper,
-  Heading,
-  Form,
-  SubmitButton,
-  TagsInput,
-  FileInput,
-  Label,
-  FileInputWrapper,
-  UploadButton,
-}

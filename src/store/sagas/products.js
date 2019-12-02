@@ -5,6 +5,8 @@ import {
   STORAGE_FIELD_PRODUCTS,
   CHANGE_PRODUCT_RATING,
   DELETE_PRODUCT_RATING,
+  ADD_PRODUCT,
+  ADMIN_PRODUCTS_PAGE_PATH,
 } from '../../constants'
 import { getDataFromStorage, updateStorageData } from '../../utils'
 import {
@@ -16,6 +18,8 @@ import {
   changeProductRatingError,
   deleteProductRatingSuccess,
   deleteProductRatingError,
+  addProductSuccess,
+  addProductError,
 } from '../actions'
 
 function* fetchProductsSaga() {
@@ -74,6 +78,31 @@ function* deleteProductRatingSaga(action) {
   }
 }
 
+function* addProductSaga(action) {
+  try {
+    const { history } = action.payload
+    const { title, price, description, image, tags } = action.payload.productData
+    const productsList = yield call(getDataFromStorage, STORAGE_FIELD_PRODUCTS)
+
+    productsList.push({
+      id: productsList[productsList.length - 1].id + 1,
+      title,
+      description,
+      tags,
+      price,
+      rating: [],
+      image,
+      isRemovable: true,
+    })
+
+    yield call(updateStorageData, STORAGE_FIELD_PRODUCTS, productsList)
+    yield put(addProductSuccess(productsList))
+    history.push(ADMIN_PRODUCTS_PAGE_PATH)
+  } catch (error) {
+    yield put(addProductError('Product add error!'))
+  }
+}
+
 function* watchFetchProducts() {
   yield takeEvery(FETCH_PRODUCTS, fetchProductsSaga)
 }
@@ -86,4 +115,8 @@ function* watchDeleteProductRating() {
   yield takeEvery(DELETE_PRODUCT_RATING, deleteProductRatingSaga)
 }
 
-export { watchFetchProducts, watchChangeProductRating, watchDeleteProductRating }
+function* watchAddProduct() {
+  yield takeEvery(ADD_PRODUCT, addProductSaga)
+}
+
+export { watchFetchProducts, watchChangeProductRating, watchDeleteProductRating, watchAddProduct }

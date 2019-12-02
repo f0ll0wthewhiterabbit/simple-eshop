@@ -54,7 +54,7 @@ export default () => (
         </Route>
 
         <Route exact path={ADMIN_PAGE_PATH}>
-          <Redirect to={ADMIN_USERS_PAGE_PATH} />
+          <Redirect to={ADMIN_PRODUCTS_PAGE_PATH} />
         </Route>
 
         <Route exact path={ADMIN_USERS_PAGE_PATH}>

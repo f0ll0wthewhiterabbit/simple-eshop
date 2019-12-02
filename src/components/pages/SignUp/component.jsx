@@ -8,7 +8,7 @@ import {
   SING_IN_PAGE_PATH,
   DATABASE_FIELD_ROLE_ADMIN,
   MAIN_PAGE_PATH,
-  ADMIN_USERS_PAGE_PATH,
+  ADMIN_PRODUCTS_PAGE_PATH,
 } from '../../../constants'
 import SignUpForm from './components/SignUpForm'
 import { Wrapper, IconWrapper, SignInLink } from './styles'
@@ -21,7 +21,7 @@ const SignUpPage = ({ isUserAdded, userRole, signOut, history, location }) => {
   if (isUserAdded) {
     return (
       <Redirect
-        to={userRole === DATABASE_FIELD_ROLE_ADMIN ? ADMIN_USERS_PAGE_PATH : MAIN_PAGE_PATH}
+        to={userRole === DATABASE_FIELD_ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH}
       />
     )
   }

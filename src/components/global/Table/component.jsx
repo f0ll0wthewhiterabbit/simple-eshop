@@ -77,6 +77,10 @@ const Table = ({
 
   const mapRowToTableCellContent = (id, row) => {
     if (id === 'tags') {
+      if (row[id].length === 0) {
+        return '-'
+      }
+
       return row[id].join(', ')
     }
 

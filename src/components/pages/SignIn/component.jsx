@@ -8,7 +8,7 @@ import {
   SING_UP_PAGE_PATH,
   MAIN_PAGE_PATH,
   DATABASE_FIELD_ROLE_ADMIN,
-  ADMIN_USERS_PAGE_PATH,
+  ADMIN_PRODUCTS_PAGE_PATH,
 } from '../../../constants'
 import SignInForm from './components/SignInForm'
 import { Wrapper, IconWrapper, SignUpLink } from './styles'
@@ -21,7 +21,7 @@ const SingInPage = ({ isUserSignedUp, userRole, signOut, history, location }) =>
   if (isUserSignedUp) {
     return (
       <Redirect
-        to={userRole === DATABASE_FIELD_ROLE_ADMIN ? ADMIN_USERS_PAGE_PATH : MAIN_PAGE_PATH}
+        to={userRole === DATABASE_FIELD_ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH}
       />
     )
   }
