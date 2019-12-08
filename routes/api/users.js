@@ -28,33 +28,6 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
-// @route   Delete api/users
-// @desc    Delete users
-// @access  Private
-router.delete('/', auth, body().isArray(), async (req, res) => {
-  const errors = validationResult(req)
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() })
-  }
-
-  try {
-    const user = await User.findById(req.user.id)
-
-    if (!user || user.role !== roles.ADMIN) {
-      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
-    }
-
-    const idListToDelete = req.body
-    const result = await User.deleteMany({ _id: { $in: idListToDelete } })
-
-    return res.json({ deletedCount: result.deletedCount })
-  } catch (err) {
-    console.error(err.message)
-    return res.status(500).send('Server error')
-  }
-})
-
 // @route   POST api/users
 // @desc    Register user
 // @access  Public
@@ -121,5 +94,32 @@ router.post(
     }
   }
 )
+
+// @route   Delete api/users
+// @desc    Delete users
+// @access  Private
+router.delete('/', [auth, body().isArray()], async (req, res) => {
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
+  try {
+    const user = await User.findById(req.user.id)
+
+    if (!user || user.role !== roles.ADMIN) {
+      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
+    }
+
+    const idListToDelete = req.body
+    const result = await User.deleteMany({ _id: { $in: idListToDelete } })
+
+    return res.json({ deletedCount: result.deletedCount })
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).send('Server error')
+  }
+})
 
 module.exports = router
