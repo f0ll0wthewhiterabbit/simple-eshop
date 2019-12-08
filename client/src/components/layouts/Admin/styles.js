@@ -13,6 +13,17 @@ export const Wrapper = styled.div`
   flex-grow: 1;
 `
 
+export const SidebarRoot = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: ${props => props.theme.spacing(2)}px;
+
+  ${props => props.theme.breakpoints.up('lg')} {
+    padding-top: ${props => props.theme.spacing(8)}px;
+  }
+`
+
 export const Sidebar = styled(Drawer)`
   height: 100%;
   width: ${props => props.theme.sizing.sidebarWidth};
@@ -28,16 +39,6 @@ export const Sidebar = styled(Drawer)`
   }
 `
 
-export const SidebarRoot = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: ${props => props.theme.spacing(2)}px;
-
-  ${props => props.theme.breakpoints.up('lg')} {
-    padding-top: ${props => props.theme.spacing(8)}px;
-  }
-`
 export const Main = styled.main`
   flex-grow: 1;
   padding: ${props => props.theme.spacing(3)}px;
