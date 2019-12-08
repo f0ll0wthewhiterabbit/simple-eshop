@@ -13,7 +13,4 @@ const mapDispatchToProps = dispatch => ({
   deleteItems: storeFieldName => dispatch(deleteItems(storeFieldName)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AlertDialog)
+export default connect(mapStateToProps, mapDispatchToProps)(AlertDialog)

@@ -25,72 +25,74 @@ const AdminProductsPage = React.lazy(() => import('./components/pages/admin/Prod
 const AdminProductAddPage = React.lazy(() => import('./components/pages/admin/ProductAdd'))
 const ErrorPage = React.lazy(() => import('./components/pages/Error'))
 
-export default () => (
-  <Router>
-    <React.Suspense
-      fallback={
-        <StandardLayout>
-          <Loader />
-        </StandardLayout>
-      }
-    >
-      <Switch>
-        <Route exact path={MAIN_PAGE_PATH}>
-          <UserLayout>
-            <CatalogPage />
-          </UserLayout>
-        </Route>
+export default () => {
+  const fallbackComponent = (
+    <StandardLayout>
+      <Loader />
+    </StandardLayout>
+  )
 
-        <Route exact path={SING_IN_PAGE_PATH}>
-          <StandardLayout>
-            <SignInPage />
-          </StandardLayout>
-        </Route>
+  return (
+    <Router>
+      <React.Suspense fallback={fallbackComponent}>
+        <Switch>
+          <Route exact path={MAIN_PAGE_PATH}>
+            <UserLayout>
+              <CatalogPage />
+            </UserLayout>
+          </Route>
 
-        <Route exact path={SING_UP_PAGE_PATH}>
-          <StandardLayout>
-            <SignUpPage />
-          </StandardLayout>
-        </Route>
-
-        <Route exact path={ADMIN_PAGE_PATH}>
-          <Redirect to={ADMIN_PRODUCTS_PAGE_PATH} />
-        </Route>
-
-        <Route exact path={ADMIN_USERS_PAGE_PATH}>
-          <AdminLayout>
-            <AdminUsersPage />
-          </AdminLayout>
-        </Route>
-
-        <Route exact path={ADMIN_PRODUCTS_PAGE_PATH}>
-          <AdminLayout>
-            <AdminProductsPage />
-          </AdminLayout>
-        </Route>
-
-        <Route exact path={ADMIN_PRODUCT_ADD_PAGE_PATH}>
-          <AdminLayout>
-            <AdminProductAddPage />
-          </AdminLayout>
-        </Route>
-
-        <Route
-          exact
-          path={ERROR_PAGE_PATH}
-          render={props => (
+          <Route exact path={SING_IN_PAGE_PATH}>
             <StandardLayout>
-              <ErrorPage {...props} />
+              <SignInPage />
             </StandardLayout>
-          )}
-        />
+          </Route>
 
-        <Route>
-          <StandardLayout>
-            <ErrorPage />
-          </StandardLayout>
-        </Route>
-      </Switch>
-    </React.Suspense>
-  </Router>
-)
+          <Route exact path={SING_UP_PAGE_PATH}>
+            <StandardLayout>
+              <SignUpPage />
+            </StandardLayout>
+          </Route>
+
+          <Route exact path={ADMIN_PAGE_PATH}>
+            <Redirect to={ADMIN_PRODUCTS_PAGE_PATH} />
+          </Route>
+
+          <Route exact path={ADMIN_USERS_PAGE_PATH}>
+            <AdminLayout>
+              <AdminUsersPage />
+            </AdminLayout>
+          </Route>
+
+          <Route exact path={ADMIN_PRODUCTS_PAGE_PATH}>
+            <AdminLayout>
+              <AdminProductsPage />
+            </AdminLayout>
+          </Route>
+
+          <Route exact path={ADMIN_PRODUCT_ADD_PAGE_PATH}>
+            <AdminLayout>
+              <AdminProductAddPage />
+            </AdminLayout>
+          </Route>
+
+          <Route
+            exact
+            path={ERROR_PAGE_PATH}
+            render={props => (
+              <StandardLayout>
+                <ErrorPage {...props} />
+              </StandardLayout>
+            )}
+          />
+
+          <Route>
+            <StandardLayout>
+              <ErrorPage />
+            </StandardLayout>
+          </Route>
+        </Switch>
+      </React.Suspense>
+    </Router>
+  )
+}

@@ -15,9 +15,7 @@ const createDevelopmentStore = () => {
   return createStore(reducer, composeEnhancers(applyMiddleware(sagaMiddleware, reduxLogger)))
 }
 
-const createProductionStore = () => {
-  return createStore(reducer, applyMiddleware(sagaMiddleware))
-}
+const createProductionStore = () => createStore(reducer, applyMiddleware(sagaMiddleware))
 
 const getStore = () => {
   if (!store) {

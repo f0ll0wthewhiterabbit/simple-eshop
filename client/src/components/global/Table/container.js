@@ -7,7 +7,4 @@ const mapDispatchToProps = dispatch => ({
   showModal: storeFieldNameForModal => dispatch(showModal(storeFieldNameForModal)),
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Table)
+export default connect(null, mapDispatchToProps)(Table)

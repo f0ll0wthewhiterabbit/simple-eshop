@@ -6,16 +6,14 @@ import Router from './Router'
 import getStore from './store'
 import Root from './components/wrappers/Root'
 
-const App = () => {
-  return (
-    <Provider store={getStore()}>
-      <ThemeProviderWrapper>
-        <Root>
-          <Router />
-        </Root>
-      </ThemeProviderWrapper>
-    </Provider>
-  )
-}
+const App = () => (
+  <Provider store={getStore()}>
+    <ThemeProviderWrapper>
+      <Root>
+        <Router />
+      </Root>
+    </ThemeProviderWrapper>
+  </Provider>
+)
 
 export default App

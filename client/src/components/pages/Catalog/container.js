@@ -13,7 +13,4 @@ const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CatalogPage)
+export default connect(mapStateToProps, mapDispatchToProps)(CatalogPage)

@@ -13,7 +13,4 @@ const mapDispatchToProps = dispatch => ({
   closeSidebar: () => dispatch(closeSidebar()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AdminLayout)
+export default connect(mapStateToProps, mapDispatchToProps)(AdminLayout)

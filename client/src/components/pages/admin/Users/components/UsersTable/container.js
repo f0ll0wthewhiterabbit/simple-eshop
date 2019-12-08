@@ -12,7 +12,4 @@ const mapDispatchToProps = dispatch => ({
   setSelectedUsers: selectedUsersList => dispatch(setSelectedUsers(selectedUsersList)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UsersTable)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersTable)

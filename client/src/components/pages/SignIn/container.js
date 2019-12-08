@@ -12,7 +12,4 @@ const mapDispatchToProps = dispatch => ({
   signOut: (history, location) => dispatch(signOut(history, location)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignInPage)
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage)

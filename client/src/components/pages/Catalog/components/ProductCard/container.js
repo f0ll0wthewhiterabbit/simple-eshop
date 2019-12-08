@@ -12,7 +12,4 @@ const mapDispatchToProps = dispatch => ({
   deleteProductRating: productId => dispatch(deleteProductRating(productId)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductCard)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)

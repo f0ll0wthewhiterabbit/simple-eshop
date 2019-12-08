@@ -13,7 +13,4 @@ const mapDispatchToProps = dispatch => ({
   openSidebar: () => dispatch(openSidebar()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

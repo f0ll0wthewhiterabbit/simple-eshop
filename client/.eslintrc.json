@@ -1,27 +1,46 @@
 {
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
   "extends": [
-    "react-app",
+    "plugin:react/recommended",
     "airbnb",
-    "plugin:jsx-a11y/recommended",
-    "prettier",
-    "prettier/react",
-    "plugin:prettier/recommended"
+    "airbnb/hooks",
+    "prettier"
   ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
   "plugins": [
-    "jsx-a11y",
-    "prettier",
+    "react",
     "react-hooks"
   ],
+  "settings": {
+    "react": {
+      "version": "16.11"
+    }
+  },
   "rules": {
-    "semi": 0,
-    "quotes": [
+    "max-len": [
       "error",
-      "single",
       {
-        "avoidEscape": true
+        "code": 100,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
       }
     ],
-    "comma-dangle": 0,
     "react/jsx-filename-extension": [
       1,
       {
@@ -31,16 +50,48 @@
         ]
       }
     ],
-    "react/require-default-props": 0,
-    "react/jsx-props-no-spreading": 0,
-    "prettier/prettier": [
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "required": {
+          "some": [
+            "nesting",
+            "id"
+          ]
+        }
+      }
+    ],
+    "no-use-before-define": [
       "error",
       {
-        "semi": false,
-        "singleQuote": true,
-        "trailingComma": "es5",
-        "printWidth": 100
+        "functions": false
       }
-    ]
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "linebreak-style": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/destructuring-assignment": "off",
+    "react/static-property-placement": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/prefer-default-export": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-plusplus": "off",
+    "object-curly-newline": "off",
+    "semi": "off"
   }
 }

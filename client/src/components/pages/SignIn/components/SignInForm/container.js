@@ -12,7 +12,4 @@ const mapDispatchToProps = dispatch => ({
   signIn: userData => dispatch(signIn(userData)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignInForm)
+export default connect(mapStateToProps, mapDispatchToProps)(SignInForm)

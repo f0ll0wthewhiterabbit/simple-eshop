@@ -12,7 +12,4 @@ const mapDispatchToProps = dispatch => ({
   setSelectedProducts: selectedProductsList => dispatch(setSelectedProducts(selectedProductsList)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductsTable)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsTable)

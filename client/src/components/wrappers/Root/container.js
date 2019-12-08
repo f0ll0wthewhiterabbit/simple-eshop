@@ -12,7 +12,4 @@ const mapDispatchToProps = dispatch => ({
   initialize: () => dispatch(initialize()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Root)
+export default connect(mapStateToProps, mapDispatchToProps)(Root)

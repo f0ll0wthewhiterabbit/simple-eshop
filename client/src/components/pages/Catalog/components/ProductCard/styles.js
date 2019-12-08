@@ -60,8 +60,11 @@ export const RaitingWrapper = styled(CardActions)`
 `
 
 export const Stars = styled(Rating)`
-  margin-left: 0;
   min-height: 18px;
+
+  && {
+    margin-left: 0;
+  }
 `
 
 export const RaitingsCount = styled.span`
@@ -72,10 +75,13 @@ export const RaitingsCount = styled.span`
 
 export const DeleteButton = styled(IconButton)`
   color: rgba(0, 0, 0, 0.26);
-  margin-left: 3px;
   position: absolute;
   top: 20px;
   left: 87px;
+
+  && {
+    margin-left: 3px;
+  }
 
   &:hover {
     color: rgba(0, 0, 0, 0.54);

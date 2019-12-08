@@ -11,7 +11,4 @@ const mapDispatchToProps = dispatch => ({
   addProduct: (productData, history) => dispatch(addProduct(productData, history)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductAddForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductAddForm)
