@@ -1,39 +1,27 @@
-import { takeEvery, call, put } from 'redux-saga/effects'
+import { takeEvery, put, select } from 'redux-saga/effects'
 
-import {
-  FETCH_USERS,
-  STORAGE_FIELD_USERS,
-  SIGN_UP,
-  STORAGE_FIELD_TOKEN,
-  STORAGE_FIELD_USER_ID,
-  SIGN_IN,
-  DATABASE_FIELD_ROLE_USER,
-  SIGN_OUT,
-  SING_IN_PAGE_PATH,
-  ADMIN_PAGE_PATH,
-} from '../../constants'
-import { getDataFromStorage, updateStorageData, generateUserToken } from '../../utils'
+import API from '../../utils/api'
+import { FETCH_USERS, DELETE_USERS, REQUEST_USER_DELETION } from '../../constants'
 import {
   fetchUsersSuccess,
   fetchUsersError,
   startLoading,
   stopLoading,
-  signUpSuccess,
-  signUpError,
-  signInSuccess,
-  signInError,
-  signOutSuccess,
+  deleteUsersSuccess,
+  deleteUsersError,
+  requestUserDeletionSuccess,
+  requestUserDeletionError,
+  authenticateSuccess,
+  closeModal,
+  setSelectedUsers,
 } from '../actions'
 
 function* fetchUsersSaga() {
   yield put(startLoading())
 
   try {
-    const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
-
-    if (!usersList) {
-      throw new Error('Users data not recieved!')
-    }
+    const response = yield API.get('/users')
+    const usersList = response.data
 
     yield put(fetchUsersSuccess(usersList))
   } catch (error) {
@@ -43,131 +31,57 @@ function* fetchUsersSaga() {
   yield put(stopLoading())
 }
 
-function* signUpSaga(action) {
-  const { userData } = action.payload
+function* deleteUsersSaga() {
+  yield put(startLoading())
+  yield put(closeModal())
+
+  const selectedUsers = yield select(state => state.users.selected)
+  const config = {
+    data: JSON.stringify(selectedUsers),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
 
   try {
-    const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
-
-    if (!usersList) {
-      throw new Error('Something went wrong!')
-    }
-
-    const isUserInDatabase = usersList.some(user => user.email === userData.email)
-
-    if (isUserInDatabase) {
-      throw new Error('Email has already been taken!')
-    } else {
-      const userId = usersList[usersList.length - 1].id + 1
-      const token = generateUserToken()
-      usersList.push({
-        id: userId,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        email: userData.email,
-        password: userData.password,
-        isRemovable: false,
-        token,
-        role: DATABASE_FIELD_ROLE_USER,
-      })
-
-      yield call(updateStorageData, STORAGE_FIELD_USERS, usersList)
-      yield localStorage.setItem(STORAGE_FIELD_USER_ID, userId)
-      yield localStorage.setItem(STORAGE_FIELD_TOKEN, token)
-
-      yield put(
-        signUpSuccess({
-          id: userId,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          role: DATABASE_FIELD_ROLE_USER,
-          isRemovable: false,
-        })
-      )
-    }
+    yield API.delete('/users', config)
+    yield put(deleteUsersSuccess(selectedUsers))
   } catch (error) {
-    const errorMessage = error.message || 'Something went wrong registering the user!'
-    yield put(signUpError(errorMessage))
+    yield put(deleteUsersError('Users delete error!'))
   }
+
+  yield put(setSelectedUsers([]))
+  yield put(stopLoading())
 }
 
-function* signInSaga(action) {
-  let currentUser
+function* requestUserDeletionSaga() {
+  yield put(startLoading())
+  yield put(closeModal())
 
   try {
-    const usersList = yield call(getDataFromStorage, STORAGE_FIELD_USERS)
+    const response = yield API.patch('/users')
+    const { _id: id, firstName, lastName, email, role, isRemovable } = response.data
+    const userData = { id, firstName, lastName, email, role, isRemovable }
 
-    if (!usersList) {
-      throw new Error('Something went wrong!')
-    }
-
-    const token = localStorage.getItem(STORAGE_FIELD_TOKEN)
-    const userId = Number(localStorage.getItem(STORAGE_FIELD_USER_ID))
-
-    if (token && userId) {
-      currentUser = usersList.find(user => user.id === userId)
-
-      if (currentUser.token !== token) {
-        throw new Error('Sign in please to continue!')
-      }
-    } else {
-      const { userData } = action.payload
-
-      if (!userData || !userData.email) {
-        throw new Error()
-      }
-
-      currentUser = usersList.find(user => user.email === userData.email)
-
-      if (!currentUser || currentUser.password !== userData.password) {
-        throw new Error('Wrong email or password!')
-      } else {
-        yield localStorage.setItem(STORAGE_FIELD_USER_ID, currentUser.id)
-        yield localStorage.setItem(STORAGE_FIELD_TOKEN, currentUser.token)
-      }
-    }
+    yield put(requestUserDeletionSuccess(id))
+    yield put(authenticateSuccess(userData))
   } catch (error) {
-    const errorMessage = error.message || ''
-    yield put(signInError(errorMessage))
-    return
+    yield put(requestUserDeletionError('Users delete error!'))
   }
 
-  yield put(
-    signInSuccess({
-      id: currentUser.id,
-      firstName: currentUser.firstName,
-      lastName: currentUser.lastName,
-      role: currentUser.role,
-      isRemovable: currentUser.isRemovable,
-    })
-  )
-}
-
-function* signOutSaga(action) {
-  const { history, location } = action.payload
-  yield localStorage.removeItem(STORAGE_FIELD_USER_ID)
-  yield localStorage.removeItem(STORAGE_FIELD_TOKEN)
-  yield put(signOutSuccess())
-
-  if (location.pathname.indexOf(ADMIN_PAGE_PATH) !== -1) {
-    history.push(SING_IN_PAGE_PATH)
-  }
+  yield put(stopLoading())
 }
 
 function* watchFetchUsers() {
   yield takeEvery(FETCH_USERS, fetchUsersSaga)
 }
 
-function* watchSignUp() {
-  yield takeEvery(SIGN_UP, signUpSaga)
+function* watchDeleteUsers() {
+  yield takeEvery(DELETE_USERS, deleteUsersSaga)
 }
 
-function* watchSignIn() {
-  yield takeEvery(SIGN_IN, signInSaga)
+function* watchRequestUserDeletion() {
+  yield takeEvery(REQUEST_USER_DELETION, requestUserDeletionSaga)
 }
 
-function* watchSignOut() {
-  yield takeEvery(SIGN_OUT, signOutSaga)
-}
-
-export { watchFetchUsers, watchSignUp, watchSignIn, watchSignOut }
+export { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion }

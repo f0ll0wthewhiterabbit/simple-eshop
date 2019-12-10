@@ -1,6 +1,4 @@
 import {
-  FETCH_DATABASE_TO_STORAGE_SUCCESS,
-  FETCH_DATABASE_TO_STORAGE_ERROR,
   SHOW_MODAL,
   CLOSE_MODAL,
   START_LOADING,
@@ -11,8 +9,6 @@ import {
 
 const initialState = {
   isLoading: false,
-  isStorageDataReady: false,
-  error: null,
   modal: {
     isOpened: false,
     storeFieldName: '',
@@ -22,20 +18,6 @@ const initialState = {
 
 const app = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_DATABASE_TO_STORAGE_SUCCESS:
-      return {
-        ...state,
-        isStorageDataReady: true,
-        error: null,
-      }
-
-    case FETCH_DATABASE_TO_STORAGE_ERROR:
-      return {
-        ...state,
-        isStorageDataReady: false,
-        error: action.payload.error,
-      }
-
     case SHOW_MODAL:
       return {
         ...state,

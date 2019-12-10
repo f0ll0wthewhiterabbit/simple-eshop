@@ -21,6 +21,10 @@ const UsersPage = ({ isLoading, error, fetchUsers }) => {
   return <UsersTable />
 }
 
+UsersPage.defaultProps = {
+  error: null,
+}
+
 UsersPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),

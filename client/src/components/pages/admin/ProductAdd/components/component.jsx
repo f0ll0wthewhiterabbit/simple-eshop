@@ -207,6 +207,10 @@ const ProductAddForm = ({ error, addProduct, history }) => {
   )
 }
 
+ProductAddForm.defaultProps = {
+  error: null,
+}
+
 ProductAddForm.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   addProduct: PropTypes.func.isRequired,

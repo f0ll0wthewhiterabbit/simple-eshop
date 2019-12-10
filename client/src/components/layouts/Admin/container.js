@@ -4,8 +4,8 @@ import AdminLayout from './component'
 import { closeSidebar } from '../../../store/actions'
 
 const mapStateToProps = state => ({
-  isUserSignedUp: state.users.current.id !== null,
-  userRole: state.users.current.role,
+  isAuthenticated: state.auth.isAuthenticated,
+  userRole: state.auth.user.role,
   isSidebarOpened: state.app.isSidebarOpened,
 })
 

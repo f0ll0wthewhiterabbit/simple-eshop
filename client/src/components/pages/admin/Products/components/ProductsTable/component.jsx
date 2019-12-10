@@ -28,7 +28,7 @@ const ProductsTable = ({ productsList, selectedProducts, setSelectedProducts }) 
 
 ProductsTable.propTypes = {
   productsList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedProducts: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
   setSelectedProducts: PropTypes.func.isRequired,
 }
 

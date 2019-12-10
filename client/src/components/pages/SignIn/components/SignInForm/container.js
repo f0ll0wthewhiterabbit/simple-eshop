@@ -4,8 +4,7 @@ import SignInForm from './component'
 import { signIn } from '../../../../../store/actions'
 
 const mapStateToProps = state => ({
-  isUserSignedUp: state.users.current.id !== null,
-  error: state.users.error,
+  error: state.auth.error,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -21,13 +21,37 @@ const initialState = {
 const products = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PRODUCTS_SUCCESS:
-    case DELETE_PRODUCTS_SUCCESS:
-    case CHANGE_PRODUCT_RATING_SUCCESS:
-    case DELETE_PRODUCT_RATING_SUCCESS:
-    case ADD_PRODUCT_SUCCESS:
       return {
         ...state,
         data: [...action.payload.productsList],
+        error: null,
+      }
+
+    case DELETE_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        data: state.data.filter(
+          product => action.payload.deletedProducts.findIndex(it => it === product._id) === -1
+        ),
+        error: null,
+      }
+
+    case ADD_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        data: [...state.data, action.payload.product],
+        error: null,
+      }
+
+    case CHANGE_PRODUCT_RATING_SUCCESS:
+    case DELETE_PRODUCT_RATING_SUCCESS:
+      return {
+        ...state,
+        data: state.data.map(product =>
+          product._id !== action.payload.product._id
+            ? product
+            : { ...product, ...action.payload.product }
+        ),
         error: null,
       }
 

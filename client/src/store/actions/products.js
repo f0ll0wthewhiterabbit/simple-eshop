@@ -3,8 +3,9 @@ import {
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_ERROR,
   SET_SELECTED_PRODUCTS,
-  DELETE_PRODUCTS_ERROR,
+  DELETE_PRODUCTS,
   DELETE_PRODUCTS_SUCCESS,
+  DELETE_PRODUCTS_ERROR,
   CHANGE_PRODUCT_RATING,
   CHANGE_PRODUCT_RATING_SUCCESS,
   CHANGE_PRODUCT_RATING_ERROR,
@@ -35,9 +36,13 @@ export const setSelectedProducts = selectedProductsList => ({
   payload: { selectedProductsList },
 })
 
-export const deleteProductsSuccess = productsList => ({
+export const deleteProducts = () => ({
+  type: DELETE_PRODUCTS,
+})
+
+export const deleteProductsSuccess = deletedProducts => ({
   type: DELETE_PRODUCTS_SUCCESS,
-  payload: { productsList },
+  payload: { deletedProducts },
 })
 
 export const deleteProductsError = error => ({
@@ -50,9 +55,9 @@ export const changeProductRating = ratingData => ({
   payload: { ratingData },
 })
 
-export const changeProductRatingSuccess = productsList => ({
+export const changeProductRatingSuccess = product => ({
   type: CHANGE_PRODUCT_RATING_SUCCESS,
-  payload: { productsList },
+  payload: { product },
 })
 
 export const changeProductRatingError = error => ({
@@ -65,9 +70,9 @@ export const deleteProductRating = productId => ({
   payload: { productId },
 })
 
-export const deleteProductRatingSuccess = productsList => ({
+export const deleteProductRatingSuccess = product => ({
   type: DELETE_PRODUCT_RATING_SUCCESS,
-  payload: { productsList },
+  payload: { product },
 })
 
 export const deleteProductRatingError = error => ({
@@ -80,9 +85,9 @@ export const addProduct = (productData, history) => ({
   payload: { productData, history },
 })
 
-export const addProductSuccess = productsList => ({
+export const addProductSuccess = product => ({
   type: ADD_PRODUCT_SUCCESS,
-  payload: { productsList },
+  payload: { product },
 })
 
 export const addProductError = error => ({

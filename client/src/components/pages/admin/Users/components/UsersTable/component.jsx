@@ -25,7 +25,7 @@ const UsersTable = ({ usersList, selectedUsers, setSelectedUsers }) => {
 
 UsersTable.propTypes = {
   usersList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedUsers: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
   setSelectedUsers: PropTypes.func.isRequired,
 }
 

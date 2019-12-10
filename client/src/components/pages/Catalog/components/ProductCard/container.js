@@ -4,7 +4,7 @@ import ProductCard from './component'
 import { changeProductRating, deleteProductRating } from '../../../../../store/actions'
 
 const mapStateToProps = state => ({
-  currentUserId: state.users.current.id,
+  currentUserId: state.auth.user.id,
 })
 
 const mapDispatchToProps = dispatch => ({

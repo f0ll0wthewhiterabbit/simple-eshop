@@ -20,6 +20,11 @@ const ErrorMessage = ({ children, title }) => {
   )
 }
 
+ErrorMessage.defaultProps = {
+  children: '',
+  title: '',
+}
+
 ErrorMessage.propTypes = {
   children: PropTypes.string,
   title: PropTypes.string,

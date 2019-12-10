@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import UserLayout from './component'
 
 const mapStateToProps = state => ({
-  isUserSignedUp: state.users.current.id !== null,
-  userRole: state.users.current.role,
+  isAuthenticated: state.auth.isAuthenticated,
+  userRole: state.auth.user.role,
 })
 
 export default connect(mapStateToProps)(UserLayout)

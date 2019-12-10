@@ -27,6 +27,10 @@ const ProductsPage = ({ isLoading, error, fetchProducts }) => {
   )
 }
 
+ProductsPage.defaultProps = {
+  error: null,
+}
+
 ProductsPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),

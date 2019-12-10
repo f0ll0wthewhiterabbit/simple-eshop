@@ -26,7 +26,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
       <Grid container spacing={4}>
         {products.map(product => {
           return (
-            <Grid key={product.id} item xs={12} sm={6} md={4}>
+            <Grid key={product._id} item xs={12} sm={6} md={4}>
               <ProductCard productData={product} />
             </Grid>
           )
@@ -43,6 +43,10 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
       {content}
     </Wrapper>
   )
+}
+
+CatalogPage.defaultProps = {
+  error: null,
 }
 
 CatalogPage.propTypes = {

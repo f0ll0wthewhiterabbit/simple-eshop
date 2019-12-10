@@ -13,7 +13,7 @@ import { ERROR_PAGE_PATH, DATABASE_FIELD_ROLE_ADMIN } from '../../../constants'
 import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 
 const AdminLayout = ({
-  isUserSignedUp,
+  isAuthenticated,
   isSidebarOpened,
   userRole,
   theme,
@@ -27,7 +27,7 @@ const AdminLayout = ({
     closeSidebar()
   }
 
-  if (!isUserSignedUp || userRole !== DATABASE_FIELD_ROLE_ADMIN) {
+  if (!isAuthenticated || userRole !== DATABASE_FIELD_ROLE_ADMIN) {
     return <Redirect to={ERROR_PAGE_PATH} />
   }
 
@@ -56,7 +56,7 @@ const AdminLayout = ({
 }
 
 AdminLayout.propTypes = {
-  isUserSignedUp: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   isSidebarOpened: PropTypes.bool.isRequired,
   userRole: PropTypes.string.isRequired,
   theme: PropTypes.shape({ breakpoints: PropTypes.object.isRequired }).isRequired,

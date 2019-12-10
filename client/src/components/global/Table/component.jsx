@@ -161,17 +161,17 @@ const Table = ({
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.id)
+                  const isItemSelected = isSelected(row._id)
                   const labelId = `enhanced-table-checkbox-${index}`
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.id, row.isRemovable)}
+                      onClick={event => handleClick(event, row._id, row.isRemovable)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id}
+                      key={row._id}
                       selected={isItemSelected}
                     >
                       {headCells.map(headCell => (
@@ -228,7 +228,7 @@ Table.propTypes = {
   title: PropTypes.string.isRequired,
   storeFieldName: PropTypes.string.isRequired,
   showModal: PropTypes.func.isRequired,
-  selectedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedItems: PropTypes.arrayOf(PropTypes.string).isRequired,
   setSelectedItems: PropTypes.func.isRequired,
 }
 

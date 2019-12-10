@@ -7,7 +7,7 @@ import Logo from './components/Logo'
 import UserMenu from './components/UserMenu'
 import { Wrapper, MenuButton } from './styles'
 
-const Header = ({ openSidebar, isAdminMode, isUserSignedUp }) => {
+const Header = ({ openSidebar, isAdmin, isAuthenticated }) => {
   const handleMenuButtonClick = () => {
     openSidebar()
   }
@@ -16,13 +16,13 @@ const Header = ({ openSidebar, isAdminMode, isUserSignedUp }) => {
     <Wrapper position="static">
       <Container maxWidth="lg">
         <Toolbar>
-          {isAdminMode && (
+          {isAdmin && (
             <MenuButton color="secondary" aria-label="open sidebar" onClick={handleMenuButtonClick}>
               <MenuIcon />
             </MenuButton>
           )}
           <Logo />
-          {isUserSignedUp && <UserMenu />}
+          {isAuthenticated && <UserMenu />}
         </Toolbar>
       </Container>
     </Wrapper>
@@ -31,8 +31,8 @@ const Header = ({ openSidebar, isAdminMode, isUserSignedUp }) => {
 
 Header.propTypes = {
   openSidebar: PropTypes.func.isRequired,
-  isAdminMode: PropTypes.bool.isRequired,
-  isUserSignedUp: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 }
 
 export default Header

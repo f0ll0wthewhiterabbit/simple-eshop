@@ -1,12 +1,14 @@
 require('dotenv').config()
 const express = require('express')
 const logger = require('morgan')
+const cors = require('cors')
 const connectDB = require('./config/db')
 
 const app = express()
 
 connectDB()
 
+app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
 app.use('/api/products', require('./routes/api/products'))

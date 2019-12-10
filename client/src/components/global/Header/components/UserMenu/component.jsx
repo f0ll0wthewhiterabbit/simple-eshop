@@ -20,7 +20,7 @@ import { STORE_FIELD_CURRENT_USER } from '../../../../../constants'
 const UserMenu = ({
   theme,
   userName,
-  isAdminMode,
+  isAdmin,
   isDeleteRequestSent,
   showModal,
   signOut,
@@ -74,7 +74,7 @@ const UserMenu = ({
           </IconWrapper>
           <ListItemText primary={userName} />
         </MenuItem>
-        {!isAdminMode && (
+        {!isAdmin && (
           <MenuItem onClick={handleDeleteAccountClick} disabled={isDeleteRequestSent}>
             <IconWrapper>
               <HighlightOffOutlinedIcon fontSize="small" />
@@ -98,10 +98,10 @@ UserMenu.propTypes = {
     breakpoints: PropTypes.object.isRequired,
   }).isRequired,
   userName: PropTypes.string.isRequired,
-  isAdminMode: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
   isDeleteRequestSent: PropTypes.bool.isRequired,
-  showModal: PropTypes.func,
-  signOut: PropTypes.func,
+  showModal: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
 }

@@ -5,23 +5,24 @@ import {
   watchChangeProductRating,
   watchDeleteProductRating,
   watchAddProduct,
+  watchDeleteProducts,
 } from './products'
-import { watchFetchUsers, watchSignUp, watchSignIn, watchSignOut } from './users'
-import watchFetchDatabaseToStorage from './storage'
-import { watchDeleteItems, watchInitialize } from './app'
+import { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion } from './users'
+import { watchAuthenticate, watchSignUp, watchSignIn, watchSignOut } from './auth'
 
 export default function*() {
   yield all([
-    watchFetchProducts(),
-    watchFetchDatabaseToStorage(),
     watchFetchUsers(),
-    watchDeleteItems(),
-    watchSignUp(),
-    watchSignIn(),
-    watchInitialize(),
-    watchSignOut(),
+    watchDeleteUsers(),
+    watchRequestUserDeletion(),
+    watchFetchProducts(),
     watchChangeProductRating(),
     watchDeleteProductRating(),
     watchAddProduct(),
+    watchDeleteProducts(),
+    watchAuthenticate(),
+    watchSignUp(),
+    watchSignIn(),
+    watchSignOut(),
   ])
 }

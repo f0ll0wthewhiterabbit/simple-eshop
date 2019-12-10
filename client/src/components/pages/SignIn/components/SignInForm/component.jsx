@@ -79,6 +79,10 @@ const SignInForm = ({ signIn, error }) => {
   )
 }
 
+SignInForm.defaultProps = {
+  error: null,
+}
+
 SignInForm.propTypes = {
   signIn: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),

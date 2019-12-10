@@ -1,3 +1,3 @@
-import ProductAddPage from './component'
+import ProductAddPage from './container'
 
 export default ProductAddPage

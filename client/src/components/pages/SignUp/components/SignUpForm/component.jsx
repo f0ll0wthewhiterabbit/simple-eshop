@@ -147,6 +147,10 @@ const SignUpForm = ({ signUp, error }) => {
   )
 }
 
+SignUpForm.defaultProps = {
+  error: null,
+}
+
 SignUpForm.propTypes = {
   signUp: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),

@@ -6,8 +6,8 @@ import Loader from './components/global/Loader'
 
 import {
   MAIN_PAGE_PATH,
-  SING_IN_PAGE_PATH,
-  SING_UP_PAGE_PATH,
+  SIGN_IN_PAGE_PATH,
+  SIGN_UP_PAGE_PATH,
   ADMIN_PAGE_PATH,
   ADMIN_USERS_PAGE_PATH,
   ADMIN_PRODUCTS_PAGE_PATH,
@@ -42,13 +42,13 @@ export default () => {
             </UserLayout>
           </Route>
 
-          <Route exact path={SING_IN_PAGE_PATH}>
+          <Route exact path={SIGN_IN_PAGE_PATH}>
             <StandardLayout>
               <SignInPage />
             </StandardLayout>
           </Route>
 
-          <Route exact path={SING_UP_PAGE_PATH}>
+          <Route exact path={SIGN_UP_PAGE_PATH}>
             <StandardLayout>
               <SignUpPage />
             </StandardLayout>

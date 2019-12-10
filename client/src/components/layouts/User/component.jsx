@@ -6,16 +6,16 @@ import Header from '../../global/Header'
 import Footer from '../../global/Footer'
 import AlertDialog from '../../global/AlertDialog'
 import {
-  SING_IN_PAGE_PATH,
+  SIGN_IN_PAGE_PATH,
   DATABASE_FIELD_ROLE_ADMIN,
   ERROR_PAGE_PATH,
   ADMIN_PRODUCTS_PAGE_PATH,
 } from '../../../constants'
 import { Root, Main } from './styles'
 
-const UserLayout = ({ isUserSignedUp, userRole, children }) => {
-  if (!isUserSignedUp) {
-    return <Redirect to={SING_IN_PAGE_PATH} />
+const UserLayout = ({ isAuthenticated, userRole, children }) => {
+  if (!isAuthenticated) {
+    return <Redirect to={SIGN_IN_PAGE_PATH} />
   }
 
   if (userRole === DATABASE_FIELD_ROLE_ADMIN) {
@@ -47,7 +47,7 @@ const UserLayout = ({ isUserSignedUp, userRole, children }) => {
 }
 
 UserLayout.propTypes = {
-  isUserSignedUp: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   userRole: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 }

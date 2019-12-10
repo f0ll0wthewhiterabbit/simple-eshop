@@ -20,7 +20,7 @@ import {
 } from './styles'
 
 const ProductCard = ({ productData, currentUserId, changeProductRating, deleteProductRating }) => {
-  const { id, title, description, tags, price, rating, image: imageSrc } = productData
+  const { _id: id, title, description, tags, price, rating, image: imageSrc } = productData
   const ratingsAmount = rating.length
   const averageRating = Math.round(rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
   const currentUserRating = rating.find(it => it.userId === currentUserId)
@@ -86,25 +86,26 @@ const ProductCard = ({ productData, currentUserId, changeProductRating, deletePr
   )
 }
 
+ProductCard.defaultProps = {
+  currentUserId: '',
+}
+
 ProductCard.propTypes = {
   productData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.arrayOf(
       PropTypes.shape({
-        userId: PropTypes.number.isRequired,
+        userId: PropTypes.string.isRequired,
         stars: PropTypes.number.isRequired,
       })
     ).isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
-  currentUserId: PropTypes.oneOfType([
-    PropTypes.number.isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]),
+  currentUserId: PropTypes.string,
   changeProductRating: PropTypes.func.isRequired,
   deleteProductRating: PropTypes.func.isRequired,
 }

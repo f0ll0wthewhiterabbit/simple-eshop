@@ -1,2 +1,1 @@
-export const PRODUCTS_API = '/data/products.json'
-export const USERS_API = '/data/users.json'
+export const API_URL = 'http://localhost:5000/api'
