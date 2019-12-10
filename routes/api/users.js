@@ -95,6 +95,37 @@ router.post(
   }
 )
 
+// @route   PATCH api/users
+// @desc    Change isRemovable user field to true
+// @access  Private
+router.patch('/', auth, async (req, res) => {
+  try {
+    const userId = req.user.id
+    const user = await User.findById(userId)
+
+    if (!user) {
+      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
+    }
+
+    if (user.isRemovable) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'Delete account request has already been sent' }] })
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: { isRemovable: true } },
+      { new: true }
+    )
+
+    return res.json(updatedUser)
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).send('Server error')
+  }
+})
+
 // @route   Delete api/users
 // @desc    Delete users
 // @access  Private
@@ -113,7 +144,13 @@ router.delete('/', [auth, body().isArray()], async (req, res) => {
     }
 
     const idListToDelete = req.body
-    const result = await User.deleteMany({ _id: { $in: idListToDelete } })
+    const usersAmount = await User.count({ _id: { $in: idListToDelete }, isRemovable: true })
+
+    if (idListToDelete.length !== usersAmount) {
+      return res.status(400).json({ errors: [{ msg: 'The requested users cannot be deleted' }] })
+    }
+
+    const result = await User.deleteMany({ _id: { $in: idListToDelete }, isRemovable: true })
 
     return res.json({ deletedCount: result.deletedCount })
   } catch (err) {

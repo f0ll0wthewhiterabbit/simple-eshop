@@ -211,7 +211,13 @@ router.delete('/', [auth, body().isArray()], async (req, res) => {
     }
 
     const idListToDelete = req.body
-    const result = await Product.deleteMany({ _id: { $in: idListToDelete } })
+    const productsAmount = await Product.count({ _id: { $in: idListToDelete }, isRemovable: true })
+
+    if (idListToDelete.length !== productsAmount) {
+      return res.status(400).json({ errors: [{ msg: 'The requested products cannot be deleted' }] })
+    }
+
+    const result = await Product.deleteMany({ _id: { $in: idListToDelete }, isRemovable: true })
 
     return res.json({ deletedCount: result.deletedCount })
   } catch (err) {
