@@ -10,11 +10,14 @@ import {
   DELETE_PRODUCT_RATING_ERROR,
   ADD_PRODUCT_SUCCESS,
   ADD_PRODUCT_ERROR,
+  START_RATING_LOADING,
 } from '../../constants'
 
 const initialState = {
   data: [],
   selected: [],
+  ratingsLoadingList: [],
+  ratingsErrorList: [],
   error: null,
 }
 
@@ -52,23 +55,38 @@ const products = (state = initialState, action) => {
             ? product
             : { ...product, ...action.payload.product }
         ),
-        error: null,
+        ratingsLoadingList: state.ratingsLoadingList.filter(
+          id => id !== action.payload.product._id
+        ),
+        ratingsErrorList: state.ratingsErrorList.filter(id => id !== action.payload.product._id),
       }
 
     case FETCH_PRODUCTS_ERROR:
     case DELETE_PRODUCTS_ERROR:
-    case CHANGE_PRODUCT_RATING_ERROR:
-    case DELETE_PRODUCT_RATING_ERROR:
     case ADD_PRODUCT_ERROR:
       return {
         ...state,
         error: action.payload.error,
       }
 
+    case CHANGE_PRODUCT_RATING_ERROR:
+    case DELETE_PRODUCT_RATING_ERROR:
+      return {
+        ...state,
+        ratingsLoadingList: state.ratingsLoadingList.filter(id => id !== action.payload.id),
+        ratingsErrorList: [...state.ratingsErrorList, action.payload.id],
+      }
+
     case SET_SELECTED_PRODUCTS:
       return {
         ...state,
         selected: [...action.payload.selectedProductsList],
+      }
+
+    case START_RATING_LOADING:
+      return {
+        ...state,
+        ratingsLoadingList: [...state.ratingsLoadingList, action.payload.id],
       }
 
     default:

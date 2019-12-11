@@ -24,6 +24,7 @@ import {
   deleteProductsError,
   closeModal,
   setSelectedProducts,
+  startRatingLoading,
 } from '../actions'
 
 function* fetchProductsSaga() {
@@ -43,6 +44,9 @@ function* fetchProductsSaga() {
 
 function* changeProductRatingSaga(action) {
   const { productId, userRating } = action.payload.ratingData
+
+  yield put(startRatingLoading(productId))
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -56,12 +60,15 @@ function* changeProductRatingSaga(action) {
 
     yield put(changeProductRatingSuccess(product))
   } catch (error) {
-    yield put(changeProductRatingError('Product rating change error!'))
+    yield put(changeProductRatingError(productId))
   }
 }
 
 function* deleteProductRatingSaga(action) {
   const { productId } = action.payload
+
+  yield put(startRatingLoading(productId))
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -75,7 +82,7 @@ function* deleteProductRatingSaga(action) {
 
     yield put(deleteProductRatingSuccess(product))
   } catch (error) {
-    yield put(deleteProductRatingError('Product rating delete error!'))
+    yield put(deleteProductRatingError(productId))
   }
 }
 

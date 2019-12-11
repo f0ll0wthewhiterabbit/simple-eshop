@@ -5,6 +5,8 @@ import { changeProductRating, deleteProductRating } from '../../../../../store/a
 
 const mapStateToProps = state => ({
   currentUserId: state.auth.user.id,
+  ratingsLoadingList: state.products.ratingsLoadingList,
+  ratingsErrorList: state.products.ratingsErrorList,
 })
 
 const mapDispatchToProps = dispatch => ({

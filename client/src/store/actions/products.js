@@ -15,6 +15,7 @@ import {
   ADD_PRODUCT,
   ADD_PRODUCT_SUCCESS,
   ADD_PRODUCT_ERROR,
+  START_RATING_LOADING,
 } from '../../constants'
 
 export const fetchProducts = () => ({
@@ -60,9 +61,9 @@ export const changeProductRatingSuccess = product => ({
   payload: { product },
 })
 
-export const changeProductRatingError = error => ({
+export const changeProductRatingError = id => ({
   type: CHANGE_PRODUCT_RATING_ERROR,
-  payload: { error },
+  payload: { id },
 })
 
 export const deleteProductRating = productId => ({
@@ -75,9 +76,9 @@ export const deleteProductRatingSuccess = product => ({
   payload: { product },
 })
 
-export const deleteProductRatingError = error => ({
+export const deleteProductRatingError = id => ({
   type: DELETE_PRODUCT_RATING_ERROR,
-  payload: { error },
+  payload: { id },
 })
 
 export const addProduct = (productData, history) => ({
@@ -93,4 +94,9 @@ export const addProductSuccess = product => ({
 export const addProductError = error => ({
   type: ADD_PRODUCT_ERROR,
   payload: { error },
+})
+
+export const startRatingLoading = id => ({
+  type: START_RATING_LOADING,
+  payload: { id },
 })

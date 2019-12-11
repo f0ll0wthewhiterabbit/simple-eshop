@@ -90,7 +90,16 @@ export const DeleteButton = styled(IconButton)`
 
 export const RatingTitle = styled.span`
   color: #bdbdbd;
-  font-size: 13px;
+  font-size: 14px;
   width: 100%;
+  margin-left: 2px;
+`
+
+export const LoadingLabel = styled(Typography)`
+  color: #bdbdbd;
+  margin-left: 2px;
+`
+
+export const ErrorLabel = styled(Typography)`
   margin-left: 2px;
 `

@@ -32,7 +32,7 @@ const Table = ({
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = rows.filter(n => n.isRemovable).map(n => n.id)
+      const newSelecteds = rows.filter(n => n.isRemovable).map(n => n._id)
       setSelectedItems(newSelecteds)
       return
     }
