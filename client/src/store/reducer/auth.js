@@ -82,7 +82,7 @@ const auth = (state = initialState, action) => {
           role: DATABASE_FIELD_ROLE_GUEST,
           isRemovable: false,
         },
-        error: null,
+        error: '',
       }
 
     default:

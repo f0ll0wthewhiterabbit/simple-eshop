@@ -1,3 +1,3 @@
-import ErrorPage from './component'
+import ErrorPage from './container'
 
 export default ErrorPage

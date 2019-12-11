@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { MAIN_PAGE_PATH } from '../../../constants'
+import { MAIN_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH } from '../../../constants'
 import ErrorMessage from '../../global/ErrorMessage'
 import { Wrapper, LinkWrapper, BackLink } from './styles'
 
-const ErrorPage = ({ location }) => {
+const ErrorPage = ({ isAdmin, location }) => {
+  const defaultPagePath = isAdmin ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH
   let title
   let backTo
   let message
@@ -20,20 +21,28 @@ const ErrorPage = ({ location }) => {
     <Wrapper>
       <ErrorMessage title={title || 'Page not found'}>{message && message}</ErrorMessage>
       <LinkWrapper>
-        <BackLink to={backTo || MAIN_PAGE_PATH}>Go back</BackLink>
+        <BackLink to={backTo || defaultPagePath}>Go back</BackLink>
       </LinkWrapper>
     </Wrapper>
   )
 }
 
+ErrorPage.defaultProps = {
+  location: null,
+}
+
 ErrorPage.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      backTo: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  location: PropTypes.oneOfType([
+    PropTypes.shape({
+      state: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        backTo: PropTypes.string.isRequired,
+        message: PropTypes.string.isRequired,
+      }),
     }),
-  }),
+    PropTypes.oneOf([null]).isRequired,
+  ]),
 }
 
 export default ErrorPage

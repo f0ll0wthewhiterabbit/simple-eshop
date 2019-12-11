@@ -6,6 +6,7 @@ const ProductSchema = new Schema({
   title: {
     type: String,
     required: true,
+    trim: true,
   },
   price: {
     type: Number,
@@ -14,6 +15,7 @@ const ProductSchema = new Schema({
   description: {
     type: String,
     required: true,
+    trim: true,
   },
   tags: {
     type: [String],
@@ -22,6 +24,7 @@ const ProductSchema = new Schema({
   image: {
     type: String,
     required: true,
+    trim: true,
   },
   rating: {
     type: [
