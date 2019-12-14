@@ -46,14 +46,11 @@ const ProductSchema = new Schema(
       required: true,
       default: [],
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
   },
   {
     toObject: { getters: true },
     toJSON: { getters: true },
+    timestamps: true,
   }
 )
 

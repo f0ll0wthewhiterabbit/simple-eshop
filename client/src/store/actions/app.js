@@ -1,8 +1,8 @@
 import {
   SHOW_MODAL,
   CLOSE_MODAL,
-  START_LOADING,
-  STOP_LOADING,
+  START_PAGE_LOADING,
+  STOP_PAGE_LOADING,
   OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
 } from '../../constants'
@@ -16,12 +16,12 @@ export const closeModal = () => ({
   type: CLOSE_MODAL,
 })
 
-export const startLoading = () => ({
-  type: START_LOADING,
+export const startPageLoading = () => ({
+  type: START_PAGE_LOADING,
 })
 
-export const stopLoading = () => ({
-  type: STOP_LOADING,
+export const stopPageLoading = () => ({
+  type: STOP_PAGE_LOADING,
 })
 
 export const openSidebar = () => ({

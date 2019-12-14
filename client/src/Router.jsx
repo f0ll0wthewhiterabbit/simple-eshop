@@ -88,7 +88,7 @@ export default () => {
 
           <Route>
             <StandardLayout>
-              <ErrorPage />
+              <Redirect to={ERROR_PAGE_PATH} />
             </StandardLayout>
           </Route>
         </Switch>

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ProductAddForm from './component'
-import { addProduct } from '../../../../../store/actions'
+import { addProduct } from '../../../../../../store/actions'
 
 const mapStateToProps = state => ({
   error: state.products.error,

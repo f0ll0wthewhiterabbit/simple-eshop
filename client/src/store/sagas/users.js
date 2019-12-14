@@ -5,8 +5,8 @@ import { FETCH_USERS, DELETE_USERS, REQUEST_USER_DELETION } from '../../constant
 import {
   fetchUsersSuccess,
   fetchUsersError,
-  startLoading,
-  stopLoading,
+  startPageLoading,
+  stopPageLoading,
   deleteUsersSuccess,
   deleteUsersError,
   requestUserDeletionSuccess,
@@ -17,7 +17,7 @@ import {
 } from '../actions'
 
 function* fetchUsersSaga() {
-  yield put(startLoading())
+  yield put(startPageLoading())
 
   try {
     const response = yield API.get('/users')
@@ -28,11 +28,11 @@ function* fetchUsersSaga() {
     yield put(fetchUsersError('Users data not recieved!'))
   }
 
-  yield put(stopLoading())
+  yield put(stopPageLoading())
 }
 
 function* deleteUsersSaga() {
-  yield put(startLoading())
+  yield put(startPageLoading())
   yield put(closeModal())
 
   const selectedUsers = yield select(state => state.users.selected)
@@ -51,11 +51,11 @@ function* deleteUsersSaga() {
   }
 
   yield put(setSelectedUsers([]))
-  yield put(stopLoading())
+  yield put(stopPageLoading())
 }
 
 function* requestUserDeletionSaga() {
-  yield put(startLoading())
+  yield put(startPageLoading())
   yield put(closeModal())
 
   try {
@@ -69,7 +69,7 @@ function* requestUserDeletionSaga() {
     yield put(requestUserDeletionError('Users delete error!'))
   }
 
-  yield put(stopLoading())
+  yield put(stopPageLoading())
 }
 
 function* watchFetchUsers() {

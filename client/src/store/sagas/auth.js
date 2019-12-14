@@ -9,6 +9,7 @@ import {
   STORAGE_FIELD_TOKEN,
   ADMIN_PAGE_PATH,
   SIGN_IN_PAGE_PATH,
+  ERROR_PAGE_PATH,
 } from '../../constants'
 import {
   signUpSuccess,
@@ -101,7 +102,10 @@ function* signOutSaga(action) {
   yield localStorage.removeItem(STORAGE_FIELD_TOKEN)
   yield put(signOutSuccess())
 
-  if (location.pathname.indexOf(ADMIN_PAGE_PATH) !== -1) {
+  if (
+    location.pathname.indexOf(ADMIN_PAGE_PATH) !== -1 ||
+    location.pathname.indexOf(ERROR_PAGE_PATH) !== -1
+  ) {
     history.push(SIGN_IN_PAGE_PATH)
   }
 }

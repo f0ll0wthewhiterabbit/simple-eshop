@@ -74,8 +74,8 @@ const UserMenu = ({
           </IconWrapper>
           <ListItemText primary={userName} />
         </MenuItem>
-        {!isAdmin && (
-          <MenuItem onClick={handleDeleteAccountClick} disabled={isDeleteRequestSent}>
+        {!isAdmin && !isDeleteRequestSent && (
+          <MenuItem onClick={handleDeleteAccountClick}>
             <IconWrapper>
               <HighlightOffOutlinedIcon fontSize="small" />
             </IconWrapper>

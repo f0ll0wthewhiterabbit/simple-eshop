@@ -70,7 +70,9 @@ const ProductAddForm = ({ error, addProduct, history }) => {
       }}
       validationSchema={Yup.object({
         title: Yup.string().required('Title is required'),
-        price: Yup.number('Price shoud be a number').required('Price is required'),
+        price: Yup.string()
+          .matches(/^\d+(\.\d{1,2})?$/, 'Wrong price format')
+          .required('Price is required'),
         description: Yup.string().required('Description is required'),
         image: Yup.string()
           .url('Image should be a correct url address')
@@ -101,7 +103,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
               <TextField
                 name="price"
                 id="price"
-                label="Price"
+                label="Price, $"
                 variant="outlined"
                 required
                 fullWidth

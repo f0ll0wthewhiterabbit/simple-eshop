@@ -1,8 +1,8 @@
 import {
   SHOW_MODAL,
   CLOSE_MODAL,
-  START_LOADING,
-  STOP_LOADING,
+  START_PAGE_LOADING,
+  STOP_PAGE_LOADING,
   OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
 } from '../../constants'
@@ -38,13 +38,13 @@ const app = (state = initialState, action) => {
         },
       }
 
-    case START_LOADING:
+    case START_PAGE_LOADING:
       return {
         ...state,
         isLoading: true,
       }
 
-    case STOP_LOADING:
+    case STOP_PAGE_LOADING:
       return {
         ...state,
         isLoading: false,
