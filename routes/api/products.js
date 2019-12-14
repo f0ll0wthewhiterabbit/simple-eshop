@@ -7,9 +7,11 @@ const roles = require('../../constants/roles')
 
 const router = express.Router()
 
-// @route   GET api/products
-// @desc    Get products
-// @access  Private
+/**
+ * @route   GET api/products
+ * @desc    Get products
+ * @access  Private
+ */
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id)
@@ -27,9 +29,11 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
-// @route   POST api/products
-// @desc    Create new post
-// @access  Private
+/**
+ * @route   POST api/products
+ * @desc    Create new post
+ * @access  Private
+ */
 router.post(
   '/',
   [
@@ -39,7 +43,11 @@ router.post(
       .isEmpty(),
     check('price', 'Please include a numeric price')
       .exists()
-      .isNumeric(),
+      .withMessage('Please include price')
+      .isNumeric()
+      .withMessage('Price should be numeric')
+      .matches(/^\d+(\.\d{1,2})?$/)
+      .withMessage('Price can be float and include no more than two characters after dot'),
     check('description', 'Description is required')
       .not()
       .isEmpty(),
@@ -73,7 +81,7 @@ router.post(
       })
       await product.save()
 
-      return res.json(product)
+      return res.status(201).json(product)
     } catch (err) {
       console.error(err.message)
       return res.status(500).send('Server error')
@@ -81,9 +89,11 @@ router.post(
   }
 )
 
-// @route   PATCH api/products
-// @desc    Update post
-// @access  Private
+/**
+ * @route   PATCH api/products
+ * @desc    Update post
+ * @access  Private
+ */
 router.patch(
   '/:id',
   [
@@ -193,9 +203,11 @@ router.patch(
   }
 )
 
-// @route   Delete api/products
-// @desc    Delete products
-// @access  Private
+/**
+ * @route   Delete api/products
+ * @desc    Delete products
+ * @access  Private
+ */
 router.delete('/', [auth, body().isArray()], async (req, res) => {
   const errors = validationResult(req)
 
@@ -211,13 +223,13 @@ router.delete('/', [auth, body().isArray()], async (req, res) => {
     }
 
     const idListToDelete = req.body
-    const productsAmount = await Product.count({ _id: { $in: idListToDelete }, isRemovable: true })
+    const productsAmount = await Product.countDocuments({ _id: { $in: idListToDelete } })
 
     if (idListToDelete.length !== productsAmount) {
       return res.status(400).json({ errors: [{ msg: 'The requested products cannot be deleted' }] })
     }
 
-    const result = await Product.deleteMany({ _id: { $in: idListToDelete }, isRemovable: true })
+    const result = await Product.deleteMany({ _id: { $in: idListToDelete } })
 
     return res.json({ deletedCount: result.deletedCount })
   } catch (err) {

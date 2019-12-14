@@ -8,9 +8,11 @@ const roles = require('../../constants/roles')
 
 const router = express.Router()
 
-// @route   GET api/users
-// @desc    Get users
-// @access  Private
+/**
+ * @route   GET api/users
+ * @desc    Get users
+ * @access  Private
+ */
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id)
@@ -28,9 +30,11 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
-// @route   POST api/users
-// @desc    Register user
-// @access  Public
+/**
+ * @route   POST api/users
+ * @desc    Register user
+ * @access  Public
+ */
 router.post(
   '/',
   [
@@ -85,7 +89,7 @@ router.post(
             throw err
           }
 
-          return res.json({ token })
+          return res.status(201).json({ token })
         }
       )
     } catch (err) {
@@ -95,9 +99,11 @@ router.post(
   }
 )
 
-// @route   PATCH api/users
-// @desc    Change isRemovable user field to true
-// @access  Private
+/**
+ * @route   PATCH api/users
+ * @desc    Change isRemovable user field to true
+ * @access  Private
+ */
 router.patch('/', auth, async (req, res) => {
   try {
     const userId = req.user.id
@@ -126,9 +132,11 @@ router.patch('/', auth, async (req, res) => {
   }
 })
 
-// @route   Delete api/users
-// @desc    Delete users
-// @access  Private
+/**
+ * @route   Delete api/users
+ * @desc    Delete users
+ * @access  Private
+ */
 router.delete('/', [auth, body().isArray()], async (req, res) => {
   const errors = validationResult(req)
 
@@ -144,7 +152,10 @@ router.delete('/', [auth, body().isArray()], async (req, res) => {
     }
 
     const idListToDelete = req.body
-    const usersAmount = await User.count({ _id: { $in: idListToDelete }, isRemovable: true })
+    const usersAmount = await User.countDocuments({
+      _id: { $in: idListToDelete },
+      isRemovable: true,
+    })
 
     if (idListToDelete.length !== usersAmount) {
       return res.status(400).json({ errors: [{ msg: 'The requested users cannot be deleted' }] })

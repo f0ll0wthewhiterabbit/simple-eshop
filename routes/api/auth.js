@@ -7,9 +7,11 @@ const User = require('../../models/User')
 
 const router = express.Router()
 
-// @route   GET api/auth
-// @desc    Validate token and get user
-// @access  Private
+/**
+ * @route   GET api/auth
+ * @desc    Validate token and get user
+ * @access  Private
+ */
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password')
@@ -20,9 +22,11 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
-// @route   POST api/auth
-// @desc    Authenticate user & get token
-// @access  Public
+/**
+ * @route   POST api/auth
+ * @desc    Authenticate user & get token
+ * @access  Public
+ */
 router.post(
   '/',
   [
@@ -42,13 +46,13 @@ router.post(
       const user = await User.findOne({ email })
 
       if (!user) {
-        return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] })
+        return res.status(400).json({ errors: [{ msg: 'Unable to login' }] })
       }
 
       const isPasswordMatch = await bcrypt.compare(password, user.password)
 
       if (!isPasswordMatch) {
-        return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] })
+        return res.status(400).json({ errors: [{ msg: 'Unable to login' }] })
       }
 
       const payload = {

@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 
+import formatPrice from '../../../utils/formatPrice'
 import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
 
 const Table = ({
@@ -28,11 +29,14 @@ const Table = ({
 
   const numSelected = selectedItems.length
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
-  const removableRowsCount = rows.filter(row => row.isRemovable).length
+  const removableRowsCount = rows.filter(row => ('isRemovable' in row ? row.isRemovable : true))
+    .length
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = rows.filter(n => n.isRemovable).map(n => n._id)
+      const newSelecteds = rows
+        .filter(n => ('isRemovable' in n ? n.isRemovable : true))
+        .map(n => n._id)
       setSelectedItems(newSelecteds)
       return
     }
@@ -100,6 +104,10 @@ const Table = ({
       return averageRating
     }
 
+    if (id === 'price') {
+      return formatPrice(row[id])
+    }
+
     return row[id]
   }
 
@@ -163,11 +171,12 @@ const Table = ({
                 .map((row, index) => {
                   const isItemSelected = isSelected(row._id)
                   const labelId = `enhanced-table-checkbox-${index}`
+                  const isRowRemovable = 'isRemovable' in row ? row.isRemovable : true
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row._id, row.isRemovable)}
+                      onClick={event => handleClick(event, row._id, isRowRemovable)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -182,7 +191,7 @@ const Table = ({
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
-                          disabled={!row.isRemovable}
+                          disabled={!isRowRemovable}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>

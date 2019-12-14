@@ -4,6 +4,7 @@ import { Typography, Chip } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import DeleteIcon from '@material-ui/icons/Delete'
 
+import formatPrice from '../../../../../utils/formatPrice'
 import {
   Wrapper,
   ImageWrapper,
@@ -85,7 +86,7 @@ const ProductCard = ({
           {title}
         </Title>
         <PriceButton size="small" color="primary" startIcon={<ShoppingCartOutlinedIcon />} disabled>
-          {price} $
+          {formatPrice(price)}
         </PriceButton>
         <Typography>{description}</Typography>
       </Content>
@@ -125,7 +126,7 @@ ProductCard.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     rating: PropTypes.arrayOf(
       PropTypes.shape({
         userId: PropTypes.string.isRequired,
