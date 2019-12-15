@@ -1,102 +1,43 @@
-import {
-  FETCH_PRODUCTS,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_ERROR,
-  SET_SELECTED_PRODUCTS,
-  DELETE_PRODUCTS,
-  DELETE_PRODUCTS_SUCCESS,
-  DELETE_PRODUCTS_ERROR,
-  CHANGE_PRODUCT_RATING,
-  CHANGE_PRODUCT_RATING_SUCCESS,
-  CHANGE_PRODUCT_RATING_ERROR,
-  DELETE_PRODUCT_RATING,
-  DELETE_PRODUCT_RATING_SUCCESS,
-  DELETE_PRODUCT_RATING_ERROR,
-  ADD_PRODUCT,
-  ADD_PRODUCT_SUCCESS,
-  ADD_PRODUCT_ERROR,
-  START_RATING_LOADING,
-} from '../../constants'
+import { createActions } from 'redux-actions'
 
-export const fetchProducts = () => ({
-  type: FETCH_PRODUCTS,
+const { products } = createActions({
+  PRODUCTS: {
+    FETCH_PRODUCTS: undefined,
+    FETCH_PRODUCTS_SUCCESS: productsList => ({ productsList }),
+    FETCH_PRODUCTS_ERROR: error => ({ error }),
+    SET_SELECTED_PRODUCTS: selectedProductsList => ({ selectedProductsList }),
+    DELETE_PRODUCTS: undefined,
+    DELETE_PRODUCTS_SUCCESS: deletedProducts => ({ deletedProducts }),
+    DELETE_PRODUCTS_ERROR: error => ({ error }),
+    CHANGE_PRODUCT_RATING: ratingData => ({ ratingData }),
+    CHANGE_PRODUCT_RATING_SUCCESS: product => ({ product }),
+    CHANGE_PRODUCT_RATING_ERROR: id => ({ id }),
+    DELETE_PRODUCT_RATING: productId => ({ productId }),
+    DELETE_PRODUCT_RATING_SUCCESS: product => ({ product }),
+    DELETE_PRODUCT_RATING_ERROR: id => ({ id }),
+    ADD_PRODUCT: (productData, history) => ({ productData, history }),
+    ADD_PRODUCT_SUCCESS: product => ({ product }),
+    ADD_PRODUCT_ERROR: error => ({ error }),
+    START_RATING_LOADING: id => ({ id }),
+  },
 })
 
-export const fetchProductsSuccess = productsList => ({
-  type: FETCH_PRODUCTS_SUCCESS,
-  payload: { productsList },
-})
-
-export const fetchProductsError = error => ({
-  type: FETCH_PRODUCTS_ERROR,
-  payload: { error },
-})
-
-export const setSelectedProducts = selectedProductsList => ({
-  type: SET_SELECTED_PRODUCTS,
-  payload: { selectedProductsList },
-})
-
-export const deleteProducts = () => ({
-  type: DELETE_PRODUCTS,
-})
-
-export const deleteProductsSuccess = deletedProducts => ({
-  type: DELETE_PRODUCTS_SUCCESS,
-  payload: { deletedProducts },
-})
-
-export const deleteProductsError = error => ({
-  type: DELETE_PRODUCTS_ERROR,
-  payload: { error },
-})
-
-export const changeProductRating = ratingData => ({
-  type: CHANGE_PRODUCT_RATING,
-  payload: { ratingData },
-})
-
-export const changeProductRatingSuccess = product => ({
-  type: CHANGE_PRODUCT_RATING_SUCCESS,
-  payload: { product },
-})
-
-export const changeProductRatingError = id => ({
-  type: CHANGE_PRODUCT_RATING_ERROR,
-  payload: { id },
-})
-
-export const deleteProductRating = productId => ({
-  type: DELETE_PRODUCT_RATING,
-  payload: { productId },
-})
-
-export const deleteProductRatingSuccess = product => ({
-  type: DELETE_PRODUCT_RATING_SUCCESS,
-  payload: { product },
-})
-
-export const deleteProductRatingError = id => ({
-  type: DELETE_PRODUCT_RATING_ERROR,
-  payload: { id },
-})
-
-export const addProduct = (productData, history) => ({
-  type: ADD_PRODUCT,
-  payload: { productData, history },
-})
-
-export const addProductSuccess = product => ({
-  type: ADD_PRODUCT_SUCCESS,
-  payload: { product },
-})
-
-export const addProductError = error => ({
-  type: ADD_PRODUCT_ERROR,
-  payload: { error },
-})
-
-export const startRatingLoading = id => ({
-  type: START_RATING_LOADING,
-  payload: { id },
-})
+export const {
+  fetchProducts,
+  fetchProductsSuccess,
+  fetchProductsError,
+  setSelectedProducts,
+  deleteProducts,
+  deleteProductsSuccess,
+  deleteProductsError,
+  changeProductRating,
+  changeProductRatingSuccess,
+  changeProductRatingError,
+  deleteProductRating,
+  deleteProductRatingSuccess,
+  deleteProductRatingError,
+  addProduct,
+  addProductSuccess,
+  addProductError,
+  startRatingLoading,
+} = products

@@ -2,10 +2,6 @@ import { takeEvery, put } from 'redux-saga/effects'
 
 import API from '../../utils/api'
 import {
-  SIGN_UP,
-  AUTHENTICATE,
-  SIGN_IN,
-  SIGN_OUT,
   STORAGE_FIELD_TOKEN,
   ADMIN_PAGE_PATH,
   SIGN_IN_PAGE_PATH,
@@ -18,8 +14,11 @@ import {
   authenticateError,
   signInSuccess,
   signInError,
-  authenticate,
   signOutSuccess,
+  authenticate,
+  signUp,
+  signIn,
+  signOut,
 } from '../actions'
 import setAuthToken from '../../utils/setAuthToken'
 
@@ -111,19 +110,19 @@ function* signOutSaga(action) {
 }
 
 function* watchAuthenticate() {
-  yield takeEvery(AUTHENTICATE, authenticateSaga)
+  yield takeEvery(authenticate.toString(), authenticateSaga)
 }
 
 function* watchSignUp() {
-  yield takeEvery(SIGN_UP, signUpSaga)
+  yield takeEvery(signUp.toString(), signUpSaga)
 }
 
 function* watchSignIn() {
-  yield takeEvery(SIGN_IN, signInSaga)
+  yield takeEvery(signIn.toString(), signInSaga)
 }
 
 function* watchSignOut() {
-  yield takeEvery(SIGN_OUT, signOutSaga)
+  yield takeEvery(signOut.toString(), signOutSaga)
 }
 
 export { watchAuthenticate, watchSignUp, watchSignIn, watchSignOut }

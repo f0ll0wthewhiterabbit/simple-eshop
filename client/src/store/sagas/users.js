@@ -1,7 +1,6 @@
 import { takeEvery, put, select } from 'redux-saga/effects'
 
 import API from '../../utils/api'
-import { FETCH_USERS, DELETE_USERS, REQUEST_USER_DELETION } from '../../constants'
 import {
   fetchUsersSuccess,
   fetchUsersError,
@@ -14,6 +13,9 @@ import {
   authenticateSuccess,
   closeModal,
   setSelectedUsers,
+  fetchUsers,
+  deleteUsers,
+  requestUserDeletion,
 } from '../actions'
 
 function* fetchUsersSaga() {
@@ -73,15 +75,15 @@ function* requestUserDeletionSaga() {
 }
 
 function* watchFetchUsers() {
-  yield takeEvery(FETCH_USERS, fetchUsersSaga)
+  yield takeEvery(fetchUsers.toString(), fetchUsersSaga)
 }
 
 function* watchDeleteUsers() {
-  yield takeEvery(DELETE_USERS, deleteUsersSaga)
+  yield takeEvery(deleteUsers.toString(), deleteUsersSaga)
 }
 
 function* watchRequestUserDeletion() {
-  yield takeEvery(REQUEST_USER_DELETION, requestUserDeletionSaga)
+  yield takeEvery(requestUserDeletion.toString(), requestUserDeletionSaga)
 }
 
 export { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion }

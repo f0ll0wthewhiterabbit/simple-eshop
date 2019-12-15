@@ -1,11 +1,13 @@
+import { handleActions } from 'redux-actions'
+
 import {
-  SHOW_MODAL,
-  CLOSE_MODAL,
-  START_PAGE_LOADING,
-  STOP_PAGE_LOADING,
-  OPEN_SIDEBAR,
-  CLOSE_SIDEBAR,
-} from '../../constants'
+  showModal,
+  closeModal,
+  startPageLoading,
+  stopPageLoading,
+  openSidebar,
+  closeSidebar,
+} from '../actions'
 
 const initialState = {
   isLoading: false,
@@ -16,55 +18,42 @@ const initialState = {
   isSidebarOpened: false,
 }
 
-const app = (state = initialState, action) => {
-  switch (action.type) {
-    case SHOW_MODAL:
-      return {
-        ...state,
-        modal: {
-          ...state.modal,
-          isOpened: true,
-          storeFieldName: action.payload.storeFieldNameForModal,
-        },
-      }
-
-    case CLOSE_MODAL:
-      return {
-        ...state,
-        modal: {
-          ...state.modal,
-          isOpened: false,
-          storeFieldName: '',
-        },
-      }
-
-    case START_PAGE_LOADING:
-      return {
-        ...state,
-        isLoading: true,
-      }
-
-    case STOP_PAGE_LOADING:
-      return {
-        ...state,
-        isLoading: false,
-      }
-
-    case OPEN_SIDEBAR:
-      return {
-        ...state,
-        isSidebarOpened: true,
-      }
-
-    case CLOSE_SIDEBAR:
-      return {
-        ...state,
-        isSidebarOpened: false,
-      }
-
-    default:
-      return state
-  }
-}
+const app = handleActions(
+  {
+    [showModal]: (state, action) => ({
+      ...state,
+      modal: {
+        ...state.modal,
+        isOpened: true,
+        storeFieldName: action.payload.storeFieldNameForModal,
+      },
+    }),
+    [closeModal]: state => ({
+      ...state,
+      modal: {
+        ...state.modal,
+        isOpened: false,
+        storeFieldName: '',
+      },
+    }),
+    [startPageLoading]: state => ({
+      ...state,
+      isLoading: true,
+    }),
+    [stopPageLoading]: state => ({
+      ...state,
+      isLoading: false,
+    }),
+    [openSidebar]: state => ({
+      ...state,
+      isSidebarOpened: true,
+    }),
+    [closeSidebar]: state => ({
+      ...state,
+      isSidebarOpened: false,
+    }),
+  },
+  initialState
+)
 
 export default app

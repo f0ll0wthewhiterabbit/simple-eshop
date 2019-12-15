@@ -1,14 +1,7 @@
 import { takeEvery, put, select } from 'redux-saga/effects'
 
 import API from '../../utils/api'
-import {
-  FETCH_PRODUCTS,
-  CHANGE_PRODUCT_RATING,
-  DELETE_PRODUCT_RATING,
-  ADD_PRODUCT,
-  ADMIN_PRODUCTS_PAGE_PATH,
-  DELETE_PRODUCTS,
-} from '../../constants'
+import { ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 import {
   fetchProductsSuccess,
   fetchProductsError,
@@ -25,6 +18,11 @@ import {
   closeModal,
   setSelectedProducts,
   startRatingLoading,
+  fetchProducts,
+  changeProductRating,
+  deleteProductRating,
+  addProduct,
+  deleteProducts,
 } from '../actions'
 
 function* fetchProductsSaga() {
@@ -133,23 +131,23 @@ function* deleteProductsSaga() {
 }
 
 function* watchFetchProducts() {
-  yield takeEvery(FETCH_PRODUCTS, fetchProductsSaga)
+  yield takeEvery(fetchProducts.toString(), fetchProductsSaga)
 }
 
 function* watchChangeProductRating() {
-  yield takeEvery(CHANGE_PRODUCT_RATING, changeProductRatingSaga)
+  yield takeEvery(changeProductRating.toString(), changeProductRatingSaga)
 }
 
 function* watchDeleteProductRating() {
-  yield takeEvery(DELETE_PRODUCT_RATING, deleteProductRatingSaga)
+  yield takeEvery(deleteProductRating.toString(), deleteProductRatingSaga)
 }
 
 function* watchAddProduct() {
-  yield takeEvery(ADD_PRODUCT, addProductSaga)
+  yield takeEvery(addProduct.toString(), addProductSaga)
 }
 
 function* watchDeleteProducts() {
-  yield takeEvery(DELETE_PRODUCTS, deleteProductsSaga)
+  yield takeEvery(deleteProducts.toString(), deleteProductsSaga)
 }
 
 export {

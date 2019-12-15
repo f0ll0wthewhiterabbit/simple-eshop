@@ -1,12 +1,14 @@
+import { handleActions, combineActions } from 'redux-actions'
+
 import {
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_ERROR,
-  DELETE_USERS_SUCCESS,
-  DELETE_USERS_ERROR,
-  REQUEST_USER_DELETION_SUCCESS,
-  REQUEST_USER_DELETION_ERROR,
-  SET_SELECTED_USERS,
-} from '../../constants'
+  fetchUsersSuccess,
+  fetchUsersError,
+  setSelectedUsers,
+  deleteUsersSuccess,
+  deleteUsersError,
+  requestUserDeletionSuccess,
+  requestUserDeletionError,
+} from '../actions'
 
 const initialState = {
   data: [],
@@ -14,50 +16,40 @@ const initialState = {
   error: null,
 }
 
-const users = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCH_USERS_SUCCESS:
-      return {
-        ...state,
-        data: [...action.payload.usersList],
-        error: null,
-      }
-
-    case DELETE_USERS_SUCCESS:
-      return {
-        ...state,
-        data: state.data.filter(
-          user => action.payload.deletedUsers.findIndex(it => it === user._id) === -1
-        ),
-        error: null,
-      }
-
-    case REQUEST_USER_DELETION_SUCCESS:
-      return {
-        ...state,
-        data: state.data.map(user =>
-          user._id === action.payload.userId ? { ...user, isRemovable: true } : user
-        ),
-        error: null,
-      }
-
-    case FETCH_USERS_ERROR:
-    case DELETE_USERS_ERROR:
-    case REQUEST_USER_DELETION_ERROR:
-      return {
-        ...state,
-        error: action.payload.error,
-      }
-
-    case SET_SELECTED_USERS:
-      return {
-        ...state,
-        selected: [...action.payload.selectedUsersList],
-      }
-
-    default:
-      return state
-  }
-}
+const users = handleActions(
+  {
+    [fetchUsersSuccess]: (state, action) => ({
+      ...state,
+      data: [...action.payload.usersList],
+      error: null,
+    }),
+    [deleteUsersSuccess]: (state, action) => ({
+      ...state,
+      data: state.data.filter(
+        user => action.payload.deletedUsers.findIndex(it => it === user._id) === -1
+      ),
+      error: null,
+    }),
+    [requestUserDeletionSuccess]: (state, action) => ({
+      ...state,
+      data: state.data.map(user =>
+        user._id === action.payload.userId ? { ...user, isRemovable: true } : user
+      ),
+      error: null,
+    }),
+    [combineActions(fetchUsersError, deleteUsersError, requestUserDeletionError)]: (
+      state,
+      action
+    ) => ({
+      ...state,
+      error: action.payload.error,
+    }),
+    [setSelectedUsers]: (state, action) => ({
+      ...state,
+      selected: [...action.payload.selectedUsersList],
+    }),
+  },
+  initialState
+)
 
 export default users
