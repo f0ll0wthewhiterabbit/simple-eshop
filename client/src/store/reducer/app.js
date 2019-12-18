@@ -1,17 +1,9 @@
 import { handleActions } from 'redux-actions'
 import { fromJS } from 'immutable'
 
-import {
-  showModal,
-  closeModal,
-  startPageLoading,
-  stopPageLoading,
-  openSidebar,
-  closeSidebar,
-} from '../actions'
+import { showModal, closeModal, openSidebar, closeSidebar } from '../actions'
 
 const initialState = fromJS({
-  isLoading: false,
   modal: {
     isOpened: false,
     storeFieldName: '',
@@ -35,8 +27,6 @@ const app = handleActions(
           storeFieldName: '',
         },
       }),
-    [startPageLoading]: state => state.set('isLoading', true),
-    [stopPageLoading]: state => state.set('isLoading', false),
     [openSidebar]: state => state.set('isSidebarOpened', true),
     [closeSidebar]: state => state.set('isSidebarOpened', false),
   },

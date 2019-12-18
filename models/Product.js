@@ -54,10 +54,10 @@ const ProductSchema = new Schema(
   }
 )
 
-ProductSchema.set('toJSON', { virtuals: false })
+ProductSchema.set('toJSON', { virtuals: true })
 
 // Price getter
-ProductSchema.path('price').get(num => (num / 100).toFixed(2))
+ProductSchema.path('price').get(num => Number((num / 100).toFixed(2)))
 
 // Price setter
 ProductSchema.path('price').set(num => num * 100)

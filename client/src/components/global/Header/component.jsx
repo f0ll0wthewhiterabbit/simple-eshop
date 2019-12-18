@@ -5,9 +5,9 @@ import MenuIcon from '@material-ui/icons/Menu'
 
 import Logo from './components/Logo'
 import UserMenu from './components/UserMenu'
-import { Wrapper, MenuButton } from './styles'
+import { Wrapper, MenuButton, WarningMessage } from './styles'
 
-const Header = ({ openSidebar, isAdmin, isAuthenticated }) => {
+const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) => {
   const handleMenuButtonClick = () => {
     openSidebar()
   }
@@ -22,6 +22,11 @@ const Header = ({ openSidebar, isAdmin, isAuthenticated }) => {
             </MenuButton>
           )}
           <Logo />
+          {isAuthenticated && isDeleteRequestSent && (
+            <WarningMessage variant="body2" color="error">
+              Unfortunately, your account will be deleted soon.
+            </WarningMessage>
+          )}
           {isAuthenticated && <UserMenu />}
         </Toolbar>
       </Container>
@@ -33,6 +38,7 @@ Header.propTypes = {
   openSidebar: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  isDeleteRequestSent: PropTypes.bool.isRequired,
 }
 
 export default Header

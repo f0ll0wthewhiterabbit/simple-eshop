@@ -4,7 +4,7 @@ import UsersPage from './component'
 import { fetchUsers } from '../../../../store/actions'
 
 const mapStateToProps = state => ({
-  isLoading: state.getIn(['app', 'isLoading']),
+  isLoading: state.getIn(['users', 'isLoading']),
   error: state.getIn(['users', 'error']),
 })
 

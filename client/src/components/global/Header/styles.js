@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { IconButton, AppBar } from '@material-ui/core'
+import { IconButton, AppBar, Typography } from '@material-ui/core'
 
 export const Wrapper = styled(AppBar)`
   height: ${props => props.theme.sizing.headerHeight.xs};
@@ -21,4 +21,8 @@ export const MenuButton = styled(IconButton)`
   ${props => props.theme.breakpoints.up('lg')} {
     display: none;
   }
+`
+
+export const WarningMessage = styled(Typography)`
+  margin-right: 12px;
 `

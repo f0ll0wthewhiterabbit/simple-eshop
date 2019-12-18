@@ -6,8 +6,6 @@ import { ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 import {
   fetchProductsSuccess,
   fetchProductsError,
-  startPageLoading,
-  stopPageLoading,
   changeProductRatingSuccess,
   changeProductRatingError,
   deleteProductRatingSuccess,
@@ -27,8 +25,6 @@ import {
 } from '../actions'
 
 function* fetchProductsSaga() {
-  yield put(startPageLoading())
-
   try {
     const response = yield API.get('/products')
     const productsList = response.data
@@ -37,8 +33,6 @@ function* fetchProductsSaga() {
   } catch (error) {
     yield put(fetchProductsError('Products data not recieved!'))
   }
-
-  yield put(stopPageLoading())
 }
 
 function* changeProductRatingSaga(action) {
@@ -86,8 +80,6 @@ function* deleteProductRatingSaga(action) {
 }
 
 function* addProductSaga(action) {
-  yield put(startPageLoading())
-
   const { history } = action.payload
   const config = {
     headers: {
@@ -104,12 +96,10 @@ function* addProductSaga(action) {
     history.push(ADMIN_PRODUCTS_PAGE_PATH)
   } catch (error) {
     yield put(addProductError('Product add error!'))
-    yield put(stopPageLoading())
   }
 }
 
 function* deleteProductsSaga() {
-  yield put(startPageLoading())
   yield put(closeModal())
 
   const selectedProducts = yield select(state => state.getIn(['products', 'selected']))
@@ -128,7 +118,6 @@ function* deleteProductsSaga() {
   }
 
   yield put(setSelectedProducts(List()))
-  yield put(stopPageLoading())
 }
 
 function* watchFetchProducts() {

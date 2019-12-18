@@ -2,11 +2,14 @@ import { handleActions, combineActions } from 'redux-actions'
 import { fromJS } from 'immutable'
 
 import {
+  fetchUsers,
   fetchUsersSuccess,
   fetchUsersError,
   setSelectedUsers,
+  deleteUsers,
   deleteUsersSuccess,
   deleteUsersError,
+  requestUserDeletion,
   requestUserDeletionSuccess,
   requestUserDeletionError,
 } from '../actions'
@@ -14,14 +17,18 @@ import {
 const initialState = fromJS({
   data: [],
   selected: [],
+  isLoading: false,
   error: null,
 })
 
 const users = handleActions(
   {
+    [combineActions(fetchUsers, deleteUsers, requestUserDeletion)]: state =>
+      state.set('isLoading', true),
     [fetchUsersSuccess]: (state, action) =>
       state.merge({
         data: fromJS(action.payload.usersList),
+        isLoading: false,
         error: null,
       }),
     [deleteUsersSuccess]: (state, action) =>
@@ -31,7 +38,10 @@ const users = handleActions(
             user => action.payload.deletedUsers.findIndex(it => it === user.get('_id')) === -1
           )
         )
-        .set('error', null),
+        .merge({
+          isLoading: false,
+          error: null,
+        }),
     [requestUserDeletionSuccess]: (state, action) =>
       state
         .update('data', data =>
@@ -39,11 +49,18 @@ const users = handleActions(
             user.get('_id') === action.payload.userId ? user.set('isRemovable', true) : user
           )
         )
-        .set('error', null),
+        .merge({
+          isLoading: false,
+          error: null,
+        }),
     [combineActions(fetchUsersError, deleteUsersError, requestUserDeletionError)]: (
       state,
       action
-    ) => state.set('error', action.payload.error),
+    ) =>
+      state.merge({
+        isLoading: false,
+        error: action.payload.error,
+      }),
     [setSelectedUsers]: (state, action) => state.set('selected', action.payload.selectedUsersList),
   },
   initialState

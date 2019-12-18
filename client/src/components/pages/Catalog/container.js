@@ -6,7 +6,7 @@ import { fetchProducts } from '../../../store/actions'
 const mapStateToProps = state => ({
   products: state.getIn(['products', 'data']),
   error: state.getIn(['products', 'error']),
-  isLoading: state.getIn(['app', 'isLoading']),
+  isLoading: state.getIn(['products', 'isLoading']),
 })
 
 const mapDispatchToProps = dispatch => ({
