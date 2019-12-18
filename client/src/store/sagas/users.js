@@ -1,4 +1,5 @@
 import { takeEvery, put, select } from 'redux-saga/effects'
+import { List } from 'immutable'
 
 import API from '../../utils/api'
 import {
@@ -37,7 +38,7 @@ function* deleteUsersSaga() {
   yield put(startPageLoading())
   yield put(closeModal())
 
-  const selectedUsers = yield select(state => state.users.selected)
+  const selectedUsers = yield select(state => state.getIn(['users', 'selected']))
   const config = {
     data: JSON.stringify(selectedUsers),
     headers: {
@@ -52,7 +53,7 @@ function* deleteUsersSaga() {
     yield put(deleteUsersError('Users delete error!'))
   }
 
-  yield put(setSelectedUsers([]))
+  yield put(setSelectedUsers(List()))
   yield put(stopPageLoading())
 }
 

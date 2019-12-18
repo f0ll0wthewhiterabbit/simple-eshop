@@ -4,8 +4,8 @@ import App from './component'
 import { authenticate } from '../../../store/actions'
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  error: state.auth.error,
+  isAuthenticated: state.getIn(['auth', 'isAuthenticated']),
+  error: state.getIn(['auth', 'error']),
 })
 
 const mapDispatchToProps = dispatch => ({

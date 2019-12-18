@@ -1,4 +1,5 @@
 import { handleActions, combineActions } from 'redux-actions'
+import { fromJS } from 'immutable'
 
 import {
   fetchProductsSuccess,
@@ -15,63 +16,61 @@ import {
   startRatingLoading,
 } from '../actions'
 
-const initialState = {
+const initialState = fromJS({
   data: [],
   selected: [],
   ratingsLoadingList: [],
   ratingsErrorList: [],
   error: null,
-}
+})
 
 const products = handleActions(
   {
-    [fetchProductsSuccess]: (state, action) => ({
-      ...state,
-      data: [...action.payload.productsList],
-      error: null,
-    }),
-    [deleteProductsSuccess]: (state, action) => ({
-      ...state,
-      data: state.data.filter(
-        product => action.payload.deletedProducts.findIndex(it => it === product._id) === -1
+    [fetchProductsSuccess]: (state, action) =>
+      state.merge({
+        data: fromJS(action.payload.productsList),
+        error: null,
+      }),
+    [deleteProductsSuccess]: (state, action) =>
+      state
+        .update('data', data =>
+          data.filter(
+            product =>
+              action.payload.deletedProducts.findIndex(it => it === product.get('_id')) === -1
+          )
+        )
+        .set('error', null),
+    [addProductSuccess]: (state, action) =>
+      state.update('data', data => data.push(fromJS(action.payload.product))).set('error', null),
+    [combineActions(changeProductRatingSuccess, deleteProductRatingSuccess)]: (state, action) =>
+      state
+        .update('data', data =>
+          data.map(product =>
+            product.get('_id') !== action.payload.product._id
+              ? product
+              : fromJS(action.payload.product)
+          )
+        )
+        .update('ratingsLoadingList', ratingsLoadingList =>
+          ratingsLoadingList.filter(id => id !== action.payload.product._id)
+        )
+        .update('ratingsErrorList', ratingsErrorList =>
+          ratingsErrorList.filter(id => id !== action.payload.product._id)
+        ),
+    [combineActions(fetchProductsError, deleteProductsError, addProductError)]: (state, action) =>
+      state.set('error', action.payload.error),
+    [combineActions(changeProductRatingError, deleteProductRatingError)]: (state, action) =>
+      state
+        .update('ratingsLoadingList', ratingsLoadingList =>
+          ratingsLoadingList.filter(id => id !== action.payload.id)
+        )
+        .update('ratingsErrorList', ratingsErrorList => ratingsErrorList.push(action.payload.id)),
+    [setSelectedProducts]: (state, action) =>
+      state.set('selected', action.payload.selectedProductsList),
+    [startRatingLoading]: (state, action) =>
+      state.update('ratingsLoadingList', ratingsLoadingList =>
+        ratingsLoadingList.push(action.payload.id)
       ),
-      error: null,
-    }),
-    [addProductSuccess]: (state, action) => ({
-      ...state,
-      data: [...state.data, action.payload.product],
-      error: null,
-    }),
-    [combineActions(changeProductRatingSuccess, deleteProductRatingSuccess)]: (state, action) => ({
-      ...state,
-      data: state.data.map(product =>
-        product._id !== action.payload.product._id
-          ? product
-          : { ...product, ...action.payload.product }
-      ),
-      ratingsLoadingList: state.ratingsLoadingList.filter(id => id !== action.payload.product._id),
-      ratingsErrorList: state.ratingsErrorList.filter(id => id !== action.payload.product._id),
-    }),
-    [combineActions(fetchProductsError, deleteProductsError, addProductError)]: (
-      state,
-      action
-    ) => ({
-      ...state,
-      error: action.payload.error,
-    }),
-    [combineActions(changeProductRatingError, deleteProductRatingError)]: (state, action) => ({
-      ...state,
-      ratingsLoadingList: state.ratingsLoadingList.filter(id => id !== action.payload.id),
-      ratingsErrorList: [...state.ratingsErrorList, action.payload.id],
-    }),
-    [setSelectedProducts]: (state, action) => ({
-      ...state,
-      selected: [...action.payload.selectedProductsList],
-    }),
-    [startRatingLoading]: (state, action) => ({
-      ...state,
-      ratingsLoadingList: [...state.ratingsLoadingList, action.payload.id],
-    }),
   },
   initialState
 )

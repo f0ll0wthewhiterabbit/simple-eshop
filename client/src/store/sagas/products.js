@@ -1,4 +1,5 @@
 import { takeEvery, put, select } from 'redux-saga/effects'
+import { List } from 'immutable'
 
 import API from '../../utils/api'
 import { ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
@@ -111,7 +112,7 @@ function* deleteProductsSaga() {
   yield put(startPageLoading())
   yield put(closeModal())
 
-  const selectedProducts = yield select(state => state.products.selected)
+  const selectedProducts = yield select(state => state.getIn(['products', 'selected']))
   const config = {
     data: JSON.stringify(selectedProducts),
     headers: {
@@ -126,7 +127,7 @@ function* deleteProductsSaga() {
     yield put(deleteProductsError('Products delete error!'))
   }
 
-  yield put(setSelectedProducts([]))
+  yield put(setSelectedProducts(List()))
   yield put(stopPageLoading())
 }
 

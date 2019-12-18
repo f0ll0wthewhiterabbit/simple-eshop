@@ -5,8 +5,8 @@ import { openSidebar } from '../../../store/actions'
 import { DATABASE_FIELD_ROLE_ADMIN } from '../../../constants'
 
 const mapStateToProps = state => ({
-  isAdmin: state.auth.user.role === DATABASE_FIELD_ROLE_ADMIN,
-  isAuthenticated: state.auth.isAuthenticated,
+  isAdmin: state.getIn(['auth', 'user', 'role']) === DATABASE_FIELD_ROLE_ADMIN,
+  isAuthenticated: state.getIn(['auth', 'isAuthenticated']),
 })
 
 const mapDispatchToProps = dispatch => ({

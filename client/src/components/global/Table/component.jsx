@@ -11,6 +11,7 @@ import {
   Tooltip,
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import Immutable, { List } from 'immutable'
 
 import formatPrice from '../../../utils/formatPrice'
 import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
@@ -27,21 +28,23 @@ const Table = ({
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
-  const numSelected = selectedItems.length
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
-  const removableRowsCount = rows.filter(row => ('isRemovable' in row ? row.isRemovable : true))
-    .length
+  const numSelected = selectedItems.size
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.size - page * rowsPerPage)
+  const removableRowsCount = rows.filter(row =>
+    row.has('isRemovable') ? row.get('isRemovable') : true
+  ).size
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
       const newSelecteds = rows
-        .filter(n => ('isRemovable' in n ? n.isRemovable : true))
-        .map(n => n._id)
+        .filter(n => (n.has('isRemovable') ? n.get('isRemovable') : true))
+        .map(n => n.get('_id'))
+
       setSelectedItems(newSelecteds)
       return
     }
 
-    setSelectedItems([])
+    setSelectedItems(List())
   }
 
   const handleClick = (event, id, isRemovable) => {
@@ -50,13 +53,13 @@ const Table = ({
     }
 
     const selectedIndex = selectedItems.indexOf(id)
-    let newSelected = []
+    let newSelected = List()
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selectedItems, id)
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selectedItems.slice(1))
-    } else if (selectedIndex === selectedItems.length - 1) {
+    } else if (selectedIndex === selectedItems.size - 1) {
       newSelected = newSelected.concat(selectedItems.slice(0, -1))
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
@@ -81,34 +84,36 @@ const Table = ({
 
   const mapRowToTableCellContent = (id, row) => {
     if (id === 'tags') {
-      if (row[id].length === 0) {
+      if (row.get(id).size === 0) {
         return '-'
       }
 
-      return row[id].join(', ')
+      return row.get(id).join(', ')
     }
 
     if (id === 'image') {
-      return <Image src={row[id]} alt={row.title} />
+      return <Image src={row.get(id)} alt={row.get('title')} />
     }
 
     if (id === 'rating') {
-      const ratingsAmount = row.rating.length
+      const ratingsAmount = row.get(id).size
 
       if (ratingsAmount === 0) {
         return '-'
       }
 
-      const averageRating = Math.round(row.rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
+      const averageRating = Math.round(
+        row.get(id).reduce((a, b) => a + b.get('stars'), 0) / ratingsAmount
+      )
 
       return averageRating
     }
 
     if (id === 'price') {
-      return formatPrice(row[id])
+      return formatPrice(row.get(id))
     }
 
-    return row[id]
+    return row.get(id)
   }
 
   const handleDeleteButtonClick = () => {
@@ -169,18 +174,18 @@ const Table = ({
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row._id)
+                  const isItemSelected = isSelected(row.get('_id'))
                   const labelId = `enhanced-table-checkbox-${index}`
-                  const isRowRemovable = 'isRemovable' in row ? row.isRemovable : true
+                  const isRowRemovable = row.has('isRemovable') ? row.get('isRemovable') : true
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row._id, isRowRemovable)}
+                      onClick={event => handleClick(event, row.get('_id'), isRowRemovable)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row._id}
+                      key={row.get('_id')}
                       selected={isItemSelected}
                     >
                       {headCells.map(headCell => (
@@ -209,7 +214,7 @@ const Table = ({
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={rows.size}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -227,7 +232,7 @@ const Table = ({
 }
 
 Table.propTypes = {
-  rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rows: PropTypes.instanceOf(Immutable.List).isRequired,
   headCells: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -237,7 +242,7 @@ Table.propTypes = {
   title: PropTypes.string.isRequired,
   storeFieldName: PropTypes.string.isRequired,
   showModal: PropTypes.func.isRequired,
-  selectedItems: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedItems: PropTypes.instanceOf(Immutable.List).isRequired,
   setSelectedItems: PropTypes.func.isRequired,
 }
 

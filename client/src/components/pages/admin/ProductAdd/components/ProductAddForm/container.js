@@ -4,7 +4,7 @@ import ProductAddForm from './component'
 import { addProduct } from '../../../../../../store/actions'
 
 const mapStateToProps = state => ({
-  error: state.products.error,
+  error: state.getIn(['products', 'error']),
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import Profile from './component'
 
 const mapStateToProps = state => ({
-  firstName: state.auth.user.firstName,
-  lastName: state.auth.user.lastName,
+  firstName: state.getIn(['auth', 'user', 'firstName']),
+  lastName: state.getIn(['auth', 'user', 'lastName']),
 })
 
 export default connect(mapStateToProps)(Profile)

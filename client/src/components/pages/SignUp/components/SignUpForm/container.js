@@ -4,7 +4,7 @@ import SignUpForm from './component'
 import { signUp } from '../../../../../store/actions'
 
 const mapStateToProps = state => ({
-  error: state.auth.error,
+  error: state.getIn(['auth', 'error']),
 })
 
 const mapDispatchToProps = dispatch => ({

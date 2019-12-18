@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Immutable from 'immutable'
 
 import Table from '../../../../../global/Table'
 import { STORE_FIELD_USERS } from '../../../../../../constants'
@@ -24,8 +25,8 @@ const UsersTable = ({ usersList, selectedUsers, setSelectedUsers }) => {
 }
 
 UsersTable.propTypes = {
-  usersList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  usersList: PropTypes.instanceOf(Immutable.List).isRequired,
+  selectedUsers: PropTypes.instanceOf(Immutable.List).isRequired,
   setSelectedUsers: PropTypes.func.isRequired,
 }
 

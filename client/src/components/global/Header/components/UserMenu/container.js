@@ -5,9 +5,9 @@ import { showModal, signOut } from '../../../../../store/actions'
 import { DATABASE_FIELD_ROLE_ADMIN } from '../../../../../constants'
 
 const mapStateToProps = state => ({
-  userName: state.auth.user.firstName,
-  isAdmin: state.auth.user.role === DATABASE_FIELD_ROLE_ADMIN,
-  isDeleteRequestSent: state.auth.user.isRemovable,
+  userName: state.getIn(['auth', 'user', 'firstName']),
+  isAdmin: state.getIn(['auth', 'user', 'role']) === DATABASE_FIELD_ROLE_ADMIN,
+  isDeleteRequestSent: state.getIn(['auth', 'user', 'isRemovable']),
 })
 
 const mapDispatchToProps = dispatch => ({

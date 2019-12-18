@@ -4,9 +4,9 @@ import CatalogPage from './component'
 import { fetchProducts } from '../../../store/actions'
 
 const mapStateToProps = state => ({
-  products: state.products.data,
-  error: state.products.error,
-  isLoading: state.app.isLoading,
+  products: state.getIn(['products', 'data']),
+  error: state.getIn(['products', 'error']),
+  isLoading: state.getIn(['app', 'isLoading']),
 })
 
 const mapDispatchToProps = dispatch => ({

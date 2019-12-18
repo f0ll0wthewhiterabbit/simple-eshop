@@ -4,8 +4,8 @@ import UsersTable from './component'
 import { setSelectedUsers } from '../../../../../../store/actions'
 
 const mapStateToProps = state => ({
-  usersList: state.users.data,
-  selectedUsers: state.users.selected,
+  usersList: state.getIn(['users', 'data']),
+  selectedUsers: state.getIn(['users', 'selected']),
 })
 
 const mapDispatchToProps = dispatch => ({

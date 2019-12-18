@@ -4,8 +4,8 @@ import ProductsTable from './component'
 import { setSelectedProducts } from '../../../../../../store/actions'
 
 const mapStateToProps = state => ({
-  productsList: state.products.data,
-  selectedProducts: state.products.selected,
+  productsList: state.getIn(['products', 'data']),
+  selectedProducts: state.getIn(['products', 'selected']),
 })
 
 const mapDispatchToProps = dispatch => ({

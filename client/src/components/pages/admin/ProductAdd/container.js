@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ProductAddPage from './component'
 
 const mapStateToProps = state => ({
-  isLoading: state.app.isLoading,
+  isLoading: state.getIn(['app', 'isLoading']),
 })
 
 export default connect(mapStateToProps)(ProductAddPage)

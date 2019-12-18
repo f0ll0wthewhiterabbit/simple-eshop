@@ -1,4 +1,5 @@
 import { handleActions, combineActions } from 'redux-actions'
+import { fromJS } from 'immutable'
 
 import {
   fetchUsersSuccess,
@@ -10,44 +11,40 @@ import {
   requestUserDeletionError,
 } from '../actions'
 
-const initialState = {
+const initialState = fromJS({
   data: [],
   selected: [],
   error: null,
-}
+})
 
 const users = handleActions(
   {
-    [fetchUsersSuccess]: (state, action) => ({
-      ...state,
-      data: [...action.payload.usersList],
-      error: null,
-    }),
-    [deleteUsersSuccess]: (state, action) => ({
-      ...state,
-      data: state.data.filter(
-        user => action.payload.deletedUsers.findIndex(it => it === user._id) === -1
-      ),
-      error: null,
-    }),
-    [requestUserDeletionSuccess]: (state, action) => ({
-      ...state,
-      data: state.data.map(user =>
-        user._id === action.payload.userId ? { ...user, isRemovable: true } : user
-      ),
-      error: null,
-    }),
+    [fetchUsersSuccess]: (state, action) =>
+      state.merge({
+        data: fromJS(action.payload.usersList),
+        error: null,
+      }),
+    [deleteUsersSuccess]: (state, action) =>
+      state
+        .update('data', data =>
+          data.filter(
+            user => action.payload.deletedUsers.findIndex(it => it === user.get('_id')) === -1
+          )
+        )
+        .set('error', null),
+    [requestUserDeletionSuccess]: (state, action) =>
+      state
+        .update('data', data =>
+          data.map(user =>
+            user.get('_id') === action.payload.userId ? user.set('isRemovable', true) : user
+          )
+        )
+        .set('error', null),
     [combineActions(fetchUsersError, deleteUsersError, requestUserDeletionError)]: (
       state,
       action
-    ) => ({
-      ...state,
-      error: action.payload.error,
-    }),
-    [setSelectedUsers]: (state, action) => ({
-      ...state,
-      selected: [...action.payload.selectedUsersList],
-    }),
+    ) => state.set('error', action.payload.error),
+    [setSelectedUsers]: (state, action) => state.set('selected', action.payload.selectedUsersList),
   },
   initialState
 )
