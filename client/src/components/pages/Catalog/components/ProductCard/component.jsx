@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 import { Typography, Chip } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import DeleteIcon from '@material-ui/icons/Delete'
-import Immutable from 'immutable'
 
 import formatPrice from '../../../../../utils/formatPrice'
 import {
@@ -128,12 +128,26 @@ ProductCard.defaultProps = {
 }
 
 ProductCard.propTypes = {
-  productData: PropTypes.instanceOf(Immutable.Map).isRequired,
+  productData: ImmutablePropTypes.contains({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    image: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    tags: ImmutablePropTypes.listOf(PropTypes.string),
+    rating: ImmutablePropTypes.listOf(
+      ImmutablePropTypes.contains({
+        _id: PropTypes.string.isRequired,
+        userId: PropTypes.string.isRequired,
+        stars: PropTypes.number.isRequired,
+      })
+    ),
+  }).isRequired,
   currentUserId: PropTypes.string,
   changeProductRating: PropTypes.func.isRequired,
   deleteProductRating: PropTypes.func.isRequired,
-  ratingsLoadingList: PropTypes.instanceOf(Immutable.List).isRequired,
-  ratingsErrorList: PropTypes.instanceOf(Immutable.List).isRequired,
+  ratingsLoadingList: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
+  ratingsErrorList: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
 }
 
 export default ProductCard

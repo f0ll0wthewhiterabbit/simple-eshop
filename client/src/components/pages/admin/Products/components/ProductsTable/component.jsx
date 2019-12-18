@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Immutable from 'immutable'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 
 import Table from '../../../../../global/Table'
 import { STORE_FIELD_PRODUCTS } from '../../../../../../constants'
@@ -28,8 +28,24 @@ const ProductsTable = ({ productsList, selectedProducts, setSelectedProducts }) 
 }
 
 ProductsTable.propTypes = {
-  productsList: PropTypes.instanceOf(Immutable.List).isRequired,
-  selectedProducts: PropTypes.instanceOf(Immutable.List).isRequired,
+  productsList: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.contains({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      image: PropTypes.string,
+      price: PropTypes.number.isRequired,
+      tags: ImmutablePropTypes.listOf(PropTypes.string),
+      rating: ImmutablePropTypes.listOf(
+        ImmutablePropTypes.contains({
+          _id: PropTypes.string.isRequired,
+          userId: PropTypes.string.isRequired,
+          stars: PropTypes.number.isRequired,
+        })
+      ),
+    })
+  ).isRequired,
+  selectedProducts: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
   setSelectedProducts: PropTypes.func.isRequired,
 }
 

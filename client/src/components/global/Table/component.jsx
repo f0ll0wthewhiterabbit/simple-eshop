@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ImmutablePropTypes from 'react-immutable-proptypes'
+import { List } from 'immutable'
 import {
   TableBody,
   TableCell,
@@ -11,7 +13,6 @@ import {
   Tooltip,
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
-import Immutable, { List } from 'immutable'
 
 import formatPrice from '../../../utils/formatPrice'
 import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
@@ -232,7 +233,7 @@ const Table = ({
 }
 
 Table.propTypes = {
-  rows: PropTypes.instanceOf(Immutable.List).isRequired,
+  rows: ImmutablePropTypes.listOf(ImmutablePropTypes.map).isRequired,
   headCells: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -242,7 +243,7 @@ Table.propTypes = {
   title: PropTypes.string.isRequired,
   storeFieldName: PropTypes.string.isRequired,
   showModal: PropTypes.func.isRequired,
-  selectedItems: PropTypes.instanceOf(Immutable.List).isRequired,
+  selectedItems: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
   setSelectedItems: PropTypes.func.isRequired,
 }
 

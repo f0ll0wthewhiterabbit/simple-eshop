@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import ImmutablePropTypes from 'react-immutable-proptypes'
 import { Grid, Typography } from '@material-ui/core'
-import Immutable from 'immutable'
 
 import ProductCard from './components/ProductCard'
 import Loader from '../../global/Loader'
@@ -51,7 +51,23 @@ CatalogPage.defaultProps = {
 }
 
 CatalogPage.propTypes = {
-  products: PropTypes.instanceOf(Immutable.List).isRequired,
+  products: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.contains({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      image: PropTypes.string,
+      price: PropTypes.number.isRequired,
+      tags: ImmutablePropTypes.listOf(PropTypes.string),
+      rating: ImmutablePropTypes.listOf(
+        ImmutablePropTypes.contains({
+          _id: PropTypes.string.isRequired,
+          userId: PropTypes.string.isRequired,
+          stars: PropTypes.number.isRequired,
+        })
+      ),
+    })
+  ).isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   isLoading: PropTypes.bool.isRequired,
   fetchProducts: PropTypes.func.isRequired,
