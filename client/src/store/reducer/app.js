@@ -1,34 +1,25 @@
 import { handleActions } from 'redux-actions'
-import { fromJS } from 'immutable'
+import { Record } from 'immutable'
 
 import { showModal, closeModal, openSidebar, closeSidebar } from '../actions'
 
-const initialState = fromJS({
-  modal: {
-    isOpened: false,
-    storeFieldName: '',
-  },
+const AppRecord = Record({
+  isModalOpened: false,
+  storeFieldNameForModal: '',
   isSidebarOpened: false,
 })
+const initialState = new AppRecord()
 
 const app = handleActions(
   {
     [showModal]: (state, action) =>
-      state.mergeDeep({
-        modal: {
-          isOpened: true,
-          storeFieldName: action.payload.storeFieldNameForModal,
-        },
+      state.merge({
+        isModalOpened: true,
+        storeFieldNameForModal: action.payload.storeFieldNameForModal,
       }),
-    [closeModal]: state =>
-      state.mergeDeep({
-        modal: {
-          isOpened: false,
-          storeFieldName: '',
-        },
-      }),
+    [closeModal]: state => state.delete('isModalOpened').delete('storeFieldNameForModal'),
     [openSidebar]: state => state.set('isSidebarOpened', true),
-    [closeSidebar]: state => state.set('isSidebarOpened', false),
+    [closeSidebar]: state => state.delete('isSidebarOpened'),
   },
   initialState
 )

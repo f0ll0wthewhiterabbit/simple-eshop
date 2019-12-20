@@ -27,7 +27,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
       <Grid container spacing={4}>
         {products.map(product => {
           return (
-            <Grid key={product.get('_id')} item xs={12} sm={6} md={4}>
+            <Grid key={product._id} item xs={12} sm={6} md={4}>
               <ProductCard productData={product} />
             </Grid>
           )
@@ -52,7 +52,7 @@ CatalogPage.defaultProps = {
 
 CatalogPage.propTypes = {
   products: ImmutablePropTypes.listOf(
-    ImmutablePropTypes.contains({
+    ImmutablePropTypes.recordOf({
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
@@ -60,7 +60,7 @@ CatalogPage.propTypes = {
       price: PropTypes.number.isRequired,
       tags: ImmutablePropTypes.listOf(PropTypes.string),
       rating: ImmutablePropTypes.listOf(
-        ImmutablePropTypes.contains({
+        ImmutablePropTypes.recordOf({
           _id: PropTypes.string.isRequired,
           userId: PropTypes.string.isRequired,
           stars: PropTypes.number.isRequired,

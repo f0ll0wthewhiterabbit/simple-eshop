@@ -2,6 +2,7 @@ import { takeEvery, put, select } from 'redux-saga/effects'
 import { List } from 'immutable'
 
 import API from '../../utils/api'
+import convertToRecord from '../../utils/convertToRecord'
 import {
   fetchUsersSuccess,
   fetchUsersError,
@@ -20,7 +21,7 @@ import {
 function* fetchUsersSaga() {
   try {
     const response = yield API.get('/users')
-    const usersList = response.data
+    const usersList = convertToRecord(response.data)
 
     yield put(fetchUsersSuccess(usersList))
   } catch (error) {

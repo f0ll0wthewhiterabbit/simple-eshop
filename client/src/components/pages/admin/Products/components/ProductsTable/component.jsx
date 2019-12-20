@@ -29,7 +29,7 @@ const ProductsTable = ({ productsList, selectedProducts, setSelectedProducts }) 
 
 ProductsTable.propTypes = {
   productsList: ImmutablePropTypes.listOf(
-    ImmutablePropTypes.contains({
+    ImmutablePropTypes.recordOf({
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
@@ -37,7 +37,7 @@ ProductsTable.propTypes = {
       price: PropTypes.number.isRequired,
       tags: ImmutablePropTypes.listOf(PropTypes.string),
       rating: ImmutablePropTypes.listOf(
-        ImmutablePropTypes.contains({
+        ImmutablePropTypes.recordOf({
           _id: PropTypes.string.isRequired,
           userId: PropTypes.string.isRequired,
           stars: PropTypes.number.isRequired,

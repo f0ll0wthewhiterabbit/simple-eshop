@@ -30,16 +30,15 @@ const Table = ({
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const numSelected = selectedItems.size
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.size - page * rowsPerPage)
-  const removableRowsCount = rows.filter(row =>
-    row.has('isRemovable') ? row.get('isRemovable') : true
-  ).size
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
+  const removableRowsCount = rows.filter(row => ('isRemovable' in row ? row.isRemovable : true))
+    .length
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
       const newSelecteds = rows
-        .filter(n => (n.has('isRemovable') ? n.get('isRemovable') : true))
-        .map(n => n.get('_id'))
+        .filter(n => ('isRemovable' in n ? n.isRemovable : true))
+        .map(n => n._id)
 
       setSelectedItems(newSelecteds)
       return
@@ -85,36 +84,34 @@ const Table = ({
 
   const mapRowToTableCellContent = (id, row) => {
     if (id === 'tags') {
-      if (row.get(id).size === 0) {
+      if (row[id].length === 0) {
         return '-'
       }
 
-      return row.get(id).join(', ')
+      return row[id].join(', ')
     }
 
     if (id === 'image') {
-      return <Image src={row.get(id)} alt={row.get('title')} />
+      return <Image src={row[id]} alt={row.title} />
     }
 
     if (id === 'rating') {
-      const ratingsAmount = row.get(id).size
+      const ratingsAmount = row[id].size
 
       if (ratingsAmount === 0) {
         return '-'
       }
 
-      const averageRating = Math.round(
-        row.get(id).reduce((a, b) => a + b.get('stars'), 0) / ratingsAmount
-      )
+      const averageRating = Math.round(row[id].reduce((a, b) => a + b.stars, 0) / ratingsAmount)
 
       return averageRating
     }
 
     if (id === 'price') {
-      return formatPrice(row.get(id))
+      return formatPrice(row[id])
     }
 
-    return row.get(id)
+    return row[id]
   }
 
   const handleDeleteButtonClick = () => {
@@ -175,18 +172,18 @@ const Table = ({
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.get('_id'))
+                  const isItemSelected = isSelected(row._id)
                   const labelId = `enhanced-table-checkbox-${index}`
-                  const isRowRemovable = row.has('isRemovable') ? row.get('isRemovable') : true
+                  const isRowRemovable = 'isRemovable' in row ? row.isRemovable : true
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.get('_id'), isRowRemovable)}
+                      onClick={event => handleClick(event, row._id, isRowRemovable)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.get('_id')}
+                      key={row._id}
                       selected={isItemSelected}
                     >
                       {headCells.map(headCell => (
@@ -233,7 +230,7 @@ const Table = ({
 }
 
 Table.propTypes = {
-  rows: ImmutablePropTypes.listOf(ImmutablePropTypes.map).isRequired,
+  rows: ImmutablePropTypes.listOf(ImmutablePropTypes.record).isRequired,
   headCells: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

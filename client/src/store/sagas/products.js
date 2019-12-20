@@ -2,6 +2,7 @@ import { takeEvery, put, select } from 'redux-saga/effects'
 import { List } from 'immutable'
 
 import API from '../../utils/api'
+import convertToRecord from '../../utils/convertToRecord'
 import { ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 import {
   fetchProductsSuccess,
@@ -27,7 +28,7 @@ import {
 function* fetchProductsSaga() {
   try {
     const response = yield API.get('/products')
-    const productsList = response.data
+    const productsList = convertToRecord(response.data)
 
     yield put(fetchProductsSuccess(productsList))
   } catch (error) {
@@ -49,7 +50,7 @@ function* changeProductRatingSaga(action) {
 
   try {
     const response = yield API.patch(`/products/${productId}`, body, config)
-    const product = response.data
+    const product = convertToRecord(response.data)
 
     yield put(changeProductRatingSuccess(product))
   } catch (error) {
@@ -71,7 +72,7 @@ function* deleteProductRatingSaga(action) {
 
   try {
     const response = yield API.patch(`/products/${productId}`, body, config)
-    const product = response.data
+    const product = convertToRecord(response.data)
 
     yield put(deleteProductRatingSuccess(product))
   } catch (error) {
@@ -90,7 +91,7 @@ function* addProductSaga(action) {
 
   try {
     const response = yield API.post('/products', body, config)
-    const product = response.data
+    const product = convertToRecord(response.data)
 
     yield put(addProductSuccess(product))
     history.push(ADMIN_PRODUCTS_PAGE_PATH)

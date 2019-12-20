@@ -1,5 +1,5 @@
 import { handleActions, combineActions } from 'redux-actions'
-import { fromJS } from 'immutable'
+import { Record, List } from 'immutable'
 
 import {
   fetchProducts,
@@ -19,25 +19,25 @@ import {
   startRatingLoading,
 } from '../actions'
 
-const initialState = fromJS({
-  data: [],
-  selected: [],
-  ratingsLoadingList: [],
-  ratingsErrorList: [],
+const ProductsRecord = Record({
+  data: List(),
+  selected: List(),
+  ratingsLoadingList: List(),
+  ratingsErrorList: List(),
   isLoading: false,
   error: null,
 })
+const initialState = new ProductsRecord()
 
 const products = handleActions(
   {
     [combineActions(fetchProducts, addProduct, deleteProducts)]: state =>
       state.set('isLoading', true),
     [fetchProductsSuccess]: (state, action) =>
-      state.merge({
-        data: fromJS(action.payload.productsList),
-        isLoading: false,
-        error: null,
-      }),
+      state
+        .set('data', action.payload.productsList)
+        .delete('isLoading')
+        .delete('error'),
     [deleteProductsSuccess]: (state, action) =>
       state
         .update('data', data =>
@@ -46,24 +46,18 @@ const products = handleActions(
               action.payload.deletedProducts.findIndex(it => it === product.get('_id')) === -1
           )
         )
-        .merge({
-          isLoading: false,
-          error: null,
-        }),
+        .delete('isLoading')
+        .delete('error'),
     [addProductSuccess]: (state, action) =>
       state
-        .update('data', data => data.push(fromJS(action.payload.product)))
-        .merge({
-          isLoading: false,
-          error: null,
-        }),
+        .update('data', data => data.push(action.payload.product))
+        .delete('isLoading')
+        .delete('error'),
     [combineActions(changeProductRatingSuccess, deleteProductRatingSuccess)]: (state, action) =>
       state
         .update('data', data =>
           data.map(product =>
-            product.get('_id') !== action.payload.product._id
-              ? product
-              : fromJS(action.payload.product)
+            product.get('_id') !== action.payload.product._id ? product : action.payload.product
           )
         )
         .update('ratingsLoadingList', ratingsLoadingList =>
@@ -73,10 +67,7 @@ const products = handleActions(
           ratingsErrorList.filter(id => id !== action.payload.product._id)
         ),
     [combineActions(fetchProductsError, deleteProductsError, addProductError)]: (state, action) =>
-      state.merge({
-        isLoading: false,
-        error: action.payload.error,
-      }),
+      state.delete('isLoading').set('error', action.payload.error),
     [combineActions(changeProductRatingError, deleteProductRatingError)]: (state, action) =>
       state
         .update('ratingsLoadingList', ratingsLoadingList =>

@@ -9,8 +9,8 @@ import {
 } from '../../../store/actions'
 
 const mapStateToProps = state => ({
-  isModalOpened: state.getIn(['app', 'modal', 'isOpened']),
-  storeFieldName: state.getIn(['app', 'modal', 'storeFieldName']),
+  isModalOpened: state.getIn(['app', 'isModalOpened']),
+  storeFieldName: state.getIn(['app', 'storeFieldNameForModal']),
 })
 
 const mapDispatchToProps = dispatch => ({

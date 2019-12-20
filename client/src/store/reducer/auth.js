@@ -1,5 +1,5 @@
 import { handleActions, combineActions } from 'redux-actions'
-import { fromJS } from 'immutable'
+import { Record } from 'immutable'
 
 import {
   authenticateSuccess,
@@ -12,69 +12,50 @@ import {
 } from '../actions'
 import { DATABASE_FIELD_ROLE_GUEST } from '../../constants'
 
-const initialState = fromJS({
+const UserRecord = Record({
+  id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  role: DATABASE_FIELD_ROLE_GUEST,
+  isRemovable: false,
+})
+const AuthRecord = Record({
   isAuthenticated: false,
   token: null,
-  user: {
-    id: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    role: DATABASE_FIELD_ROLE_GUEST,
-    isRemovable: false,
-  },
+  user: new UserRecord(),
   error: null,
 })
+const initialState = new AuthRecord()
 
 const auth = handleActions(
   {
     [authenticateSuccess]: (state, action) =>
-      state.mergeDeep({
-        isAuthenticated: true,
-        user: {
-          id: action.payload.userData.id,
-          firstName: action.payload.userData.firstName,
-          lastName: action.payload.userData.lastName,
-          email: action.payload.userData.email,
-          role: action.payload.userData.role,
-          isRemovable: action.payload.userData.isRemovable,
-        },
-        error: null,
-      }),
+      state
+        .mergeDeep({
+          isAuthenticated: true,
+          user: action.payload.userData,
+        })
+        .delete('error'),
     [combineActions(signUpSuccess, signInSuccess)]: (state, action) =>
-      state.merge({
-        isAuthenticated: true,
-        token: action.payload.token,
-        error: null,
-      }),
+      state
+        .merge({
+          isAuthenticated: true,
+          token: action.payload.token,
+        })
+        .delete('error'),
     [combineActions(authenticateError, signUpError, signInError)]: (state, action) =>
-      state.mergeDeep({
-        isAuthenticated: false,
-        token: null,
-        user: {
-          id: '',
-          firstName: '',
-          lastName: '',
-          email: '',
-          role: DATABASE_FIELD_ROLE_GUEST,
-          isRemovable: false,
-        },
-        error: action.payload.error,
-      }),
+      state
+        .delete('isAuthenticated')
+        .delete('token')
+        .delete('user')
+        .set('error', action.payload.error),
     [signOutSuccess]: state =>
-      state.mergeDeep({
-        isAuthenticated: false,
-        token: null,
-        user: {
-          id: '',
-          firstName: '',
-          lastName: '',
-          email: '',
-          role: DATABASE_FIELD_ROLE_GUEST,
-          isRemovable: false,
-        },
-        error: '',
-      }),
+      state
+        .delete('isAuthenticated')
+        .delete('token')
+        .delete('user')
+        .set('error', ''),
   },
   initialState
 )

@@ -31,16 +31,10 @@ const ProductCard = ({
   ratingsLoadingList,
   ratingsErrorList,
 }) => {
-  const id = productData.get('_id')
-  const title = productData.get('title')
-  const description = productData.get('description')
-  const tags = productData.get('tags')
-  const price = productData.get('price')
-  const rating = productData.get('rating')
-  const imageSrc = productData.get('image')
+  const { id, title, description, tags, price, rating, image: imageSrc } = productData
   const ratingsAmount = rating.size
   const averageRating = Math.round(rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
-  const currentUserRating = rating.find(it => it.get('userId') === currentUserId)
+  const currentUserRating = rating.find(it => it.userId === currentUserId)
   const isUserRatedProduct = Boolean(currentUserRating)
   const isRatingLoading = ratingsLoadingList.indexOf(id) !== -1
   const isErrorInLoad = ratingsErrorList.indexOf(id) !== -1
@@ -70,7 +64,7 @@ const ProductCard = ({
     userRatingField = (
       <>
         <Stars
-          value={isUserRatedProduct ? currentUserRating.get('stars') : 0}
+          value={isUserRatedProduct ? currentUserRating.stars : 0}
           name={`simple-controlled-user-${id}`}
           size="small"
           onChange={handleRatingChange}
@@ -128,7 +122,7 @@ ProductCard.defaultProps = {
 }
 
 ProductCard.propTypes = {
-  productData: ImmutablePropTypes.contains({
+  productData: ImmutablePropTypes.recordOf({
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
@@ -136,7 +130,7 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     tags: ImmutablePropTypes.listOf(PropTypes.string),
     rating: ImmutablePropTypes.listOf(
-      ImmutablePropTypes.contains({
+      ImmutablePropTypes.recordOf({
         _id: PropTypes.string.isRequired,
         userId: PropTypes.string.isRequired,
         stars: PropTypes.number.isRequired,

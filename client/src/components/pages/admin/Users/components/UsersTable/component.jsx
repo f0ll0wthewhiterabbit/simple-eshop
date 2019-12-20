@@ -26,7 +26,7 @@ const UsersTable = ({ usersList, selectedUsers, setSelectedUsers }) => {
 
 UsersTable.propTypes = {
   usersList: ImmutablePropTypes.listOf(
-    ImmutablePropTypes.contains({
+    ImmutablePropTypes.recordOf({
       _id: PropTypes.string.isRequired,
       firstName: PropTypes.string.isRequired,
       lastName: PropTypes.string.isRequired,
