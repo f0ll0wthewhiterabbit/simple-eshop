@@ -1,43 +1,53 @@
-import { createActions } from 'redux-actions'
+import { createAction } from 'redux-actions'
 
-const { products } = createActions({
-  PRODUCTS: {
-    FETCH_PRODUCTS: undefined,
-    FETCH_PRODUCTS_SUCCESS: productsList => ({ productsList }),
-    FETCH_PRODUCTS_ERROR: error => ({ error }),
-    SET_SELECTED_PRODUCTS: selectedProductsList => ({ selectedProductsList }),
-    DELETE_PRODUCTS: undefined,
-    DELETE_PRODUCTS_SUCCESS: deletedProducts => ({ deletedProducts }),
-    DELETE_PRODUCTS_ERROR: error => ({ error }),
-    CHANGE_PRODUCT_RATING: ratingData => ({ ratingData }),
-    CHANGE_PRODUCT_RATING_SUCCESS: product => ({ product }),
-    CHANGE_PRODUCT_RATING_ERROR: id => ({ id }),
-    DELETE_PRODUCT_RATING: productId => ({ productId }),
-    DELETE_PRODUCT_RATING_SUCCESS: product => ({ product }),
-    DELETE_PRODUCT_RATING_ERROR: id => ({ id }),
-    ADD_PRODUCT: (productData, history) => ({ productData, history }),
-    ADD_PRODUCT_SUCCESS: product => ({ product }),
-    ADD_PRODUCT_ERROR: error => ({ error }),
-    START_RATING_LOADING: id => ({ id }),
-  },
-})
-
-export const {
-  fetchProducts,
-  fetchProductsSuccess,
-  fetchProductsError,
-  setSelectedProducts,
-  deleteProducts,
-  deleteProductsSuccess,
-  deleteProductsError,
-  changeProductRating,
-  changeProductRatingSuccess,
-  changeProductRatingError,
-  deleteProductRating,
-  deleteProductRatingSuccess,
-  deleteProductRatingError,
-  addProduct,
-  addProductSuccess,
-  addProductError,
-  startRatingLoading,
-} = products
+export const fetchProducts = createAction('PRODUCTS/FETCH_PRODUCTS')
+export const fetchProductsSuccess = createAction(
+  'PRODUCTS/FETCH_PRODUCTS_SUCCESS',
+  productsList => ({ productsList })
+)
+export const fetchProductsError = createAction('PRODUCTS/FETCH_PRODUCTS_ERROR', error => ({
+  error,
+}))
+export const setSelectedProducts = createAction(
+  'PRODUCTS/SET_SELECTED_PRODUCTS',
+  selectedProductsList => ({ selectedProductsList })
+)
+export const deleteProducts = createAction('PRODUCTS/DELETE_PRODUCTS')
+export const deleteProductsSuccess = createAction(
+  'PRODUCTS/DELETE_PRODUCTS_SUCCESS',
+  deletedProducts => ({ deletedProducts })
+)
+export const deleteProductsError = createAction('PRODUCTS/DELETE_PRODUCTS_ERROR', error => ({
+  error,
+}))
+export const changeProductRating = createAction('PRODUCTS/CHANGE_PRODUCT_RATING', ratingData => ({
+  ratingData,
+}))
+export const changeProductRatingSuccess = createAction(
+  'PRODUCTS/CHANGE_PRODUCT_RATING_SUCCESS',
+  product => ({ product })
+)
+export const changeProductRatingError = createAction(
+  'PRODUCTS/CHANGE_PRODUCT_RATING_ERROR',
+  id => ({ id })
+)
+export const deleteProductRating = createAction('PRODUCTS/DELETE_PRODUCT_RATING', productId => ({
+  productId,
+}))
+export const deleteProductRatingSuccess = createAction(
+  'PRODUCTS/DELETE_PRODUCT_RATING_SUCCESS',
+  product => ({ product })
+)
+export const deleteProductRatingError = createAction(
+  'PRODUCTS/DELETE_PRODUCT_RATING_ERROR',
+  id => ({ id })
+)
+export const addProduct = createAction('PRODUCTS/ADD_PRODUCT', (productData, history) => ({
+  productData,
+  history,
+}))
+export const addProductSuccess = createAction('PRODUCTS/ADD_PRODUCT_SUCCESS', product => ({
+  product,
+}))
+export const addProductError = createAction('PRODUCTS/ADD_PRODUCT_ERROR', error => ({ error }))
+export const startRatingLoading = createAction('PRODUCTS/START_RATING_LOADING', id => ({ id }))

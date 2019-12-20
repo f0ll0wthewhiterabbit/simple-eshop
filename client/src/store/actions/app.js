@@ -1,12 +1,8 @@
-import { createActions } from 'redux-actions'
+import { createAction } from 'redux-actions'
 
-const { app } = createActions({
-  APP: {
-    SHOW_MODAL: storeFieldNameForModal => ({ storeFieldNameForModal }),
-    CLOSE_MODAL: undefined,
-    OPEN_SIDEBAR: undefined,
-    CLOSE_SIDEBAR: undefined,
-  },
-})
-
-export const { showModal, closeModal, openSidebar, closeSidebar } = app
+export const showModal = createAction('APP/SHOW_MODAL', storeFieldNameForModal => ({
+  storeFieldNameForModal,
+}))
+export const closeModal = createAction('APP/CLOSE_MODAL')
+export const openSidebar = createAction('APP/OPEN_SIDEBAR')
+export const closeSidebar = createAction('APP/CLOSE_SIDEBAR')

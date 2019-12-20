@@ -121,23 +121,23 @@ function* deleteProductsSaga() {
 }
 
 function* watchFetchProducts() {
-  yield takeEvery(fetchProducts.toString(), fetchProductsSaga)
+  yield takeEvery(fetchProducts, fetchProductsSaga)
 }
 
 function* watchChangeProductRating() {
-  yield takeEvery(changeProductRating.toString(), changeProductRatingSaga)
+  yield takeEvery(changeProductRating, changeProductRatingSaga)
 }
 
 function* watchDeleteProductRating() {
-  yield takeEvery(deleteProductRating.toString(), deleteProductRatingSaga)
+  yield takeEvery(deleteProductRating, deleteProductRatingSaga)
 }
 
 function* watchAddProduct() {
-  yield takeEvery(addProduct.toString(), addProductSaga)
+  yield takeEvery(addProduct, addProductSaga)
 }
 
 function* watchDeleteProducts() {
-  yield takeEvery(deleteProducts.toString(), deleteProductsSaga)
+  yield takeEvery(deleteProducts, deleteProductsSaga)
 }
 
 export {

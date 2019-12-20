@@ -1,31 +1,15 @@
-import { createActions } from 'redux-actions'
+import { createAction } from 'redux-actions'
 
-const { auth } = createActions({
-  AUTH: {
-    AUTHENTICATE: undefined,
-    AUTHENTICATE_SUCCESS: userData => ({ userData }),
-    AUTHENTICATE_ERROR: error => ({ error }),
-    SIGN_UP: userData => ({ userData }),
-    SIGN_UP_SUCCESS: token => ({ token }),
-    SIGN_UP_ERROR: error => ({ error }),
-    SIGN_IN: userData => ({ userData }),
-    SIGN_IN_SUCCESS: token => ({ token }),
-    SIGN_IN_ERROR: error => ({ error }),
-    SIGN_OUT: (history, location) => ({ history, location }),
-    SIGN_OUT_SUCCESS: undefined,
-  },
-})
-
-export const {
-  authenticate,
-  authenticateSuccess,
-  authenticateError,
-  signUp,
-  signUpSuccess,
-  signUpError,
-  signIn,
-  signInSuccess,
-  signInError,
-  signOut,
-  signOutSuccess,
-} = auth
+export const authenticate = createAction('AUTH/AUTHENTICATE')
+export const authenticateSuccess = createAction('AUTH/AUTHENTICATE_SUCCESS', userData => ({
+  userData,
+}))
+export const authenticateError = createAction('AUTH/AUTHENTICATE_ERROR', error => ({ error }))
+export const signUp = createAction('AUTH/SIGN_UP', userData => ({ userData }))
+export const signUpSuccess = createAction('AUTH/SIGN_UP_SUCCESS', token => ({ token }))
+export const signUpError = createAction('AUTH/SIGN_UP_ERROR', error => ({ error }))
+export const signIn = createAction('AUTH/SIGN_IN', userData => ({ userData }))
+export const signInSuccess = createAction('AUTH/SIGN_IN_SUCCESS', token => ({ token }))
+export const signInError = createAction('AUTH/SIGN_IN_ERROR', error => ({ error }))
+export const signOut = createAction('AUTH/SIGN_OUT', (history, location) => ({ history, location }))
+export const signOutSuccess = createAction('AUTH/SIGN_OUT_SUCCESS')

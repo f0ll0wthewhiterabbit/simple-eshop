@@ -65,15 +65,15 @@ function* requestUserDeletionSaga() {
 }
 
 function* watchFetchUsers() {
-  yield takeEvery(fetchUsers.toString(), fetchUsersSaga)
+  yield takeEvery(fetchUsers, fetchUsersSaga)
 }
 
 function* watchDeleteUsers() {
-  yield takeEvery(deleteUsers.toString(), deleteUsersSaga)
+  yield takeEvery(deleteUsers, deleteUsersSaga)
 }
 
 function* watchRequestUserDeletion() {
-  yield takeEvery(requestUserDeletion.toString(), requestUserDeletionSaga)
+  yield takeEvery(requestUserDeletion, requestUserDeletionSaga)
 }
 
 export { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion }

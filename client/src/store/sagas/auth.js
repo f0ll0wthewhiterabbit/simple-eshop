@@ -110,19 +110,19 @@ function* signOutSaga(action) {
 }
 
 function* watchAuthenticate() {
-  yield takeEvery(authenticate.toString(), authenticateSaga)
+  yield takeEvery(authenticate, authenticateSaga)
 }
 
 function* watchSignUp() {
-  yield takeEvery(signUp.toString(), signUpSaga)
+  yield takeEvery(signUp, signUpSaga)
 }
 
 function* watchSignIn() {
-  yield takeEvery(signIn.toString(), signInSaga)
+  yield takeEvery(signIn, signInSaga)
 }
 
 function* watchSignOut() {
-  yield takeEvery(signOut.toString(), signOutSaga)
+  yield takeEvery(signOut, signOutSaga)
 }
 
 export { watchAuthenticate, watchSignUp, watchSignIn, watchSignOut }
