@@ -30,9 +30,9 @@ const Table = ({
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const numSelected = selectedItems.size
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.size - page * rowsPerPage)
   const removableRowsCount = rows.filter(row => ('isRemovable' in row ? row.isRemovable : true))
-    .length
+    .size
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
@@ -84,7 +84,7 @@ const Table = ({
 
   const mapRowToTableCellContent = (id, row) => {
     if (id === 'tags') {
-      if (row[id].length === 0) {
+      if (row[id].size === 0) {
         return '-'
       }
 

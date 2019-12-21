@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
-import UserLayout from './component'
+import PrivateRoute from './component'
 
 const mapStateToProps = state => ({
   isAuthenticated: state.getIn(['auth', 'isAuthenticated']),
   userRole: state.getIn(['auth', 'user', 'role']),
 })
 
-export default connect(mapStateToProps)(UserLayout)
+export default connect(mapStateToProps)(PrivateRoute)

@@ -7,20 +7,16 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import {
   SIGN_UP_PAGE_PATH,
   MAIN_PAGE_PATH,
-  DATABASE_FIELD_ROLE_ADMIN,
+  ROLE_ADMIN,
   ADMIN_PRODUCTS_PAGE_PATH,
-  DATABASE_FIELD_ROLE_GUEST,
+  ROLE_GUEST,
 } from '../../../constants'
 import SignInForm from './components/SignInForm'
 import { Wrapper, IconWrapper, SignUpLink } from './styles'
 
 const SingInPage = ({ isAuthenticated, userRole }) => {
-  if (isAuthenticated && userRole !== DATABASE_FIELD_ROLE_GUEST) {
-    return (
-      <Redirect
-        to={userRole === DATABASE_FIELD_ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH}
-      />
-    )
+  if (isAuthenticated && userRole !== ROLE_GUEST) {
+    return <Redirect to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH} />
   }
 
   return (

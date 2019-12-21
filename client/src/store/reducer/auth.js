@@ -10,14 +10,14 @@ import {
   signInError,
   signOutSuccess,
 } from '../actions'
-import { DATABASE_FIELD_ROLE_GUEST } from '../../constants'
+import { ROLE_GUEST } from '../../constants'
 
 const UserRecord = Record({
   id: '',
   firstName: '',
   lastName: '',
   email: '',
-  role: DATABASE_FIELD_ROLE_GUEST,
+  role: ROLE_GUEST,
   isRemovable: false,
 })
 const AuthRecord = Record({

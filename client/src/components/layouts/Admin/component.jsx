@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
 import { withTheme } from 'styled-components'
 import { useMediaQuery, Divider } from '@material-ui/core'
 
@@ -9,41 +8,14 @@ import Footer from '../../global/Footer'
 import Profile from './components/Profile'
 import SidebarNav from './components/SidebarNav'
 import AlertDialog from '../../global/AlertDialog'
-import { ERROR_PAGE_PATH, DATABASE_FIELD_ROLE_USER, MAIN_PAGE_PATH } from '../../../constants'
 import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 
-const AdminLayout = ({
-  isAuthenticated,
-  isSidebarOpened,
-  userRole,
-  theme,
-  closeSidebar,
-  children,
-}) => {
+const AdminLayout = ({ isSidebarOpened, theme, closeSidebar, children }) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), { defaultMatches: true })
   const shouldOpenSidebar = isDesktop ? true : isSidebarOpened
 
   const handleSidebarClose = () => {
     closeSidebar()
-  }
-
-  if (!isAuthenticated) {
-    return <Redirect to={ERROR_PAGE_PATH} />
-  }
-
-  if (userRole === DATABASE_FIELD_ROLE_USER) {
-    return (
-      <Redirect
-        to={{
-          pathname: ERROR_PAGE_PATH,
-          state: {
-            title: 'Forbidden',
-            message: '',
-            backTo: MAIN_PAGE_PATH,
-          },
-        }}
-      />
-    )
   }
 
   return (
@@ -71,9 +43,7 @@ const AdminLayout = ({
 }
 
 AdminLayout.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
   isSidebarOpened: PropTypes.bool.isRequired,
-  userRole: PropTypes.string.isRequired,
   theme: PropTypes.shape({ breakpoints: PropTypes.object.isRequired }).isRequired,
   closeSidebar: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,

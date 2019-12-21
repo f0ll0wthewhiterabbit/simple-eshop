@@ -6,21 +6,17 @@ import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded'
 
 import {
   SIGN_IN_PAGE_PATH,
-  DATABASE_FIELD_ROLE_ADMIN,
+  ROLE_ADMIN,
   MAIN_PAGE_PATH,
   ADMIN_PRODUCTS_PAGE_PATH,
-  DATABASE_FIELD_ROLE_GUEST,
+  ROLE_GUEST,
 } from '../../../constants'
 import SignUpForm from './components/SignUpForm'
 import { Wrapper, IconWrapper, SignInLink } from './styles'
 
 const SignUpPage = ({ isAuthenticated, userRole }) => {
-  if (isAuthenticated && userRole !== DATABASE_FIELD_ROLE_GUEST) {
-    return (
-      <Redirect
-        to={userRole === DATABASE_FIELD_ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH}
-      />
-    )
+  if (isAuthenticated && userRole !== ROLE_GUEST) {
+    return <Redirect to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH} />
   }
 
   return (

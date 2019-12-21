@@ -1,3 +1,3 @@
-import UserLayout from './container'
+import UserLayout from './component'
 
 export default UserLayout
