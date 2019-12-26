@@ -16,7 +16,12 @@ import {
   fetchUsers,
   deleteUsers,
   requestUserDeletion,
+  updateUser,
+  updateUserSuccess,
+  updateUserError,
+  authenticate,
 } from '../actions'
+import { MAIN_PAGE_PATH, ROLE_ADMIN, ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 
 function* fetchUsersSaga() {
   try {
@@ -65,6 +70,36 @@ function* requestUserDeletionSaga() {
   }
 }
 
+function* updateUserSaga(action) {
+  const { userData, history } = action.payload
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  const body = JSON.stringify({
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+  })
+
+  try {
+    const response = yield API.patch('/users', body, config)
+    const user = convertToRecord(response.data)
+    const userRole = yield select(state => state.getIn(['auth', 'user', 'role']))
+
+    yield put(updateUserSuccess(user))
+    yield put(authenticate())
+
+    if (userRole === ROLE_ADMIN) {
+      history.push(ADMIN_PRODUCTS_PAGE_PATH)
+    } else {
+      history.push(MAIN_PAGE_PATH)
+    }
+  } catch (error) {
+    yield put(updateUserError('User update error!'))
+  }
+}
+
 function* watchFetchUsers() {
   yield takeEvery(fetchUsers, fetchUsersSaga)
 }
@@ -77,4 +112,8 @@ function* watchRequestUserDeletion() {
   yield takeEvery(requestUserDeletion, requestUserDeletionSaga)
 }
 
-export { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion }
+function* watchUpdateUser() {
+  yield takeEvery(updateUser, updateUserSaga)
+}
+
+export { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion, watchUpdateUser }

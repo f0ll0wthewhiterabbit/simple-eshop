@@ -7,6 +7,7 @@ import PrivateRoute from './components/wrappers/PrivateRoute'
 
 import {
   MAIN_PAGE_PATH,
+  PROFILE_PAGE_PATH,
   SIGN_IN_PAGE_PATH,
   SIGN_UP_PAGE_PATH,
   ADMIN_PAGE_PATH,
@@ -17,6 +18,7 @@ import {
 } from './constants'
 
 const CatalogPage = React.lazy(() => import('./components/pages/Catalog'))
+const ProfilePage = React.lazy(() => import('./components/pages/Profile'))
 const SignInPage = React.lazy(() => import('./components/pages/SignIn'))
 const SignUpPage = React.lazy(() => import('./components/pages/SignUp'))
 const AdminUsersPage = React.lazy(() => import('./components/pages/admin/Users'))
@@ -31,6 +33,7 @@ export default () => {
         <React.Suspense fallback={<Loader />}>
           <Switch>
             <PrivateRoute exact path={MAIN_PAGE_PATH} component={CatalogPage} />
+            <PrivateRoute exact path={PROFILE_PAGE_PATH} component={ProfilePage} />
             <Route exact path={SIGN_IN_PAGE_PATH} component={SignInPage} />
             <Route exact path={SIGN_UP_PAGE_PATH} component={SignUpPage} />
             <PrivateRoute exact path={ADMIN_USERS_PAGE_PATH} component={AdminUsersPage} />

@@ -12,6 +12,9 @@ import {
   requestUserDeletion,
   requestUserDeletionSuccess,
   requestUserDeletionError,
+  updateUser,
+  updateUserSuccess,
+  updateUserError,
 } from '../actions'
 
 const UsersRecord = Record({
@@ -24,7 +27,7 @@ const initialState = new UsersRecord()
 
 const users = handleActions(
   {
-    [combineActions(fetchUsers, deleteUsers, requestUserDeletion)]: state =>
+    [combineActions(fetchUsers, deleteUsers, requestUserDeletion, updateUser)]: state =>
       state.set('isLoading', true),
     [fetchUsersSuccess]: (state, action) =>
       state
@@ -49,10 +52,21 @@ const users = handleActions(
         )
         .delete('isLoading')
         .delete('error'),
-    [combineActions(fetchUsersError, deleteUsersError, requestUserDeletionError)]: (
-      state,
-      action
-    ) => state.delete('isLoading').set('error', action.payload.error),
+    [updateUserSuccess]: (state, action) =>
+      state
+        .update('data', data =>
+          data.map(user =>
+            user.get('_id') === action.payload.user._id ? action.payload.user : user
+          )
+        )
+        .delete('isLoading')
+        .delete('error'),
+    [combineActions(
+      fetchUsersError,
+      deleteUsersError,
+      requestUserDeletionError,
+      updateUserError
+    )]: (state, action) => state.delete('isLoading').set('error', action.payload.error),
     [setSelectedUsers]: (state, action) => state.set('selected', action.payload.selectedUsersList),
   },
   initialState

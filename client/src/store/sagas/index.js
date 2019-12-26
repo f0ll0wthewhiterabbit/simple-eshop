@@ -7,7 +7,12 @@ import {
   watchAddProduct,
   watchDeleteProducts,
 } from './products'
-import { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion } from './users'
+import {
+  watchFetchUsers,
+  watchDeleteUsers,
+  watchRequestUserDeletion,
+  watchUpdateUser,
+} from './users'
 import { watchAuthenticate, watchSignUp, watchSignIn, watchSignOut } from './auth'
 
 export default function*() {
@@ -15,6 +20,7 @@ export default function*() {
     watchFetchUsers(),
     watchDeleteUsers(),
     watchRequestUserDeletion(),
+    watchUpdateUser(),
     watchFetchProducts(),
     watchChangeProductRating(),
     watchDeleteProductRating(),

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { withTheme } from 'styled-components'
 import { Menu, MenuItem, ListItemText, useMediaQuery } from '@material-ui/core'
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined'
@@ -15,7 +15,7 @@ import {
   ArrowIcon,
   IconWrapper,
 } from './styles'
-import { STORE_FIELD_CURRENT_USER } from '../../../../../constants'
+import { STORE_FIELD_CURRENT_USER, PROFILE_PAGE_PATH } from '../../../../../constants'
 
 const UserMenu = ({
   theme,
@@ -68,7 +68,7 @@ const UserMenu = ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem disabled>
+        <MenuItem component={Link} to={PROFILE_PAGE_PATH} onClick={handleClose}>
           <IconWrapper>
             <PersonOutlineOutlinedIcon fontSize="small" />
           </IconWrapper>

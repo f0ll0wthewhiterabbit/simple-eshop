@@ -101,36 +101,68 @@ router.post(
 
 /**
  * @route   PATCH api/users
- * @desc    Change isRemovable user field to true
+ * @desc    Update user. Can be with or without req.body:
+ *            1) With payload - change user firstName & lastName
+ *            2) Without payload - change isRemovable user field to true
  * @access  Private
  */
-router.patch('/', auth, async (req, res) => {
-  try {
-    const userId = req.user.id
-    const user = await User.findById(userId)
+router.patch(
+  '/',
+  [
+    auth,
+    check('firstName', 'First name is required')
+      .optional()
+      .not()
+      .isEmpty(),
+    check('lastName', 'Last name is required')
+      .optional()
+      .not()
+      .isEmpty(),
+  ],
+  async (req, res) => {
+    const userData = req.body
+    const userFields = {}
+    const errors = validationResult(req)
 
-    if (!user) {
-      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
     }
 
-    if (user.isRemovable) {
-      return res
-        .status(400)
-        .json({ errors: [{ msg: 'Delete account request has already been sent' }] })
+    if (userData.firstName) {
+      userFields.firstName = userData.firstName
     }
 
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { $set: { isRemovable: true } },
-      { new: true }
-    )
+    if (userData.lastName) {
+      userFields.lastName = userData.lastName
+    }
 
-    return res.json(updatedUser)
-  } catch (err) {
-    console.error(err.message)
-    return res.status(500).send('Server error')
+    try {
+      const userId = req.user.id
+      const user = await User.findById(userId)
+
+      if (!user) {
+        return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
+      }
+
+      if (!userData.firstName && !userData.lastName) {
+        if (user.isRemovable) {
+          return res
+            .status(400)
+            .json({ errors: [{ msg: 'Delete account request has already been sent' }] })
+        }
+
+        userFields.isRemovable = true
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(userId, { $set: userFields }, { new: true })
+
+      return res.json(updatedUser)
+    } catch (err) {
+      console.error(err.message)
+      return res.status(500).send('Server error')
+    }
   }
-})
+)
 
 /**
  * @route   Delete api/users
