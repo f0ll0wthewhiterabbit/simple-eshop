@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { List } from 'immutable'
 import {
@@ -11,11 +12,13 @@ import {
   Checkbox,
   IconButton,
   Tooltip,
+  Link as MiuLink,
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import formatPrice from '../../../utils/formatPrice'
 import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
+import { ADMIN_PRODUCTS_PAGE_PATH } from '../../../constants'
 
 const Table = ({
   rows,
@@ -83,32 +86,40 @@ const Table = ({
   const isSelected = id => selectedItems.indexOf(id) !== -1
 
   const mapRowToTableCellContent = (id, row) => {
+    if (id === 'title') {
+      return (
+        <MiuLink component={Link} to={`${ADMIN_PRODUCTS_PAGE_PATH}/${row._id}`}>
+          {row.title}
+        </MiuLink>
+      )
+    }
+
     if (id === 'tags') {
-      if (row[id].size === 0) {
+      if (row.tags.size === 0) {
         return '-'
       }
 
-      return row[id].join(', ')
+      return row.tags.join(', ')
     }
 
     if (id === 'image') {
-      return <Image src={row[id]} alt={row.title} />
+      return <Image src={row.image} alt={row.title} />
     }
 
     if (id === 'rating') {
-      const ratingsAmount = row[id].size
+      const ratingsAmount = row.rating.size
 
       if (ratingsAmount === 0) {
         return '-'
       }
 
-      const averageRating = Math.round(row[id].reduce((a, b) => a + b.stars, 0) / ratingsAmount)
+      const averageRating = Math.round(row.rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
 
       return averageRating
     }
 
     if (id === 'price') {
-      return formatPrice(row[id])
+      return formatPrice(row.price)
     }
 
     return row[id]
@@ -179,7 +190,6 @@ const Table = ({
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row._id, isRowRemovable)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -196,6 +206,7 @@ const Table = ({
                           checked={isItemSelected}
                           disabled={!isRowRemovable}
                           inputProps={{ 'aria-labelledby': labelId }}
+                          onClick={event => handleClick(event, row._id, isRowRemovable)}
                         />
                       </TableCell>
                     </TableRow>

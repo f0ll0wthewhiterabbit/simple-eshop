@@ -51,3 +51,12 @@ export const addProductSuccess = createAction('PRODUCTS/ADD_PRODUCT_SUCCESS', pr
 }))
 export const addProductError = createAction('PRODUCTS/ADD_PRODUCT_ERROR', error => ({ error }))
 export const startRatingLoading = createAction('PRODUCTS/START_RATING_LOADING', id => ({ id }))
+export const editProduct = createAction('PRODUCTS/EDIT_PRODUCT', (id, changedFields, history) => ({
+  id,
+  changedFields,
+  history,
+}))
+export const editProductSuccess = createAction('PRODUCTS/EDIT_PRODUCT_SUCCESS', product => ({
+  product,
+}))
+export const editProductError = createAction('PRODUCTS/EDIT_PRODUCT_ERROR', error => ({ error }))

@@ -5,6 +5,7 @@ import {
   watchChangeProductRating,
   watchDeleteProductRating,
   watchAddProduct,
+  watchEditProduct,
   watchDeleteProducts,
 } from './products'
 import {
@@ -25,6 +26,7 @@ export default function*() {
     watchChangeProductRating(),
     watchDeleteProductRating(),
     watchAddProduct(),
+    watchEditProduct(),
     watchDeleteProducts(),
     watchAuthenticate(),
     watchSignUp(),

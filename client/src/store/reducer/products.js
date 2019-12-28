@@ -16,6 +16,9 @@ import {
   addProduct,
   addProductSuccess,
   addProductError,
+  editProduct,
+  editProductSuccess,
+  editProductError,
   startRatingLoading,
 } from '../actions'
 
@@ -31,13 +34,15 @@ const initialState = new ProductsRecord()
 
 const products = handleActions(
   {
-    [combineActions(fetchProducts, addProduct, deleteProducts)]: state =>
+    [combineActions(fetchProducts, addProduct, editProduct, deleteProducts)]: state =>
       state.set('isLoading', true),
+
     [fetchProductsSuccess]: (state, action) =>
       state
         .set('data', action.payload.productsList)
         .delete('isLoading')
         .delete('error'),
+
     [deleteProductsSuccess]: (state, action) =>
       state
         .update('data', data =>
@@ -48,11 +53,13 @@ const products = handleActions(
         )
         .delete('isLoading')
         .delete('error'),
+
     [addProductSuccess]: (state, action) =>
       state
         .update('data', data => data.push(action.payload.product))
         .delete('isLoading')
         .delete('error'),
+
     [combineActions(changeProductRatingSuccess, deleteProductRatingSuccess)]: (state, action) =>
       state
         .update('data', data =>
@@ -66,16 +73,32 @@ const products = handleActions(
         .update('ratingsErrorList', ratingsErrorList =>
           ratingsErrorList.filter(id => id !== action.payload.product._id)
         ),
-    [combineActions(fetchProductsError, deleteProductsError, addProductError)]: (state, action) =>
-      state.delete('isLoading').set('error', action.payload.error),
+
+    [editProductSuccess]: (state, action) =>
+      state
+        .update('data', data =>
+          data.map(product =>
+            product.get('_id') !== action.payload.product._id ? product : action.payload.product
+          )
+        )
+        .delete('isLoading')
+        .delete('error'),
+
+    [combineActions(fetchProductsError, addProductError, editProductError, deleteProductsError)]: (
+      state,
+      action
+    ) => state.delete('isLoading').set('error', action.payload.error),
+
     [combineActions(changeProductRatingError, deleteProductRatingError)]: (state, action) =>
       state
         .update('ratingsLoadingList', ratingsLoadingList =>
           ratingsLoadingList.filter(id => id !== action.payload.id)
         )
         .update('ratingsErrorList', ratingsErrorList => ratingsErrorList.push(action.payload.id)),
+
     [setSelectedProducts]: (state, action) =>
       state.set('selected', action.payload.selectedProductsList),
+
     [startRatingLoading]: (state, action) =>
       state.update('ratingsLoadingList', ratingsLoadingList =>
         ratingsLoadingList.push(action.payload.id)

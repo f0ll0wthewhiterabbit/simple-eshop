@@ -14,7 +14,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
 
   let content
 
-  if (error || products.length === 0) {
+  if (error || products.size === 0) {
     content = (
       <Typography variant="body1" align="center">
         Sorry, there are no products yet

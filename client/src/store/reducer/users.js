@@ -29,11 +29,13 @@ const users = handleActions(
   {
     [combineActions(fetchUsers, deleteUsers, requestUserDeletion, updateUser)]: state =>
       state.set('isLoading', true),
+
     [fetchUsersSuccess]: (state, action) =>
       state
         .set('data', action.payload.usersList)
         .delete('isLoading')
         .delete('error'),
+
     [deleteUsersSuccess]: (state, action) =>
       state
         .update('data', data =>
@@ -43,6 +45,7 @@ const users = handleActions(
         )
         .delete('isLoading')
         .delete('error'),
+
     [requestUserDeletionSuccess]: (state, action) =>
       state
         .update('data', data =>
@@ -52,6 +55,7 @@ const users = handleActions(
         )
         .delete('isLoading')
         .delete('error'),
+
     [updateUserSuccess]: (state, action) =>
       state
         .update('data', data =>
@@ -61,12 +65,14 @@ const users = handleActions(
         )
         .delete('isLoading')
         .delete('error'),
+
     [combineActions(
       fetchUsersError,
       deleteUsersError,
       requestUserDeletionError,
       updateUserError
     )]: (state, action) => state.delete('isLoading').set('error', action.payload.error),
+
     [setSelectedUsers]: (state, action) => state.set('selected', action.payload.selectedUsersList),
   },
   initialState

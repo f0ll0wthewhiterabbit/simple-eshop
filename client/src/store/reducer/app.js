@@ -17,8 +17,11 @@ const app = handleActions(
         isModalOpened: true,
         storeFieldNameForModal: action.payload.storeFieldNameForModal,
       }),
+
     [closeModal]: state => state.delete('isModalOpened').delete('storeFieldNameForModal'),
+
     [openSidebar]: state => state.set('isSidebarOpened', true),
+
     [closeSidebar]: state => state.delete('isSidebarOpened'),
   },
   initialState

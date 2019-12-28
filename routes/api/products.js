@@ -31,7 +31,7 @@ router.get('/', auth, async (req, res) => {
 
 /**
  * @route   POST api/products
- * @desc    Create new post
+ * @desc    Create new product
  * @access  Private
  */
 router.post(
@@ -90,8 +90,8 @@ router.post(
 )
 
 /**
- * @route   PATCH api/products
- * @desc    Update post
+ * @route   PATCH api/products/:id
+ * @desc    Update product
  * @access  Private
  */
 router.patch(

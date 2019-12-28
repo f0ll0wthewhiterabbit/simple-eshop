@@ -18,6 +18,18 @@ const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
     )
   }
 
+  const isDataChanged = (newFirstName, newLastName) => {
+    if (newFirstName !== firstName) {
+      return true
+    }
+
+    if (newLastName !== lastName) {
+      return true
+    }
+
+    return false
+  }
+
   return (
     <Formik
       initialValues={{
@@ -73,8 +85,7 @@ const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
             variant="contained"
             color="primary"
             disabled={
-              (values.firstName === firstName && values.lastName === lastName) ||
-              (isSubmitting && error === null)
+              !isDataChanged(values.firstName, values.lastName) || (isSubmitting && error === null)
             }
           >
             {isSubmitting && error === null ? <Progress size={20} /> : 'Save changes'}

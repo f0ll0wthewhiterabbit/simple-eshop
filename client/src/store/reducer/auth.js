@@ -37,6 +37,7 @@ const auth = handleActions(
           user: action.payload.userData,
         })
         .delete('error'),
+
     [combineActions(signUpSuccess, signInSuccess)]: (state, action) =>
       state
         .merge({
@@ -44,12 +45,14 @@ const auth = handleActions(
           token: action.payload.token,
         })
         .delete('error'),
+
     [combineActions(authenticateError, signUpError, signInError)]: (state, action) =>
       state
         .delete('isAuthenticated')
         .delete('token')
         .delete('user')
         .set('error', action.payload.error),
+
     [signOutSuccess]: state =>
       state
         .delete('isAuthenticated')

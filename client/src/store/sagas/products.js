@@ -5,24 +5,27 @@ import API from '../../utils/api'
 import convertToRecord from '../../utils/convertToRecord'
 import { ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 import {
+  fetchProducts,
   fetchProductsSuccess,
   fetchProductsError,
+  changeProductRating,
   changeProductRatingSuccess,
   changeProductRatingError,
+  deleteProductRating,
   deleteProductRatingSuccess,
   deleteProductRatingError,
+  addProduct,
   addProductSuccess,
   addProductError,
+  editProduct,
+  editProductSuccess,
+  editProductError,
+  deleteProducts,
   deleteProductsSuccess,
   deleteProductsError,
   closeModal,
   setSelectedProducts,
   startRatingLoading,
-  fetchProducts,
-  changeProductRating,
-  deleteProductRating,
-  addProduct,
-  deleteProducts,
 } from '../actions'
 
 function* fetchProductsSaga() {
@@ -81,13 +84,13 @@ function* deleteProductRatingSaga(action) {
 }
 
 function* addProductSaga(action) {
-  const { history } = action.payload
+  const { productData, history } = action.payload
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   }
-  const body = JSON.stringify(action.payload.productData)
+  const body = JSON.stringify(productData)
 
   try {
     const response = yield API.post('/products', body, config)
@@ -97,6 +100,26 @@ function* addProductSaga(action) {
     history.push(ADMIN_PRODUCTS_PAGE_PATH)
   } catch (error) {
     yield put(addProductError('Product add error!'))
+  }
+}
+
+function* editProductSaga(action) {
+  const { id, changedFields, history } = action.payload
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  const body = JSON.stringify(changedFields)
+
+  try {
+    const response = yield API.patch(`/products/${id}`, body, config)
+    const product = convertToRecord(response.data)
+
+    yield put(editProductSuccess(product))
+    history.push(ADMIN_PRODUCTS_PAGE_PATH)
+  } catch (error) {
+    yield put(editProductError('Product edit error!'))
   }
 }
 
@@ -137,6 +160,10 @@ function* watchAddProduct() {
   yield takeEvery(addProduct, addProductSaga)
 }
 
+function* watchEditProduct() {
+  yield takeEvery(editProduct, editProductSaga)
+}
+
 function* watchDeleteProducts() {
   yield takeEvery(deleteProducts, deleteProductsSaga)
 }
@@ -146,5 +173,6 @@ export {
   watchChangeProductRating,
   watchDeleteProductRating,
   watchAddProduct,
+  watchEditProduct,
   watchDeleteProducts,
 }
