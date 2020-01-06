@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
+const User = require('../models/User')
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
   const token = req.header('x-auth-token')
 
   if (!token) {
@@ -9,11 +10,18 @@ module.exports = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    req.user = decoded.user
+
+    const user = await User.findById(decoded.user.id)
+
+    req.user = user
     next()
   } catch (err) {
     if (err.name === 'TokenExpiredError') {
       return res.status(401).json({ errors: [{ msg: 'Token expired' }] })
+    }
+
+    if (err.name === 'CastError') {
+      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
     }
 
     return res.status(401).json({ errors: [{ msg: 'Token is not valid' }] })

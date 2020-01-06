@@ -84,42 +84,48 @@ function* deleteProductRatingSaga(action) {
 }
 
 function* addProductSaga(action) {
-  const { productData, history } = action.payload
+  const { productFormData, history } = action.payload
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
     },
   }
-  const body = JSON.stringify(productData)
 
   try {
-    const response = yield API.post('/products', body, config)
+    const response = yield API.post('/products', productFormData, config)
     const product = convertToRecord(response.data)
 
     yield put(addProductSuccess(product))
     history.push(ADMIN_PRODUCTS_PAGE_PATH)
   } catch (error) {
-    yield put(addProductError('Product add error!'))
+    const message = error.response.data.errors
+      ? error.response.data.errors[0].msg
+      : 'Product add error!'
+
+    yield put(addProductError(message))
   }
 }
 
 function* editProductSaga(action) {
-  const { id, changedFields, history } = action.payload
+  const { id, changedFieldsFormData, history } = action.payload
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
     },
   }
-  const body = JSON.stringify(changedFields)
 
   try {
-    const response = yield API.patch(`/products/${id}`, body, config)
+    const response = yield API.patch(`/products/${id}`, changedFieldsFormData, config)
     const product = convertToRecord(response.data)
 
     yield put(editProductSuccess(product))
     history.push(ADMIN_PRODUCTS_PAGE_PATH)
   } catch (error) {
-    yield put(editProductError('Product edit error!'))
+    const message = error.response.data.errors
+      ? error.response.data.errors[0].msg
+      : 'Product add error!'
+
+    yield put(editProductError(message))
   }
 }
 

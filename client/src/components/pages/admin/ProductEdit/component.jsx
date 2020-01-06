@@ -39,7 +39,7 @@ const ProductEditPage = ({ isLoading, products, fetchProducts }) => {
     title: product.title,
     description: product.description,
     price: product.price,
-    imageSrc: product.image,
+    imageName: product.imageName,
     tags: product.tags.toJS(),
   }
 
@@ -65,7 +65,7 @@ ProductEditPage.propTypes = {
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
-      image: PropTypes.string.isRequired,
+      imageName: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       tags: ImmutablePropTypes.listOf(PropTypes.string),
       rating: ImmutablePropTypes.listOf(

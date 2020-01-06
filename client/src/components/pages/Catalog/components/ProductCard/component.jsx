@@ -6,6 +6,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import formatPrice from '../../../../../utils/formatPrice'
+import { API_URL } from '../../../../../constants'
 import {
   Wrapper,
   ImageWrapper,
@@ -31,7 +32,7 @@ const ProductCard = ({
   ratingsLoadingList,
   ratingsErrorList,
 }) => {
-  const { id, title, description, tags, price, rating, image: imageSrc } = productData
+  const { id, title, description, tags, price, rating, imageName } = productData
   const ratingsAmount = rating.size
   const averageRating = Math.round(rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
   const currentUserRating = rating.find(it => it.userId === currentUserId)
@@ -81,7 +82,7 @@ const ProductCard = ({
 
   return (
     <Wrapper>
-      <ImageWrapper image={imageSrc} title={title} />
+      <ImageWrapper image={`${API_URL}/products/${id}/${imageName}`} title={title} />
       <Content>
         <Title gutterBottom variant="h5" component="h2">
           {title}
@@ -126,7 +127,7 @@ ProductCard.propTypes = {
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
-    image: PropTypes.string.isRequired,
+    imageName: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     tags: ImmutablePropTypes.listOf(PropTypes.string),
     rating: ImmutablePropTypes.listOf(

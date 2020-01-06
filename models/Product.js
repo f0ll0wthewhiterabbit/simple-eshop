@@ -23,9 +23,13 @@ const ProductSchema = new Schema(
       required: true,
     },
     image: {
+      type: Buffer,
+      required: true,
+    },
+    imageName: {
       type: String,
       required: true,
-      trim: true,
+      default: 'image',
     },
     rating: {
       type: [
@@ -53,6 +57,15 @@ const ProductSchema = new Schema(
     timestamps: true,
   }
 )
+
+ProductSchema.methods.getPublicFields = function() {
+  const productObject = this.toObject()
+
+  delete productObject.image
+  delete productObject.__v
+
+  return productObject
+}
 
 // Price getter
 ProductSchema.path('price').get(num => Number((num / 100).toFixed(2)))

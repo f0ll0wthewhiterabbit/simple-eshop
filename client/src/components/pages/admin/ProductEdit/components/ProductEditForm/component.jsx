@@ -19,10 +19,9 @@ import {
 
 const ProductEditForm = ({ product, error, editProduct, history }) => {
   const [tags, setTags] = useState(product.tags)
-  const [imageLabel, setImageLabel] = useState('')
   const hiddenFileInput = useRef(null)
 
-  const { id, title, description, price, imageSrc } = product
+  const { id, title, description, price, imageName } = product
 
   const handleAddTag = tag => {
     setTags([...tags, tag.trim()])
@@ -30,12 +29,6 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
 
   const handleDeleteTag = (tag, index) => {
     setTags([...tags.slice(0, index), ...tags.slice(index + 1)])
-  }
-
-  const handleImageChange = evt => {
-    if (evt.target.files[0].name) {
-      setImageLabel(evt.target.files[0].name)
-    }
   }
 
   const handleButtonKeyDown = evt => {
@@ -50,32 +43,32 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
   }
 
   const handleFormSubmit = values => {
-    const changedFields = {}
+    const changedFieldsFormData = new FormData()
 
     if (values.title !== title) {
-      changedFields.title = values.title
+      changedFieldsFormData.set('title', values.title)
     }
 
     if (values.price !== price) {
-      changedFields.price = values.price
+      changedFieldsFormData.set('price', values.price)
     }
 
     if (values.description !== description) {
-      changedFields.description = values.description
+      changedFieldsFormData.set('description', values.description)
     }
 
-    if (values.image !== imageSrc) {
-      changedFields.image = values.image
+    if (values.image !== imageName) {
+      changedFieldsFormData.set('image', values.image, values.image.name)
     }
 
     if (JSON.stringify(tags) !== JSON.stringify(product.tags)) {
-      changedFields.tags = tags
+      changedFieldsFormData.set('tags', tags)
     }
 
-    editProduct(id, changedFields, history)
+    editProduct(id, changedFieldsFormData, history)
   }
 
-  const isDataChanged = (newTitle, newPrice, newDescription, newImageSrc, newTags) => {
+  const isDataChanged = (newTitle, newPrice, newDescription, newImageName, newTags) => {
     if (newTitle !== title) {
       return true
     }
@@ -88,7 +81,7 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
       return true
     }
 
-    if (newImageSrc !== imageSrc) {
+    if (newImageName !== imageName) {
       return true
     }
 
@@ -105,7 +98,7 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
         title,
         price,
         description,
-        image: imageSrc,
+        image: imageName,
       }}
       validationSchema={Yup.object({
         title: Yup.string().required('Title is required'),
@@ -113,13 +106,20 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
           .matches(/^\d+(\.\d{1,2})?$/, 'Wrong price format')
           .required('Price is required'),
         description: Yup.string().required('Description is required'),
-        image: Yup.string()
-          .url('Image should be a correct url address')
-          .required('Image url is required'),
+        image: Yup.mixed().required('Image is required'),
       })}
       onSubmit={handleFormSubmit}
     >
-      {({ handleChange, handleBlur, values, errors, touched, isSubmitting }) => (
+      {({
+        handleChange,
+        handleBlur,
+        values,
+        errors,
+        touched,
+        isSubmitting,
+        setFieldValue,
+        setFieldTouched,
+      }) => (
         <StyledForm as={Form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={8}>
@@ -138,6 +138,7 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
                 helperText={errors.title && touched.title && errors.title}
               />
             </Grid>
+
             <Grid item xs={12} sm={4}>
               <TextField
                 name="price"
@@ -154,6 +155,7 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
                 helperText={errors.price && touched.price && errors.price}
               />
             </Grid>
+
             <Grid item xs={12}>
               <TextField
                 name="description"
@@ -172,6 +174,7 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
                 helperText={errors.description && touched.description && errors.description}
               />
             </Grid>
+
             <Grid item xs={12}>
               <TagsInput
                 name="tags"
@@ -186,46 +189,40 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
                 helperText="Hit Enter to add new tag"
               />
             </Grid>
-            {false && ( // TODO:
-              <Grid item xs={12}>
-                <FileInputWrapper>
-                  <Label htmlFor="file-button">
-                    <FileInput
-                      accept="image/*"
-                      id="file-button"
-                      type="file"
-                      onChange={handleImageChange}
-                      required
-                      ref={hiddenFileInput}
-                    />
-                    <UploadButton
-                      variant="contained"
-                      color="default"
-                      startIcon={<ImageIcon />}
-                      component="span"
-                      onKeyDown={handleButtonKeyDown}
-                    >
-                      Upload
-                    </UploadButton>
-                  </Label>
-                  <Typography variant="body2">{imageLabel}</Typography>
-                </FileInputWrapper>
-              </Grid>
-            )}
+
             <Grid item xs={12}>
-              <TextField
-                name="image"
-                id="image"
-                label="Image Url"
-                variant="outlined"
-                required
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.image}
-                error={errors.image && touched.image}
-                helperText={errors.image && touched.image && errors.image}
-              />
+              <FileInputWrapper>
+                <Label htmlFor="file-input">
+                  <FileInput
+                    accept="image/*"
+                    id="file-input"
+                    name="file-input"
+                    type="file"
+                    onChange={event => {
+                      setFieldValue('image', event.currentTarget.files[0])
+                    }}
+                    ref={hiddenFileInput}
+                  />
+                  <UploadButton
+                    variant="contained"
+                    color="default"
+                    startIcon={<ImageIcon />}
+                    component="span"
+                    onKeyDown={handleButtonKeyDown}
+                  >
+                    {values.image ? 'Change' : 'Upload'}
+                  </UploadButton>
+                </Label>
+                {errors.image && touched.image ? (
+                  <Typography variant="body2" color="error">
+                    {errors.image}
+                  </Typography>
+                ) : (
+                  <Typography variant="body2">
+                    {values.image !== imageName ? values.image.name : imageName}
+                  </Typography>
+                )}
+              </FileInputWrapper>
             </Grid>
           </Grid>
           <SubmitButton
@@ -233,8 +230,15 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
             fullWidth
             variant="contained"
             color="primary"
+            onFocus={() => setFieldTouched('image', true)}
             disabled={
-              !isDataChanged(values.title, values.price, values.description, values.image, tags) ||
+              !isDataChanged(
+                values.title,
+                values.price,
+                values.description,
+                values.image !== imageName ? values.image.name : imageName,
+                tags
+              ) ||
               (isSubmitting && error === null)
             }
           >
@@ -260,7 +264,7 @@ ProductEditForm.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
-    imageSrc: PropTypes.string.isRequired,
+    imageName: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,

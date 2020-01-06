@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addProduct: (productData, history) => dispatch(addProduct(productData, history)),
+  addProduct: (productFormData, history) => dispatch(addProduct(productFormData, history)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductAddForm)

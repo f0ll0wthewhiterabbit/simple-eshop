@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
-const connectDB = require('./config/db')
+const connectDB = require('./db/mongoose')
 
 const app = express()
 

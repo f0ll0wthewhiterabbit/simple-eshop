@@ -56,7 +56,7 @@ CatalogPage.propTypes = {
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
-      image: PropTypes.string,
+      imageName: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       tags: ImmutablePropTypes.listOf(PropTypes.string),
       rating: ImmutablePropTypes.listOf(

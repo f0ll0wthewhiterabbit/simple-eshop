@@ -19,7 +19,6 @@ import {
 
 const ProductAddForm = ({ error, addProduct, history }) => {
   const [tags, setTags] = useState(['Foo', 'Bar'])
-  const [imageLabel, setImageLabel] = useState('')
   const hiddenFileInput = useRef(null)
 
   const handleAddTag = tag => {
@@ -28,12 +27,6 @@ const ProductAddForm = ({ error, addProduct, history }) => {
 
   const handleDeleteTag = (tag, index) => {
     setTags([...tags.slice(0, index), ...tags.slice(index + 1)])
-  }
-
-  const handleImageChange = evt => {
-    if (evt.target.files[0].name) {
-      setImageLabel(evt.target.files[0].name)
-    }
   }
 
   const handleButtonKeyDown = evt => {
@@ -48,16 +41,14 @@ const ProductAddForm = ({ error, addProduct, history }) => {
   }
 
   const handleFormSubmit = values => {
-    addProduct(
-      {
-        title: values.title,
-        price: values.price,
-        description: values.description,
-        image: values.image,
-        tags,
-      },
-      history
-    )
+    const formData = new FormData()
+    formData.set('title', values.title)
+    formData.set('price', values.price)
+    formData.set('description', values.description)
+    formData.set('tags', tags)
+    formData.set('image', values.image, values.image.name)
+
+    addProduct(formData, history)
   }
 
   return (
@@ -74,13 +65,20 @@ const ProductAddForm = ({ error, addProduct, history }) => {
           .matches(/^\d+(\.\d{1,2})?$/, 'Wrong price format')
           .required('Price is required'),
         description: Yup.string().required('Description is required'),
-        image: Yup.string()
-          .url('Image should be a correct url address')
-          .required('Image url is required'),
+        image: Yup.mixed().required('Image is required'),
       })}
       onSubmit={handleFormSubmit}
     >
-      {({ handleChange, handleBlur, values, errors, touched, isSubmitting }) => (
+      {({
+        handleChange,
+        handleBlur,
+        values,
+        errors,
+        touched,
+        isSubmitting,
+        setFieldValue,
+        setFieldTouched,
+      }) => (
         <StyledForm as={Form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={8}>
@@ -99,6 +97,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
                 helperText={errors.title && touched.title && errors.title}
               />
             </Grid>
+
             <Grid item xs={12} sm={4}>
               <TextField
                 name="price"
@@ -115,6 +114,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
                 helperText={errors.price && touched.price && errors.price}
               />
             </Grid>
+
             <Grid item xs={12}>
               <TextField
                 name="description"
@@ -133,6 +133,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
                 helperText={errors.description && touched.description && errors.description}
               />
             </Grid>
+
             <Grid item xs={12}>
               <TagsInput
                 name="tags"
@@ -147,46 +148,38 @@ const ProductAddForm = ({ error, addProduct, history }) => {
                 helperText="Hit Enter to add new tag"
               />
             </Grid>
-            {false && ( // TODO:
-              <Grid item xs={12}>
-                <FileInputWrapper>
-                  <Label htmlFor="file-button">
-                    <FileInput
-                      accept="image/*"
-                      id="file-button"
-                      type="file"
-                      onChange={handleImageChange}
-                      required
-                      ref={hiddenFileInput}
-                    />
-                    <UploadButton
-                      variant="contained"
-                      color="default"
-                      startIcon={<ImageIcon />}
-                      component="span"
-                      onKeyDown={handleButtonKeyDown}
-                    >
-                      Upload
-                    </UploadButton>
-                  </Label>
-                  <Typography variant="body2">{imageLabel}</Typography>
-                </FileInputWrapper>
-              </Grid>
-            )}
+
             <Grid item xs={12}>
-              <TextField
-                name="image"
-                id="image"
-                label="Image Url"
-                variant="outlined"
-                required
-                fullWidth
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.image}
-                error={errors.image && touched.image}
-                helperText={errors.image && touched.image && errors.image}
-              />
+              <FileInputWrapper>
+                <Label htmlFor="file-input">
+                  <FileInput
+                    accept="image/*"
+                    id="file-input"
+                    name="file-input"
+                    type="file"
+                    onChange={event => {
+                      setFieldValue('image', event.currentTarget.files[0])
+                    }}
+                    ref={hiddenFileInput}
+                  />
+                  <UploadButton
+                    variant="contained"
+                    color="default"
+                    startIcon={<ImageIcon />}
+                    component="span"
+                    onKeyDown={handleButtonKeyDown}
+                  >
+                    {values.image ? 'Change' : 'Upload'}
+                  </UploadButton>
+                </Label>
+                {errors.image && touched.image ? (
+                  <Typography variant="body2" color="error">
+                    {errors.image}
+                  </Typography>
+                ) : (
+                  <Typography variant="body2">{values.image.name}</Typography>
+                )}
+              </FileInputWrapper>
             </Grid>
           </Grid>
           <SubmitButton
@@ -194,6 +187,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
             fullWidth
             variant="contained"
             color="primary"
+            onFocus={() => setFieldTouched('image', true)}
             disabled={isSubmitting && error === null}
           >
             {isSubmitting && error === null ? <Progress size={20} /> : 'Add Product'}

@@ -15,13 +15,13 @@ const router = express.Router()
  */
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id)
-
-    if (!user || user.role !== roles.ADMIN) {
+    if (req.user.role !== roles.ADMIN) {
       return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
     }
 
-    const users = await User.find().select('-password')
+    const users = await User.find()
+      .select('-password')
+      .select('-__v')
 
     return res.json(users)
   } catch (err) {
@@ -38,12 +38,8 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [
-    check('firstName', 'First name is required')
-      .not()
-      .isEmpty(),
-    check('lastName', 'Last name is required')
-      .not()
-      .isEmpty(),
+    check('firstName', 'First name is required').notEmpty(),
+    check('lastName', 'Last name is required').notEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 }),
   ],
@@ -112,12 +108,10 @@ router.patch(
     auth,
     check('firstName', 'First name is required')
       .optional()
-      .not()
-      .isEmpty(),
+      .notEmpty(),
     check('lastName', 'Last name is required')
       .optional()
-      .not()
-      .isEmpty(),
+      .notEmpty(),
   ],
   async (req, res) => {
     const userData = req.body
@@ -137,15 +131,8 @@ router.patch(
     }
 
     try {
-      const userId = req.user.id
-      const user = await User.findById(userId)
-
-      if (!user) {
-        return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
-      }
-
       if (!userData.firstName && !userData.lastName) {
-        if (user.isRemovable) {
+        if (req.user.isRemovable) {
           return res
             .status(400)
             .json({ errors: [{ msg: 'Delete account request has already been sent' }] })
@@ -154,7 +141,11 @@ router.patch(
         userFields.isRemovable = true
       }
 
-      const updatedUser = await User.findByIdAndUpdate(userId, { $set: userFields }, { new: true })
+      const updatedUser = await User.findByIdAndUpdate(
+        req.user.id,
+        { $set: userFields },
+        { new: true }
+      )
 
       return res.json(updatedUser)
     } catch (err) {
@@ -177,9 +168,7 @@ router.delete('/', [auth, body().isArray()], async (req, res) => {
   }
 
   try {
-    const user = await User.findById(req.user.id)
-
-    if (!user || user.role !== roles.ADMIN) {
+    if (req.user.role !== roles.ADMIN) {
       return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
     }
 

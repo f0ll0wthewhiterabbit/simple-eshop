@@ -54,6 +54,9 @@
     "object-curly-newline": "off",
     "semi": "off",
     "no-console": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "no-underscore-dangle": "off",
+    "space-before-function-paren": "off",
+    "func-names": "off"
   }
 }

@@ -41,13 +41,13 @@ export default () => {
             <PrivateRoute exact path={ADMIN_PRODUCTS_PAGE_PATH} component={AdminProductsPage} />
             <PrivateRoute
               exact
-              path={`${ADMIN_PRODUCTS_PAGE_PATH}/:id`}
-              component={AdminProductEditPage}
+              path={ADMIN_PRODUCT_ADD_PAGE_PATH}
+              component={AdminProductAddPage}
             />
             <PrivateRoute
               exact
-              path={ADMIN_PRODUCT_ADD_PAGE_PATH}
-              component={AdminProductAddPage}
+              path={`${ADMIN_PRODUCTS_PAGE_PATH}/:id`}
+              component={AdminProductEditPage}
             />
             <PrivateRoute
               exact

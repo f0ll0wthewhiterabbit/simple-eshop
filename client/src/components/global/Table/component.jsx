@@ -17,8 +17,8 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import formatPrice from '../../../utils/formatPrice'
+import { ADMIN_PRODUCTS_PAGE_PATH, API_URL } from '../../../constants'
 import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
-import { ADMIN_PRODUCTS_PAGE_PATH } from '../../../constants'
 
 const Table = ({
   rows,
@@ -103,7 +103,7 @@ const Table = ({
     }
 
     if (id === 'image') {
-      return <Image src={row.image} alt={row.title} />
+      return <Image src={`${API_URL}/products/${row._id}/${row.imageName}`} alt={row.title} />
     }
 
     if (id === 'rating') {
