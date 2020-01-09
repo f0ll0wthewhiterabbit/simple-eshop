@@ -17,20 +17,30 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import formatPrice from '../../../utils/formatPrice'
-import { ADMIN_PRODUCTS_PAGE_PATH, API_URL } from '../../../constants'
+import {
+  ADMIN_PRODUCTS_PAGE_PATH,
+  API_URL,
+  ADMIN_HIGH_PER_PAGE_LIMIT,
+  DEFAULT_ADMIN_PER_PAGE_LIMIT,
+  ADMIN_LOW_PER_PAGE_LIMIT,
+} from '../../../constants'
 import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
 
 const Table = ({
   rows,
+  rowsPerPage,
+  currentPage,
+  totalAmount,
   headCells,
   title,
   storeFieldName,
   showModal,
   selectedItems,
   setSelectedItems,
+  fetchData,
+  setRowsPerPage,
 }) => {
   const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const numSelected = selectedItems.size
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.size - page * rowsPerPage)
@@ -75,6 +85,9 @@ const Table = ({
   }
 
   const handleChangePage = (event, newPage) => {
+    const term = currentPage === newPage ? 1 : -1
+
+    fetchData(currentPage + term, rowsPerPage)
     setPage(newPage)
   }
 
@@ -221,11 +234,15 @@ const Table = ({
           </TableRoot>
         </TableWrapper>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[
+            ADMIN_LOW_PER_PAGE_LIMIT,
+            DEFAULT_ADMIN_PER_PAGE_LIMIT,
+            ADMIN_HIGH_PER_PAGE_LIMIT,
+          ]}
           component="div"
-          count={rows.size}
+          count={totalAmount}
           rowsPerPage={rowsPerPage}
-          page={page}
+          page={currentPage - 1}
           backIconButtonProps={{
             'aria-label': 'previous page',
           }}
@@ -242,6 +259,9 @@ const Table = ({
 
 Table.propTypes = {
   rows: ImmutablePropTypes.listOf(ImmutablePropTypes.record).isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  totalAmount: PropTypes.number.isRequired,
   headCells: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -253,6 +273,8 @@ Table.propTypes = {
   showModal: PropTypes.func.isRequired,
   selectedItems: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
   setSelectedItems: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
+  setRowsPerPage: PropTypes.func.isRequired,
 }
 
 export default Table

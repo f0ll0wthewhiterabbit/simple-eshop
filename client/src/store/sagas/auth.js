@@ -6,6 +6,8 @@ import {
   ADMIN_PAGE_PATH,
   SIGN_IN_PAGE_PATH,
   ERROR_PAGE_PATH,
+  ROLE_ADMIN,
+  DEFAULT_ADMIN_PER_PAGE_LIMIT,
 } from '../../constants'
 import {
   signUpSuccess,
@@ -19,6 +21,7 @@ import {
   signUp,
   signIn,
   signOut,
+  setProductsPerPage,
 } from '../actions'
 import setAuthToken from '../../utils/setAuthToken'
 
@@ -36,6 +39,10 @@ function* authenticateSaga() {
     const response = yield API.get('/auth')
     const { _id: id, firstName, lastName, email, role, isRemovable } = response.data
     const userData = { id, firstName, lastName, email, role, isRemovable }
+
+    if (role === ROLE_ADMIN) {
+      yield put(setProductsPerPage(DEFAULT_ADMIN_PER_PAGE_LIMIT))
+    }
 
     yield put(authenticateSuccess(userData))
   } catch (error) {

@@ -28,12 +28,22 @@ import {
   startRatingLoading,
 } from '../actions'
 
-function* fetchProductsSaga() {
+function* fetchProductsSaga(action) {
   try {
-    const response = yield API.get('/products')
-    const productsList = convertToRecord(response.data)
+    const { currentPage: page, itemsPerPage: limit } = action.payload
+    const url = limit ? `/products/?page=${page}&limit=${limit}` : `/products/?page=${page}`
+    const response = yield API.get(url)
+    const productsList = convertToRecord(response.data.data)
+    const {
+      total: totalAmount,
+      page: currentPage,
+      perPage: itemsPerPage,
+      totalPages,
+    } = response.data
 
-    yield put(fetchProductsSuccess(productsList))
+    yield put(
+      fetchProductsSuccess(productsList, totalAmount, currentPage, itemsPerPage, totalPages)
+    )
   } catch (error) {
     yield put(fetchProductsError('Products data not recieved!'))
   }

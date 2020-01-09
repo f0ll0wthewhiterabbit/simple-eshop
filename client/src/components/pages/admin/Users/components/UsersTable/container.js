@@ -1,15 +1,20 @@
 import { connect } from 'react-redux'
 
 import UsersTable from './component'
-import { setSelectedUsers } from '../../../../../../store/actions'
+import { setSelectedUsers, fetchUsers, setUsersPerPage } from '../../../../../../store/actions'
 
 const mapStateToProps = state => ({
   usersList: state.getIn(['users', 'data']),
+  itemsPerPage: state.getIn(['users', 'itemsPerPage']),
+  currentPage: state.getIn(['users', 'currentPage']),
+  totalAmount: state.getIn(['users', 'totalAmount']),
   selectedUsers: state.getIn(['users', 'selected']),
 })
 
 const mapDispatchToProps = dispatch => ({
   setSelectedUsers: selectedUsersList => dispatch(setSelectedUsers(selectedUsersList)),
+  fetchUsers: (currentPage, itemsPerPage) => dispatch(fetchUsers(currentPage, itemsPerPage)),
+  setUsersPerPage: amount => dispatch(setUsersPerPage(amount)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersTable)

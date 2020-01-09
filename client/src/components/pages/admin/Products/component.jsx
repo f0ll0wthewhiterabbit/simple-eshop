@@ -6,10 +6,10 @@ import ProductsTable from './components/ProductsTable'
 import Loader from '../../../global/Loader'
 import ErrorMessage from '../../../global/ErrorMessage'
 
-const ProductsPage = ({ isLoading, error, fetchProducts }) => {
+const ProductsPage = ({ itemsPerPage, isLoading, error, fetchProducts }) => {
   useEffect(() => {
-    fetchProducts()
-  }, [fetchProducts])
+    fetchProducts(1, itemsPerPage)
+  }, [fetchProducts, itemsPerPage])
 
   if (error) {
     return <ErrorMessage>{error}</ErrorMessage>
@@ -32,6 +32,7 @@ ProductsPage.defaultProps = {
 }
 
 ProductsPage.propTypes = {
+  itemsPerPage: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   fetchProducts: PropTypes.func.isRequired,

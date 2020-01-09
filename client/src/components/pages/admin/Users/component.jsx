@@ -5,10 +5,10 @@ import ErrorMessage from '../../../global/ErrorMessage'
 import Loader from '../../../global/Loader'
 import UsersTable from './components/UsersTable'
 
-const UsersPage = ({ isLoading, error, fetchUsers }) => {
+const UsersPage = ({ itemsPerPage, isLoading, error, fetchUsers }) => {
   useEffect(() => {
-    fetchUsers()
-  }, [fetchUsers])
+    fetchUsers(1, itemsPerPage)
+  }, [fetchUsers, itemsPerPage])
 
   if (error) {
     return <ErrorMessage>{error}</ErrorMessage>
@@ -26,6 +26,7 @@ UsersPage.defaultProps = {
 }
 
 UsersPage.propTypes = {
+  itemsPerPage: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   fetchUsers: PropTypes.func.isRequired,

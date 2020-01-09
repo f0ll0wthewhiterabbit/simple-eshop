@@ -9,8 +9,8 @@ const roles = require('../../constants/roles')
 const router = express.Router()
 
 /**
- * @route   GET api/users
- * @desc    Get users
+ * @route   GET api/users?page=1&limit=3
+ * @desc    Get users. Optional - page number and limit
  * @access  Private
  */
 router.get('/', auth, async (req, res) => {
@@ -19,11 +19,26 @@ router.get('/', auth, async (req, res) => {
       return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
     }
 
+    const DEFAULT_ITEMS_PER_PAGE = 9
+    const queryPage = req.query.page
+    const total = await User.estimatedDocumentCount()
+    const page = queryPage ? parseInt(queryPage, 10) : 1
+    const perPage = queryPage ? parseInt(req.query.limit, 10) || DEFAULT_ITEMS_PER_PAGE : total
+    const totalPages = Math.ceil(total / perPage)
     const users = await User.find()
+      .skip(page === 1 ? 0 : page * perPage - perPage)
+      .limit(perPage)
       .select('-password')
       .select('-__v')
+      .sort('-createdAt')
 
-    return res.json(users)
+    return res.json({
+      page,
+      perPage,
+      total,
+      totalPages,
+      data: users,
+    })
   } catch (err) {
     console.error(err.message)
     return res.status(500).send('Server error')

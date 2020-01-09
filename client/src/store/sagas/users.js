@@ -23,12 +23,20 @@ import {
 } from '../actions'
 import { MAIN_PAGE_PATH, ROLE_ADMIN, ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 
-function* fetchUsersSaga() {
+function* fetchUsersSaga(action) {
   try {
-    const response = yield API.get('/users')
-    const usersList = convertToRecord(response.data)
+    const { currentPage: page, itemsPerPage: limit } = action.payload
+    const url = limit ? `/users/?page=${page}&limit=${limit}` : `/users/?page=${page}`
+    const response = yield API.get(url)
+    const usersList = convertToRecord(response.data.data)
+    const {
+      total: totalAmount,
+      page: currentPage,
+      perPage: itemsPerPage,
+      totalPages,
+    } = response.data
 
-    yield put(fetchUsersSuccess(usersList))
+    yield put(fetchUsersSuccess(usersList, totalAmount, currentPage, itemsPerPage, totalPages))
   } catch (error) {
     yield put(fetchUsersError('Users data not recieved!'))
   }

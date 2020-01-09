@@ -20,10 +20,16 @@ import {
   editProductSuccess,
   editProductError,
   startRatingLoading,
+  setProductsPerPage,
 } from '../actions'
+import { DEFAULT_CATALOG_PER_PAGE_LIMIT } from '../../constants'
 
 const ProductsRecord = Record({
   data: List(),
+  totalAmount: 0,
+  itemsPerPage: DEFAULT_CATALOG_PER_PAGE_LIMIT,
+  currentPage: 1,
+  totalPages: 1,
   selected: List(),
   ratingsLoadingList: List(),
   ratingsErrorList: List(),
@@ -40,6 +46,10 @@ const products = handleActions(
     [fetchProductsSuccess]: (state, action) =>
       state
         .set('data', action.payload.productsList)
+        .set('totalAmount', action.payload.totalAmount)
+        .set('itemsPerPage', action.payload.itemsPerPage)
+        .set('currentPage', action.payload.currentPage)
+        .set('totalPages', action.payload.totalPages)
         .delete('isLoading')
         .delete('error'),
 
@@ -51,6 +61,7 @@ const products = handleActions(
               action.payload.deletedProducts.findIndex(it => it === product.get('_id')) === -1
           )
         )
+        .update('totalAmount', amount => amount - action.payload.deletedProducts.size)
         .delete('isLoading')
         .delete('error'),
 
@@ -103,6 +114,8 @@ const products = handleActions(
       state.update('ratingsLoadingList', ratingsLoadingList =>
         ratingsLoadingList.push(action.payload.id)
       ),
+
+    [setProductsPerPage]: (state, action) => state.set('itemsPerPage', action.payload.amount),
   },
   initialState
 )

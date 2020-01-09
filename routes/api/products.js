@@ -9,18 +9,32 @@ const roles = require('../../constants/roles')
 const router = express.Router()
 
 /**
- * @route   GET api/products
- * @desc    Get products
+ * @route   GET api/products?page=1&limit=3
+ * @desc    Get products. Optional - page number and limit
  * @access  Private
  */
 router.get('/', auth, async (req, res) => {
   try {
+    const DEFAULT_ITEMS_PER_PAGE = 9
+    const queryPage = req.query.page
+    const total = await Product.estimatedDocumentCount()
+    const page = queryPage ? parseInt(queryPage, 10) : 1
+    const perPage = queryPage ? parseInt(req.query.limit, 10) || DEFAULT_ITEMS_PER_PAGE : total
+    const totalPages = Math.ceil(total / perPage)
     const products = await Product.find()
+      .skip(page === 1 ? 0 : page * perPage - perPage)
+      .limit(perPage)
       .select('-image')
       .select('-__v')
       .sort('-createdAt')
 
-    return res.json(products)
+    return res.json({
+      page,
+      perPage,
+      total,
+      totalPages,
+      data: products,
+    })
   } catch (err) {
     console.error(err.message)
     return res.status(500).send('Server error')

@@ -1,9 +1,19 @@
 import { createAction } from 'redux-actions'
 
-export const fetchUsers = createAction('USERS/FETCH_USERS')
-export const fetchUsersSuccess = createAction('USERS/FETCH_USERS_SUCCESS', usersList => ({
-  usersList,
+export const fetchUsers = createAction('USERS/FETCH_USERS', (currentPage, itemsPerPage) => ({
+  currentPage,
+  itemsPerPage,
 }))
+export const fetchUsersSuccess = createAction(
+  'USERS/FETCH_USERS_SUCCESS',
+  (usersList, totalAmount, currentPage, itemsPerPage, totalPages) => ({
+    usersList,
+    totalAmount,
+    currentPage,
+    itemsPerPage,
+    totalPages,
+  })
+)
 export const fetchUsersError = createAction('USERS/FETCH_USERS_ERROR', error => ({ error }))
 export const setSelectedUsers = createAction('USERS/SET_SELECTED_USERS', selectedUsersList => ({
   selectedUsersList,
@@ -32,3 +42,6 @@ export const updateUser = createAction('USERS/UPDATE_USER', (userData, history) 
 }))
 export const updateUserSuccess = createAction('USERS/UPDATE_USER_SUCCESS', user => ({ user }))
 export const updateUserError = createAction('USERS/UPDATE_USER_ERROR', error => ({ error }))
+export const setUsersPerPage = createAction('USERS/SET_USERS_PER_PAGE', amount => ({
+  amount,
+}))
