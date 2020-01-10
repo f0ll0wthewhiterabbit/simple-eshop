@@ -30,8 +30,17 @@ import {
 
 function* fetchProductsSaga(action) {
   try {
-    const { currentPage: page, itemsPerPage: limit } = action.payload
-    const url = limit ? `/products/?page=${page}&limit=${limit}` : `/products/?page=${page}`
+    const { currentPage: page, itemsPerPage: limit, filter } = action.payload
+    let url = `/products/?page=${page}`
+
+    if (limit) {
+      url += `&limit=${limit}`
+    }
+
+    if (filter) {
+      url += `&filter=${filter}`
+    }
+
     const response = yield API.get(url)
     const productsList = convertToRecord(response.data.data)
     const {

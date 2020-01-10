@@ -2,47 +2,19 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { Grid, Typography } from '@material-ui/core'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
 import ProductCard from './components/ProductCard'
 import Loader from '../../global/Loader'
-import { Wrapper, Heading, Pagination, PaginationItem, PaginationButton } from './styles'
+import FilterSelect from './components/FilterSelect'
+import Pagination from './components/Pagination'
+import { Wrapper, Heading } from './styles'
 
-const CatalogPage = ({
-  products,
-  currentPage,
-  totalAmount,
-  totalPages,
-  error,
-  isLoading,
-  fetchProducts,
-}) => {
+const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
   useEffect(() => {
     fetchProducts(1)
   }, [fetchProducts])
 
-  const pageNumbers = Array.from({ length: totalPages }, (v, k) => k + 1)
   let content
-
-  const handlePageNumberClick = evt => {
-    fetchProducts(Number(evt.target.innerText))
-  }
-
-  const handlePreviousPageClick = () => {
-    fetchProducts(currentPage - 1)
-  }
-  const handleNextPageClick = () => {
-    fetchProducts(currentPage + 1)
-  }
-
-  const isPageNumberInPagination = pageNumber => {
-    return (
-      pageNumber === 1 ||
-      pageNumber === totalAmount ||
-      (pageNumber >= currentPage - 2 && pageNumber <= currentPage + 2)
-    )
-  }
 
   if (error || products.size === 0) {
     content = (
@@ -64,42 +36,7 @@ const CatalogPage = ({
             )
           })}
         </Grid>
-        <Pagination>
-          <PaginationItem>
-            <PaginationButton
-              aria-label="delete"
-              size="small"
-              disabled={currentPage === 1 ? true : undefined}
-              onClick={handlePreviousPageClick}
-            >
-              <ChevronLeftIcon />
-            </PaginationButton>
-          </PaginationItem>
-          {pageNumbers.map(
-            pageNumber =>
-              isPageNumberInPagination(pageNumber) && (
-                <PaginationItem key={pageNumber}>
-                  <PaginationButton
-                    type="button"
-                    active={pageNumber === currentPage ? 1 : undefined}
-                    onClick={pageNumber === currentPage ? undefined : handlePageNumberClick}
-                  >
-                    {pageNumber}
-                  </PaginationButton>
-                </PaginationItem>
-              )
-          )}
-          <PaginationItem>
-            <PaginationButton
-              aria-label="delete"
-              size="small"
-              disabled={currentPage === totalPages ? true : undefined}
-              onClick={handleNextPageClick}
-            >
-              <ChevronRightIcon />
-            </PaginationButton>
-          </PaginationItem>
-        </Pagination>
+        <Pagination />
       </>
     )
   }
@@ -109,6 +46,7 @@ const CatalogPage = ({
       <Heading variant="h4" component="h1" align="center">
         Catalog
       </Heading>
+      <FilterSelect />
       {content}
     </Wrapper>
   )
@@ -116,9 +54,6 @@ const CatalogPage = ({
 
 CatalogPage.defaultProps = {
   error: null,
-  totalAmount: null,
-  totalPages: null,
-  currentPage: 1,
 }
 
 CatalogPage.propTypes = {
@@ -139,9 +74,6 @@ CatalogPage.propTypes = {
       ),
     })
   ).isRequired,
-  currentPage: PropTypes.number,
-  totalAmount: PropTypes.number,
-  totalPages: PropTypes.number,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   isLoading: PropTypes.bool.isRequired,
   fetchProducts: PropTypes.func.isRequired,

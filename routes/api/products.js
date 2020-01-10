@@ -9,19 +9,31 @@ const roles = require('../../constants/roles')
 const router = express.Router()
 
 /**
- * @route   GET api/products?page=1&limit=3
- * @desc    Get products. Optional - page number and limit
+ * @route   GET api/products?page=1&limit=3&filter=myRatings
+ * @desc    Get products. Optional - page number, limit, filter=myRatings
  * @access  Private
  */
 router.get('/', auth, async (req, res) => {
   try {
     const DEFAULT_ITEMS_PER_PAGE = 9
+
     const queryPage = req.query.page
-    const total = await Product.estimatedDocumentCount()
+    const queryLimit = req.query.limit
+    const queryFilter = req.query.filter
+    const isRatingFilter = queryFilter && queryFilter === 'myRatings'
+    const filter = isRatingFilter ? { rating: { $elemMatch: { userId: req.user._id } } } : {}
+    const total = await Product.countDocuments({ ...filter })
     const page = queryPage ? parseInt(queryPage, 10) : 1
-    const perPage = queryPage ? parseInt(req.query.limit, 10) || DEFAULT_ITEMS_PER_PAGE : total
+    let perPage
+
+    if (queryPage || queryLimit) {
+      perPage = parseInt(queryLimit, 10) || DEFAULT_ITEMS_PER_PAGE
+    } else {
+      perPage = total
+    }
+
     const totalPages = Math.ceil(total / perPage)
-    const products = await Product.find()
+    const products = await Product.find({ ...filter })
       .skip(page === 1 ? 0 : page * perPage - perPage)
       .limit(perPage)
       .select('-image')

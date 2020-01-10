@@ -21,8 +21,9 @@ import {
   editProductError,
   startRatingLoading,
   setProductsPerPage,
+  setProductsFilter,
 } from '../actions'
-import { DEFAULT_CATALOG_PER_PAGE_LIMIT } from '../../constants'
+import { DEFAULT_CATALOG_PER_PAGE_LIMIT, URL_FIELD_NO_FILTER } from '../../constants'
 
 const ProductsRecord = Record({
   data: List(),
@@ -33,6 +34,7 @@ const ProductsRecord = Record({
   selected: List(),
   ratingsLoadingList: List(),
   ratingsErrorList: List(),
+  filter: URL_FIELD_NO_FILTER,
   isLoading: false,
   error: null,
 })
@@ -116,6 +118,8 @@ const products = handleActions(
       ),
 
     [setProductsPerPage]: (state, action) => state.set('itemsPerPage', action.payload.amount),
+
+    [setProductsFilter]: (state, action) => state.set('filter', action.payload.filter),
   },
   initialState
 )

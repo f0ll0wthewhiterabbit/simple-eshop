@@ -2,9 +2,10 @@ import { createAction } from 'redux-actions'
 
 export const fetchProducts = createAction(
   'PRODUCTS/FETCH_PRODUCTS',
-  (currentPage, itemsPerPage) => ({
+  (currentPage, itemsPerPage, filter) => ({
     currentPage,
     itemsPerPage,
+    filter,
   })
 )
 export const fetchProductsSuccess = createAction(
@@ -77,4 +78,7 @@ export const editProductSuccess = createAction('PRODUCTS/EDIT_PRODUCT_SUCCESS', 
 export const editProductError = createAction('PRODUCTS/EDIT_PRODUCT_ERROR', error => ({ error }))
 export const setProductsPerPage = createAction('PRODUCTS/SET_PRODUCTS_PER_PAGE', amount => ({
   amount,
+}))
+export const setProductsFilter = createAction('PRODUCTS/SET_PRODUCTS_FILTER', filter => ({
+  filter,
 }))
