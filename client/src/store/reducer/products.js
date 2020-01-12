@@ -5,6 +5,12 @@ import {
   fetchProducts,
   fetchProductsSuccess,
   fetchProductsError,
+  fetchProduct,
+  fetchProductSuccess,
+  fetchProductError,
+  fetchProductRating,
+  fetchProductRatingSuccess,
+  fetchProductRatingError,
   setSelectedProducts,
   deleteProducts,
   deleteProductsSuccess,
@@ -25,7 +31,7 @@ import {
 } from '../actions'
 import { DEFAULT_CATALOG_PER_PAGE_LIMIT, URL_FIELD_NO_FILTER } from '../../constants'
 
-const ProductsRecord = Record({
+const initialState = Record({
   data: List(),
   totalAmount: 0,
   itemsPerPage: DEFAULT_CATALOG_PER_PAGE_LIMIT,
@@ -35,19 +41,53 @@ const ProductsRecord = Record({
   ratingsLoadingList: List(),
   ratingsErrorList: List(),
   filter: URL_FIELD_NO_FILTER,
+  currentProduct: Record({
+    id: '',
+    title: '',
+    description: '',
+    price: null,
+    imageName: '',
+    tags: List(),
+    rating: List(),
+  })(),
   isLoading: false,
   error: null,
-})
-const initialState = new ProductsRecord()
+})()
 
 const products = handleActions(
   {
-    [combineActions(fetchProducts, addProduct, editProduct, deleteProducts)]: state =>
-      state.set('isLoading', true),
+    [combineActions(
+      fetchProducts,
+      fetchProduct,
+      fetchProductRating,
+      addProduct,
+      editProduct,
+      deleteProducts
+    )]: state => state.set('isLoading', true),
 
     [fetchProductsSuccess]: (state, action) =>
       state
         .set('data', action.payload.productsList)
+        .set('totalAmount', action.payload.totalAmount)
+        .set('itemsPerPage', action.payload.itemsPerPage)
+        .set('currentPage', action.payload.currentPage)
+        .set('totalPages', action.payload.totalPages)
+        .delete('isLoading')
+        .delete('error'),
+
+    [fetchProductSuccess]: (state, action) =>
+      state
+        .delete('currentProduct')
+        .update('currentProduct', currentProduct => currentProduct.merge(action.payload.product))
+        .delete('isLoading')
+        .delete('error'),
+
+    [fetchProductRatingSuccess]: (state, action) =>
+      state
+        .delete('currentProduct')
+        .update('currentProduct', currentProduct =>
+          currentProduct.merge(action.payload.productRatingData)
+        )
         .set('totalAmount', action.payload.totalAmount)
         .set('itemsPerPage', action.payload.itemsPerPage)
         .set('currentPage', action.payload.currentPage)
@@ -94,13 +134,18 @@ const products = handleActions(
             product.get('_id') !== action.payload.product._id ? product : action.payload.product
           )
         )
+        .delete('currentProduct')
         .delete('isLoading')
         .delete('error'),
 
-    [combineActions(fetchProductsError, addProductError, editProductError, deleteProductsError)]: (
-      state,
-      action
-    ) => state.delete('isLoading').set('error', action.payload.error),
+    [combineActions(
+      fetchProductsError,
+      fetchProductError,
+      fetchProductRatingError,
+      addProductError,
+      editProductError,
+      deleteProductsError
+    )]: (state, action) => state.delete('isLoading').set('error', action.payload.error),
 
     [combineActions(changeProductRatingError, deleteProductRatingError)]: (state, action) =>
       state

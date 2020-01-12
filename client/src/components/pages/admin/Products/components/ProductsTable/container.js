@@ -17,7 +17,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setSelectedProducts: selectedProductsList => dispatch(setSelectedProducts(selectedProductsList)),
-  fetchProducts: (currentPage, itemsPerPage) => dispatch(fetchProducts(currentPage, itemsPerPage)),
+  fetchProducts: (page, itemsPerPage) => dispatch(fetchProducts(page, itemsPerPage)),
   setProductsPerPage: amount => dispatch(setProductsPerPage(amount)),
 })
 

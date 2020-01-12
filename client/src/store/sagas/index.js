@@ -2,6 +2,8 @@ import { all } from 'redux-saga/effects'
 
 import {
   watchFetchProducts,
+  watchFetchProduct,
+  watchFetchProductRating,
   watchChangeProductRating,
   watchDeleteProductRating,
   watchAddProduct,
@@ -23,6 +25,8 @@ export default function*() {
     watchRequestUserDeletion(),
     watchUpdateUser(),
     watchFetchProducts(),
+    watchFetchProduct(),
+    watchFetchProductRating(),
     watchChangeProductRating(),
     watchDeleteProductRating(),
     watchAddProduct(),

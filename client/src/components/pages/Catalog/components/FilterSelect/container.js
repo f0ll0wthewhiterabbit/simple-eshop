@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: (currentPage, itemsPerPage, filter) =>
-    dispatch(fetchProducts(currentPage, itemsPerPage, filter)),
+  fetchProducts: (page, itemsPerPage, filter) =>
+    dispatch(fetchProducts(page, itemsPerPage, filter)),
   setProductsFilter: filter => dispatch(setProductsFilter(filter)),
 })
 

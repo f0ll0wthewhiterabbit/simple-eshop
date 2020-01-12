@@ -68,7 +68,7 @@ CatalogPage.propTypes = {
       rating: ImmutablePropTypes.listOf(
         ImmutablePropTypes.recordOf({
           _id: PropTypes.string.isRequired,
-          userId: PropTypes.string.isRequired,
+          user: PropTypes.string.isRequired,
           stars: PropTypes.number.isRequired,
         })
       ),

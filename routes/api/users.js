@@ -11,7 +11,7 @@ const router = express.Router()
 /**
  * @route   GET api/users?page=1&limit=3
  * @desc    Get users. Optional - page number and limit
- * @access  Private
+ * @access  Private - admin only
  */
 router.get('/', auth, async (req, res) => {
   try {
@@ -28,8 +28,7 @@ router.get('/', auth, async (req, res) => {
     const users = await User.find()
       .skip(page === 1 ? 0 : page * perPage - perPage)
       .limit(perPage)
-      .select('-password')
-      .select('-__v')
+      .select('-password -__v')
       .sort('-createdAt')
 
     return res.json({
@@ -173,7 +172,7 @@ router.patch(
 /**
  * @route   Delete api/users
  * @desc    Delete users
- * @access  Private
+ * @access  Private - admin only
  */
 router.delete('/', [auth, body().isArray()], async (req, res) => {
   const errors = validationResult(req)

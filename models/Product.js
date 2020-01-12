@@ -34,7 +34,7 @@ const ProductSchema = new Schema(
     rating: {
       type: [
         {
-          userId: {
+          user: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true,

@@ -1,30 +1,26 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useParams } from 'react-router-dom'
 import ImmutablePropTypes from 'react-immutable-proptypes'
-import EditIcon from '@material-ui/icons/Edit'
+import { useParams } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
 
 import ProductEditForm from './components/ProductEditForm'
 import Loader from '../../../global/Loader'
 import { Root, Wrapper, IconWrapper, Heading } from './styles'
 
-const ProductEditPage = ({ isLoading, products, fetchProducts }) => {
-  useEffect(() => {
-    if (products.size === 0) {
-      fetchProducts()
-    }
-  }, [fetchProducts, products.size])
-
+const ProductEditPage = ({ isLoading, product, fetchProduct }) => {
   const { id } = useParams()
+
+  useEffect(() => {
+    fetchProduct(id)
+  }, [fetchProduct, id])
 
   if (isLoading) {
     return <Loader />
   }
 
-  const product = products.find(it => it._id === id)
-
-  if (!product) {
+  if (!product.title) {
     return (
       <Wrapper>
         <Typography variant="body1" align="center">
@@ -35,11 +31,11 @@ const ProductEditPage = ({ isLoading, products, fetchProducts }) => {
   }
 
   const productData = {
-    id: product._id,
+    id: product.id,
     title: product.title,
     description: product.description,
-    price: product.price,
     imageName: product.imageName,
+    price: product.price || 0,
     tags: product.tags.toJS(),
   }
 
@@ -60,24 +56,15 @@ const ProductEditPage = ({ isLoading, products, fetchProducts }) => {
 
 ProductEditPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  products: ImmutablePropTypes.listOf(
-    ImmutablePropTypes.recordOf({
-      _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      imageName: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      tags: ImmutablePropTypes.listOf(PropTypes.string),
-      rating: ImmutablePropTypes.listOf(
-        ImmutablePropTypes.recordOf({
-          _id: PropTypes.string.isRequired,
-          userId: PropTypes.string.isRequired,
-          stars: PropTypes.number.isRequired,
-        })
-      ),
-    }).isRequired
-  ).isRequired,
-  fetchProducts: PropTypes.func.isRequired,
+  product: ImmutablePropTypes.recordOf({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    imageName: PropTypes.string.isRequired,
+    price: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.oneOf([null]).isRequired]),
+    tags: ImmutablePropTypes.listOf(PropTypes.string),
+  }).isRequired,
+  fetchProduct: PropTypes.func.isRequired,
 }
 
 export default ProductEditPage

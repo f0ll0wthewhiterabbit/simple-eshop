@@ -35,7 +35,7 @@ const ProductCard = ({
   const { id, title, description, tags, price, rating, imageName } = productData
   const ratingsAmount = rating.size
   const averageRating = Math.round(rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
-  const currentUserRating = rating.find(it => it.userId === currentUserId)
+  const currentUserRating = rating.find(it => it.user === currentUserId)
   const isUserRatedProduct = Boolean(currentUserRating)
   const isRatingLoading = ratingsLoadingList.indexOf(id) !== -1
   const isErrorInLoad = ratingsErrorList.indexOf(id) !== -1
@@ -133,7 +133,7 @@ ProductCard.propTypes = {
     rating: ImmutablePropTypes.listOf(
       ImmutablePropTypes.recordOf({
         _id: PropTypes.string.isRequired,
-        userId: PropTypes.string.isRequired,
+        user: PropTypes.string.isRequired,
         stars: PropTypes.number.isRequired,
       })
     ),

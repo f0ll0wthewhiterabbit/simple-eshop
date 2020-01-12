@@ -12,21 +12,19 @@ import {
 } from '../actions'
 import { ROLE_GUEST } from '../../constants'
 
-const UserRecord = Record({
-  id: '',
-  firstName: '',
-  lastName: '',
-  email: '',
-  role: ROLE_GUEST,
-  isRemovable: false,
-})
-const AuthRecord = Record({
+const initialState = Record({
   isAuthenticated: false,
   token: null,
-  user: new UserRecord(),
+  user: Record({
+    id: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: ROLE_GUEST,
+    isRemovable: false,
+  })(),
   error: null,
-})
-const initialState = new AuthRecord()
+})()
 
 const auth = handleActions(
   {

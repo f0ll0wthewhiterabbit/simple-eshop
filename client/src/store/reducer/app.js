@@ -3,12 +3,11 @@ import { Record } from 'immutable'
 
 import { showModal, closeModal, openSidebar, closeSidebar } from '../actions'
 
-const AppRecord = Record({
+const initialState = Record({
   isModalOpened: false,
   storeFieldNameForModal: '',
   isSidebarOpened: false,
-})
-const initialState = new AppRecord()
+})()
 
 const app = handleActions(
   {

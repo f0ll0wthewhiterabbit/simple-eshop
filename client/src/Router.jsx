@@ -25,6 +25,7 @@ const AdminUsersPage = React.lazy(() => import('./components/pages/admin/Users')
 const AdminProductsPage = React.lazy(() => import('./components/pages/admin/Products'))
 const AdminProductAddPage = React.lazy(() => import('./components/pages/admin/ProductAdd'))
 const AdminProductEditPage = React.lazy(() => import('./components/pages/admin/ProductEdit'))
+const AdminProductRatingPage = React.lazy(() => import('./components/pages/admin/ProductRating'))
 const ErrorPage = React.lazy(() => import('./components/pages/Error'))
 
 export default () => {
@@ -48,6 +49,11 @@ export default () => {
               exact
               path={`${ADMIN_PRODUCTS_PAGE_PATH}/:id`}
               component={AdminProductEditPage}
+            />
+            <PrivateRoute
+              exact
+              path={`${ADMIN_PRODUCTS_PAGE_PATH}/:id/rating`}
+              component={AdminProductRatingPage}
             />
             <PrivateRoute
               exact

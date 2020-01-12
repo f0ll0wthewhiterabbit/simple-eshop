@@ -21,9 +21,10 @@ router.get('/', auth, async (req, res) => {
     const queryLimit = req.query.limit
     const queryFilter = req.query.filter
     const isRatingFilter = queryFilter && queryFilter === 'myRatings'
-    const filter = isRatingFilter ? { rating: { $elemMatch: { userId: req.user._id } } } : {}
+    const filter = isRatingFilter ? { rating: { $elemMatch: { user: req.user._id } } } : {}
     const total = await Product.countDocuments({ ...filter })
     const page = queryPage ? parseInt(queryPage, 10) : 1
+
     let perPage
 
     if (queryPage || queryLimit) {
@@ -36,8 +37,7 @@ router.get('/', auth, async (req, res) => {
     const products = await Product.find({ ...filter })
       .skip(page === 1 ? 0 : page * perPage - perPage)
       .limit(perPage)
-      .select('-image')
-      .select('-__v')
+      .select('-image -__v')
       .sort('-createdAt')
 
     return res.json({
@@ -56,7 +56,7 @@ router.get('/', auth, async (req, res) => {
 /**
  * @route   POST api/products
  * @desc    Create new product
- * @access  Private
+ * @access  Private - admin only
  */
 router.post(
   '/',
@@ -121,7 +121,7 @@ router.post(
 /**
  * @route   PATCH api/products/:id
  * @desc    Update product
- * @access  Private
+ * @access  Private - mixed
  */
 router.patch(
   '/:id',
@@ -181,7 +181,7 @@ router.patch(
         productFields.tags = []
       }
 
-      if (req.files) {
+      if (req.files && req.files.length > 0) {
         const image = req.files[0]
         const buffer = await sharp(image.buffer)
           .resize({ width: 400, height: 225 })
@@ -198,7 +198,7 @@ router.patch(
       if (stars || stars === 0) {
         const productRating = product.rating
         const userRatingIndex = product.rating.findIndex(
-          rating => rating.userId.toString() === userId
+          rating => rating.user.toString() === userId
         )
 
         if (userRatingIndex !== -1) {
@@ -209,7 +209,7 @@ router.patch(
           }
         } else {
           productRating.push({
-            userId,
+            user: userId,
             stars,
           })
         }
@@ -241,7 +241,7 @@ router.patch(
 /**
  * @route   Delete api/products
  * @desc    Delete products
- * @access  Private
+ * @access  Private - admin only
  */
 router.delete('/', [auth, body().isArray()], async (req, res) => {
   const errors = validationResult(req)
@@ -267,6 +267,86 @@ router.delete('/', [auth, body().isArray()], async (req, res) => {
     return res.json({ deletedCount: result.deletedCount })
   } catch (err) {
     console.error(err.message)
+    return res.status(500).send('Server error')
+  }
+})
+
+/**
+ * @route   GET api/products/:id
+ * @desc    Get product
+ * @access  Private - admin only
+ */
+router.get('/:id', auth, async (req, res) => {
+  try {
+    if (req.user.role !== roles.ADMIN) {
+      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
+    }
+
+    const product = await Product.findById(req.params.id).select('-image -__v')
+
+    res.json(product)
+  } catch (err) {
+    console.error(err)
+
+    if (err.name === 'CastError') {
+      return res.status(400).json({ errors: [{ msg: 'Invalid request params' }] })
+    }
+
+    return res.status(500).send('Server error')
+  }
+})
+
+/**
+ * @route   GET api/products/:id/rating?page=1&limit=3
+ * @desc    Get product rating. Optional for ratings - page number, limit
+ * @access  Private - admin only
+ */
+router.get('/:id/rating', auth, async (req, res) => {
+  try {
+    if (req.user.role !== roles.ADMIN) {
+      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
+    }
+
+    const product = await Product.findById(req.params.id).select(
+      '-tags -imageName -image -price -description -__v'
+    )
+
+    const DEFAULT_ITEMS_PER_PAGE = 10
+
+    const queryPage = req.query.page
+    const queryLimit = req.query.limit
+    const total = product.rating.length
+    const page = queryPage ? parseInt(queryPage, 10) : 1
+    let perPage
+
+    if (queryPage || queryLimit) {
+      perPage = parseInt(queryLimit, 10) || DEFAULT_ITEMS_PER_PAGE
+    } else {
+      perPage = total
+    }
+
+    const totalPages = Math.ceil(total / perPage)
+    const skip = page === 1 ? 0 : page * perPage - perPage
+
+    const productData = await Product.findById(req.params.id)
+      .populate('rating.user', 'firstName lastName email')
+      .slice('rating', [skip, perPage])
+      .select('-tags -imageName -image -price -description -__v')
+
+    return res.json({
+      page,
+      perPage,
+      total,
+      totalPages,
+      data: productData,
+    })
+  } catch (err) {
+    console.error(err)
+
+    if (err.name === 'CastError') {
+      return res.status(400).json({ errors: [{ msg: 'Invalid request params' }] })
+    }
+
     return res.status(500).send('Server error')
   }
 })

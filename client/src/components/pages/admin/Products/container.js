@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: (currentPage, itemsPerPage) => dispatch(fetchProducts(currentPage, itemsPerPage)),
+  fetchProducts: (page, itemsPerPage) => dispatch(fetchProducts(page, itemsPerPage)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage)

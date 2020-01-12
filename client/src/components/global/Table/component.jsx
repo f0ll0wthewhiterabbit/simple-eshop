@@ -12,7 +12,7 @@ import {
   Checkbox,
   IconButton,
   Tooltip,
-  Link as MiuLink,
+  Link as MuiLink,
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 
@@ -101,9 +101,9 @@ const Table = ({
   const mapRowToTableCellContent = (id, row) => {
     if (id === 'title') {
       return (
-        <MiuLink component={Link} to={`${ADMIN_PRODUCTS_PAGE_PATH}/${row._id}`}>
+        <MuiLink component={Link} to={`${ADMIN_PRODUCTS_PAGE_PATH}/${row._id}`}>
           {row.title}
-        </MiuLink>
+        </MuiLink>
       )
     }
 
@@ -128,7 +128,11 @@ const Table = ({
 
       const averageRating = Math.round(row.rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
 
-      return averageRating
+      return (
+        <MuiLink component={Link} to={`${ADMIN_PRODUCTS_PAGE_PATH}/${row._id}/rating`}>
+          {averageRating}
+        </MuiLink>
+      )
     }
 
     if (id === 'price') {

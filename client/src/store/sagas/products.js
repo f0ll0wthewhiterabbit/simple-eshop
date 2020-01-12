@@ -8,6 +8,12 @@ import {
   fetchProducts,
   fetchProductsSuccess,
   fetchProductsError,
+  fetchProduct,
+  fetchProductSuccess,
+  fetchProductError,
+  fetchProductRating,
+  fetchProductRatingSuccess,
+  fetchProductRatingError,
   changeProductRating,
   changeProductRatingSuccess,
   changeProductRatingError,
@@ -30,7 +36,7 @@ import {
 
 function* fetchProductsSaga(action) {
   try {
-    const { currentPage: page, itemsPerPage: limit, filter } = action.payload
+    const { page, itemsPerPage: limit, filter } = action.payload
     let url = `/products/?page=${page}`
 
     if (limit) {
@@ -55,6 +61,62 @@ function* fetchProductsSaga(action) {
     )
   } catch (error) {
     yield put(fetchProductsError('Products data not recieved!'))
+  }
+}
+
+function* fetchProductSaga(action) {
+  try {
+    const response = yield API.get(`/products/${action.payload.id}`)
+    const { _id: id, title, description, price, imageName, tags } = response.data
+    const product = convertToRecord({
+      id,
+      title,
+      description,
+      price,
+      imageName,
+      tags,
+    })
+
+    yield put(fetchProductSuccess(product))
+  } catch (error) {
+    yield put(fetchProductError('Product not recieved!'))
+  }
+}
+
+function* fetchProductRatingSaga(action) {
+  try {
+    const { productId, page, itemsPerPage: limit } = action.payload
+    let url = `/products/${productId}/rating?page=${page}`
+
+    if (limit) {
+      url += `&limit=${limit}`
+    }
+
+    const response = yield API.get(url)
+    const { id, title, rating } = response.data.data
+    const {
+      total: totalAmount,
+      page: currentPage,
+      perPage: itemsPerPage,
+      totalPages,
+    } = response.data
+    const productRatingData = convertToRecord({
+      id,
+      title,
+      rating,
+    })
+
+    yield put(
+      fetchProductRatingSuccess(
+        productRatingData,
+        totalAmount,
+        currentPage,
+        itemsPerPage,
+        totalPages
+      )
+    )
+  } catch (error) {
+    yield put(fetchProductRatingError('Product rating not recieved!'))
   }
 }
 
@@ -173,6 +235,14 @@ function* watchFetchProducts() {
   yield takeEvery(fetchProducts, fetchProductsSaga)
 }
 
+function* watchFetchProduct() {
+  yield takeEvery(fetchProduct, fetchProductSaga)
+}
+
+function* watchFetchProductRating() {
+  yield takeEvery(fetchProductRating, fetchProductRatingSaga)
+}
+
 function* watchChangeProductRating() {
   yield takeEvery(changeProductRating, changeProductRatingSaga)
 }
@@ -195,6 +265,8 @@ function* watchDeleteProducts() {
 
 export {
   watchFetchProducts,
+  watchFetchProduct,
+  watchFetchProductRating,
   watchChangeProductRating,
   watchDeleteProductRating,
   watchAddProduct,

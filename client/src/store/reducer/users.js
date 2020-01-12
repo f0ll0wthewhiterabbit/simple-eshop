@@ -19,7 +19,7 @@ import {
 } from '../actions'
 import { DEFAULT_ADMIN_PER_PAGE_LIMIT } from '../../constants'
 
-const UsersRecord = Record({
+const initialState = Record({
   data: List(),
   totalAmount: 0,
   itemsPerPage: DEFAULT_ADMIN_PER_PAGE_LIMIT,
@@ -28,8 +28,7 @@ const UsersRecord = Record({
   selected: List(),
   isLoading: false,
   error: null,
-})
-const initialState = new UsersRecord()
+})()
 
 const users = handleActions(
   {

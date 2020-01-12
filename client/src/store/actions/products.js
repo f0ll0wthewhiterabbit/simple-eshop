@@ -2,8 +2,8 @@ import { createAction } from 'redux-actions'
 
 export const fetchProducts = createAction(
   'PRODUCTS/FETCH_PRODUCTS',
-  (currentPage, itemsPerPage, filter) => ({
-    currentPage,
+  (page, itemsPerPage, filter) => ({
+    page,
     itemsPerPage,
     filter,
   })
@@ -21,6 +21,37 @@ export const fetchProductsSuccess = createAction(
 export const fetchProductsError = createAction('PRODUCTS/FETCH_PRODUCTS_ERROR', error => ({
   error,
 }))
+export const fetchProduct = createAction('PRODUCTS/FETCH_PRODUCT', id => ({ id }))
+export const fetchProductSuccess = createAction('PRODUCTS/FETCH_PRODUCT_SUCCESS', product => ({
+  product,
+}))
+export const fetchProductError = createAction('PRODUCTS/FETCH_PRODUCT_ERROR', error => ({
+  error,
+}))
+export const fetchProductRating = createAction(
+  'PRODUCTS/FETCH_PRODUCT_RATING',
+  (productId, page, itemsPerPage) => ({
+    productId,
+    page,
+    itemsPerPage,
+  })
+)
+export const fetchProductRatingSuccess = createAction(
+  'PRODUCTS/FETCH_PRODUCT_RATING_SUCCESS',
+  (productRatingData, totalAmount, currentPage, itemsPerPage, totalPages) => ({
+    productRatingData,
+    totalAmount,
+    currentPage,
+    itemsPerPage,
+    totalPages,
+  })
+)
+export const fetchProductRatingError = createAction(
+  'PRODUCTS/FETCH_PRODUCT_RATING_ERROR',
+  error => ({
+    error,
+  })
+)
 export const setSelectedProducts = createAction(
   'PRODUCTS/SET_SELECTED_PRODUCTS',
   selectedProductsList => ({ selectedProductsList })
