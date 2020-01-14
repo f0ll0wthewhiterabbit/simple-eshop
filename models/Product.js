@@ -58,9 +58,29 @@ const ProductSchema = new Schema(
   }
 )
 
-ProductSchema.methods.getPublicFields = function() {
+ProductSchema.methods.getPublicFields = function(currentUserId) {
   const productObject = this.toObject()
 
+  const ratings = productObject.rating
+  const votesAmount = ratings.length
+  let averageRating
+
+  if (votesAmount > 0) {
+    averageRating = Math.round(ratings.reduce((a, b) => a + b.stars, 0) / votesAmount)
+  } else {
+    averageRating = null
+  }
+
+  const currentUserRating = ratings.find(it => it.user.toString() === currentUserId)
+  productObject.ratingInfo = {}
+
+  if (currentUserRating) {
+    productObject.ratingInfo.currentUserRating = currentUserRating.stars
+  }
+
+  productObject.ratingInfo.average = averageRating
+  productObject.ratingInfo.votesAmount = votesAmount
+  delete productObject.rating
   delete productObject.image
   delete productObject.__v
 
@@ -74,3 +94,22 @@ ProductSchema.path('price').get(num => Number((num / 100).toFixed(2)))
 ProductSchema.path('price').set(num => num * 100)
 
 module.exports = mongoose.model('Product', ProductSchema)
+
+// {
+//   $project: {
+//     title: '$title',
+//     description: '$description',
+//     price: '$price',
+//     imageName: '$imageName',
+//     tags: '$tags',
+//     createdAt: '$createdAt',
+//     updatedAt: '$updatedAt',
+//     ratingInfo: {
+//       average: '$ratingInfo.average',
+//       votesAmount: '$ratingInfo.votesAmount',
+//       currentUserRating: {
+//         $arrayElemAt: ['$ratingInfo.currentUserRating.stars', 0],
+//       },
+//     },
+//   },
+// },

@@ -50,13 +50,14 @@ ProductsTable.propTypes = {
       image: PropTypes.string,
       price: PropTypes.number.isRequired,
       tags: ImmutablePropTypes.listOf(PropTypes.string),
-      rating: ImmutablePropTypes.listOf(
-        ImmutablePropTypes.recordOf({
-          _id: PropTypes.string.isRequired,
-          user: PropTypes.string.isRequired,
-          stars: PropTypes.number.isRequired,
-        })
-      ),
+      ratingInfo: ImmutablePropTypes.recordOf({
+        average: PropTypes.oneOfType([
+          PropTypes.number.isRequired,
+          PropTypes.oneOf([null]).isRequired,
+        ]),
+        votesAmount: PropTypes.number.isRequired,
+        currentUserRating: PropTypes.number,
+      }),
     })
   ).isRequired,
   itemsPerPage: PropTypes.number.isRequired,

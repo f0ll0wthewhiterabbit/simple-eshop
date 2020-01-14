@@ -120,13 +120,11 @@ const Table = ({
     }
 
     if (id === 'rating') {
-      const ratingsAmount = row.rating.size
-
-      if (ratingsAmount === 0) {
+      if (row.ratingInfo.votesAmount === 0) {
         return '-'
       }
 
-      const averageRating = Math.round(row.rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
+      const averageRating = Math.round(row.ratingInfo.average)
 
       return (
         <MuiLink component={Link} to={`${ADMIN_PRODUCTS_PAGE_PATH}/${row._id}/rating`}>

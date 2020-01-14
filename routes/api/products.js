@@ -34,11 +34,45 @@ router.get('/', auth, async (req, res) => {
     }
 
     const totalPages = Math.ceil(total / perPage)
-    const products = await Product.find({ ...filter })
-      .skip(page === 1 ? 0 : page * perPage - perPage)
-      .limit(perPage)
-      .select('-image -__v')
-      .sort('-createdAt')
+    const products = await Product.aggregate([
+      { $match: filter },
+      { $skip: page === 1 ? 0 : page * perPage - perPage },
+      { $limit: perPage },
+      {
+        $addFields: {
+          ratingInfo: {
+            average: { $avg: '$rating.stars' },
+            votesAmount: { $size: '$rating.stars' },
+            currentUserRating: {
+              $filter: {
+                input: '$rating',
+                as: 'item',
+                cond: { $eq: ['$$item.user', req.user._id] },
+              },
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          title: '$title',
+          description: '$description',
+          price: '$price',
+          imageName: '$imageName',
+          tags: '$tags',
+          createdAt: '$createdAt',
+          updatedAt: '$updatedAt',
+          ratingInfo: {
+            average: '$ratingInfo.average',
+            votesAmount: '$ratingInfo.votesAmount',
+            currentUserRating: {
+              $arrayElemAt: ['$ratingInfo.currentUserRating.stars', 0],
+            },
+          },
+        },
+      },
+      { $sort: { createdAt: -1 } },
+    ])
 
     return res.json({
       page,
@@ -103,7 +137,7 @@ router.post(
       })
       await product.save()
 
-      const productWithoutImage = product.getPublicFields()
+      const productWithoutImage = product.getPublicFields(req.user.id)
 
       return res.status(201).json(productWithoutImage)
     } catch (err) {
@@ -223,7 +257,7 @@ router.patch(
         { new: true }
       )
 
-      const productWithoutImage = updatedProduct.getPublicFields()
+      const productWithoutImage = updatedProduct.getPublicFields(req.user.id)
 
       return res.json(productWithoutImage)
     } catch (err) {

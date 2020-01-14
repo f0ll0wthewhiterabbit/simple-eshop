@@ -26,16 +26,14 @@ import {
 
 const ProductCard = ({
   productData,
-  currentUserId,
   changeProductRating,
   deleteProductRating,
   ratingsLoadingList,
   ratingsErrorList,
 }) => {
-  const { id, title, description, tags, price, rating, imageName } = productData
-  const ratingsAmount = rating.size
-  const averageRating = Math.round(rating.reduce((a, b) => a + b.stars, 0) / ratingsAmount)
-  const currentUserRating = rating.find(it => it.user === currentUserId)
+  const { _id: id, title, description, tags, price, ratingInfo, imageName } = productData
+  const { average, votesAmount, currentUserRating } = ratingInfo
+  const averageRating = Math.round(average)
   const isUserRatedProduct = Boolean(currentUserRating)
   const isRatingLoading = ratingsLoadingList.indexOf(id) !== -1
   const isErrorInLoad = ratingsErrorList.indexOf(id) !== -1
@@ -65,7 +63,7 @@ const ProductCard = ({
     userRatingField = (
       <>
         <Stars
-          value={isUserRatedProduct ? currentUserRating.stars : 0}
+          value={isUserRatedProduct ? currentUserRating : 0}
           name={`simple-controlled-user-${id}`}
           size="small"
           onChange={handleRatingChange}
@@ -111,15 +109,11 @@ const ProductCard = ({
             readOnly
             size="small"
           />
-          <RaitingsCount active>({ratingsAmount})</RaitingsCount>
+          <RaitingsCount active>({votesAmount})</RaitingsCount>
         </RaitingWrapper>
       </RaitingsRoot>
     </Wrapper>
   )
-}
-
-ProductCard.defaultProps = {
-  currentUserId: '',
 }
 
 ProductCard.propTypes = {
@@ -130,15 +124,15 @@ ProductCard.propTypes = {
     imageName: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     tags: ImmutablePropTypes.listOf(PropTypes.string),
-    rating: ImmutablePropTypes.listOf(
-      ImmutablePropTypes.recordOf({
-        _id: PropTypes.string.isRequired,
-        user: PropTypes.string.isRequired,
-        stars: PropTypes.number.isRequired,
-      })
-    ),
+    ratingInfo: ImmutablePropTypes.recordOf({
+      average: PropTypes.oneOfType([
+        PropTypes.number.isRequired,
+        PropTypes.oneOf([null]).isRequired,
+      ]),
+      votesAmount: PropTypes.number.isRequired,
+      currentUserRating: PropTypes.number,
+    }),
   }).isRequired,
-  currentUserId: PropTypes.string,
   changeProductRating: PropTypes.func.isRequired,
   deleteProductRating: PropTypes.func.isRequired,
   ratingsLoadingList: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
