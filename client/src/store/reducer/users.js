@@ -48,9 +48,7 @@ const users = handleActions(
     [deleteUsersSuccess]: (state, action) =>
       state
         .update('data', data =>
-          data.filter(
-            user => action.payload.deletedUsers.findIndex(it => it === user.get('_id')) === -1
-          )
+          data.filter(user => action.payload.deletedUsers.findIndex(it => it === user._id) === -1)
         )
         .update('totalAmount', amount => amount - action.payload.deletedUsers.size)
         .delete('isLoading')

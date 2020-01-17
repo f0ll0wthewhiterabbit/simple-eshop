@@ -99,8 +99,7 @@ const products = handleActions(
       state
         .update('data', data =>
           data.filter(
-            product =>
-              action.payload.deletedProducts.findIndex(it => it === product.get('_id')) === -1
+            product => action.payload.deletedProducts.findIndex(it => it === product._id) === -1
           )
         )
         .update('totalAmount', amount => amount - action.payload.deletedProducts.size)
