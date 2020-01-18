@@ -9,7 +9,7 @@ const Logo = ({ isAdmin }) => {
     <Wrapper data-justify={isAdmin ? 'center' : 'flex-start'}>
       <SiteLink to={MAIN_PAGE_PATH}>
         <LogoIcon fontSize="large" />
-        <LogoTitle variant="h6" component="h2">
+        <LogoTitle variant="h6" component="h2" data-test="LogoTitle">
           simple eShop
         </LogoTitle>
       </SiteLink>

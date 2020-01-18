@@ -17,17 +17,22 @@ const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) 
       <Container maxWidth="lg">
         <Toolbar>
           {isAdmin && (
-            <MenuButton color="secondary" aria-label="open sidebar" onClick={handleMenuButtonClick}>
+            <MenuButton
+              color="secondary"
+              aria-label="open sidebar"
+              onClick={handleMenuButtonClick}
+              data-test="menuButton"
+            >
               <MenuIcon />
             </MenuButton>
           )}
           <Logo />
           {isAuthenticated && isDeleteRequestSent && (
-            <WarningMessage variant="body2" color="error">
+            <WarningMessage variant="body2" color="error" data-test="warningMessage">
               Unfortunately, your account will be deleted soon.
             </WarningMessage>
           )}
-          {isAuthenticated && <UserMenu />}
+          {isAuthenticated && <UserMenu data-test="userMenu" />}
         </Toolbar>
       </Container>
     </Wrapper>

@@ -17,7 +17,7 @@ import {
 } from './styles'
 import { STORE_FIELD_CURRENT_USER, PROFILE_PAGE_PATH } from '../../../../../constants'
 
-const UserMenu = ({
+export const UserMenu = ({
   theme,
   userName,
   isAdmin,
@@ -49,11 +49,21 @@ const UserMenu = ({
   }
 
   const userMenuButton = isMobileDevice ? (
-    <UserMenuButtonSmall aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+    <UserMenuButtonSmall
+      aria-controls="simple-menu"
+      aria-haspopup="true"
+      onClick={handleClick}
+      data-test="menuButton"
+    >
       <AccountBoxIcon />
     </UserMenuButtonSmall>
   ) : (
-    <UserMenuButtonNormal aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+    <UserMenuButtonNormal
+      aria-controls="simple-menu"
+      aria-haspopup="true"
+      onClick={handleClick}
+      data-test="menuButton"
+    >
       {userName} <ArrowIcon />
     </UserMenuButtonNormal>
   )
@@ -67,22 +77,28 @@ const UserMenu = ({
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        data-test="menu"
       >
-        <MenuItem component={Link} to={PROFILE_PAGE_PATH} onClick={handleClose}>
+        <MenuItem
+          component={Link}
+          to={PROFILE_PAGE_PATH}
+          onClick={handleClose}
+          data-test="profileButton"
+        >
           <IconWrapper>
             <PersonOutlineOutlinedIcon fontSize="small" />
           </IconWrapper>
           <ListItemText primary={userName} />
         </MenuItem>
         {!isAdmin && !isDeleteRequestSent && (
-          <MenuItem onClick={handleDeleteAccountClick}>
+          <MenuItem onClick={handleDeleteAccountClick} data-test="deleteAccountButton">
             <IconWrapper>
               <HighlightOffOutlinedIcon fontSize="small" />
             </IconWrapper>
             <ListItemText primary="Delete Account" />
           </MenuItem>
         )}
-        <MenuItem onClick={handleSignOutClick}>
+        <MenuItem onClick={handleSignOutClick} data-test="signOutButton">
           <IconWrapper>
             <ExitToAppOutlinedIcon fontSize="small" />
           </IconWrapper>
