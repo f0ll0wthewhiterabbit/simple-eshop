@@ -7,10 +7,10 @@ import { ROLE_ADMIN } from '../../../constants'
 
 const Layout = ({ isAuthenticated, userRole, children }) => {
   if (isAuthenticated && userRole === ROLE_ADMIN) {
-    return <AdminLayout>{children}</AdminLayout>
+    return <AdminLayout data-test="adminLayout">{children}</AdminLayout>
   }
 
-  return <StandardLayout>{children}</StandardLayout>
+  return <StandardLayout data-test="standardLayout">{children}</StandardLayout>
 }
 
 Layout.propTypes = {

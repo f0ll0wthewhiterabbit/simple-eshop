@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorPage component should render correctly 1`] = `
+<styled.div>
+  <ErrorMessage
+    data-test="errorMessage"
+    title="Page not found"
+  />
+  <Styled(WithStyles(ForwardRef(Typography)))>
+    <Styled(Link)
+      data-test="backLink"
+      to="/"
+    >
+      Go back
+    </Styled(Link)>
+  </Styled(WithStyles(ForwardRef(Typography)))>
+</styled.div>
+`;

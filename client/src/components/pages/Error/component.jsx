@@ -19,9 +19,13 @@ const ErrorPage = ({ isAdmin, location }) => {
 
   return (
     <Wrapper>
-      <ErrorMessage title={title || 'Page not found'}>{message && message}</ErrorMessage>
+      <ErrorMessage title={title || 'Page not found'} data-test="errorMessage">
+        {message && message}
+      </ErrorMessage>
       <LinkWrapper>
-        <BackLink to={backTo || defaultPagePath}>Go back</BackLink>
+        <BackLink to={backTo || defaultPagePath} data-test="backLink">
+          Go back
+        </BackLink>
       </LinkWrapper>
     </Wrapper>
   )
