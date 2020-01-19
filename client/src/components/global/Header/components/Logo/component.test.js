@@ -2,17 +2,16 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Logo from './component'
-import findByTestAttr from '../../../../../utils/findByTestAttr'
 
 describe('Logo component', () => {
   let props
   let wrapper
 
   const generateWrapper = passedProps => {
-    const defaultProps = {
+    const initialProps = {
       isAdmin: false,
     }
-    props = { ...defaultProps, ...passedProps }
+    props = { ...initialProps, ...passedProps }
 
     return shallow(<Logo {...props} />)
   }
@@ -21,14 +20,8 @@ describe('Logo component', () => {
     wrapper = generateWrapper()
   })
 
-  it('should render', () => {
-    expect(wrapper).toHaveLength(1)
-  })
-
-  it('should contain proper text in LogoTitle', () => {
-    const logoTitle = findByTestAttr(wrapper, 'LogoTitle')
-
-    expect(logoTitle.text()).toBe('simple eShop')
+  it('should render correctly', () => {
+    expect(wrapper).toMatchSnapshot()
   })
 
   it(`should contain 'data-justify=flex-start' prop`, () => {

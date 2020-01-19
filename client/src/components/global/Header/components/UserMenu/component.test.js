@@ -10,8 +10,8 @@ jest.mock('@material-ui/core/useMediaQuery')
 describe('UserMenu component', () => {
   let props
   let wrapper
-  const showModal = jest.fn()
-  const signOut = jest.fn()
+  const mockShowModal = jest.fn()
+  const mockSignOut = jest.fn()
   const testUserName = 'testUserName'
   const dataTestMenu = 'menu'
   const dataTestDeleteAccountButton = 'deleteAccountButton'
@@ -24,17 +24,17 @@ describe('UserMenu component', () => {
   useStateSpy.mockImplementation(init => [init, setState])
 
   const generateWrapper = passedProps => {
-    const defaultProps = {
+    const initialProps = {
       theme: { breakpoints: { up: jest.fn() } },
       userName: testUserName,
       isAdmin: false,
       isDeleteRequestSent: false,
-      showModal,
-      signOut,
+      showModal: mockShowModal,
+      signOut: mockSignOut,
       history: { push: jest.fn() },
       location: { pathname: '/testPathName' },
     }
-    props = { ...defaultProps, ...passedProps }
+    props = { ...initialProps, ...passedProps }
 
     return shallow(<UserMenu {...props} />)
   }
@@ -43,8 +43,8 @@ describe('UserMenu component', () => {
     wrapper = generateWrapper()
   })
 
-  it('should render', () => {
-    expect(wrapper).toHaveLength(1)
+  it('should render correctly', () => {
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('should contain delete account button', () => {
@@ -104,7 +104,7 @@ describe('UserMenu component', () => {
       const deleteAccountButton = findByTestAttr(wrapper, dataTestDeleteAccountButton)
       deleteAccountButton.simulate('click')
 
-      expect(showModal).toHaveBeenCalledTimes(1)
+      expect(mockShowModal).toHaveBeenCalledTimes(1)
     })
 
     it(`should close menu after delete account button click`, () => {
@@ -127,7 +127,7 @@ describe('UserMenu component', () => {
       const signOutButton = findByTestAttr(wrapper, dataTestSignOutButton)
       signOutButton.simulate('click')
 
-      expect(signOut).toHaveBeenCalledTimes(1)
+      expect(mockSignOut).toHaveBeenCalledTimes(1)
     })
   })
 })

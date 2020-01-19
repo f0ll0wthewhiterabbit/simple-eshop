@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserMenu component should render correctly 1`] = `
+<styled.div>
+  <Styled(WithStyles(ForwardRef(IconButton)))
+    aria-controls="simple-menu"
+    aria-haspopup="true"
+    data-test="menuButton"
+    onClick={[Function]}
+  >
+    <AccountBoxIcon />
+  </Styled(WithStyles(ForwardRef(IconButton)))>
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    data-test="menu"
+    id="simple-menu"
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+  >
+    <WithStyles(ForwardRef(MenuItem))
+      component={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "displayName": "Link",
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      data-test="profileButton"
+      onClick={[Function]}
+      to="/profile"
+    >
+      <Styled(WithStyles(ForwardRef(ListItemIcon)))>
+        <PersonOutlineOutlinedIcon
+          fontSize="small"
+        />
+      </Styled(WithStyles(ForwardRef(ListItemIcon)))>
+      <WithStyles(ForwardRef(ListItemText))
+        primary="testUserName"
+      />
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      data-test="deleteAccountButton"
+      onClick={[Function]}
+    >
+      <Styled(WithStyles(ForwardRef(ListItemIcon)))>
+        <HighlightOffOutlinedIcon
+          fontSize="small"
+        />
+      </Styled(WithStyles(ForwardRef(ListItemIcon)))>
+      <WithStyles(ForwardRef(ListItemText))
+        primary="Delete Account"
+      />
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      data-test="signOutButton"
+      onClick={[Function]}
+    >
+      <Styled(WithStyles(ForwardRef(ListItemIcon)))>
+        <ExitToAppOutlinedIcon
+          fontSize="small"
+        />
+      </Styled(WithStyles(ForwardRef(ListItemIcon)))>
+      <WithStyles(ForwardRef(ListItemText))
+        primary="Sign Out"
+      />
+    </WithStyles(ForwardRef(MenuItem))>
+  </WithStyles(ForwardRef(Menu))>
+</styled.div>
+`;

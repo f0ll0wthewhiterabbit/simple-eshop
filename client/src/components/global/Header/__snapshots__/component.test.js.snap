@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component should render correctly 1`] = `
+<Styled(WithStyles(ForwardRef(AppBar)))
+  position="static"
+>
+  <WithStyles(ForwardRef(Container))
+    maxWidth="lg"
+  >
+    <WithStyles(ForwardRef(Toolbar))>
+      <Connect(Logo) />
+      <Connect(withRouter(WithTheme(UserMenu)))
+        data-test="userMenu"
+      />
+    </WithStyles(ForwardRef(Toolbar))>
+  </WithStyles(ForwardRef(Container))>
+</Styled(WithStyles(ForwardRef(AppBar)))>
+`;
