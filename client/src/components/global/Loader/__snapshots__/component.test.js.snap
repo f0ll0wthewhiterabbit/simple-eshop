@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader component should render correctly 1`] = `
+<styled.div>
+  <Styled(WithStyles(ForwardRef(CircularProgress)))
+    disableShrink={true}
+    size={36}
+    thickness={4}
+  />
+</styled.div>
+`;

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component should render correctly 1`] = `
+<styled.footer>
+  <WithStyles(ForwardRef(Container))
+    maxWidth="lg"
+  >
+    <Styled(WithStyles(ForwardRef(Typography)))
+      align="center"
+      color="textSecondary"
+      component="p"
+      variant="subtitle1"
+    >
+      <WithStyles(ForwardRef(Link))
+        color="inherit"
+        href="https://www.itechart.by/"
+      >
+        <styled.img
+          alt="iTechArt"
+          src="/itechart-logo.png"
+        />
+      </WithStyles(ForwardRef(Link))>
+      Students Lab Vitebsk
+    </Styled(WithStyles(ForwardRef(Typography)))>
+    <WithStyles(ForwardRef(Typography))
+      align="center"
+      color="textSecondary"
+      variant="body2"
+    >
+      © 
+      <Styled(Link)
+        to="/"
+      >
+        simple eShop
+      </Styled(Link)>
+       
+      2020
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Container))>
+</styled.footer>
+`;
