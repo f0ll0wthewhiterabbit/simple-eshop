@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertDialog component should render correctly 1`] = `
+<Styled(WithStyles(ForwardRef(Dialog)))
+  aria-describedby="alert-dialog-description"
+  aria-labelledby="alert-dialog-title"
+  data-test="dialogContainer"
+  onClose={[MockFunction]}
+  open={false}
+>
+  <WithStyles(ForwardRef(DialogTitle))
+    data-test="dialogTitle"
+    id="alert-dialog-title"
+  >
+    Test Title
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(ForwardRef(Button))
+      color="primary"
+      data-test="cancelButton"
+      onClick={[MockFunction]}
+      variant="outlined"
+    >
+      Cancel
+    </WithStyles(ForwardRef(Button))>
+    <WithStyles(ForwardRef(Button))
+      autoFocus={true}
+      color="secondary"
+      data-test="confirmButton"
+      onClick={[Function]}
+      startIcon={<Memo(ErrorIcon) />}
+      variant="contained"
+    >
+      Confirm
+    </WithStyles(ForwardRef(Button))>
+  </WithStyles(ForwardRef(DialogActions))>
+</Styled(WithStyles(ForwardRef(Dialog)))>
+`;

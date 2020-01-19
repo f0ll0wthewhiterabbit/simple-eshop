@@ -49,15 +49,20 @@ const AlertDialog = ({
       onClose={closeModal}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      data-test="dialogContainer"
     >
-      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+      <DialogTitle id="alert-dialog-title" data-test="dialogTitle">
+        {title}
+      </DialogTitle>
       {children && (
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">{children}</DialogContentText>
+          <DialogContentText id="alert-dialog-description" data-test="dialogContentText">
+            {children}
+          </DialogContentText>
         </DialogContent>
       )}
       <DialogActions>
-        <Button onClick={closeModal} color="primary" variant="outlined">
+        <Button onClick={closeModal} color="primary" variant="outlined" data-test="cancelButton">
           Cancel
         </Button>
         <Button
@@ -66,6 +71,7 @@ const AlertDialog = ({
           variant="contained"
           startIcon={<ErrorIcon />}
           autoFocus
+          data-test="confirmButton"
         >
           Confirm
         </Button>

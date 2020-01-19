@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorMessage component should render correctly 1`] = `
+<styled.div>
+  <Styled(WithStyles(ForwardRef(Avatar)))>
+    <PriorityHighOutlinedIcon />
+  </Styled(WithStyles(ForwardRef(Avatar)))>
+</styled.div>
+`;

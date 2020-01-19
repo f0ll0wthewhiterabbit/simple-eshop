@@ -11,11 +11,15 @@ const ErrorMessage = ({ children, title }) => {
         <PriorityHighOutlinedIcon />
       </IconWrapper>
       {title && (
-        <Heading variant="h5" component="h1">
+        <Heading variant="h5" component="h1" data-test="heading">
           {title}
         </Heading>
       )}
-      {children && <Message variant="h6">{children}</Message>}
+      {children && (
+        <Message variant="h6" data-test="message">
+          {children}
+        </Message>
+      )}
     </Wrapper>
   )
 }
