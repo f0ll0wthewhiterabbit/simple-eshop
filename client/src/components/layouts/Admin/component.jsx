@@ -10,7 +10,7 @@ import SidebarNav from './components/SidebarNav'
 import AlertDialog from '../../global/AlertDialog'
 import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 
-const AdminLayout = ({ isSidebarOpened, theme, closeSidebar, children }) => {
+export const AdminLayout = ({ isSidebarOpened, theme, closeSidebar, children }) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), { defaultMatches: true })
   const shouldOpenSidebar = isDesktop ? true : isSidebarOpened
 
@@ -28,6 +28,7 @@ const AdminLayout = ({ isSidebarOpened, theme, closeSidebar, children }) => {
           onClose={handleSidebarClose}
           open={shouldOpenSidebar}
           ModalProps={isDesktop ? {} : { keepMounted: true }} // Better open performance on mobile.
+          data-test="sidebar"
         >
           <SidebarRoot>
             <Profile />
@@ -35,7 +36,7 @@ const AdminLayout = ({ isSidebarOpened, theme, closeSidebar, children }) => {
             <SidebarNav />
           </SidebarRoot>
         </Sidebar>
-        <Main>{children}</Main>
+        <Main data-test="main">{children}</Main>
       </Wrapper>
       <Footer />
     </Root>

@@ -14,7 +14,7 @@ const StandardLayout = ({ children }) => {
         deleted soon.
       </AlertDialog>
       <Header />
-      <Main>{children}</Main>
+      <Main data-test="main">{children}</Main>
       <Footer />
     </Root>
   )

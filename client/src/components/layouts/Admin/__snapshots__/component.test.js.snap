@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminLayout component should render correctly 1`] = `
+<styled.div>
+  <Connect(AlertDialog)
+    title="Do you really want to delete selected items from database?"
+  />
+  <Connect(Header) />
+  <styled.div>
+    <Styled(WithStyles(ForwardRef(Drawer)))
+      ModalProps={
+        Object {
+          "keepMounted": true,
+        }
+      }
+      data-test="sidebar"
+      onClose={[Function]}
+      open={true}
+      variant="temporary"
+    >
+      <styled.div>
+        <Connect(Profile) />
+        <WithStyles(ForwardRef(Divider)) />
+        <SidebarNav />
+      </styled.div>
+    </Styled(WithStyles(ForwardRef(Drawer)))>
+    <styled.main
+      data-test="main"
+    >
+      <p>
+        test content
+      </p>
+    </styled.main>
+  </styled.div>
+  <Footer />
+</styled.div>
+`;
