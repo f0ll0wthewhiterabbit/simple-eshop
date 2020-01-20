@@ -20,7 +20,7 @@ const FilterSelect = ({ filter, fetchProducts, setProductsFilter }) => {
   return (
     <Wrapper>
       <SelectFormControl>
-        <Select value={filter} onChange={handleChange}>
+        <Select value={filter} onChange={handleChange} data-test="select">
           <MenuItem value={URL_FIELD_NO_FILTER}>All</MenuItem>
           <MenuItem value={URL_FIELD_RATINGS_FILTER}>My ratings</MenuItem>
         </Select>

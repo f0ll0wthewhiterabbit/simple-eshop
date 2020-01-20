@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatalogPage component should render correctly 1`] = `
+<Styled(WithStyles(ForwardRef(Container)))
+  maxWidth="lg"
+>
+  <Styled(WithStyles(ForwardRef(Typography)))
+    align="center"
+    component="h1"
+    variant="h4"
+  >
+    Catalog
+  </Styled(WithStyles(ForwardRef(Typography)))>
+  <Connect(FilterSelect) />
+  <WithStyles(ForwardRef(Typography))
+    align="center"
+    data-test="errorMessage"
+    variant="body1"
+  >
+    Sorry, there are no products yet
+  </WithStyles(ForwardRef(Typography))>
+</Styled(WithStyles(ForwardRef(Container)))>
+`;

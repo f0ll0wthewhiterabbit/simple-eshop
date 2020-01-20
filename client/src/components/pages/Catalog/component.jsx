@@ -18,12 +18,12 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
 
   if (error || products.size === 0) {
     content = (
-      <Typography variant="body1" align="center">
+      <Typography variant="body1" align="center" data-test="errorMessage">
         Sorry, there are no products yet
       </Typography>
     )
   } else if (isLoading) {
-    content = <Loader />
+    content = <Loader data-test="loader" />
   } else {
     content = (
       <>
@@ -31,7 +31,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
           {products.map(product => {
             return (
               <Grid key={product._id} item xs={12} sm={6} md={4}>
-                <ProductCard productData={product} />
+                <ProductCard productData={product} data-test="productCard" />
               </Grid>
             )
           })}

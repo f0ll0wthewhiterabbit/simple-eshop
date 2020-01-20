@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductCard component should render correctly 1`] = `
+<Styled(WithStyles(ForwardRef(Card)))>
+  <Styled(WithStyles(ForwardRef(CardMedia)))
+    image="http://localhost:5000/api/products/1/TestImageName"
+    title="TestTitle"
+  />
+  <Styled(WithStyles(ForwardRef(CardContent)))>
+    <Styled(WithStyles(ForwardRef(Typography)))
+      component="h2"
+      data-test="title"
+      gutterBottom={true}
+      variant="h5"
+    >
+      TestTitle
+    </Styled(WithStyles(ForwardRef(Typography)))>
+    <Styled(WithStyles(ForwardRef(Button)))
+      color="primary"
+      data-test="price"
+      disabled={true}
+      size="small"
+      startIcon={<Memo(ShoppingCartOutlinedIcon) />}
+    >
+      US$ 99.00
+    </Styled(WithStyles(ForwardRef(Button)))>
+    <WithStyles(ForwardRef(Typography))
+      data-test="description"
+    >
+      TestDescription
+    </WithStyles(ForwardRef(Typography))>
+  </Styled(WithStyles(ForwardRef(CardContent)))>
+  <Styled(WithStyles(ForwardRef(CardActions)))>
+    <WithStyles(ForwardRef(Chip))
+      color="secondary"
+      data-test="tag"
+      key="firstTag"
+      label="firstTag"
+      size="small"
+    />
+    <WithStyles(ForwardRef(Chip))
+      color="secondary"
+      data-test="tag"
+      key="secondTag"
+      label="secondTag"
+      size="small"
+    />
+  </Styled(WithStyles(ForwardRef(CardActions)))>
+  <styled.div>
+    <Styled(WithStyles(ForwardRef(CardActions)))>
+      <styled.span>
+        Your rating:
+      </styled.span>
+      <Styled(WithStyles(ForwardRef(Rating)))
+        data-test="userRating"
+        name="simple-controlled-user-1"
+        onChange={[Function]}
+        readOnly={true}
+        size="small"
+        value={5}
+      />
+      <Styled(WithStyles(ForwardRef(IconButton)))
+        aria-label="delete"
+        data-test="deleteButton"
+        onClick={[Function]}
+        size="small"
+      >
+        <DeleteIcon
+          fontSize="inherit"
+        />
+      </Styled(WithStyles(ForwardRef(IconButton)))>
+    </Styled(WithStyles(ForwardRef(CardActions)))>
+    <Styled(WithStyles(ForwardRef(CardActions)))>
+      <styled.span>
+        Average rating:
+      </styled.span>
+      <Styled(WithStyles(ForwardRef(Rating)))
+        data-test="averageRating"
+        name="simple-controlled-average-1"
+        onChange={[Function]}
+        readOnly={true}
+        size="small"
+        value={5}
+      />
+      <styled.span
+        active={true}
+        data-test="ratingsCount"
+      >
+        (
+        2
+        )
+      </styled.span>
+    </Styled(WithStyles(ForwardRef(CardActions)))>
+  </styled.div>
+</Styled(WithStyles(ForwardRef(Card)))>
+`;

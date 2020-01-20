@@ -35,6 +35,7 @@ const Pagination = ({ currentPage, totalPages, filter, fetchProducts }) => {
           size="small"
           disabled={currentPage === 1 ? true : undefined}
           onClick={handlePreviousPageClick}
+          data-test="previousButton"
         >
           <ChevronLeftIcon />
         </PaginationButton>
@@ -42,11 +43,12 @@ const Pagination = ({ currentPage, totalPages, filter, fetchProducts }) => {
       {pageNumbers.map(
         pageNumber =>
           isPageNumberInPagination(pageNumber) && (
-            <PaginationItem key={pageNumber}>
+            <PaginationItem key={pageNumber} data-test="paginationItem">
               <PaginationButton
                 type="button"
                 active={pageNumber === currentPage ? 1 : undefined}
                 onClick={pageNumber === currentPage ? undefined : handlePageNumberClick}
+                data-test={`paginationButton${pageNumber}`}
               >
                 {pageNumber}
               </PaginationButton>
@@ -59,6 +61,7 @@ const Pagination = ({ currentPage, totalPages, filter, fetchProducts }) => {
           size="small"
           disabled={currentPage === totalPages ? true : undefined}
           onClick={handleNextPageClick}
+          data-test="nextButton"
         >
           <ChevronRightIcon />
         </PaginationButton>

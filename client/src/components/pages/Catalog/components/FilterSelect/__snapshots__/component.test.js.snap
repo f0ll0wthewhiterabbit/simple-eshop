@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSelect component should render correctly 1`] = `
+<styled.div>
+  <Styled(WithStyles(ForwardRef(FormControl)))>
+    <WithStyles(ForwardRef(Select))
+      data-test="select"
+      onChange={[Function]}
+      value="all"
+    >
+      <WithStyles(ForwardRef(MenuItem))
+        value="all"
+      >
+        All
+      </WithStyles(ForwardRef(MenuItem))>
+      <WithStyles(ForwardRef(MenuItem))
+        value="myRatings"
+      >
+        My ratings
+      </WithStyles(ForwardRef(MenuItem))>
+    </WithStyles(ForwardRef(Select))>
+  </Styled(WithStyles(ForwardRef(FormControl)))>
+</styled.div>
+`;

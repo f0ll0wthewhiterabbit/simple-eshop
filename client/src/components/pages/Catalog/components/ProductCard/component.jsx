@@ -53,12 +53,16 @@ const ProductCard = ({
 
   if (isErrorInLoad) {
     userRatingField = (
-      <ErrorLabel variant="caption" color="secondary">
+      <ErrorLabel variant="caption" color="secondary" data-test="ratingError">
         Something went wrong!
       </ErrorLabel>
     )
   } else if (isRatingLoading) {
-    userRatingField = <LoadingLabel variant="caption">Loading...</LoadingLabel>
+    userRatingField = (
+      <LoadingLabel variant="caption" data-test="ratingLoading">
+        Loading...
+      </LoadingLabel>
+    )
   } else {
     userRatingField = (
       <>
@@ -68,9 +72,15 @@ const ProductCard = ({
           size="small"
           onChange={handleRatingChange}
           readOnly={isUserRatedProduct}
+          data-test="userRating"
         />
         {isUserRatedProduct && (
-          <DeleteButton aria-label="delete" size="small" onClick={handleDeleteButtonClick}>
+          <DeleteButton
+            aria-label="delete"
+            size="small"
+            onClick={handleDeleteButtonClick}
+            data-test="deleteButton"
+          >
             <DeleteIcon fontSize="inherit" />
           </DeleteButton>
         )}
@@ -82,17 +92,23 @@ const ProductCard = ({
     <Wrapper>
       <ImageWrapper image={`${API_URL}/products/${id}/${imageName}`} title={title} />
       <Content>
-        <Title gutterBottom variant="h5" component="h2">
+        <Title gutterBottom variant="h5" component="h2" data-test="title">
           {title}
         </Title>
-        <PriceButton size="small" color="primary" startIcon={<ShoppingCartOutlinedIcon />} disabled>
+        <PriceButton
+          size="small"
+          color="primary"
+          startIcon={<ShoppingCartOutlinedIcon />}
+          disabled
+          data-test="price"
+        >
           {formatPrice(price)}
         </PriceButton>
-        <Typography>{description}</Typography>
+        <Typography data-test="description">{description}</Typography>
       </Content>
       <TagsWrapper>
         {tags.map(tag => (
-          <Chip key={tag} label={tag} color="secondary" size="small" />
+          <Chip key={tag} label={tag} color="secondary" size="small" data-test="tag" />
         ))}
       </TagsWrapper>
       <RaitingsRoot>
@@ -108,8 +124,11 @@ const ProductCard = ({
             onChange={handleRatingChange}
             readOnly
             size="small"
+            data-test="averageRating"
           />
-          <RaitingsCount active>({votesAmount})</RaitingsCount>
+          <RaitingsCount active data-test="ratingsCount">
+            ({votesAmount})
+          </RaitingsCount>
         </RaitingWrapper>
       </RaitingsRoot>
     </Wrapper>
