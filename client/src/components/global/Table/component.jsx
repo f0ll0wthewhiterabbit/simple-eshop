@@ -19,11 +19,11 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import formatPrice from '../../../utils/formatPrice'
 import {
   ADMIN_PRODUCTS_PAGE_PATH,
-  API_URL,
   ADMIN_HIGH_PER_PAGE_LIMIT,
   DEFAULT_ADMIN_PER_PAGE_LIMIT,
   ADMIN_LOW_PER_PAGE_LIMIT,
 } from '../../../constants'
+import { baseURL } from '../../../utils/api'
 import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
 
 const Table = ({
@@ -116,7 +116,7 @@ const Table = ({
     }
 
     if (id === 'image') {
-      return <Image src={`${API_URL}/products/${row._id}/${row.imageName}`} alt={row.title} />
+      return <Image src={`${baseURL}/products/${row._id}/${row.imageName}`} alt={row.title} />
     }
 
     if (id === 'rating') {
