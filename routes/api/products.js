@@ -1,10 +1,8 @@
 const express = require('express')
-const { body, check, validationResult } = require('express-validator')
-const sharp = require('sharp')
 const auth = require('../../middleware/auth')
 const formData = require('../../middleware/formData')
-const Product = require('../../models/Product')
-const roles = require('../../constants/roles')
+const validationMethods = require('../../constants/validationMethods')
+const ProductsController = require('../../controllers/api/products')
 
 const router = express.Router()
 
@@ -13,79 +11,7 @@ const router = express.Router()
  * @desc    Get products. Optional - page number, limit, filter=myRatings
  * @access  Private
  */
-router.get('/', auth, async (req, res) => {
-  try {
-    const DEFAULT_ITEMS_PER_PAGE = 9
-
-    const queryPage = req.query.page
-    const queryLimit = req.query.limit
-    const queryFilter = req.query.filter
-    const isRatingFilter = queryFilter && queryFilter === 'myRatings'
-    const filter = isRatingFilter ? { rating: { $elemMatch: { user: req.user._id } } } : {}
-    const total = await Product.countDocuments({ ...filter })
-    const page = queryPage ? parseInt(queryPage, 10) : 1
-
-    let perPage
-
-    if (queryPage || queryLimit) {
-      perPage = parseInt(queryLimit, 10) || DEFAULT_ITEMS_PER_PAGE
-    } else {
-      perPage = total
-    }
-
-    const totalPages = Math.ceil(total / perPage)
-    const products = await Product.aggregate([
-      { $match: filter },
-      { $skip: page === 1 ? 0 : page * perPage - perPage },
-      { $limit: perPage },
-      {
-        $addFields: {
-          ratingInfo: {
-            average: { $avg: '$rating.stars' },
-            votesAmount: { $size: '$rating.stars' },
-            currentUserRating: {
-              $filter: {
-                input: '$rating',
-                as: 'item',
-                cond: { $eq: ['$$item.user', req.user._id] },
-              },
-            },
-          },
-        },
-      },
-      {
-        $project: {
-          title: '$title',
-          description: '$description',
-          price: '$price',
-          imageName: '$imageName',
-          tags: '$tags',
-          createdAt: '$createdAt',
-          updatedAt: '$updatedAt',
-          ratingInfo: {
-            average: '$ratingInfo.average',
-            votesAmount: '$ratingInfo.votesAmount',
-            currentUserRating: {
-              $arrayElemAt: ['$ratingInfo.currentUserRating.stars', 0],
-            },
-          },
-        },
-      },
-      { $sort: { createdAt: -1 } },
-    ])
-
-    return res.json({
-      page,
-      perPage,
-      total,
-      totalPages,
-      data: products,
-    })
-  } catch (err) {
-    console.error(err.message)
-    return res.status(500).send('Server error')
-  }
-})
+router.get('/', auth, ProductsController.getProducts)
 
 /**
  * @route   POST api/products
@@ -94,62 +20,8 @@ router.get('/', auth, async (req, res) => {
  */
 router.post(
   '/',
-  [
-    auth,
-    formData,
-    check('title', 'Title is required').notEmpty(),
-    check('price', 'Please include a numeric price')
-      .exists()
-      .withMessage('Please include price')
-      .isNumeric()
-      .withMessage('Price should be numeric')
-      .matches(/^\d+(\.\d{1,2})?$/)
-      .withMessage('Price can be float and include no more than two characters after dot'),
-    check('description', 'Description is required').notEmpty(),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req)
-
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() })
-    }
-
-    const { title, price, description, tags } = req.body
-    const image = req.files[0]
-
-    try {
-      if (req.user.role !== roles.ADMIN) {
-        return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
-      }
-
-      const buffer = await sharp(image.buffer)
-        .resize({ width: 400, height: 225 })
-        .jpeg()
-        .toBuffer()
-
-      const product = new Product({
-        title,
-        price,
-        description,
-        tags: tags ? tags.split(',') : [],
-        image: buffer,
-        imageName: image.originalname,
-      })
-      await product.save()
-
-      const productWithoutImage = product.getPublicFields(req.user.id)
-
-      return res.status(201).json(productWithoutImage)
-    } catch (err) {
-      console.error(err.message)
-
-      if (err.name === 'CastError') {
-        return res.status(400).json({ errors: [{ msg: 'Invalid request params' }] })
-      }
-
-      return res.status(500).send('Server error')
-    }
-  }
+  [auth, formData, ProductsController.validate(validationMethods.CREATE_PRODUCT)],
+  ProductsController.createProduct
 )
 
 /**
@@ -159,117 +31,8 @@ router.post(
  */
 router.patch(
   '/:id',
-  [
-    auth,
-    formData,
-    check('title', 'Title should not be empty')
-      .optional()
-      .notEmpty(),
-    check('price', 'Price should be a numer')
-      .optional()
-      .isNumeric()
-      .withMessage('Price should be numeric')
-      .matches(/^\d+(\.\d{1,2})?$/)
-      .withMessage('Price can be float and include no more than two characters after dot'),
-    check('description', 'Description should not be empty')
-      .optional()
-      .notEmpty(),
-    check('stars', 'Stars should be an integer numer between 0 and 5')
-      .optional()
-      .isInt({ min: 0, max: 5 }),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req)
-
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() })
-    }
-
-    const { user } = req
-    const userId = user.id
-    const { title, price, description, tags, stars } = req.body
-    const productFields = {}
-
-    try {
-      if ((title || price || description || tags || req.files) && user.role !== roles.ADMIN) {
-        return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
-      }
-
-      if (title) {
-        productFields.title = title
-      }
-
-      if (price) {
-        productFields.price = price
-      }
-
-      if (description) {
-        productFields.description = description
-      }
-
-      if (tags) {
-        productFields.tags = tags.split(',')
-      }
-
-      if (tags === '') {
-        productFields.tags = []
-      }
-
-      if (req.files && req.files.length > 0) {
-        const image = req.files[0]
-        const buffer = await sharp(image.buffer)
-          .resize({ width: 400, height: 225 })
-          .jpeg()
-          .toBuffer()
-
-        productFields.image = buffer
-        productFields.imageName = image.originalname
-      }
-
-      const productId = req.params.id
-      const product = await Product.findById(productId)
-
-      if (stars || stars === 0) {
-        const productRating = product.rating
-        const userRatingIndex = product.rating.findIndex(
-          rating => rating.user.toString() === userId
-        )
-
-        if (userRatingIndex !== -1) {
-          if (stars === 0) {
-            productRating.splice(userRatingIndex, 1)
-          } else {
-            productRating[userRatingIndex].stars = stars
-          }
-        } else {
-          productRating.push({
-            user: userId,
-            stars,
-          })
-        }
-
-        productFields.rating = productRating
-      }
-
-      const updatedProduct = await Product.findByIdAndUpdate(
-        productId,
-        { $set: productFields },
-        { new: true }
-      )
-
-      const productWithoutImage = updatedProduct.getPublicFields(req.user.id)
-
-      return res.json(productWithoutImage)
-    } catch (err) {
-      console.error(err.message)
-
-      if (err.name === 'CastError') {
-        return res.status(400).json({ errors: [{ msg: 'Invalid request params' }] })
-      }
-
-      return res.status(500).send('Server error')
-    }
-  }
+  [auth, formData, ProductsController.validate(validationMethods.UPDATE_PRODUCT)],
+  ProductsController.updateProduct
 )
 
 /**
@@ -277,138 +40,31 @@ router.patch(
  * @desc    Delete products
  * @access  Private - admin only
  */
-router.delete('/', [auth, body().isArray()], async (req, res) => {
-  const errors = validationResult(req)
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() })
-  }
-
-  try {
-    if (req.user.role !== roles.ADMIN) {
-      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
-    }
-
-    const idListToDelete = req.body
-    const productsAmount = await Product.countDocuments({ _id: { $in: idListToDelete } })
-
-    if (idListToDelete.length !== productsAmount) {
-      return res.status(400).json({ errors: [{ msg: 'The requested products cannot be deleted' }] })
-    }
-
-    const result = await Product.deleteMany({ _id: { $in: idListToDelete } })
-
-    return res.json({ deletedCount: result.deletedCount })
-  } catch (err) {
-    console.error(err.message)
-    return res.status(500).send('Server error')
-  }
-})
+router.delete(
+  '/',
+  [auth, ProductsController.validate(validationMethods.DELETE_PRODUCTS)],
+  ProductsController.deleteProducts
+)
 
 /**
  * @route   GET api/products/:id
  * @desc    Get product
  * @access  Private - admin only
  */
-router.get('/:id', auth, async (req, res) => {
-  try {
-    if (req.user.role !== roles.ADMIN) {
-      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
-    }
-
-    const product = await Product.findById(req.params.id).select('-image -__v')
-
-    res.json(product)
-  } catch (err) {
-    console.error(err)
-
-    if (err.name === 'CastError') {
-      return res.status(400).json({ errors: [{ msg: 'Invalid request params' }] })
-    }
-
-    return res.status(500).send('Server error')
-  }
-})
+router.get('/:id', auth, ProductsController.getProduct)
 
 /**
  * @route   GET api/products/:id/rating?page=1&limit=3
  * @desc    Get product rating. Optional for ratings - page number, limit
  * @access  Private - admin only
  */
-router.get('/:id/rating', auth, async (req, res) => {
-  try {
-    if (req.user.role !== roles.ADMIN) {
-      return res.status(401).json({ errors: [{ msg: 'Forbidden' }] })
-    }
-
-    const product = await Product.findById(req.params.id).select(
-      '-tags -imageName -image -price -description -__v'
-    )
-
-    const DEFAULT_ITEMS_PER_PAGE = 10
-
-    const queryPage = req.query.page
-    const queryLimit = req.query.limit
-    const total = product.rating.length
-    const page = queryPage ? parseInt(queryPage, 10) : 1
-    let perPage
-
-    if (queryPage || queryLimit) {
-      perPage = parseInt(queryLimit, 10) || DEFAULT_ITEMS_PER_PAGE
-    } else {
-      perPage = total
-    }
-
-    const totalPages = Math.ceil(total / perPage)
-    const skip = page === 1 ? 0 : page * perPage - perPage
-
-    const productData = await Product.findById(req.params.id)
-      .populate('rating.user', 'firstName lastName email')
-      .slice('rating', [skip, perPage])
-      .select('-tags -imageName -image -price -description -__v')
-
-    return res.json({
-      page,
-      perPage,
-      total,
-      totalPages,
-      data: productData,
-    })
-  } catch (err) {
-    console.error(err)
-
-    if (err.name === 'CastError') {
-      return res.status(400).json({ errors: [{ msg: 'Invalid request params' }] })
-    }
-
-    return res.status(500).send('Server error')
-  }
-})
+router.get('/:id/rating', auth, ProductsController.getProductRating)
 
 /**
  * @route   GET api/products/:id/image
  * @desc    Get product image
  * @access  Public
  */
-router.get('/:id/:imageName', async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id)
-
-    if (!product.image) {
-      return res.status(404).json({ errors: [{ msg: 'There is no image for this product' }] })
-    }
-
-    res.set('Content-Type', 'image/jpeg')
-    res.send(product.image)
-  } catch (err) {
-    console.error(err)
-
-    if (err.name === 'CastError') {
-      return res.status(400).json({ errors: [{ msg: 'Invalid request params' }] })
-    }
-
-    return res.status(500).send('Server error')
-  }
-})
+router.get('/:id/:imageName', ProductsController.getProductImage)
 
 module.exports = router

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const User = require('../models/User')
+const UserService = require('../services/user')
 
 module.exports = async (req, res, next) => {
   const token = req.header('x-auth-token')
@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-    const user = await User.findById(decoded.user.id)
+    const user = await UserService.getUserById(decoded.user.id)
 
     req.user = user
     next()

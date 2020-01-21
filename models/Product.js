@@ -94,22 +94,3 @@ ProductSchema.path('price').get(num => Number((num / 100).toFixed(2)))
 ProductSchema.path('price').set(num => num * 100)
 
 module.exports = mongoose.model('Product', ProductSchema)
-
-// {
-//   $project: {
-//     title: '$title',
-//     description: '$description',
-//     price: '$price',
-//     imageName: '$imageName',
-//     tags: '$tags',
-//     createdAt: '$createdAt',
-//     updatedAt: '$updatedAt',
-//     ratingInfo: {
-//       average: '$ratingInfo.average',
-//       votesAmount: '$ratingInfo.votesAmount',
-//       currentUserRating: {
-//         $arrayElemAt: ['$ratingInfo.currentUserRating.stars', 0],
-//       },
-//     },
-//   },
-// },
