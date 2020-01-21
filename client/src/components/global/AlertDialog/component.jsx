@@ -7,40 +7,11 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import ErrorIcon from '@material-ui/icons/Error'
 
-import {
-  STORE_FIELD_PRODUCTS,
-  STORE_FIELD_USERS,
-  STORE_FIELD_CURRENT_USER,
-} from '../../../constants'
 import { DialogContainer } from './styles'
 
-const AlertDialog = ({
-  isModalOpened,
-  title,
-  children,
-  closeModal,
-  storeFieldName,
-  deleteUsers,
-  deleteProducts,
-  requestUserDeletion,
-}) => {
+const AlertDialog = ({ isModalOpened, title, children, closeModal, confirmMethod }) => {
   const handleConfirmButton = () => {
-    switch (storeFieldName) {
-      case STORE_FIELD_PRODUCTS:
-        deleteProducts()
-        break
-
-      case STORE_FIELD_USERS:
-        deleteUsers()
-        break
-
-      case STORE_FIELD_CURRENT_USER:
-        requestUserDeletion()
-        break
-
-      default:
-        break
-    }
+    confirmMethod()
   }
 
   return (
@@ -82,6 +53,7 @@ const AlertDialog = ({
 
 AlertDialog.defaultProps = {
   children: '',
+  confirmMethod: () => {},
 }
 
 AlertDialog.propTypes = {
@@ -89,10 +61,7 @@ AlertDialog.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   closeModal: PropTypes.func.isRequired,
-  storeFieldName: PropTypes.string.isRequired,
-  deleteUsers: PropTypes.func.isRequired,
-  deleteProducts: PropTypes.func.isRequired,
-  requestUserDeletion: PropTypes.func.isRequired,
+  confirmMethod: PropTypes.func,
 }
 
 export default AlertDialog

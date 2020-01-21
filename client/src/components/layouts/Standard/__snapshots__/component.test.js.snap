@@ -3,6 +3,7 @@
 exports[`StandardLayout component should render correctly 1`] = `
 <styled.div>
   <Connect(AlertDialog)
+    confirmMethod={[MockFunction]}
     title="Delete your account?"
   >
     The remove request will be sent to the administrator. Unfortunately, your account will be deleted soon.

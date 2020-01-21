@@ -9,10 +9,26 @@ import Profile from './components/Profile'
 import SidebarNav from './components/SidebarNav'
 import AlertDialog from '../../global/AlertDialog'
 import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
+import { STORE_FIELD_USERS, STORE_FIELD_PRODUCTS } from '../../../constants'
 
-export const AdminLayout = ({ isSidebarOpened, theme, closeSidebar, children }) => {
+export const AdminLayout = ({
+  isSidebarOpened,
+  storeFieldName,
+  theme,
+  closeSidebar,
+  deleteUsers,
+  deleteProducts,
+  children,
+}) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), { defaultMatches: true })
   const shouldOpenSidebar = isDesktop ? true : isSidebarOpened
+  let confirmMethod
+
+  if (storeFieldName === STORE_FIELD_PRODUCTS) {
+    confirmMethod = deleteProducts
+  } else if (storeFieldName === STORE_FIELD_USERS) {
+    confirmMethod = deleteUsers
+  }
 
   const handleSidebarClose = () => {
     closeSidebar()
@@ -20,7 +36,10 @@ export const AdminLayout = ({ isSidebarOpened, theme, closeSidebar, children }) 
 
   return (
     <Root>
-      <AlertDialog title="Do you really want to delete selected items from database?" />
+      <AlertDialog
+        title="Do you really want to delete selected items from database?"
+        confirmMethod={confirmMethod}
+      />
       <Header />
       <Wrapper>
         <Sidebar
@@ -43,10 +62,17 @@ export const AdminLayout = ({ isSidebarOpened, theme, closeSidebar, children }) 
   )
 }
 
+AdminLayout.defaultProps = {
+  storeFieldName: '',
+}
+
 AdminLayout.propTypes = {
   isSidebarOpened: PropTypes.bool.isRequired,
+  storeFieldName: PropTypes.string,
   theme: PropTypes.shape({ breakpoints: PropTypes.object.isRequired }).isRequired,
   closeSidebar: PropTypes.func.isRequired,
+  deleteUsers: PropTypes.func.isRequired,
+  deleteProducts: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 }
 

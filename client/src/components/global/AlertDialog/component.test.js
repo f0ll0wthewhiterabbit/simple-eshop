@@ -3,20 +3,13 @@ import { shallow } from 'enzyme'
 
 import AlertDialog from './component'
 import findByTestAttr from '../../../utils/findByTestAttr'
-import {
-  STORE_FIELD_PRODUCTS,
-  STORE_FIELD_USERS,
-  STORE_FIELD_CURRENT_USER,
-} from '../../../constants'
 
 describe('AlertDialog component', () => {
   let props
   let wrapper
   const testTitle = 'Test Title'
   const mockCloseModal = jest.fn()
-  const mockDeleteUsers = jest.fn()
-  const mockDeleteProducts = jest.fn()
-  const mockRequestUserDeletion = jest.fn()
+  const mockConfirmMethod = jest.fn()
 
   const generateWrapper = passedProps => {
     const initialProps = {
@@ -25,9 +18,7 @@ describe('AlertDialog component', () => {
       children: '',
       closeModal: mockCloseModal,
       storeFieldName: '',
-      deleteUsers: mockDeleteUsers,
-      deleteProducts: mockDeleteProducts,
-      requestUserDeletion: mockRequestUserDeletion,
+      confirmMethod: mockConfirmMethod,
     }
     props = { ...initialProps, ...passedProps }
 
@@ -83,36 +74,10 @@ describe('AlertDialog component', () => {
     expect(mockCloseModal).toHaveBeenCalledTimes(1)
   })
 
-  it('should be confirmed but not handled after confirm button click', () => {
+  it('should handle confirm method after confirm button click', () => {
     const confirmButton = findByTestAttr(wrapper, 'confirmButton')
     confirmButton.simulate('click')
 
-    expect(mockDeleteUsers).toHaveBeenCalledTimes(0)
-    expect(mockDeleteProducts).toHaveBeenCalledTimes(0)
-    expect(mockRequestUserDeletion).toHaveBeenCalledTimes(0)
-  })
-
-  it('should handle delete users after confirm button click', () => {
-    wrapper = generateWrapper({ storeFieldName: STORE_FIELD_USERS })
-    const confirmButton = findByTestAttr(wrapper, 'confirmButton')
-    confirmButton.simulate('click')
-
-    expect(mockDeleteUsers).toHaveBeenCalledTimes(1)
-  })
-
-  it('should handle delete products after confirm button click', () => {
-    wrapper = generateWrapper({ storeFieldName: STORE_FIELD_PRODUCTS })
-    const confirmButton = findByTestAttr(wrapper, 'confirmButton')
-    confirmButton.simulate('click')
-
-    expect(mockDeleteProducts).toHaveBeenCalledTimes(1)
-  })
-
-  it('should handle deletetion request of user after confirm button click', () => {
-    wrapper = generateWrapper({ storeFieldName: STORE_FIELD_CURRENT_USER })
-    const confirmButton = findByTestAttr(wrapper, 'confirmButton')
-    confirmButton.simulate('click')
-
-    expect(mockRequestUserDeletion).toHaveBeenCalledTimes(1)
+    expect(mockConfirmMethod).toHaveBeenCalledTimes(1)
   })
 })

@@ -6,10 +6,10 @@ import Footer from '../../global/Footer'
 import AlertDialog from '../../global/AlertDialog'
 import { Root, Main } from './styles'
 
-const StandardLayout = ({ children }) => {
+const StandardLayout = ({ requestUserDeletion, children }) => {
   return (
     <Root>
-      <AlertDialog title="Delete your account?">
+      <AlertDialog title="Delete your account?" confirmMethod={requestUserDeletion}>
         The remove request will be sent to the administrator. Unfortunately, your account will be
         deleted soon.
       </AlertDialog>
@@ -21,6 +21,7 @@ const StandardLayout = ({ children }) => {
 }
 
 StandardLayout.propTypes = {
+  requestUserDeletion: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 }
 

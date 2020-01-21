@@ -1,3 +1,3 @@
-import StandardLayout from './component'
+import StandardLayout from './container'
 
 export default StandardLayout

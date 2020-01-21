@@ -15,6 +15,8 @@ describe('AdminLayout component', () => {
 
   const generateWrapper = passedProps => {
     const initialProps = {
+      deleteUsers: jest.fn(),
+      deleteProducts: jest.fn(),
       children: testChildren,
       isSidebarOpened: true,
       closeSidebar: jest.fn(),

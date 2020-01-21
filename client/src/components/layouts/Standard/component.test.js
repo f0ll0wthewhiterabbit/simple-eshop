@@ -12,6 +12,7 @@ describe('StandardLayout component', () => {
 
   const generateWrapper = passedProps => {
     const initialProps = {
+      requestUserDeletion: jest.fn(),
       children: testChildren,
     }
     props = { ...initialProps, ...passedProps }
