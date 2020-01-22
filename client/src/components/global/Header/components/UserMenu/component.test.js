@@ -8,11 +8,17 @@ import findByTestAttr from '../../../../../utils/findByTestAttr'
 jest.mock('@material-ui/core/useMediaQuery')
 
 describe('UserMenu component', () => {
-  let props
   let wrapper
-  const mockShowModal = jest.fn()
-  const mockSignOut = jest.fn()
-  const testUserName = 'testUserName'
+  const initialProps = {
+    theme: { breakpoints: { up: jest.fn() } },
+    userName: 'testUserName',
+    isAdmin: false,
+    isDeleteRequestSent: false,
+    showModal: jest.fn(),
+    signOut: jest.fn(),
+    history: { push: jest.fn() },
+    location: { pathname: '/testPathName' },
+  }
   const dataTestMenu = 'menu'
   const dataTestDeleteAccountButton = 'deleteAccountButton'
   const dataTestMenuButton = 'menuButton'
@@ -24,23 +30,19 @@ describe('UserMenu component', () => {
   useStateSpy.mockImplementation(init => [init, setState])
 
   const generateWrapper = passedProps => {
-    const initialProps = {
-      theme: { breakpoints: { up: jest.fn() } },
-      userName: testUserName,
-      isAdmin: false,
-      isDeleteRequestSent: false,
-      showModal: mockShowModal,
-      signOut: mockSignOut,
-      history: { push: jest.fn() },
-      location: { pathname: '/testPathName' },
-    }
-    props = { ...initialProps, ...passedProps }
+    const defaultProps = { ...initialProps }
+    const props = { ...defaultProps, ...passedProps }
 
     return shallow(<UserMenu {...props} />)
   }
 
   beforeEach(() => {
     wrapper = generateWrapper()
+  })
+
+  afterEach(() => {
+    initialProps.showModal.mockClear()
+    initialProps.signOut.mockClear()
   })
 
   it('should render correctly', () => {
@@ -72,7 +74,7 @@ describe('UserMenu component', () => {
     wrapper = generateWrapper()
     const button = findByTestAttr(wrapper, dataTestMenuButton)
 
-    expect(button.text().indexOf(testUserName)).not.toBe(-1)
+    expect(button.text().indexOf(initialProps.userName)).not.toBe(-1)
   })
 
   it('should render button without user name on small destop width', () => {
@@ -80,7 +82,7 @@ describe('UserMenu component', () => {
     wrapper = generateWrapper()
     const button = findByTestAttr(wrapper, dataTestMenuButton)
 
-    expect(button.text().indexOf(testUserName)).toBe(-1)
+    expect(button.text().indexOf(initialProps.userName)).toBe(-1)
   })
 
   describe('closed menu', () => {
@@ -104,7 +106,7 @@ describe('UserMenu component', () => {
       const deleteAccountButton = findByTestAttr(wrapper, dataTestDeleteAccountButton)
       deleteAccountButton.simulate('click')
 
-      expect(mockShowModal).toHaveBeenCalledTimes(1)
+      expect(initialProps.showModal).toHaveBeenCalledTimes(1)
     })
 
     it(`should close menu after delete account button click`, () => {
@@ -127,7 +129,7 @@ describe('UserMenu component', () => {
       const signOutButton = findByTestAttr(wrapper, dataTestSignOutButton)
       signOutButton.simulate('click')
 
-      expect(mockSignOut).toHaveBeenCalledTimes(1)
+      expect(initialProps.signOut).toHaveBeenCalledTimes(1)
     })
   })
 })

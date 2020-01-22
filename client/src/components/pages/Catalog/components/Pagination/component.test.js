@@ -6,21 +6,21 @@ import findByTestAttr from '../../../../../utils/findByTestAttr'
 import { URL_FIELD_RATINGS_FILTER } from '../../../../../constants'
 
 describe('Pagination component', () => {
-  let props
   let wrapper
   const filter = URL_FIELD_RATINGS_FILTER
-  const currentPage = 5
-  const totalPages = 10
-  const mockFetchProducts = jest.fn()
+  const initialProps = {
+    currentPage: 5,
+    totalPages: 10,
+    filter: URL_FIELD_RATINGS_FILTER,
+    fetchProducts: jest.fn(),
+  }
+  const dataTestPaginationItem = 'paginationItem'
+  const dataTestPerviousButton = 'previousButton'
+  const dataTestNextButton = 'nextButton'
 
   const generateWrapper = passedProps => {
-    const initialProps = {
-      currentPage,
-      totalPages,
-      filter,
-      fetchProducts: mockFetchProducts,
-    }
-    props = { ...initialProps, ...passedProps }
+    const defaultProps = { ...initialProps }
+    const props = { ...defaultProps, ...passedProps }
 
     return shallow(<Pagination {...props} />)
   }
@@ -30,7 +30,7 @@ describe('Pagination component', () => {
   })
 
   afterEach(() => {
-    mockFetchProducts.mockClear()
+    initialProps.fetchProducts.mockClear()
   })
 
   it('should render correctly', () => {
@@ -38,19 +38,19 @@ describe('Pagination component', () => {
   })
 
   it('should render correct number for current page', () => {
-    const paginationButton = findByTestAttr(wrapper, `paginationButton${currentPage}`)
+    const paginationButton = findByTestAttr(wrapper, `paginationButton${initialProps.currentPage}`)
 
-    expect(paginationButton.text()).toBe(currentPage.toString())
+    expect(paginationButton.text()).toBe(initialProps.currentPage.toString())
   })
 
   it('should render current page button as active button', () => {
-    const paginationButton = findByTestAttr(wrapper, `paginationButton${currentPage}`)
+    const paginationButton = findByTestAttr(wrapper, `paginationButton${initialProps.currentPage}`)
 
     expect(paginationButton.props().active).toBeTruthy()
   })
 
   it('should contain correct page numbers', () => {
-    const paginationItems = findByTestAttr(wrapper, 'paginationItem')
+    const paginationItems = findByTestAttr(wrapper, dataTestPaginationItem)
     const expectedAmountOfButtons = 7
 
     expect(paginationItems).toHaveLength(expectedAmountOfButtons)
@@ -58,15 +58,15 @@ describe('Pagination component', () => {
 
   it('should contain correct page numbers for first page', () => {
     wrapper = generateWrapper({ currentPage: 1 })
-    const paginationItems = findByTestAttr(wrapper, 'paginationItem')
+    const paginationItems = findByTestAttr(wrapper, dataTestPaginationItem)
     const expectedAmountOfButtons = 4
 
     expect(paginationItems).toHaveLength(expectedAmountOfButtons)
   })
 
   it('should contain correct page numbers for last page', () => {
-    wrapper = generateWrapper({ currentPage: totalPages })
-    const paginationItems = findByTestAttr(wrapper, 'paginationItem')
+    wrapper = generateWrapper({ currentPage: initialProps.totalPages })
+    const paginationItems = findByTestAttr(wrapper, dataTestPaginationItem)
     const expectedAmountOfButtons = 4
 
     expect(paginationItems).toHaveLength(expectedAmountOfButtons)
@@ -74,14 +74,14 @@ describe('Pagination component', () => {
 
   it('should contain disabled previous button for first page', () => {
     wrapper = generateWrapper({ currentPage: 1 })
-    const previousButton = findByTestAttr(wrapper, 'previousButton')
+    const previousButton = findByTestAttr(wrapper, dataTestPerviousButton)
 
     expect(previousButton.props().disabled).toBeTruthy()
   })
 
   it('should contain disabled previous button for last page', () => {
-    wrapper = generateWrapper({ currentPage: totalPages })
-    const nextButton = findByTestAttr(wrapper, 'nextButton')
+    wrapper = generateWrapper({ currentPage: initialProps.totalPages })
+    const nextButton = findByTestAttr(wrapper, dataTestNextButton)
 
     expect(nextButton.props().disabled).toBeTruthy()
   })
@@ -91,27 +91,35 @@ describe('Pagination component', () => {
     const paginationButton = findByTestAttr(wrapper, `paginationButton${pageNumber}`)
     paginationButton.simulate('click', { target: { innerText: pageNumber.toString() } })
 
-    expect(mockFetchProducts).toHaveBeenLastCalledWith(pageNumber, null, filter)
+    expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(pageNumber, null, filter)
   })
 
   it('should handle previous page click', () => {
-    const previousButton = findByTestAttr(wrapper, 'previousButton')
+    const previousButton = findByTestAttr(wrapper, dataTestPerviousButton)
     previousButton.simulate('click')
 
-    expect(mockFetchProducts).toHaveBeenLastCalledWith(currentPage - 1, null, filter)
+    expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(
+      initialProps.currentPage - 1,
+      null,
+      filter
+    )
   })
 
   it('should handle next page click', () => {
-    const nextButton = findByTestAttr(wrapper, 'nextButton')
+    const nextButton = findByTestAttr(wrapper, dataTestNextButton)
     nextButton.simulate('click')
 
-    expect(mockFetchProducts).toHaveBeenLastCalledWith(currentPage + 1, null, filter)
+    expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(
+      initialProps.currentPage + 1,
+      null,
+      filter
+    )
   })
 
   it('should handle active page button click', () => {
-    const paginationButton = findByTestAttr(wrapper, `paginationButton${currentPage}`)
+    const paginationButton = findByTestAttr(wrapper, `paginationButton${initialProps.currentPage}`)
     paginationButton.simulate('click')
 
-    expect(mockFetchProducts).toHaveBeenCalledTimes(0)
+    expect(initialProps.fetchProducts).toHaveBeenCalledTimes(0)
   })
 })

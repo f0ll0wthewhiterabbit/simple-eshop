@@ -6,18 +6,19 @@ import { ROLE_GUEST, ROLE_ADMIN, ROLE_USER } from '../../../constants'
 import findByTestAttr from '../../../utils/findByTestAttr'
 
 describe('Layout component', () => {
-  let props
   let wrapper
   const testContent = 'test content'
-  const testChildren = <p>{testContent}</p>
+  const initialProps = {
+    isAuthenticated: false,
+    userRole: ROLE_GUEST,
+    children: <p>{testContent}</p>,
+  }
+  const dataTestStandardLayout = 'standardLayout'
+  const dataTestAdminLayout = 'adminLayout'
 
   const generateWrapper = passedProps => {
-    const initialProps = {
-      isAuthenticated: false,
-      userRole: ROLE_GUEST,
-      children: testChildren,
-    }
-    props = { ...initialProps, ...passedProps }
+    const defaultProps = { ...initialProps }
+    const props = { ...defaultProps, ...passedProps }
 
     return shallow(<Layout {...props} />)
   }
@@ -31,27 +32,27 @@ describe('Layout component', () => {
   })
 
   it('should render standardLayout', () => {
-    const standardLayout = findByTestAttr(wrapper, 'standardLayout')
+    const standardLayout = findByTestAttr(wrapper, dataTestStandardLayout)
 
     expect(standardLayout).toHaveLength(1)
   })
 
   it('should contain correct children', () => {
-    const standardLayout = findByTestAttr(wrapper, 'standardLayout')
+    const standardLayout = findByTestAttr(wrapper, dataTestStandardLayout)
 
     expect(standardLayout.find('p').text()).toEqual(testContent)
   })
 
   it('should render adminLayout for administrator', () => {
     wrapper = generateWrapper({ isAuthenticated: true, userRole: ROLE_ADMIN })
-    const adminLayout = findByTestAttr(wrapper, 'adminLayout')
+    const adminLayout = findByTestAttr(wrapper, dataTestAdminLayout)
 
     expect(adminLayout).toHaveLength(1)
   })
 
   it(`shouldn't render adminLayout for authenticated user`, () => {
     wrapper = generateWrapper({ isAuthenticated: true, userRole: ROLE_USER })
-    const adminLayout = findByTestAttr(wrapper, 'adminLayout')
+    const adminLayout = findByTestAttr(wrapper, dataTestAdminLayout)
 
     expect(adminLayout).toHaveLength(0)
   })

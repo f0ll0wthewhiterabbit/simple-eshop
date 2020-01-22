@@ -5,27 +5,30 @@ import Header from './component'
 import findByTestAttr from '../../../utils/findByTestAttr'
 
 describe('Header component', () => {
-  let props
   let wrapper
-  const mockOpenSidebar = jest.fn()
+  const initialProps = {
+    openSidebar: jest.fn(),
+    isAdmin: false,
+    isAuthenticated: true,
+    isDeleteRequestSent: false,
+  }
   const dataTestMenuButton = 'menuButton'
   const dataTestWarningMessage = 'warningMessage'
   const dataTestUserMenu = 'userMenu'
 
   const generateWrapper = passedProps => {
-    const initialProps = {
-      openSidebar: mockOpenSidebar,
-      isAdmin: false,
-      isAuthenticated: true,
-      isDeleteRequestSent: false,
-    }
-    props = { ...initialProps, ...passedProps }
+    const defaultProps = { ...initialProps }
+    const props = { ...defaultProps, ...passedProps }
 
     return shallow(<Header {...props} />)
   }
 
   beforeEach(() => {
     wrapper = generateWrapper()
+  })
+
+  afterEach(() => {
+    initialProps.openSidebar.mockClear()
   })
 
   it('should render correctly', () => {
@@ -70,6 +73,6 @@ describe('Header component', () => {
     const button = findByTestAttr(wrapper, dataTestMenuButton)
     button.simulate('click')
 
-    expect(mockOpenSidebar).toHaveBeenCalledTimes(1)
+    expect(initialProps.openSidebar).toHaveBeenCalledTimes(1)
   })
 })

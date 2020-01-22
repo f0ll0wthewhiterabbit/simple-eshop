@@ -5,15 +5,17 @@ import ErrorMessage from './component'
 import findByTestAttr from '../../../utils/findByTestAttr'
 
 describe('ErrorMessage component', () => {
-  let props
   let wrapper
+  const initialProps = {
+    children: '',
+    title: '',
+  }
+  const dataTestHeading = 'heading'
+  const dataTestMessage = 'message'
 
   const generateWrapper = passedProps => {
-    const initialProps = {
-      children: '',
-      title: '',
-    }
-    props = { ...initialProps, ...passedProps }
+    const defaultProps = { ...initialProps }
+    const props = { ...defaultProps, ...passedProps }
 
     return shallow(<ErrorMessage {...props} />)
   }
@@ -27,13 +29,13 @@ describe('ErrorMessage component', () => {
   })
 
   it(`shouldn't contain title`, () => {
-    const title = findByTestAttr(wrapper, 'heading')
+    const title = findByTestAttr(wrapper, dataTestHeading)
 
     expect(title).toHaveLength(0)
   })
 
   it(`shouldn't contain message`, () => {
-    const message = findByTestAttr(wrapper, 'message')
+    const message = findByTestAttr(wrapper, dataTestMessage)
 
     expect(message).toHaveLength(0)
   })
@@ -41,7 +43,7 @@ describe('ErrorMessage component', () => {
   it(`should contain title passed from props`, () => {
     const testTitle = 'Test Title'
     wrapper = generateWrapper({ title: testTitle })
-    const title = findByTestAttr(wrapper, 'heading')
+    const title = findByTestAttr(wrapper, dataTestHeading)
 
     expect(title).toHaveLength(1)
     expect(title.text()).toBe(testTitle)
@@ -50,7 +52,7 @@ describe('ErrorMessage component', () => {
   it(`should contain message passed as children`, () => {
     const testMessage = 'Test Message'
     wrapper = generateWrapper({ children: testMessage })
-    const message = findByTestAttr(wrapper, 'message')
+    const message = findByTestAttr(wrapper, dataTestMessage)
 
     expect(message).toHaveLength(1)
     expect(message.text()).toBe(testMessage)

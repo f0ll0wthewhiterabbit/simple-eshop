@@ -5,17 +5,17 @@ import StandardLayout from './component'
 import findByTestAttr from '../../../utils/findByTestAttr'
 
 describe('StandardLayout component', () => {
-  let props
   let wrapper
   const testContent = 'test content'
-  const testChildren = <p>{testContent}</p>
+  const initialProps = {
+    requestUserDeletion: jest.fn(),
+    children: <p>{testContent}</p>,
+  }
+  const dataTestMain = 'main'
 
   const generateWrapper = passedProps => {
-    const initialProps = {
-      requestUserDeletion: jest.fn(),
-      children: testChildren,
-    }
-    props = { ...initialProps, ...passedProps }
+    const defaultProps = { ...initialProps }
+    const props = { ...defaultProps, ...passedProps }
 
     return shallow(<StandardLayout {...props} />)
   }
@@ -29,7 +29,7 @@ describe('StandardLayout component', () => {
   })
 
   it('should contain correct children in main', () => {
-    const main = findByTestAttr(wrapper, 'main')
+    const main = findByTestAttr(wrapper, dataTestMain)
 
     expect(main.find('p').text()).toEqual(testContent)
   })

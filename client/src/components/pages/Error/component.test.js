@@ -6,16 +6,18 @@ import findByTestAttr from '../../../utils/findByTestAttr'
 import { MAIN_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH, SIGN_UP_PAGE_PATH } from '../../../constants'
 
 describe('ErrorPage component', () => {
-  let props
   let wrapper
+  const initialProps = {
+    isAdmin: false,
+    location: null,
+  }
   const defaultTitle = 'Page not found'
+  const dataTestErrorMessage = 'errorMessage'
+  const dataTestBackLink = 'backLink'
 
   const generateWrapper = passedProps => {
-    const initialProps = {
-      isAdmin: false,
-      location: null,
-    }
-    props = { ...initialProps, ...passedProps }
+    const defaultProps = { ...initialProps }
+    const props = { ...defaultProps, ...passedProps }
 
     return shallow(<ErrorPage {...props} />)
   }
@@ -29,26 +31,26 @@ describe('ErrorPage component', () => {
   })
 
   it(`should pass default title to ErrorMessage`, () => {
-    const errorMessage = findByTestAttr(wrapper, 'errorMessage')
+    const errorMessage = findByTestAttr(wrapper, dataTestErrorMessage)
 
     expect(errorMessage.props().title).toBe(defaultTitle)
   })
 
   it(`should pass no children to ErrorMessage`, () => {
-    const errorMessage = findByTestAttr(wrapper, 'errorMessage')
+    const errorMessage = findByTestAttr(wrapper, dataTestErrorMessage)
 
     expect(errorMessage.props().children).toBe('')
   })
 
   it(`should contain link to main page`, () => {
-    const backLink = findByTestAttr(wrapper, 'backLink')
+    const backLink = findByTestAttr(wrapper, dataTestBackLink)
 
     expect(backLink.props().to).toBe(MAIN_PAGE_PATH)
   })
 
   it(`should contain link to admin products page in admin mode`, () => {
     wrapper = generateWrapper({ isAdmin: true })
-    const backLink = findByTestAttr(wrapper, 'backLink')
+    const backLink = findByTestAttr(wrapper, dataTestBackLink)
 
     expect(backLink.props().to).toBe(ADMIN_PRODUCTS_PAGE_PATH)
   })
@@ -70,19 +72,19 @@ describe('ErrorPage component', () => {
     })
 
     it('should pass title from location prop to ErrorMessage', () => {
-      const errorMessage = findByTestAttr(wrapper, 'errorMessage')
+      const errorMessage = findByTestAttr(wrapper, dataTestErrorMessage)
 
       expect(errorMessage.props().title).toBe(locationTitle)
     })
 
     it(`should pass message from location prop to ErrorMessage's children`, () => {
-      const errorMessage = findByTestAttr(wrapper, 'errorMessage')
+      const errorMessage = findByTestAttr(wrapper, dataTestErrorMessage)
 
       expect(errorMessage.props().children).toBe(locationMessage)
     })
 
     it(`should contain link from location prop`, () => {
-      const backLink = findByTestAttr(wrapper, 'backLink')
+      const backLink = findByTestAttr(wrapper, dataTestBackLink)
 
       expect(backLink.props().to).toBe(SIGN_UP_PAGE_PATH)
     })

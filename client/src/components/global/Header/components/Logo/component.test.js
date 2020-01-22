@@ -4,14 +4,14 @@ import { shallow } from 'enzyme'
 import Logo from './component'
 
 describe('Logo component', () => {
-  let props
   let wrapper
+  const initialProps = {
+    isAdmin: false,
+  }
 
   const generateWrapper = passedProps => {
-    const initialProps = {
-      isAdmin: false,
-    }
-    props = { ...initialProps, ...passedProps }
+    const defaultProps = { ...initialProps }
+    const props = { ...defaultProps, ...passedProps }
 
     return shallow(<Logo {...props} />)
   }
