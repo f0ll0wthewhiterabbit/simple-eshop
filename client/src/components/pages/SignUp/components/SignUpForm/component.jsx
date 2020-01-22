@@ -7,13 +7,16 @@ import * as Yup from 'yup'
 import { StyledForm, SubmitButton, Progress } from './styles'
 
 const SignUpForm = ({ signUp, error }) => {
-  const handleFormSubmit = values => {
-    signUp({
-      email: values.email,
-      firstName: values.firstName,
-      lastName: values.lastName,
-      password: values.password,
-    })
+  const handleFormSubmit = (values, formMethods) => {
+    signUp(
+      {
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: values.password,
+      },
+      formMethods.setSubmitting
+    )
   }
 
   return (
@@ -132,9 +135,9 @@ const SignUpForm = ({ signUp, error }) => {
             fullWidth
             variant="contained"
             color="primary"
-            disabled={isSubmitting && error === null}
+            disabled={isSubmitting}
           >
-            {isSubmitting && error === null ? <Progress size={20} /> : 'Sign Up'}
+            {isSubmitting ? <Progress size={20} /> : 'Sign Up'}
           </SubmitButton>
           {error && (
             <Typography color="error" variant="body1" align="center" gutterBottom>

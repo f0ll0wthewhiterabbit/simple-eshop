@@ -8,13 +8,14 @@ import * as Yup from 'yup'
 import { StyledForm, SubmitButton, Progress } from './styles'
 
 const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
-  const handleFormSubmit = values => {
+  const handleFormSubmit = (values, formMethods) => {
     updateUser(
       {
         firstName: values.firstName,
         lastName: values.lastName,
       },
-      history
+      history,
+      formMethods.setSubmitting
     )
   }
 
@@ -84,11 +85,9 @@ const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
             fullWidth
             variant="contained"
             color="primary"
-            disabled={
-              !isDataChanged(values.firstName, values.lastName) || (isSubmitting && error === null)
-            }
+            disabled={!isDataChanged(values.firstName, values.lastName) || isSubmitting}
           >
-            {isSubmitting && error === null ? <Progress size={20} /> : 'Save changes'}
+            {isSubmitting ? <Progress size={20} /> : 'Save changes'}
           </SubmitButton>
           {error && (
             <Typography color="error" variant="body1" align="center" gutterBottom>

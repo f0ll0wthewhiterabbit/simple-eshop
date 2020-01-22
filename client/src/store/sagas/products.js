@@ -184,6 +184,7 @@ function* addProductSaga(action) {
       : 'Product add error!'
 
     yield put(addProductError(message))
+    yield action.payload.setFormSubmitting(false)
   }
 }
 
@@ -207,6 +208,7 @@ function* editProductSaga(action) {
       : 'Product add error!'
 
     yield put(editProductError(message))
+    yield action.payload.setFormSubmitting(false)
   }
 }
 

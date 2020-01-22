@@ -86,10 +86,14 @@ export const deleteProductRatingError = createAction(
   'PRODUCTS/DELETE_PRODUCT_RATING_ERROR',
   id => ({ id })
 )
-export const addProduct = createAction('PRODUCTS/ADD_PRODUCT', (productFormData, history) => ({
-  productFormData,
-  history,
-}))
+export const addProduct = createAction(
+  'PRODUCTS/ADD_PRODUCT',
+  (productFormData, history, setFormSubmitting) => ({
+    productFormData,
+    history,
+    setFormSubmitting,
+  })
+)
 export const addProductSuccess = createAction('PRODUCTS/ADD_PRODUCT_SUCCESS', product => ({
   product,
 }))
@@ -97,10 +101,11 @@ export const addProductError = createAction('PRODUCTS/ADD_PRODUCT_ERROR', error 
 export const startRatingLoading = createAction('PRODUCTS/START_RATING_LOADING', id => ({ id }))
 export const editProduct = createAction(
   'PRODUCTS/EDIT_PRODUCT',
-  (id, changedFieldsFormData, history) => ({
+  (id, changedFieldsFormData, history, setFormSubmitting) => ({
     id,
     changedFieldsFormData,
     history,
+    setFormSubmitting,
   })
 )
 export const editProductSuccess = createAction('PRODUCTS/EDIT_PRODUCT_SUCCESS', product => ({

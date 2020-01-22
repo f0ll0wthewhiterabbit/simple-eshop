@@ -19,10 +19,8 @@ import {
   changeProductRatingError,
   deleteProductRatingSuccess,
   deleteProductRatingError,
-  addProduct,
   addProductSuccess,
   addProductError,
-  editProduct,
   editProductSuccess,
   editProductError,
   startRatingLoading,
@@ -88,18 +86,6 @@ describe('Products reducer', () => {
 
   it('should start loading after [fetchProductRating] action', () => {
     const recievedState = productsReducer(undefined, fetchProductRating())
-
-    expect(recievedState.isLoading).toBe(true)
-  })
-
-  it('should start loading after [addProduct] action', () => {
-    const recievedState = productsReducer(undefined, addProduct())
-
-    expect(recievedState.isLoading).toBe(true)
-  })
-
-  it('should start loading after [editProduct] action', () => {
-    const recievedState = productsReducer(undefined, editProduct())
 
     expect(recievedState.isLoading).toBe(true)
   })

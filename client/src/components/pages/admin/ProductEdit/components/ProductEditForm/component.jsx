@@ -42,7 +42,7 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
     }
   }
 
-  const handleFormSubmit = values => {
+  const handleFormSubmit = (values, formMethods) => {
     const changedFieldsFormData = new FormData()
 
     if (values.title !== title) {
@@ -65,7 +65,7 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
       changedFieldsFormData.set('tags', tags)
     }
 
-    editProduct(id, changedFieldsFormData, history)
+    editProduct(id, changedFieldsFormData, history, formMethods.setSubmitting)
   }
 
   const isDataChanged = (newTitle, newPrice, newDescription, newImageName, newTags) => {
@@ -238,11 +238,10 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
                 values.description,
                 values.image !== imageName ? values.image.name : imageName,
                 tags
-              ) ||
-              (isSubmitting && error === null)
+              ) || isSubmitting
             }
           >
-            {isSubmitting && error === null ? <Progress size={20} /> : 'Save Product'}
+            {isSubmitting ? <Progress size={20} /> : 'Save Product'}
           </SubmitButton>
           {error && (
             <Typography color="error" variant="body1" align="center" gutterBottom>

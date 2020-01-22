@@ -75,6 +75,7 @@ function* signUpSaga(action) {
 
     yield localStorage.removeItem(STORAGE_FIELD_TOKEN)
     yield put(signUpError(errorMessage))
+    yield action.payload.setFormSubmitting(false)
   }
 }
 
@@ -100,6 +101,7 @@ function* signInSaga(action) {
 
     yield localStorage.removeItem(STORAGE_FIELD_TOKEN)
     yield put(signInError(errorMessage))
+    yield action.payload.setFormSubmitting(false)
   }
 }
 

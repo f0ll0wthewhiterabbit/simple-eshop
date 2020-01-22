@@ -36,10 +36,14 @@ export const requestUserDeletionError = createAction(
     error,
   })
 )
-export const updateUser = createAction('USERS/UPDATE_USER', (userData, history) => ({
-  userData,
-  history,
-}))
+export const updateUser = createAction(
+  'USERS/UPDATE_USER',
+  (userData, history, setFormSubmitting) => ({
+    userData,
+    history,
+    setFormSubmitting,
+  })
+)
 export const updateUserSuccess = createAction('USERS/UPDATE_USER_SUCCESS', user => ({ user }))
 export const updateUserError = createAction('USERS/UPDATE_USER_ERROR', error => ({ error }))
 export const setUsersPerPage = createAction('USERS/SET_USERS_PER_PAGE', amount => ({

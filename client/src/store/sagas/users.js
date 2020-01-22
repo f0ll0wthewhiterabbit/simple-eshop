@@ -105,6 +105,7 @@ function* updateUserSaga(action) {
     }
   } catch (error) {
     yield put(updateUserError('User update error!'))
+    yield action.payload.setFormSubmitting(false)
   }
 }
 

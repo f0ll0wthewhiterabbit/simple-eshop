@@ -40,7 +40,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
     }
   }
 
-  const handleFormSubmit = values => {
+  const handleFormSubmit = (values, formMethods) => {
     const formData = new FormData()
     formData.set('title', values.title)
     formData.set('price', values.price)
@@ -48,7 +48,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
     formData.set('tags', tags)
     formData.set('image', values.image, values.image.name)
 
-    addProduct(formData, history)
+    addProduct(formData, history, formMethods.setSubmitting)
   }
 
   return (
@@ -188,9 +188,9 @@ const ProductAddForm = ({ error, addProduct, history }) => {
             variant="contained"
             color="primary"
             onFocus={() => setFieldTouched('image', true)}
-            disabled={isSubmitting && error === null}
+            disabled={isSubmitting}
           >
-            {isSubmitting && error === null ? <Progress size={20} /> : 'Add Product'}
+            {isSubmitting ? <Progress size={20} /> : 'Add Product'}
           </SubmitButton>
           {error && (
             <Typography color="error" variant="body1" align="center" gutterBottom>

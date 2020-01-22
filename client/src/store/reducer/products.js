@@ -19,10 +19,8 @@ import {
   changeProductRatingError,
   deleteProductRatingSuccess,
   deleteProductRatingError,
-  addProduct,
   addProductSuccess,
   addProductError,
-  editProduct,
   editProductSuccess,
   editProductError,
   startRatingLoading,
@@ -56,14 +54,8 @@ const initialState = Record({
 
 const products = handleActions(
   {
-    [combineActions(
-      fetchProducts,
-      fetchProduct,
-      fetchProductRating,
-      addProduct,
-      editProduct,
-      deleteProducts
-    )]: state => state.set('isLoading', true),
+    [combineActions(fetchProducts, fetchProduct, fetchProductRating, deleteProducts)]: state =>
+      state.set('isLoading', true),
 
     [fetchProductsSuccess]: (state, action) =>
       state

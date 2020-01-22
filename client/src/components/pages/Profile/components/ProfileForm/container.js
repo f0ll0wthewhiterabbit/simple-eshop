@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: (userData, history) => dispatch(updateUser(userData, history)),
+  updateUser: (userData, history, setFormSubmitting) =>
+    dispatch(updateUser(userData, history, setFormSubmitting)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm)
