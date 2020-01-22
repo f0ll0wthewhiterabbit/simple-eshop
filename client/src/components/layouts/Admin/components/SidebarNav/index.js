@@ -1,3 +1,3 @@
-import SidebarNav from './component'
+import SidebarNav from './container'
 
 export default SidebarNav
