@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
-import { TableBody, TableCell, TableHead, TableRow, TablePagination } from '@material-ui/core'
+import { TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 
 import {
   ADMIN_LOW_PER_PAGE_LIMIT,
@@ -18,6 +18,7 @@ import {
   Heading,
   SubHeading,
   Comment,
+  TablePaginationPanel,
 } from './styles'
 
 const ProductRatingTable = ({
@@ -120,7 +121,7 @@ const ProductRatingTable = ({
           </TableRoot>
         </TableWrapper>
         <Comment variant="caption">&quot;--&quot; - for deleted users</Comment>
-        <TablePagination
+        <TablePaginationPanel
           rowsPerPageOptions={[
             ADMIN_LOW_PER_PAGE_LIMIT,
             DEFAULT_ADMIN_PER_PAGE_LIMIT,

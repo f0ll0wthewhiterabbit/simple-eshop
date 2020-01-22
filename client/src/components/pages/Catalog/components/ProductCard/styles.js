@@ -28,18 +28,36 @@ export const Content = styled(CardContent)`
 `
 
 export const Title = styled(Typography)`
-  padding-right: ${props => props.theme.spacing(10)}px;
+  padding-right: ${props => props.theme.spacing(11)}px;
 `
 
 export const PriceButton = styled(Button)`
   position: absolute;
   top: 16px;
   right: 16px;
+
+  .MuiButton-startIcon {
+    display: none;
+  }
+
+  ${props => props.theme.breakpoints.up('lg')} {
+    .MuiButton-startIcon {
+      display: inherit;
+      margin-right: 4px;
+    }
+  }
 `
 
 export const TagsWrapper = styled(CardActions)`
   padding-left: ${props => props.theme.spacing(2)}px;
   padding-right: ${props => props.theme.spacing(2)}px;
+  flex-wrap: wrap;
+
+  .MuiChip-root {
+    margin-left: 0;
+    margin-right: 6px;
+    margin-bottom: 2px;
+  }
 `
 
 export const RaitingsRoot = styled.div`

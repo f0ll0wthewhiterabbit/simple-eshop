@@ -7,7 +7,7 @@ import ProductCard from './components/ProductCard'
 import Loader from '../../global/Loader'
 import FilterSelect from './components/FilterSelect'
 import Pagination from './components/Pagination'
-import { Wrapper, Heading } from './styles'
+import { Wrapper, Heading, ContentWrapper } from './styles'
 
 const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
   useEffect(() => {
@@ -47,7 +47,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
         Catalog
       </Heading>
       <FilterSelect />
-      {content}
+      <ContentWrapper>{content}</ContentWrapper>
     </Wrapper>
   )
 }

@@ -29,9 +29,28 @@ export const LogoIcon = styled(ExplicitIcon)`
 export const LogoTitle = styled(Typography)`
   display: block;
   font-size: 1rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 53px;
+    height: 2px;
+    background-color: #fff;
+    top: 13px;
+    left: -2px;
+  }
 
   ${props => props.theme.breakpoints.up('sm')} {
     display: block;
     font-size: 1.25rem;
+
+    &::before {
+      content: '';
+      width: 66px;
+      top: 16px;
+      left: -3px;
+    }
   }
 `

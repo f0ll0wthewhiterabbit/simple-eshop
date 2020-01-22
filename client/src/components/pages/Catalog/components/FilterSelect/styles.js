@@ -2,9 +2,15 @@ import styled from 'styled-components'
 import { FormControl } from '@material-ui/core'
 
 export const Wrapper = styled.div`
-  position: absolute;
-  top: 49px;
-  right: 32px;
+  text-align: center;
+  margin-bottom: 28px;
+
+  ${props => props.theme.breakpoints.up('sm')} {
+    position: absolute;
+    top: 49px;
+    right: 32px;
+    margin-bottom: 0;
+  }
 `
 
 export const SelectFormControl = styled(FormControl)`

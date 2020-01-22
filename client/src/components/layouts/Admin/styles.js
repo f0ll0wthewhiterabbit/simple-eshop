@@ -43,4 +43,5 @@ export const Main = styled.main`
   flex-grow: 1;
   padding: ${props => props.theme.spacing(3)}px;
   position: relative;
+  overflow-x: auto;
 `

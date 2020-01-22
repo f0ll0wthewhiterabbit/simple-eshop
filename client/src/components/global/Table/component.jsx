@@ -7,7 +7,6 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TablePagination,
   TableRow,
   Checkbox,
   IconButton,
@@ -23,8 +22,17 @@ import {
   DEFAULT_ADMIN_PER_PAGE_LIMIT,
   ADMIN_LOW_PER_PAGE_LIMIT,
 } from '../../../constants'
-import { baseURL } from '../../../utils/api'
-import { Root, Wrapper, TableWrapper, TableRoot, ToolbarRoot, ToolbarTitle, Image } from './styles'
+import { BASE_URL } from '../../../utils/api'
+import {
+  Root,
+  Wrapper,
+  TableWrapper,
+  TableRoot,
+  ToolbarRoot,
+  ToolbarTitle,
+  Image,
+  TablePaginationPanel,
+} from './styles'
 
 const Table = ({
   rows,
@@ -116,7 +124,7 @@ const Table = ({
     }
 
     if (id === 'image') {
-      return <Image src={`${baseURL}/products/${row._id}/${row.imageName}`} alt={row.title} />
+      return <Image src={`${BASE_URL}/products/${row._id}/${row.imageName}`} alt={row.title} />
     }
 
     if (id === 'rating') {
@@ -235,7 +243,7 @@ const Table = ({
             </TableBody>
           </TableRoot>
         </TableWrapper>
-        <TablePagination
+        <TablePaginationPanel
           rowsPerPageOptions={[
             ADMIN_LOW_PER_PAGE_LIMIT,
             DEFAULT_ADMIN_PER_PAGE_LIMIT,

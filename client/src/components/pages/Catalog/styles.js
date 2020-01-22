@@ -8,6 +8,15 @@ export const Wrapper = styled(Container)`
 `
 
 export const Heading = styled(Typography)`
-  margin-bottom: ${props => props.theme.spacing(4)}px;
+  margin-bottom: ${props => props.theme.spacing(2)}px;
   font-size: 1.85rem;
+
+  ${props => props.theme.breakpoints.up('sm')} {
+    margin-bottom: ${props => props.theme.spacing(4)}px;
+  }
+`
+
+export const ContentWrapper = styled.div`
+  min-height: 100px;
+  position: relative;
 `

@@ -6,7 +6,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import formatPrice from '../../../../../utils/formatPrice'
-import { baseURL } from '../../../../../utils/api'
+import { BASE_URL } from '../../../../../utils/api'
 import {
   Wrapper,
   ImageWrapper,
@@ -90,7 +90,7 @@ const ProductCard = ({
 
   return (
     <Wrapper>
-      <ImageWrapper image={`${baseURL}/products/${id}/${imageName}`} title={title} />
+      <ImageWrapper image={`${BASE_URL}/products/${id}/${imageName}`} title={title} />
       <Content>
         <Title gutterBottom variant="h5" component="h2" data-test="title">
           {title}

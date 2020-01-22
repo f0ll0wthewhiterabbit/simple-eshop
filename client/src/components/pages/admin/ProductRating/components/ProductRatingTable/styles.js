@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Paper, Table, Toolbar, Typography } from '@material-ui/core'
+import { Paper, Table, Toolbar, Typography, TablePagination } from '@material-ui/core'
 
 export const Root = styled.div`
   width: 100%;
@@ -46,7 +46,40 @@ export const SubHeading = styled(Typography)`
 `
 
 export const Comment = styled(Typography)`
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
+  display: none;
+
+  ${props => props.theme.breakpoints.up('sm')} {
+    display: block;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+  }
+`
+
+export const TablePaginationPanel = styled(TablePagination)`
+  .MuiToolbar-root {
+    justify-content: space-around;
+  }
+
+  .MuiTablePagination-caption:first-of-type {
+    display: none;
+  }
+
+  .MuiTablePagination-spacer {
+    display: none;
+  }
+
+  ${props => props.theme.breakpoints.up('sm')} {
+    .MuiToolbar-root {
+      justify-content: flex-end;
+    }
+
+    .MuiTablePagination-caption:first-of-type {
+      display: block;
+    }
+
+    .MuiTablePagination-spacer {
+      display: block;
+    }
+  }
 `
