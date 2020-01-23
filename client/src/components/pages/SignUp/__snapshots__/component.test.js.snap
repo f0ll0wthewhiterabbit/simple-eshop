@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpPage component should render correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  component="main"
+  maxWidth="xs"
+>
+  <styled.div>
+    <Styled(WithStyles(ForwardRef(Avatar)))>
+      <PersonAddRoundedIcon />
+    </Styled(WithStyles(ForwardRef(Avatar)))>
+    <WithStyles(ForwardRef(Typography))
+      component="h1"
+      variant="h5"
+    >
+      Sign up
+    </WithStyles(ForwardRef(Typography))>
+    <Connect(SignUpForm) />
+    <WithStyles(ForwardRef(Typography))
+      align="center"
+      color="textSecondary"
+      variant="body2"
+    >
+      Already have an account? 
+      <Styled(Link)
+        to="/sign-in"
+      >
+        Sign In
+      </Styled(Link)>
+    </WithStyles(ForwardRef(Typography))>
+  </styled.div>
+</WithStyles(ForwardRef(Container))>
+`;

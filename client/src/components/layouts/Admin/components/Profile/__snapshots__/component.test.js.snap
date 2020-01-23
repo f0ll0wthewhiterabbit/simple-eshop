@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile component should render correctly 1`] = `
+<styled.div>
+  <Styled(WithStyles(ForwardRef(Avatar)))
+    data-test="avatar"
+  >
+    J D
+  </Styled(WithStyles(ForwardRef(Avatar)))>
+  <WithStyles(ForwardRef(Typography))
+    data-test="name"
+    variant="h6"
+  >
+    John Doe
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="caption"
+  >
+    Administrator
+  </WithStyles(ForwardRef(Typography))>
+</styled.div>
+`;

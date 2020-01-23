@@ -29,7 +29,7 @@ const SidebarNav = ({ closeSidebar }) => {
       <PagesList>
         {pages.map(page => (
           <NavigationItem key={page.title} button>
-            <NavigationLink to={page.href} onClick={handleNavLinkClick}>
+            <NavigationLink to={page.href} onClick={handleNavLinkClick} data-test="navigationLink">
               <PageIcon>{page.icon}</PageIcon>
               <PageText primary={page.title} />
             </NavigationLink>

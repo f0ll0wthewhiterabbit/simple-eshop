@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SingInPage component should render correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  maxWidth="xs"
+>
+  <styled.div>
+    <Styled(WithStyles(ForwardRef(Avatar)))>
+      <LockOutlinedIcon />
+    </Styled(WithStyles(ForwardRef(Avatar)))>
+    <WithStyles(ForwardRef(Typography))
+      component="h1"
+      variant="h5"
+    >
+      Sign in
+    </WithStyles(ForwardRef(Typography))>
+    <Connect(SignInForm) />
+    <WithStyles(ForwardRef(Typography))
+      align="center"
+      color="textSecondary"
+      variant="body2"
+    >
+      Don't have an account? 
+      <Styled(Link)
+        to="/sign-up"
+      >
+        Sign Up
+      </Styled(Link)>
+    </WithStyles(ForwardRef(Typography))>
+  </styled.div>
+</WithStyles(ForwardRef(Container))>
+`;

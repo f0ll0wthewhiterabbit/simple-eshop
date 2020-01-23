@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfilePage component should render correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  component="main"
+  maxWidth="xs"
+>
+  <styled.div>
+    <Styled(WithStyles(ForwardRef(Typography)))
+      align="center"
+      component="h1"
+      variant="h4"
+    >
+      Profile
+    </Styled(WithStyles(ForwardRef(Typography)))>
+    <Styled(WithStyles(ForwardRef(Avatar)))
+      data-test="avatar"
+    >
+      J D
+    </Styled(WithStyles(ForwardRef(Avatar)))>
+    <Connect(withRouter(ProfileForm)) />
+  </styled.div>
+</WithStyles(ForwardRef(Container))>
+`;

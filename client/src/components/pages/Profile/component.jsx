@@ -15,7 +15,7 @@ const ProfilePage = ({ firstName, lastName }) => {
         <Heading variant="h4" component="h1" align="center">
           Profile
         </Heading>
-        <IconWrapper>{`${firstLetter} ${secondLetter}`}</IconWrapper>
+        <IconWrapper data-test="avatar">{`${firstLetter} ${secondLetter}`}</IconWrapper>
         <ProfileForm />
       </Wrapper>
     </Container>

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidebarNav component should render correctly 1`] = `
+<nav
+  aria-label="navigation"
+>
+  <Styled(WithStyles(ForwardRef(List)))>
+    <Styled(WithStyles(ForwardRef(ListItem)))
+      button={true}
+      key="Users"
+    >
+      <Styled(NavLink)
+        data-test="navigationLink"
+        onClick={[Function]}
+        to="/admin/users"
+      >
+        <Styled(WithStyles(ForwardRef(ListItemIcon)))>
+          <PeopleIcon />
+        </Styled(WithStyles(ForwardRef(ListItemIcon)))>
+        <Styled(WithStyles(ForwardRef(ListItemText)))
+          primary="Users"
+        />
+      </Styled(NavLink)>
+    </Styled(WithStyles(ForwardRef(ListItem)))>
+    <Styled(WithStyles(ForwardRef(ListItem)))
+      button={true}
+      key="Products"
+    >
+      <Styled(NavLink)
+        data-test="navigationLink"
+        onClick={[Function]}
+        to="/admin/products"
+      >
+        <Styled(WithStyles(ForwardRef(ListItemIcon)))>
+          <ShoppingBasketIcon />
+        </Styled(WithStyles(ForwardRef(ListItemIcon)))>
+        <Styled(WithStyles(ForwardRef(ListItemText)))
+          primary="Products"
+        />
+      </Styled(NavLink)>
+    </Styled(WithStyles(ForwardRef(ListItem)))>
+  </Styled(WithStyles(ForwardRef(List)))>
+</nav>
+`;

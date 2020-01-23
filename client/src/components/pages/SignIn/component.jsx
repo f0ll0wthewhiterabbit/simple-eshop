@@ -16,7 +16,12 @@ import { Wrapper, IconWrapper, SignUpLink } from './styles'
 
 const SingInPage = ({ isAuthenticated, userRole }) => {
   if (isAuthenticated && userRole !== ROLE_GUEST) {
-    return <Redirect to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH} />
+    return (
+      <Redirect
+        to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH}
+        data-test="redirect"
+      />
+    )
   }
 
   return (

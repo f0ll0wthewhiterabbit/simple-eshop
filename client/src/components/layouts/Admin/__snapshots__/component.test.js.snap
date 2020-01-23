@@ -21,7 +21,7 @@ exports[`AdminLayout component should render correctly 1`] = `
       <styled.div>
         <Connect(Profile) />
         <WithStyles(ForwardRef(Divider)) />
-        <SidebarNav />
+        <Connect(SidebarNav) />
       </styled.div>
     </Styled(WithStyles(ForwardRef(Drawer)))>
     <styled.main

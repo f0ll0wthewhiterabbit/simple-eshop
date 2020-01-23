@@ -10,8 +10,8 @@ const Profile = ({ firstName, lastName }) => {
 
   return (
     <Wrapper>
-      <ProfileAvatar>{`${firstLetter} ${secondLetter}`}</ProfileAvatar>
-      <Typography variant="h6">{`${firstName} ${lastName}`}</Typography>
+      <ProfileAvatar data-test="avatar">{`${firstLetter} ${secondLetter}`}</ProfileAvatar>
+      <Typography variant="h6" data-test="name">{`${firstName} ${lastName}`}</Typography>
       <Typography variant="caption">Administrator</Typography>
     </Wrapper>
   )
