@@ -17,16 +17,16 @@ import {
   ERROR_PAGE_PATH,
 } from './constants'
 
-const CatalogPage = React.lazy(() => import('./components/pages/Catalog'))
-const ProfilePage = React.lazy(() => import('./components/pages/Profile'))
-const SignInPage = React.lazy(() => import('./components/pages/SignIn'))
-const SignUpPage = React.lazy(() => import('./components/pages/SignUp'))
-const AdminUsersPage = React.lazy(() => import('./components/pages/admin/Users'))
-const AdminProductsPage = React.lazy(() => import('./components/pages/admin/Products'))
-const AdminProductAddPage = React.lazy(() => import('./components/pages/admin/ProductAdd'))
-const AdminProductEditPage = React.lazy(() => import('./components/pages/admin/ProductEdit'))
-const AdminProductRatingPage = React.lazy(() => import('./components/pages/admin/ProductRating'))
-const ErrorPage = React.lazy(() => import('./components/pages/Error'))
+const CatalogPage = React.lazy(() => import('./pages/Catalog'))
+const ProfilePage = React.lazy(() => import('./pages/Profile'))
+const SignInPage = React.lazy(() => import('./pages/SignIn'))
+const SignUpPage = React.lazy(() => import('./pages/SignUp'))
+const AdminUsersPage = React.lazy(() => import('./pages/admin/Users'))
+const AdminProductsPage = React.lazy(() => import('./pages/admin/Products'))
+const AdminProductAddPage = React.lazy(() => import('./pages/admin/ProductAdd'))
+const AdminProductEditPage = React.lazy(() => import('./pages/admin/ProductEdit'))
+const AdminProductRatingPage = React.lazy(() => import('./pages/admin/ProductRating'))
+const ErrorPage = React.lazy(() => import('./pages/Error'))
 
 export default () => {
   return (
