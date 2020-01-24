@@ -12,9 +12,8 @@ const mapStateToProps = state => ({
   isLoading: state.getIn(['products', 'isLoading']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchProducts: (page, itemsPerPage, filter) =>
-    dispatch(fetchProducts(page, itemsPerPage, filter)),
-})
+const mapDispatchToProps = {
+  fetchProducts: (page, itemsPerPage, filter) => fetchProducts(page, itemsPerPage, filter),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CatalogPage)

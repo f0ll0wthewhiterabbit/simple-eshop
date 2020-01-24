@@ -10,9 +10,9 @@ const mapStateToProps = state => ({
   error: state.getIn(['products', 'error']),
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
   fetchProductRating: (productId, page, itemsPerPage) =>
-    dispatch(fetchProductRating(productId, page, itemsPerPage)),
-})
+    fetchProductRating(productId, page, itemsPerPage),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductRatingPage)

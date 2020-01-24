@@ -8,10 +8,10 @@ const mapStateToProps = state => ({
   storeFieldName: state.getIn(['app', 'storeFieldNameForModal']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  closeSidebar: () => dispatch(closeSidebar()),
-  deleteUsers: () => dispatch(deleteUsers()),
-  deleteProducts: () => dispatch(deleteProducts()),
-})
+const mapDispatchToProps = {
+  closeSidebar,
+  deleteUsers,
+  deleteProducts,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminLayoutWithTheme)

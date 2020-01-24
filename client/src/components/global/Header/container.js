@@ -10,8 +10,8 @@ const mapStateToProps = state => ({
   isDeleteRequestSent: state.getIn(['auth', 'user', 'isRemovable']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  openSidebar: () => dispatch(openSidebar()),
-})
+const mapDispatchToProps = {
+  openSidebar,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

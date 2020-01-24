@@ -7,9 +7,9 @@ const mapStateToProps = state => ({
   error: state.getIn(['products', 'error']),
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
   addProduct: (productFormData, history, setFormSubmitting) =>
-    dispatch(addProduct(productFormData, history, setFormSubmitting)),
-})
+    addProduct(productFormData, history, setFormSubmitting),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductAddForm)

@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
   error: state.getIn(['users', 'error']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchUsers: (currentPage, itemsPerPage) => dispatch(fetchUsers(currentPage, itemsPerPage)),
-})
+const mapDispatchToProps = {
+  fetchUsers: (currentPage, itemsPerPage) => fetchUsers(currentPage, itemsPerPage),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersPage)

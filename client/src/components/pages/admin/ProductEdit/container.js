@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
   isLoading: state.getIn(['products', 'isLoading']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchProduct: id => dispatch(fetchProduct(id)),
-})
+const mapDispatchToProps = {
+  fetchProduct: id => fetchProduct(id),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductEditPage)

@@ -9,10 +9,10 @@ const mapStateToProps = state => ({
   totalAmount: state.getIn(['products', 'totalAmount']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  setProductsPerPage: selectedProductsList => dispatch(setProductsPerPage(selectedProductsList)),
+const mapDispatchToProps = {
+  setProductsPerPage: selectedProductsList => setProductsPerPage(selectedProductsList),
   fetchProductRating: (productId, page, itemsPerPage) =>
-    dispatch(fetchProductRating(productId, page, itemsPerPage)),
-})
+    fetchProductRating(productId, page, itemsPerPage),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductRatingTable)

@@ -7,9 +7,9 @@ const mapStateToProps = state => ({
   error: state.getIn(['products', 'error']),
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
   editProduct: (id, changedFieldsFormData, history, setFormSubmitting) =>
-    dispatch(editProduct(id, changedFieldsFormData, history, setFormSubmitting)),
-})
+    editProduct(id, changedFieldsFormData, history, setFormSubmitting),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductEditForm)

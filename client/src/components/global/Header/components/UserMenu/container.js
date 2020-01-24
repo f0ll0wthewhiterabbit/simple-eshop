@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import UserMenu from './component'
+import UserMenuComponent from './component'
 import { showModal, signOut } from '../../../../../store/actions'
 import { ROLE_ADMIN } from '../../../../../constants'
 
@@ -10,9 +10,9 @@ const mapStateToProps = state => ({
   isDeleteRequestSent: state.getIn(['auth', 'user', 'isRemovable']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  showModal: storeFieldNameForModal => dispatch(showModal(storeFieldNameForModal)),
-  signOut: (history, location) => dispatch(signOut(history, location)),
-})
+const mapDispatchToProps = {
+  showModal: storeFieldNameForModal => showModal(storeFieldNameForModal),
+  signOut: (history, location) => signOut(history, location),
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(UserMenuComponent)

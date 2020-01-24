@@ -11,10 +11,10 @@ const mapStateToProps = state => ({
   selectedUsers: state.getIn(['users', 'selected']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  setSelectedUsers: selectedUsersList => dispatch(setSelectedUsers(selectedUsersList)),
-  fetchUsers: (currentPage, itemsPerPage) => dispatch(fetchUsers(currentPage, itemsPerPage)),
-  setUsersPerPage: amount => dispatch(setUsersPerPage(amount)),
-})
+const mapDispatchToProps = {
+  setSelectedUsers: selectedUsersList => setSelectedUsers(selectedUsersList),
+  fetchUsers: (currentPage, itemsPerPage) => fetchUsers(currentPage, itemsPerPage),
+  setUsersPerPage: amount => setUsersPerPage(amount),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersTable)

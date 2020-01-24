@@ -7,10 +7,9 @@ const mapStateToProps = state => ({
   filter: state.getIn(['products', 'filter']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchProducts: (page, itemsPerPage, filter) =>
-    dispatch(fetchProducts(page, itemsPerPage, filter)),
-  setProductsFilter: filter => dispatch(setProductsFilter(filter)),
-})
+const mapDispatchToProps = {
+  fetchProducts: (page, itemsPerPage, filter) => fetchProducts(page, itemsPerPage, filter),
+  setProductsFilter: filter => setProductsFilter(filter),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterSelect)

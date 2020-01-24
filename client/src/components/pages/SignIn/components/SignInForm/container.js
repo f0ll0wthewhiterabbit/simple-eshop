@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
   error: state.getIn(['auth', 'error']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  signIn: (userData, setFormSubmitting) => dispatch(signIn(userData, setFormSubmitting)),
-})
+const mapDispatchToProps = {
+  signIn: (userData, setFormSubmitting) => signIn(userData, setFormSubmitting),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInForm)

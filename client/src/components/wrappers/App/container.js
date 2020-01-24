@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
   error: state.getIn(['auth', 'error']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  authenticate: () => dispatch(authenticate()),
-})
+const mapDispatchToProps = {
+  authenticate,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

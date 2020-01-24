@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
   isModalOpened: state.getIn(['app', 'isModalOpened']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  closeModal: () => dispatch(closeModal()),
-})
+const mapDispatchToProps = {
+  closeModal,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlertDialog)

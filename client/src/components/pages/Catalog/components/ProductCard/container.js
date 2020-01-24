@@ -8,9 +8,9 @@ const mapStateToProps = state => ({
   ratingsErrorList: state.getIn(['products', 'ratingsErrorList']),
 })
 
-const mapDispatchToProps = dispatch => ({
-  changeProductRating: productData => dispatch(changeProductRating(productData)),
-  deleteProductRating: productId => dispatch(deleteProductRating(productId)),
-})
+const mapDispatchToProps = {
+  changeProductRating: productData => changeProductRating(productData),
+  deleteProductRating: productId => deleteProductRating(productId),
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
