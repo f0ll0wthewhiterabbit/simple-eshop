@@ -24,7 +24,7 @@ const ThemeProviderWrapper = ({ children }) => (
 )
 
 ThemeProviderWrapper.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default ThemeProviderWrapper

@@ -59,7 +59,7 @@ AlertDialog.defaultProps = {
 AlertDialog.propTypes = {
   isModalOpened: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  children: PropTypes.node,
   closeModal: PropTypes.func.isRequired,
   confirmMethod: PropTypes.func,
 }

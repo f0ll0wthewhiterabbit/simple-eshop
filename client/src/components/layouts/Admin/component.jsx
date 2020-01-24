@@ -73,7 +73,7 @@ AdminLayout.propTypes = {
   closeSidebar: PropTypes.func.isRequired,
   deleteUsers: PropTypes.func.isRequired,
   deleteProducts: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default withTheme(AdminLayout)

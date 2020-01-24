@@ -22,7 +22,7 @@ const StandardLayout = ({ requestUserDeletion, children }) => {
 
 StandardLayout.propTypes = {
   requestUserDeletion: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default StandardLayout

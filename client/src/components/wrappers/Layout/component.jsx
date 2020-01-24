@@ -16,7 +16,7 @@ const Layout = ({ isAuthenticated, userRole, children }) => {
 Layout.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   userRole: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout
