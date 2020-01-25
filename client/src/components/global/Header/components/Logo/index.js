@@ -1,3 +1,1 @@
-import Logo from './container'
-
-export default Logo
+export { default } from './container'

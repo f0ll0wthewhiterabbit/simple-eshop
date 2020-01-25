@@ -1,3 +1,1 @@
-import UsersTable from './container'
-
-export default UsersTable
+export { default } from './container'

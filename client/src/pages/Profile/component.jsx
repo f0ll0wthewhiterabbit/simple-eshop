@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Container } from '@material-ui/core'
 
-import ProfileForm from './components/ProfileForm'
+import ProfileFormContainer from './components/ProfileForm'
 import { Wrapper, Heading, IconWrapper } from './styles'
 
 const ProfilePage = ({ firstName, lastName }) => {
@@ -16,7 +16,7 @@ const ProfilePage = ({ firstName, lastName }) => {
           Profile
         </Heading>
         <IconWrapper data-test="avatar">{`${firstLetter} ${secondLetter}`}</IconWrapper>
-        <ProfileForm />
+        <ProfileFormContainer />
       </Wrapper>
     </Container>
   )

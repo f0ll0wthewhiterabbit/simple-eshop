@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import Loader from '../../../components/global/Loader'
 import ErrorMessage from '../../../components/global/ErrorMessage'
-import ProductRatingTable from './components/ProductRatingTable'
+import ProductRatingTableContainer from './components/ProductRatingTable'
 
 import { Wrapper } from './styles'
 
@@ -43,7 +43,7 @@ const ProductRatingPage = ({
 
   return (
     <>
-      <ProductRatingTable productData={currentProduct} />
+      <ProductRatingTableContainer productData={currentProduct} />
     </>
   )
 }

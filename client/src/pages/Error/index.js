@@ -1,3 +1,1 @@
-import ErrorPage from './container'
-
-export default ErrorPage
+export { default } from './container'

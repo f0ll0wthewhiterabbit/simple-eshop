@@ -1,3 +1,1 @@
-import CatalogPage from './container'
-
-export default CatalogPage
+export { default } from './container'

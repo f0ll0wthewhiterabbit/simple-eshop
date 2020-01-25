@@ -1,3 +1,1 @@
-import ProfilePage from './container'
-
-export default ProfilePage
+export { default } from './container'

@@ -1,3 +1,1 @@
-import UsersPage from './container'
-
-export default UsersPage
+export { default } from './container'

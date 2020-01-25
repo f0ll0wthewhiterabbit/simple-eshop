@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import ProductsToolbar from './components/ProductsToolbar'
-import ProductsTable from './components/ProductsTable'
+import ProductsTableContainer from './components/ProductsTable'
 import Loader from '../../../components/global/Loader'
 import ErrorMessage from '../../../components/global/ErrorMessage'
 
@@ -22,7 +22,7 @@ const ProductsPage = ({ itemsPerPage, isLoading, error, fetchProducts }) => {
   return (
     <>
       <ProductsToolbar />
-      <ProductsTable />
+      <ProductsTableContainer />
     </>
   )
 }

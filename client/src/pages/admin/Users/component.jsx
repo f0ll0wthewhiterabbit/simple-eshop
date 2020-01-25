@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import ErrorMessage from '../../../components/global/ErrorMessage'
 import Loader from '../../../components/global/Loader'
-import UsersTable from './components/UsersTable'
+import UsersTableContainer from './components/UsersTable'
 
 const UsersPage = ({ itemsPerPage, isLoading, error, fetchUsers }) => {
   useEffect(() => {
@@ -18,7 +18,7 @@ const UsersPage = ({ itemsPerPage, isLoading, error, fetchUsers }) => {
     return <Loader />
   }
 
-  return <UsersTable />
+  return <UsersTableContainer />
 }
 
 UsersPage.defaultProps = {

@@ -1,3 +1,1 @@
-import Layout from './container'
-
-export default Layout
+export { default } from './container'

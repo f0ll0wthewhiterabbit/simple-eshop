@@ -1,3 +1,1 @@
-import AdminLayout from './container'
-
-export default AdminLayout
+export { default } from './container'

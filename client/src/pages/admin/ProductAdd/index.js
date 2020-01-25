@@ -1,3 +1,1 @@
-import ProductAddPage from './container'
-
-export default ProductAddPage
+export { default } from './container'

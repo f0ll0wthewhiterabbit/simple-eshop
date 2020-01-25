@@ -1,3 +1,1 @@
-import AlertDialog from './container'
-
-export default AlertDialog
+export { default } from './container'

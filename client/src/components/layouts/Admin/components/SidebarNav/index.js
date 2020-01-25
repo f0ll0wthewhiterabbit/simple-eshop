@@ -1,3 +1,1 @@
-import SidebarNav from './container'
-
-export default SidebarNav
+export { default } from './container'

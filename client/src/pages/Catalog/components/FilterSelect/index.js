@@ -1,3 +1,1 @@
-import FilterSelect from './container'
-
-export default FilterSelect
+export { default } from './container'

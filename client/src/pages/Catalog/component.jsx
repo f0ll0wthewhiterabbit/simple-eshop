@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { Grid, Typography } from '@material-ui/core'
 
-import ProductCard from './components/ProductCard'
+import ProductCardContainer from './components/ProductCard'
 import Loader from '../../components/global/Loader'
-import FilterSelect from './components/FilterSelect'
-import Pagination from './components/Pagination'
+import FilterSelectContainer from './components/FilterSelect'
+import PaginationContainer from './components/Pagination'
 import { Wrapper, Heading, ContentWrapper } from './styles'
 
 const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
@@ -31,12 +31,12 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
           {products.map(product => {
             return (
               <Grid key={product._id} item xs={12} sm={6} md={4}>
-                <ProductCard productData={product} data-test="productCard" />
+                <ProductCardContainer productData={product} data-test="productCard" />
               </Grid>
             )
           })}
         </Grid>
-        <Pagination />
+        <PaginationContainer />
       </>
     )
   }
@@ -46,7 +46,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
       <Heading variant="h4" component="h1" align="center">
         Catalog
       </Heading>
-      <FilterSelect />
+      <FilterSelectContainer />
       <ContentWrapper>{content}</ContentWrapper>
     </Wrapper>
   )

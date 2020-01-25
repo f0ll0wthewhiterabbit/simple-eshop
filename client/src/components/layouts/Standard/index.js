@@ -1,3 +1,1 @@
-import StandardLayout from './container'
-
-export default StandardLayout
+export { default } from './container'

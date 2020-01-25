@@ -1,3 +1,1 @@
-import Profile from './container'
-
-export default Profile
+export { default } from './container'

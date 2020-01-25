@@ -11,7 +11,7 @@ import {
   ADMIN_PRODUCTS_PAGE_PATH,
   ROLE_GUEST,
 } from '../../constants'
-import SignInForm from './components/SignInForm'
+import SignInFormContainer from './components/SignInForm'
 import { Wrapper, IconWrapper, SignUpLink } from './styles'
 
 const SingInPage = ({ isAuthenticated, userRole }) => {
@@ -33,7 +33,7 @@ const SingInPage = ({ isAuthenticated, userRole }) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <SignInForm />
+        <SignInFormContainer />
         <Typography color="textSecondary" variant="body2" align="center">
           Don&apos;t have an account? <SignUpLink to={SIGN_UP_PAGE_PATH}>Sign Up</SignUpLink>
         </Typography>

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 
-import ProductEditForm from './components/ProductEditForm'
+import ProductEditFormContainer from './components/ProductEditForm'
 import Loader from '../../../components/global/Loader'
 import { Root, Wrapper, IconWrapper, Heading } from './styles'
 
@@ -48,7 +48,7 @@ const ProductEditPage = ({ isLoading, product, fetchProduct }) => {
         <Heading component="h1" variant="h5" gutterBottom>
           Edit Product
         </Heading>
-        <ProductEditForm product={productData} />
+        <ProductEditFormContainer product={productData} />
       </Wrapper>
     </Root>
   )

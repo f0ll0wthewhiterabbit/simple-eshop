@@ -1,3 +1,1 @@
-import ProductsTable from './container'
-
-export default ProductsTable
+export { default } from './container'

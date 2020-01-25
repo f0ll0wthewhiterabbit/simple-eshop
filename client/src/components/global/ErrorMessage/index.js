@@ -1,3 +1,1 @@
-import ErrorMessage from './component'
-
-export default ErrorMessage
+export { default } from './component'

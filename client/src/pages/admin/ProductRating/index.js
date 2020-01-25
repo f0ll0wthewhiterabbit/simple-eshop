@@ -1,3 +1,1 @@
-import ProductRatingPage from './container'
-
-export default ProductRatingPage
+export { default } from './container'

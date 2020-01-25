@@ -1,3 +1,1 @@
-import ProductEditForm from './container'
-
-export default ProductEditForm
+export { default } from './container'

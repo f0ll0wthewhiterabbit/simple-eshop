@@ -1,3 +1,1 @@
-import PrivateRoute from './container'
-
-export default PrivateRoute
+export { default } from './container'

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Toolbar, Container } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 
-import Logo from './components/Logo'
-import UserMenu from './components/UserMenu'
+import LogoContainer from './components/Logo'
+import UserMenuContainer from './components/UserMenu'
 import { Wrapper, MenuButton, WarningMessage } from './styles'
 
 const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) => {
@@ -26,13 +26,13 @@ const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) 
               <MenuIcon />
             </MenuButton>
           )}
-          <Logo />
+          <LogoContainer />
           {isAuthenticated && isDeleteRequestSent && (
             <WarningMessage variant="body2" color="error" data-test="warningMessage">
               Unfortunately, your account will be deleted soon.
             </WarningMessage>
           )}
-          {isAuthenticated && <UserMenu data-test="userMenu" />}
+          {isAuthenticated && <UserMenuContainer data-test="userMenu" />}
         </Toolbar>
       </Container>
     </Wrapper>

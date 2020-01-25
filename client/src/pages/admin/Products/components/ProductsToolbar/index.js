@@ -1,3 +1,1 @@
-import ProductsToolbar from './component'
-
-export default ProductsToolbar
+export { default } from './component'

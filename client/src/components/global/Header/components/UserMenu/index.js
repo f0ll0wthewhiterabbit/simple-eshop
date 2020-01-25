@@ -1,3 +1,1 @@
-import UserMenu from './container'
-
-export default UserMenu
+export { default } from './container'

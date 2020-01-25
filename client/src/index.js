@@ -5,12 +5,12 @@ import { StylesProvider } from '@material-ui/core/styles'
 import 'typeface-roboto'
 
 import getStore from './store'
-import App from './components/wrappers/App'
+import AppContainer from './components/wrappers/App'
 
 ReactDOM.render(
   <StylesProvider injectFirst>
     <Provider store={getStore()}>
-      <App />
+      <AppContainer />
     </Provider>
   </StylesProvider>,
   document.getElementById('root')

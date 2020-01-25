@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Header from '../../global/Header'
+import HeaderContainer from '../../global/Header'
 import Footer from '../../global/Footer'
-import AlertDialog from '../../global/AlertDialog'
+import AlertDialogContainer from '../../global/AlertDialog'
 import { Root, Main } from './styles'
 
 const StandardLayout = ({ requestUserDeletion, children }) => {
   return (
     <Root>
-      <AlertDialog title="Delete your account?" confirmMethod={requestUserDeletion}>
+      <AlertDialogContainer title="Delete your account?" confirmMethod={requestUserDeletion}>
         The remove request will be sent to the administrator. Unfortunately, your account will be
         deleted soon.
-      </AlertDialog>
-      <Header />
+      </AlertDialogContainer>
+      <HeaderContainer />
       <Main data-test="main">{children}</Main>
       <Footer />
     </Root>

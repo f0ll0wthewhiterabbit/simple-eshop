@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
-import Table from '../../../../../components/global/Table'
+import TableContainer from '../../../../../components/global/Table'
 import { STORE_FIELD_PRODUCTS } from '../../../../../constants'
 
 const ProductsTable = ({
@@ -25,7 +25,7 @@ const ProductsTable = ({
   ]
 
   return (
-    <Table
+    <TableContainer
       rows={productsList}
       rowsPerPage={itemsPerPage}
       currentPage={currentPage}

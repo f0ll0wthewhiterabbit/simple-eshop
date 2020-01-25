@@ -1,3 +1,1 @@
-import ProfileForm from './container'
-
-export default ProfileForm
+export { default } from './container'

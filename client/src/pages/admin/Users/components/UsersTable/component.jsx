@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
-import Table from '../../../../../components/global/Table'
+import TableContainer from '../../../../../components/global/Table'
 import { STORE_FIELD_USERS } from '../../../../../constants'
 
 const UsersTable = ({
@@ -22,7 +22,7 @@ const UsersTable = ({
   ]
 
   return (
-    <Table
+    <TableContainer
       rows={usersList}
       rowsPerPage={itemsPerPage}
       currentPage={currentPage}

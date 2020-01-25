@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { withTheme } from 'styled-components'
 import { useMediaQuery, Divider } from '@material-ui/core'
 
-import Header from '../../global/Header'
+import HeaderContainer from '../../global/Header'
 import Footer from '../../global/Footer'
-import Profile from './components/Profile'
-import SidebarNav from './components/SidebarNav'
-import AlertDialog from '../../global/AlertDialog'
+import ProfileContainer from './components/Profile'
+import SidebarNavContainer from './components/SidebarNav'
+import AlertDialogContainer from '../../global/AlertDialog'
 import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 import { STORE_FIELD_USERS, STORE_FIELD_PRODUCTS } from '../../../constants'
 
@@ -36,11 +36,11 @@ export const AdminLayout = ({
 
   return (
     <Root>
-      <AlertDialog
+      <AlertDialogContainer
         title="Do you really want to delete selected items from database?"
         confirmMethod={confirmMethod}
       />
-      <Header />
+      <HeaderContainer />
       <Wrapper>
         <Sidebar
           variant={isDesktop ? 'persistent' : 'temporary'}
@@ -50,9 +50,9 @@ export const AdminLayout = ({
           data-test="sidebar"
         >
           <SidebarRoot>
-            <Profile />
+            <ProfileContainer />
             <Divider />
-            <SidebarNav />
+            <SidebarNavContainer />
           </SidebarRoot>
         </Sidebar>
         <Main data-test="main">{children}</Main>
