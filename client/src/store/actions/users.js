@@ -49,3 +49,4 @@ export const updateUserError = createAction('USERS/UPDATE_USER_ERROR', error => 
 export const setUsersPerPage = createAction('USERS/SET_USERS_PER_PAGE', amount => ({
   amount,
 }))
+export const startUsersLoading = createAction('USERS/START_USERS_LOADING')

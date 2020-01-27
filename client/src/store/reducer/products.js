@@ -2,17 +2,13 @@ import { handleActions, combineActions } from 'redux-actions'
 import { Record, List } from 'immutable'
 
 import {
-  fetchProducts,
   fetchProductsSuccess,
   fetchProductsError,
-  fetchProduct,
   fetchProductSuccess,
   fetchProductError,
-  fetchProductRating,
   fetchProductRatingSuccess,
   fetchProductRatingError,
   setSelectedProducts,
-  deleteProducts,
   deleteProductsSuccess,
   deleteProductsError,
   changeProductRatingSuccess,
@@ -26,6 +22,7 @@ import {
   startRatingLoading,
   setProductsPerPage,
   setProductsFilter,
+  startProductsLoading,
 } from '../actions'
 import { DEFAULT_CATALOG_PER_PAGE_LIMIT, URL_FIELD_NO_FILTER } from '../../constants'
 
@@ -48,14 +45,13 @@ const initialState = Record({
     tags: List(),
     rating: List(),
   })(),
-  isLoading: false,
+  isLoading: true,
   error: null,
 })()
 
 const products = handleActions(
   {
-    [combineActions(fetchProducts, fetchProduct, fetchProductRating, deleteProducts)]: state =>
-      state.set('isLoading', true),
+    [startProductsLoading]: state => state.set('isLoading', true),
 
     [fetchProductsSuccess]: (state, action) =>
       state
@@ -64,14 +60,14 @@ const products = handleActions(
         .set('itemsPerPage', action.payload.itemsPerPage)
         .set('currentPage', action.payload.currentPage)
         .set('totalPages', action.payload.totalPages)
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [fetchProductSuccess]: (state, action) =>
       state
         .delete('currentProduct')
         .update('currentProduct', currentProduct => currentProduct.merge(action.payload.product))
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [fetchProductRatingSuccess]: (state, action) =>
@@ -84,7 +80,7 @@ const products = handleActions(
         .set('itemsPerPage', action.payload.itemsPerPage)
         .set('currentPage', action.payload.currentPage)
         .set('totalPages', action.payload.totalPages)
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [deleteProductsSuccess]: (state, action) =>
@@ -95,13 +91,13 @@ const products = handleActions(
           )
         )
         .update('totalAmount', amount => amount - action.payload.deletedProducts.size)
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [addProductSuccess]: (state, action) =>
       state
         .update('data', data => data.push(action.payload.product))
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [combineActions(changeProductRatingSuccess, deleteProductRatingSuccess)]: (state, action) =>
@@ -126,7 +122,7 @@ const products = handleActions(
           )
         )
         .delete('currentProduct')
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [combineActions(
@@ -136,7 +132,7 @@ const products = handleActions(
       addProductError,
       editProductError,
       deleteProductsError
-    )]: (state, action) => state.delete('isLoading').set('error', action.payload.error),
+    )]: (state, action) => state.set('isLoading', false).set('error', action.payload.error),
 
     [combineActions(changeProductRatingError, deleteProductRatingError)]: (state, action) =>
       state

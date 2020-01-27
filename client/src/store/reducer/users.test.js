@@ -2,20 +2,17 @@ import { Record, List } from 'immutable'
 
 import usersReducer from './users'
 import {
-  fetchUsers,
   fetchUsersSuccess,
   fetchUsersError,
   setSelectedUsers,
-  deleteUsers,
   deleteUsersSuccess,
   deleteUsersError,
-  requestUserDeletion,
   requestUserDeletionSuccess,
   requestUserDeletionError,
-  updateUser,
   updateUserSuccess,
   updateUserError,
   setUsersPerPage,
+  startUsersLoading,
 } from '../actions'
 import { DEFAULT_ADMIN_PER_PAGE_LIMIT } from '../../constants'
 
@@ -27,7 +24,7 @@ describe('Users reducer', () => {
     currentPage: 1,
     totalPages: 1,
     selected: List(),
-    isLoading: false,
+    isLoading: true,
     error: null,
   })()
   const testUser1 = Record({ _id: '1', isRemovable: false, firstName: 'First' })()
@@ -46,26 +43,8 @@ describe('Users reducer', () => {
     expect(recievedState.hashCode()).toBe(initialState.hashCode())
   })
 
-  it('should start loading after [fetchUsers] action', () => {
-    const recievedState = usersReducer(undefined, fetchUsers())
-
-    expect(recievedState.isLoading).toBe(true)
-  })
-
-  it('should start loading after [deleteUsers] action', () => {
-    const recievedState = usersReducer(undefined, deleteUsers())
-
-    expect(recievedState.isLoading).toBe(true)
-  })
-
-  it('should start loading after [requestUserDeletion] action', () => {
-    const recievedState = usersReducer(undefined, requestUserDeletion())
-
-    expect(recievedState.isLoading).toBe(true)
-  })
-
-  it('should start loading after [updateUser] action', () => {
-    const recievedState = usersReducer(undefined, updateUser())
+  it('should start loading after [startUsersLoading] action', () => {
+    const recievedState = usersReducer(undefined, startUsersLoading())
 
     expect(recievedState.isLoading).toBe(true)
   })
@@ -87,7 +66,7 @@ describe('Users reducer', () => {
     expect(recievedState.currentPage).toBe(testCurrentPage)
     expect(recievedState.itemsPerPage).toBe(testItemsPerPage)
     expect(recievedState.totalPages).toBe(testTotalPages)
-    expect(recievedState.isLoading).toBe(initialState.isLoading)
+    expect(recievedState.isLoading).toBe(false)
     expect(recievedState.error).toBe(initialState.error)
   })
 
@@ -108,7 +87,7 @@ describe('Users reducer', () => {
 
     expect(recievedState.data).toEqual(expectedUsersList)
     expect(recievedState.totalAmount).toEqual(testTotalAmount - deleteUserIdsList.size)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
     expect(recievedState.error).toEqual(initialState.error)
   })
 
@@ -126,7 +105,7 @@ describe('Users reducer', () => {
     )
     const recievedState = usersReducer(stateAfterFetchUsers, requestUserDeletionSuccess('2'))
 
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
     expect(recievedState.error).toEqual(initialState.error)
     expect(recievedState.data.get(1).isRemovable).toBe(expectedUser.isRemovable)
   })
@@ -145,7 +124,7 @@ describe('Users reducer', () => {
     )
     const recievedState = usersReducer(stateAfterFetchUsers, updateUserSuccess(expectedUser))
 
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
     expect(recievedState.error).toEqual(initialState.error)
     expect(recievedState.data.get(1).firstName).toBe(expectedUser.firstName)
   })
@@ -154,28 +133,28 @@ describe('Users reducer', () => {
     const recievedState = usersReducer(undefined, fetchUsersError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [deleteUsersError] action', () => {
     const recievedState = usersReducer(undefined, deleteUsersError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [requestUserDeletionError] action', () => {
     const recievedState = usersReducer(undefined, requestUserDeletionError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [updateUserError] action', () => {
     const recievedState = usersReducer(undefined, updateUserError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [setSelectedUsers] action', () => {

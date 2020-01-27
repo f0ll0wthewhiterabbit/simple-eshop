@@ -20,11 +20,13 @@ import {
   updateUserSuccess,
   updateUserError,
   authenticate,
+  startUsersLoading,
 } from '../actions'
 import { MAIN_PAGE_PATH, ROLE_ADMIN, ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 
 function* fetchUsersSaga(action) {
   try {
+    yield put(startUsersLoading())
     const { currentPage: page, itemsPerPage: limit } = action.payload
     const url = limit ? `/users/?page=${page}&limit=${limit}` : `/users/?page=${page}`
     const response = yield API.get(url)
@@ -43,17 +45,18 @@ function* fetchUsersSaga(action) {
 }
 
 function* deleteUsersSaga() {
-  yield put(closeModal())
-
-  const selectedUsers = yield select(state => state.getIn(['users', 'selected']))
-  const config = {
-    data: JSON.stringify(selectedUsers),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-
   try {
+    yield put(closeModal())
+    yield put(startUsersLoading())
+
+    const selectedUsers = yield select(state => state.getIn(['users', 'selected']))
+    const config = {
+      data: JSON.stringify(selectedUsers),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
     yield API.delete('/users', config)
     yield put(deleteUsersSuccess(selectedUsers))
   } catch (error) {
@@ -64,9 +67,10 @@ function* deleteUsersSaga() {
 }
 
 function* requestUserDeletionSaga() {
-  yield put(closeModal())
-
   try {
+    yield put(closeModal())
+    yield put(startUsersLoading())
+
     const response = yield API.patch('/users')
     const { _id: id, firstName, lastName, email, role, isRemovable } = response.data
     const userData = { id, firstName, lastName, email, role, isRemovable }
@@ -79,18 +83,19 @@ function* requestUserDeletionSaga() {
 }
 
 function* updateUserSaga(action) {
-  const { userData, history } = action.payload
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-  const body = JSON.stringify({
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-  })
-
   try {
+    yield put(startUsersLoading())
+    const { userData, history } = action.payload
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    const body = JSON.stringify({
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+    })
+
     const response = yield API.patch('/users', body, config)
     const user = convertToRecord(response.data)
     const userRole = yield select(state => state.getIn(['auth', 'user', 'role']))

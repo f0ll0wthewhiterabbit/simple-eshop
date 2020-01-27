@@ -118,3 +118,4 @@ export const setProductsPerPage = createAction('PRODUCTS/SET_PRODUCTS_PER_PAGE',
 export const setProductsFilter = createAction('PRODUCTS/SET_PRODUCTS_FILTER', filter => ({
   filter,
 }))
+export const startProductsLoading = createAction('PRODUCTS/START_PRODUCTS_LOADING')

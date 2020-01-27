@@ -32,10 +32,12 @@ import {
   closeModal,
   setSelectedProducts,
   startRatingLoading,
+  startProductsLoading,
 } from '../actions'
 
 function* fetchProductsSaga(action) {
   try {
+    yield put(startProductsLoading())
     const { page, itemsPerPage: limit, filter } = action.payload
     let url = `/products/?page=${page}`
 
@@ -66,6 +68,7 @@ function* fetchProductsSaga(action) {
 
 function* fetchProductSaga(action) {
   try {
+    yield put(startProductsLoading())
     const response = yield API.get(`/products/${action.payload.id}`)
     const { _id: id, title, description, price, imageName, tags } = response.data
     const product = convertToRecord({
@@ -85,6 +88,7 @@ function* fetchProductSaga(action) {
 
 function* fetchProductRatingSaga(action) {
   try {
+    yield put(startProductsLoading())
     const { productId, page, itemsPerPage: limit } = action.payload
     let url = `/products/${productId}/rating?page=${page}`
 
@@ -213,17 +217,18 @@ function* editProductSaga(action) {
 }
 
 function* deleteProductsSaga() {
-  yield put(closeModal())
-
-  const selectedProducts = yield select(state => state.getIn(['products', 'selected']))
-  const config = {
-    data: JSON.stringify(selectedProducts),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-
   try {
+    yield put(closeModal())
+    yield put(startProductsLoading())
+
+    const selectedProducts = yield select(state => state.getIn(['products', 'selected']))
+    const config = {
+      data: JSON.stringify(selectedProducts),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
     yield API.delete('/products', config)
     yield put(deleteProductsSuccess(selectedProducts))
   } catch (error) {

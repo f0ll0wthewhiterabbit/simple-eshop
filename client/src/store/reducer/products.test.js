@@ -2,17 +2,13 @@ import { Record, List } from 'immutable'
 
 import productsReducer from './products'
 import {
-  fetchProducts,
   fetchProductsSuccess,
   fetchProductsError,
-  fetchProduct,
   fetchProductSuccess,
   fetchProductError,
-  fetchProductRating,
   fetchProductRatingSuccess,
   fetchProductRatingError,
   setSelectedProducts,
-  deleteProducts,
   deleteProductsSuccess,
   deleteProductsError,
   changeProductRatingSuccess,
@@ -26,6 +22,7 @@ import {
   startRatingLoading,
   setProductsPerPage,
   setProductsFilter,
+  startProductsLoading,
 } from '../actions'
 import {
   DEFAULT_CATALOG_PER_PAGE_LIMIT,
@@ -53,7 +50,7 @@ describe('Products reducer', () => {
       tags: List(),
       rating: List(),
     })(),
-    isLoading: false,
+    isLoading: true,
     error: null,
   })()
   const testProduct1 = Record({ _id: '1', title: 'First' })()
@@ -72,26 +69,8 @@ describe('Products reducer', () => {
     expect(recievedState.hashCode()).toBe(initialState.hashCode())
   })
 
-  it('should start loading after [fetchProducts] action', () => {
-    const recievedState = productsReducer(undefined, fetchProducts())
-
-    expect(recievedState.isLoading).toBe(true)
-  })
-
-  it('should start loading after [fetchProduct] action', () => {
-    const recievedState = productsReducer(undefined, fetchProduct())
-
-    expect(recievedState.isLoading).toBe(true)
-  })
-
-  it('should start loading after [fetchProductRating] action', () => {
-    const recievedState = productsReducer(undefined, fetchProductRating())
-
-    expect(recievedState.isLoading).toBe(true)
-  })
-
-  it('should start loading after [deleteProducts] action', () => {
-    const recievedState = productsReducer(undefined, deleteProducts())
+  it('should start loading after [startProductsLoading] action', () => {
+    const recievedState = productsReducer(undefined, startProductsLoading())
 
     expect(recievedState.isLoading).toBe(true)
   })
@@ -113,7 +92,7 @@ describe('Products reducer', () => {
     expect(recievedState.currentPage).toBe(testCurrentPage)
     expect(recievedState.itemsPerPage).toBe(testItemsPerPage)
     expect(recievedState.totalPages).toBe(testTotalPages)
-    expect(recievedState.isLoading).toBe(initialState.isLoading)
+    expect(recievedState.isLoading).toBe(false)
     expect(recievedState.error).toBe(initialState.error)
   })
 
@@ -135,7 +114,7 @@ describe('Products reducer', () => {
     expect(recievedState.currentProduct.imageName).toBe(testCurrentProduct.imageName)
     expect(recievedState.currentProduct.tags).toEqual(testCurrentProduct.tags)
     expect(recievedState.currentProduct.rating).toEqual(initialState.currentProduct.rating)
-    expect(recievedState.isLoading).toBe(initialState.isLoading)
+    expect(recievedState.isLoading).toBe(false)
     expect(recievedState.error).toBe(initialState.error)
   })
 
@@ -166,7 +145,7 @@ describe('Products reducer', () => {
     expect(recievedState.currentPage).toBe(testCurrentPage)
     expect(recievedState.itemsPerPage).toBe(testItemsPerPage)
     expect(recievedState.totalPages).toBe(testTotalPages)
-    expect(recievedState.isLoading).toBe(initialState.isLoading)
+    expect(recievedState.isLoading).toBe(false)
     expect(recievedState.error).toBe(initialState.error)
   })
 
@@ -190,7 +169,7 @@ describe('Products reducer', () => {
 
     expect(recievedState.data).toEqual(expectedUsersList)
     expect(recievedState.totalAmount).toEqual(testTotalAmount - deleteProductsIdsList.size)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
     expect(recievedState.error).toEqual(initialState.error)
   })
 
@@ -213,7 +192,7 @@ describe('Products reducer', () => {
 
     expect(recievedState.data.get(3)._id).toEqual(newTestProduct._id)
     expect(recievedState.data.get(3).title).toEqual(newTestProduct.title)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
     expect(recievedState.error).toEqual(initialState.error)
   })
 
@@ -300,7 +279,7 @@ describe('Products reducer', () => {
 
     expect(recievedState.data.get(0)._id).toEqual(changedTestProduct._id)
     expect(recievedState.data.get(0).title).toEqual(changedTestProduct.title)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
     expect(recievedState.error).toEqual(initialState.error)
     expect(recievedState.currentProduct.hashCode()).toEqual(initialState.currentProduct.hashCode())
   })
@@ -309,42 +288,42 @@ describe('Products reducer', () => {
     const recievedState = productsReducer(undefined, fetchProductsError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [fetchProductError] action', () => {
     const recievedState = productsReducer(undefined, fetchProductError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [fetchProductRatingError] action', () => {
     const recievedState = productsReducer(undefined, fetchProductRatingError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [addProductError] action', () => {
     const recievedState = productsReducer(undefined, addProductError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [editProductError] action', () => {
     const recievedState = productsReducer(undefined, editProductError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [deleteProductsError] action', () => {
     const recievedState = productsReducer(undefined, deleteProductsError(testError))
 
     expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(initialState.isLoading)
+    expect(recievedState.isLoading).toEqual(false)
   })
 
   it('should handle [changeProductRatingError] action', () => {

@@ -2,20 +2,17 @@ import { handleActions, combineActions } from 'redux-actions'
 import { Record, List } from 'immutable'
 
 import {
-  fetchUsers,
   fetchUsersSuccess,
   fetchUsersError,
   setSelectedUsers,
-  deleteUsers,
   deleteUsersSuccess,
   deleteUsersError,
-  requestUserDeletion,
   requestUserDeletionSuccess,
   requestUserDeletionError,
-  updateUser,
   updateUserSuccess,
   updateUserError,
   setUsersPerPage,
+  startUsersLoading,
 } from '../actions'
 import { DEFAULT_ADMIN_PER_PAGE_LIMIT } from '../../constants'
 
@@ -26,14 +23,13 @@ const initialState = Record({
   currentPage: 1,
   totalPages: 1,
   selected: List(),
-  isLoading: false,
+  isLoading: true,
   error: null,
 })()
 
 const users = handleActions(
   {
-    [combineActions(fetchUsers, deleteUsers, requestUserDeletion, updateUser)]: state =>
-      state.set('isLoading', true),
+    [startUsersLoading]: state => state.set('isLoading', true),
 
     [fetchUsersSuccess]: (state, action) =>
       state
@@ -42,7 +38,7 @@ const users = handleActions(
         .set('itemsPerPage', action.payload.itemsPerPage)
         .set('currentPage', action.payload.currentPage)
         .set('totalPages', action.payload.totalPages)
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [deleteUsersSuccess]: (state, action) =>
@@ -51,7 +47,7 @@ const users = handleActions(
           data.filter(user => action.payload.deletedUsers.findIndex(it => it === user._id) === -1)
         )
         .update('totalAmount', amount => amount - action.payload.deletedUsers.size)
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [requestUserDeletionSuccess]: (state, action) =>
@@ -61,7 +57,7 @@ const users = handleActions(
             user.get('_id') === action.payload.userId ? user.set('isRemovable', true) : user
           )
         )
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [updateUserSuccess]: (state, action) =>
@@ -71,7 +67,7 @@ const users = handleActions(
             user.get('_id') === action.payload.user._id ? action.payload.user : user
           )
         )
-        .delete('isLoading')
+        .set('isLoading', false)
         .delete('error'),
 
     [combineActions(
@@ -79,7 +75,7 @@ const users = handleActions(
       deleteUsersError,
       requestUserDeletionError,
       updateUserError
-    )]: (state, action) => state.delete('isLoading').set('error', action.payload.error),
+    )]: (state, action) => state.set('isLoading', false).set('error', action.payload.error),
 
     [setSelectedUsers]: (state, action) => state.set('selected', action.payload.selectedUsersList),
 
