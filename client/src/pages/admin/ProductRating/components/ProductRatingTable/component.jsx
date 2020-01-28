@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
+import Rating from '@material-ui/lab/Rating'
 
 import {
   ADMIN_LOW_PER_PAGE_LIMIT,
@@ -65,7 +66,7 @@ const ProductRatingTable = ({
     }
 
     if (id === 'rating') {
-      return row.stars
+      return <Rating value={row.stars} name="simple-uncontrolled-average" readOnly size="small" />
     }
 
     return row[id]

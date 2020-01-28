@@ -7,6 +7,7 @@ import findByTestAttr from '../../../../../utils/findByTestAttr'
 describe('SidebarNav component', () => {
   let wrapper
   const initialProps = {
+    isSidebarOpened: true,
     closeSidebar: jest.fn(),
   }
   const dataTestNavigationLink = 'navigationLink'
@@ -35,5 +36,13 @@ describe('SidebarNav component', () => {
     firstNavigationLink.simulate('click')
 
     expect(initialProps.closeSidebar).toHaveBeenCalledTimes(1)
+  })
+
+  it(`shouldn't call 'closeSidebar' if 'isSidebarOpened=false'`, () => {
+    wrapper = generateWrapper({ isSidebarOpened: false })
+    const firstNavigationLink = findByTestAttr(wrapper, dataTestNavigationLink).first()
+    firstNavigationLink.simulate('click')
+
+    expect(initialProps.closeSidebar).toHaveBeenCalledTimes(0)
   })
 })

@@ -6,7 +6,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 import { ADMIN_USERS_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH } from '../../../../../constants'
 import { PagesList, NavigationLink, NavigationItem, PageIcon, PageText } from './styles'
 
-const SidebarNav = ({ closeSidebar }) => {
+const SidebarNav = ({ isSidebarOpened, closeSidebar }) => {
   const pages = [
     {
       title: 'Users',
@@ -21,7 +21,9 @@ const SidebarNav = ({ closeSidebar }) => {
   ]
 
   const handleNavLinkClick = () => {
-    closeSidebar()
+    if (isSidebarOpened) {
+      closeSidebar()
+    }
   }
 
   return (
@@ -41,6 +43,7 @@ const SidebarNav = ({ closeSidebar }) => {
 }
 
 SidebarNav.propTypes = {
+  isSidebarOpened: PropTypes.bool.isRequired,
   closeSidebar: PropTypes.func.isRequired,
 }
 
