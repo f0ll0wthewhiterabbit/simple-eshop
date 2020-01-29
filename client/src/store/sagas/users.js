@@ -1,4 +1,4 @@
-import { takeEvery, put, select } from 'redux-saga/effects'
+import { takeEvery, put, select, call } from 'redux-saga/effects'
 import { List } from 'immutable'
 
 import API from '../../utils/api'
@@ -24,12 +24,15 @@ import {
 } from '../actions'
 import { MAIN_PAGE_PATH, ROLE_ADMIN, ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 
-function* fetchUsersSaga(action) {
+export const getUsers = state => state.getIn(['users', 'selected'])
+export const getRole = state => state.getIn(['auth', 'user', 'role'])
+
+export function* handleFetchUsers(action) {
   try {
     yield put(startUsersLoading())
     const { currentPage: page, itemsPerPage: limit } = action.payload
     const url = limit ? `/users/?page=${page}&limit=${limit}` : `/users/?page=${page}`
-    const response = yield API.get(url)
+    const response = yield call(API.get, url)
     const usersList = convertToRecord(response.data.data)
     const {
       total: totalAmount,
@@ -44,12 +47,12 @@ function* fetchUsersSaga(action) {
   }
 }
 
-function* deleteUsersSaga() {
+export function* handleDeleteUsers() {
   try {
     yield put(closeModal())
     yield put(startUsersLoading())
 
-    const selectedUsers = yield select(state => state.getIn(['users', 'selected']))
+    const selectedUsers = yield select(getUsers)
     const config = {
       data: JSON.stringify(selectedUsers),
       headers: {
@@ -57,7 +60,7 @@ function* deleteUsersSaga() {
       },
     }
 
-    yield API.delete('/users', config)
+    yield call(API.delete, '/users', config)
     yield put(deleteUsersSuccess(selectedUsers))
   } catch (error) {
     yield put(deleteUsersError('Users delete error!'))
@@ -66,12 +69,12 @@ function* deleteUsersSaga() {
   yield put(setSelectedUsers(List()))
 }
 
-function* requestUserDeletionSaga() {
+export function* handleRequestUserDeletion() {
   try {
     yield put(closeModal())
     yield put(startUsersLoading())
 
-    const response = yield API.patch('/users')
+    const response = yield call(API.patch, '/users')
     const { _id: id, firstName, lastName, email, role, isRemovable } = response.data
     const userData = { id, firstName, lastName, email, role, isRemovable }
 
@@ -82,7 +85,7 @@ function* requestUserDeletionSaga() {
   }
 }
 
-function* updateUserSaga(action) {
+export function* handleUpdateUser(action) {
   try {
     yield put(startUsersLoading())
     const { userData, history } = action.payload
@@ -96,9 +99,9 @@ function* updateUserSaga(action) {
       lastName: userData.lastName,
     })
 
-    const response = yield API.patch('/users', body, config)
+    const response = yield call(API.patch, '/users', body, config)
     const user = convertToRecord(response.data)
-    const userRole = yield select(state => state.getIn(['auth', 'user', 'role']))
+    const userRole = yield select(getRole)
 
     yield put(updateUserSuccess(user))
     yield put(authenticate())
@@ -115,19 +118,19 @@ function* updateUserSaga(action) {
 }
 
 function* watchFetchUsers() {
-  yield takeEvery(fetchUsers, fetchUsersSaga)
+  yield takeEvery(fetchUsers, handleFetchUsers)
 }
 
 function* watchDeleteUsers() {
-  yield takeEvery(deleteUsers, deleteUsersSaga)
+  yield takeEvery(deleteUsers, handleDeleteUsers)
 }
 
 function* watchRequestUserDeletion() {
-  yield takeEvery(requestUserDeletion, requestUserDeletionSaga)
+  yield takeEvery(requestUserDeletion, handleRequestUserDeletion)
 }
 
 function* watchUpdateUser() {
-  yield takeEvery(updateUser, updateUserSaga)
+  yield takeEvery(updateUser, handleUpdateUser)
 }
 
 export { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion, watchUpdateUser }

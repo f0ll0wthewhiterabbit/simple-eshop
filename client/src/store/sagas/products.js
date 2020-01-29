@@ -1,4 +1,4 @@
-import { takeEvery, put, select } from 'redux-saga/effects'
+import { takeEvery, put, select, call } from 'redux-saga/effects'
 import { List } from 'immutable'
 
 import API from '../../utils/api'
@@ -35,7 +35,9 @@ import {
   startProductsLoading,
 } from '../actions'
 
-function* fetchProductsSaga(action) {
+export const getSelectedProducts = state => state.getIn(['products', 'selected'])
+
+export function* handleFetchProducts(action) {
   try {
     yield put(startProductsLoading())
     const { page, itemsPerPage: limit, filter } = action.payload
@@ -49,7 +51,7 @@ function* fetchProductsSaga(action) {
       url += `&filter=${filter}`
     }
 
-    const response = yield API.get(url)
+    const response = yield call(API.get, url)
     const productsList = convertToRecord(response.data.data)
     const {
       total: totalAmount,
@@ -66,10 +68,10 @@ function* fetchProductsSaga(action) {
   }
 }
 
-function* fetchProductSaga(action) {
+export function* handleFetchProduct(action) {
   try {
     yield put(startProductsLoading())
-    const response = yield API.get(`/products/${action.payload.id}`)
+    const response = yield call(API.get, `/products/${action.payload.id}`)
     const { _id: id, title, description, price, imageName, tags } = response.data
     const product = convertToRecord({
       id,
@@ -86,7 +88,7 @@ function* fetchProductSaga(action) {
   }
 }
 
-function* fetchProductRatingSaga(action) {
+export function* handleFetchProductRating(action) {
   try {
     yield put(startProductsLoading())
     const { productId, page, itemsPerPage: limit } = action.payload
@@ -96,7 +98,7 @@ function* fetchProductRatingSaga(action) {
       url += `&limit=${limit}`
     }
 
-    const response = yield API.get(url)
+    const response = yield call(API.get, url)
     const { id, title, rating } = response.data.data
     const {
       total: totalAmount,
@@ -124,7 +126,7 @@ function* fetchProductRatingSaga(action) {
   }
 }
 
-function* changeProductRatingSaga(action) {
+export function* handleChangeProductRating(action) {
   const { productId, userRating } = action.payload.ratingData
 
   yield put(startRatingLoading(productId))
@@ -137,7 +139,7 @@ function* changeProductRatingSaga(action) {
   const body = JSON.stringify({ stars: userRating })
 
   try {
-    const response = yield API.patch(`/products/${productId}`, body, config)
+    const response = yield call(API.patch, `/products/${productId}`, body, config)
     const product = convertToRecord(response.data)
 
     yield put(changeProductRatingSuccess(product))
@@ -146,7 +148,7 @@ function* changeProductRatingSaga(action) {
   }
 }
 
-function* deleteProductRatingSaga(action) {
+export function* handleDeleteProductRating(action) {
   const { productId } = action.payload
 
   yield put(startRatingLoading(productId))
@@ -159,7 +161,7 @@ function* deleteProductRatingSaga(action) {
   const body = JSON.stringify({ stars: 0 })
 
   try {
-    const response = yield API.patch(`/products/${productId}`, body, config)
+    const response = yield call(API.patch, `/products/${productId}`, body, config)
     const product = convertToRecord(response.data)
 
     yield put(deleteProductRatingSuccess(product))
@@ -168,7 +170,7 @@ function* deleteProductRatingSaga(action) {
   }
 }
 
-function* addProductSaga(action) {
+export function* handleAddProduct(action) {
   const { productFormData, history } = action.payload
   const config = {
     headers: {
@@ -177,7 +179,7 @@ function* addProductSaga(action) {
   }
 
   try {
-    const response = yield API.post('/products', productFormData, config)
+    const response = yield call(API.post, '/products', productFormData, config)
     const product = convertToRecord(response.data)
 
     yield put(addProductSuccess(product))
@@ -192,7 +194,7 @@ function* addProductSaga(action) {
   }
 }
 
-function* editProductSaga(action) {
+export function* handleEditProduct(action) {
   const { id, changedFieldsFormData, history } = action.payload
   const config = {
     headers: {
@@ -201,7 +203,7 @@ function* editProductSaga(action) {
   }
 
   try {
-    const response = yield API.patch(`/products/${id}`, changedFieldsFormData, config)
+    const response = yield call(API.patch, `/products/${id}`, changedFieldsFormData, config)
     const product = convertToRecord(response.data)
 
     yield put(editProductSuccess(product))
@@ -209,19 +211,19 @@ function* editProductSaga(action) {
   } catch (error) {
     const message = error.response.data.errors
       ? error.response.data.errors[0].msg
-      : 'Product add error!'
+      : 'Product edit error!'
 
     yield put(editProductError(message))
     yield action.payload.setFormSubmitting(false)
   }
 }
 
-function* deleteProductsSaga() {
+export function* handleDeleteProducts() {
   try {
     yield put(closeModal())
     yield put(startProductsLoading())
 
-    const selectedProducts = yield select(state => state.getIn(['products', 'selected']))
+    const selectedProducts = yield select(getSelectedProducts)
     const config = {
       data: JSON.stringify(selectedProducts),
       headers: {
@@ -229,7 +231,7 @@ function* deleteProductsSaga() {
       },
     }
 
-    yield API.delete('/products', config)
+    yield call(API.delete, '/products', config)
     yield put(deleteProductsSuccess(selectedProducts))
   } catch (error) {
     yield put(deleteProductsError('Products delete error!'))
@@ -239,35 +241,35 @@ function* deleteProductsSaga() {
 }
 
 function* watchFetchProducts() {
-  yield takeEvery(fetchProducts, fetchProductsSaga)
+  yield takeEvery(fetchProducts, handleFetchProducts)
 }
 
 function* watchFetchProduct() {
-  yield takeEvery(fetchProduct, fetchProductSaga)
+  yield takeEvery(fetchProduct, handleFetchProduct)
 }
 
 function* watchFetchProductRating() {
-  yield takeEvery(fetchProductRating, fetchProductRatingSaga)
+  yield takeEvery(fetchProductRating, handleFetchProductRating)
 }
 
 function* watchChangeProductRating() {
-  yield takeEvery(changeProductRating, changeProductRatingSaga)
+  yield takeEvery(changeProductRating, handleChangeProductRating)
 }
 
 function* watchDeleteProductRating() {
-  yield takeEvery(deleteProductRating, deleteProductRatingSaga)
+  yield takeEvery(deleteProductRating, handleDeleteProductRating)
 }
 
 function* watchAddProduct() {
-  yield takeEvery(addProduct, addProductSaga)
+  yield takeEvery(addProduct, handleAddProduct)
 }
 
 function* watchEditProduct() {
-  yield takeEvery(editProduct, editProductSaga)
+  yield takeEvery(editProduct, handleEditProduct)
 }
 
 function* watchDeleteProducts() {
-  yield takeEvery(deleteProducts, deleteProductsSaga)
+  yield takeEvery(deleteProducts, handleDeleteProducts)
 }
 
 export {
