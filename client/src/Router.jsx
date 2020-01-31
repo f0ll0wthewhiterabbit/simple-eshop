@@ -13,7 +13,6 @@ import {
   ADMIN_PAGE_PATH,
   ADMIN_USERS_PAGE_PATH,
   ADMIN_PRODUCTS_PAGE_PATH,
-  ADMIN_PRODUCT_ADD_PAGE_PATH,
   ERROR_PAGE_PATH,
 } from './constants'
 
@@ -39,21 +38,20 @@ export default () => {
             <Route exact path={SIGN_IN_PAGE_PATH} component={SignInPage} />
             <Route exact path={SIGN_UP_PAGE_PATH} component={SignUpPage} />
             <PrivateRoute exact path={ADMIN_USERS_PAGE_PATH} component={AdminUsersPage} />
-            <PrivateRoute exact path={ADMIN_PRODUCTS_PAGE_PATH} component={AdminProductsPage} />
-            <PrivateRoute
-              exact
-              path={ADMIN_PRODUCT_ADD_PAGE_PATH}
-              component={AdminProductAddPage}
-            />
-            <PrivateRoute
-              exact
-              path={`${ADMIN_PRODUCTS_PAGE_PATH}/:id`}
-              component={AdminProductEditPage}
-            />
-            <PrivateRoute
-              exact
-              path={`${ADMIN_PRODUCTS_PAGE_PATH}/:id/rating`}
-              component={AdminProductRatingPage}
+            <Route
+              path={ADMIN_PRODUCTS_PAGE_PATH}
+              render={({ match: { url } }) => (
+                <Switch>
+                  <PrivateRoute path={`${url}/`} component={AdminProductsPage} exact />
+                  <PrivateRoute path={`${url}/add`} component={AdminProductAddPage} exact />
+                  <PrivateRoute path={`${url}/:id`} component={AdminProductEditPage} exact />
+                  <PrivateRoute
+                    path={`${url}/:id/rating`}
+                    component={AdminProductRatingPage}
+                    exact
+                  />
+                </Switch>
+              )}
             />
             <PrivateRoute
               exact

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, withRouter } from 'react-router-dom'
 import {
   SIGN_IN_PAGE_PATH,
   ROLE_ADMIN,
@@ -64,4 +64,4 @@ PrivateRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.element]).isRequired,
 }
 
-export default PrivateRoute
+export default withRouter(PrivateRoute)
