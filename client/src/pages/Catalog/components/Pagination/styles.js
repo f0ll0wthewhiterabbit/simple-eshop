@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { IconButton } from '@material-ui/core'
 
 export const PaginationList = styled.ul`
+  padding: 0;
   list-style: none;
   display: flex;
   justify-content: center;

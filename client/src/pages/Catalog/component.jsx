@@ -7,7 +7,7 @@ import ProductCardContainer from './components/ProductCard'
 import Loader from '../../components/global/Loader'
 import FilterSelectContainer from './components/FilterSelect'
 import PaginationContainer from './components/Pagination'
-import { Wrapper, Heading, ContentWrapper } from './styles'
+import { Wrapper, Heading, ContentWrapper, CardsWrapper } from './styles'
 
 const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
   useEffect(() => {
@@ -16,10 +16,10 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
 
   let content
 
-  if (error || products.size === 0) {
+  if (error) {
     content = (
       <Typography variant="body1" align="center" data-test="errorMessage">
-        Sorry, there are no products yet
+        Sorry, something went wrong...
       </Typography>
     )
   } else if (isLoading) {
@@ -27,7 +27,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
   } else {
     content = (
       <>
-        <Grid container spacing={4}>
+        <CardsWrapper container spacing={4}>
           {products.map(product => {
             return (
               <Grid key={product._id} item xs={12} sm={6} md={4}>
@@ -35,7 +35,7 @@ const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
               </Grid>
             )
           })}
-        </Grid>
+        </CardsWrapper>
         <PaginationContainer />
       </>
     )

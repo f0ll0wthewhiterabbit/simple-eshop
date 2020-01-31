@@ -9,4 +9,6 @@ export const Root = styled.div`
 export const Main = styled.main`
   position: relative;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 `

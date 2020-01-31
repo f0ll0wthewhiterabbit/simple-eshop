@@ -36,16 +36,14 @@ describe('CatalogPage component', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('should render error message if products list is empty', () => {
-    const errorMessage = findByTestAttr(wrapper, dataTestErrorMessage)
-
-    expect(errorMessage).toHaveLength(1)
-  })
-
   it('should render correct text in error message', () => {
+    wrapper = generateWrapper({
+      products: testProductsList,
+      error: 'test error message',
+    })
     const errorMessage = findByTestAttr(wrapper, dataTestErrorMessage)
 
-    expect(errorMessage.text()).toBe('Sorry, there are no products yet')
+    expect(errorMessage.text()).toBe('Sorry, something went wrong...')
   })
 
   it('should render error message after error', () => {

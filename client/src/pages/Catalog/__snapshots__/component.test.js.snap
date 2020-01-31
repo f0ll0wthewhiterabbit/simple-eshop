@@ -13,13 +13,11 @@ exports[`CatalogPage component should render correctly 1`] = `
   </Styled(WithStyles(ForwardRef(Typography)))>
   <Connect(FilterSelect) />
   <styled.div>
-    <WithStyles(ForwardRef(Typography))
-      align="center"
-      data-test="errorMessage"
-      variant="body1"
-    >
-      Sorry, there are no products yet
-    </WithStyles(ForwardRef(Typography))>
+    <Styled(WithStyles(ForwardRef(Grid)))
+      container={true}
+      spacing={4}
+    />
+    <Connect(Pagination) />
   </styled.div>
 </Styled(WithStyles(ForwardRef(Container)))>
 `;
