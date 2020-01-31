@@ -134,6 +134,7 @@ exports.createProduct = async (req, res) => {
 
   const { title, price, description, tags } = req.body
   const image = req.files[0]
+  const imageName = image.originalname
 
   try {
     if (req.user.role !== roles.ADMIN) {
@@ -151,6 +152,7 @@ exports.createProduct = async (req, res) => {
       description,
       tags: tags ? tags.split(',') : [],
       image: buffer,
+      imageName,
     }
     const product = await ProductService.createProduct(productData, req.user.id)
 

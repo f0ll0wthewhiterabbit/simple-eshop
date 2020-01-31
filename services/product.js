@@ -124,14 +124,14 @@ exports.getProductImage = async productId => {
 
 exports.createProduct = async (productData, userId) => {
   try {
-    const { title, price, description, tags, image } = productData
+    const { title, price, description, tags, image, imageName } = productData
     const product = new Product({
       title,
       price,
       description,
       tags: tags || [],
       image,
-      imageName: image.originalname,
+      imageName,
     })
     await product.save()
 
