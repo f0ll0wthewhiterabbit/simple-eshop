@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export const Wrapper = styled.div`
   flex-grow: 1;
   display: flex;
-  justify-content: ${props => props['data-justify']};
+  justify-content: ${props => props.justify};
   align-items: center;
 
   ${props => props.theme.breakpoints.up('lg')} {
