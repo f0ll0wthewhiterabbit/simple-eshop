@@ -1,4 +1,5 @@
-export const STORAGE_FIELD_TOKEN = 'token'
+export const STORAGE_FIELD_ACCESS_TOKEN = 'accessToken'
+export const STORAGE_FIELD_REFRESH_TOKEN = 'refreshToken'
 export const STORE_FIELD_PRODUCTS = 'products'
 export const STORE_FIELD_USERS = 'users'
 export const STORE_FIELD_CURRENT_USER = 'usersCurrent'

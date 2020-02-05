@@ -4,6 +4,7 @@ import { throwError } from 'redux-saga-test-plan/providers'
 
 import API from '../../utils/api'
 import setAuthToken from '../../utils/setAuthToken'
+import isTokenExpired from '../../utils/isTokenExpired'
 import {
   authenticateError,
   authenticateSuccess,
@@ -17,55 +18,68 @@ import {
 } from '../actions'
 import { handleAuthenticate, handleSignUp, handleSignIn, handleSignOut } from './auth'
 import {
-  ROLE_USER,
   ROLE_ADMIN,
   DEFAULT_ADMIN_PER_PAGE_LIMIT,
-  STORAGE_FIELD_TOKEN,
   ADMIN_PRODUCTS_PAGE_PATH,
   SIGN_IN_PAGE_PATH,
+  STORAGE_FIELD_ACCESS_TOKEN,
+  STORAGE_FIELD_REFRESH_TOKEN,
 } from '../../constants'
 
 describe('Auth sagas', () => {
   describe('authenticate', () => {
-    it('should handle', () => {
-      const testResponse = {
-        data: {
-          _id: '1',
-          firstName: 'John',
-          lastName: 'Doe',
-          email: 'jd@email.com',
-          role: ROLE_ADMIN,
-          isRemovable: false,
-        },
-      }
-      const { _id: id, firstName, lastName, email, role, isRemovable } = testResponse.data
-      const userData = { id, firstName, lastName, email, role, isRemovable }
+    const testResponse = {
+      data: {
+        _id: '1',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'jd@email.com',
+        role: ROLE_ADMIN,
+        isRemovable: false,
+      },
+    }
+    const { _id: id, firstName, lastName, email, role, isRemovable } = testResponse.data
+    const userData = { id, firstName, lastName, email, role, isRemovable }
 
+    it('should handle if token not expired', () => {
       return expectSaga(handleAuthenticate)
         .provide([
           [matchers.call.fn(localStorage.getItem), 'testToken'],
+          [matchers.call.fn(isTokenExpired), false],
           [matchers.call.fn(setAuthToken), undefined],
           [matchers.call.fn(API.get), testResponse],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'getItem'], STORAGE_FIELD_TOKEN)
+        .call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
+        .put(setProductsPerPage(DEFAULT_ADMIN_PER_PAGE_LIMIT))
+        .put(authenticateSuccess(userData))
+        .run()
+    })
+
+    it('should handle if token expired', () => {
+      const testResponseTokens = {
+        data: {
+          accessToken: 'testAccessToken',
+          refreshToken: 'testRefreshToken',
+        },
+      }
+      return expectSaga(handleAuthenticate)
+        .provide([
+          [matchers.call.fn(localStorage.getItem), 'testToken'],
+          [matchers.call.fn(isTokenExpired), true],
+          [matchers.call.fn(setAuthToken), undefined],
+          [matchers.call.fn(API.get), testResponse],
+          [matchers.call.fn(API.post), testResponseTokens],
+          [matchers.call.fn(localStorage.removeItem), undefined],
+          [matchers.call.fn(localStorage.setItem), undefined],
+        ])
+        .call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
         .put(setProductsPerPage(DEFAULT_ADMIN_PER_PAGE_LIMIT))
         .put(authenticateSuccess(userData))
         .run()
     })
 
     it('should handle error without token', () => {
-      const testResponse = {
-        data: {
-          _id: '1',
-          firstName: 'John',
-          lastName: 'Doe',
-          email: 'jd@email.com',
-          role: ROLE_USER,
-          isRemovable: false,
-        },
-      }
-
       return expectSaga(handleAuthenticate)
         .provide([
           [matchers.call.fn(setAuthToken), undefined],
@@ -73,7 +87,7 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.getItem), null],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'getItem'], STORAGE_FIELD_TOKEN)
+        .call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
         .put(authenticateError(''))
         .run()
     })
@@ -84,14 +98,15 @@ describe('Auth sagas', () => {
 
       return expectSaga(handleAuthenticate)
         .provide([
+          [matchers.call.fn(isTokenExpired), false],
           [matchers.call.fn(setAuthToken), undefined],
           [matchers.call.fn(API.get), throwError(error)],
           [matchers.call.fn(localStorage.getItem), 'testToken'],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'getItem'], STORAGE_FIELD_TOKEN)
+        .call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
         .put(authenticateError(errorMessage))
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_TOKEN)
+        .call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
         .run()
     })
   })
@@ -116,7 +131,7 @@ describe('Auth sagas', () => {
     it('should handle', () => {
       const testResponse = {
         data: {
-          token: '123456qwe',
+          accessToken: '123456qwe',
         },
       }
 
@@ -126,8 +141,8 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.setItem), undefined],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'setItem'], STORAGE_FIELD_TOKEN, testResponse.data.token)
-        .put(signUpSuccess(testResponse.data.token))
+        .call([localStorage, 'setItem'], STORAGE_FIELD_ACCESS_TOKEN, testResponse.data.accessToken)
+        .put(signUpSuccess(testResponse.data.accessToken))
         .put(authenticate())
         .run()
     })
@@ -142,7 +157,7 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.setItem), undefined],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_TOKEN)
+        .call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
         .put(signUpError(errorMessage))
         .run()
 
@@ -157,6 +172,7 @@ describe('Auth sagas', () => {
         userData: {
           email: 'jd@email.com',
           password: 'qwerty',
+          rememberMe: false,
         },
         setFormSubmitting: jest.fn(),
       },
@@ -169,7 +185,7 @@ describe('Auth sagas', () => {
     it('should handle', () => {
       const testResponse = {
         data: {
-          token: '123456qwe',
+          accessToken: '123456qwe',
         },
       }
 
@@ -179,8 +195,8 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.setItem), undefined],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'setItem'], STORAGE_FIELD_TOKEN, testResponse.data.token)
-        .put(signInSuccess(testResponse.data.token))
+        .call([localStorage, 'setItem'], STORAGE_FIELD_ACCESS_TOKEN, testResponse.data.accessToken)
+        .put(signInSuccess(testResponse.data.accessToken))
         .put(authenticate())
         .run()
     })
@@ -195,7 +211,7 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.setItem), undefined],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_TOKEN)
+        .call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
         .put(signInError(errorMessage))
         .run()
 
@@ -223,8 +239,14 @@ describe('Auth sagas', () => {
 
     it('should handle', () => {
       expectSaga(handleSignOut, action)
-        .provide([[matchers.call.fn(localStorage.removeItem), undefined]])
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_TOKEN)
+        .provide([
+          [matchers.call.fn(localStorage.getItem), 'testToken'],
+          [matchers.call.fn(localStorage.removeItem, STORAGE_FIELD_REFRESH_TOKEN), undefined],
+          [matchers.call.fn(localStorage.removeItem, STORAGE_FIELD_ACCESS_TOKEN), undefined],
+          [matchers.call.fn(API.delete), undefined],
+        ])
+        .call([localStorage, 'removeItem'], STORAGE_FIELD_REFRESH_TOKEN)
+        .call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
         .put(signOutSuccess())
         .run()
 

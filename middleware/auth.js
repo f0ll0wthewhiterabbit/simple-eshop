@@ -9,11 +9,10 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
-    const user = await UserService.getUserById(decoded.user.id)
-
+    const decoded = jwt.verify(token, process.env.JWT_ACCESS_TOKEN_SECRET)
+    const user = await UserService.getUserById(decoded.userId)
     req.user = user
+
     next()
   } catch (err) {
     if (err.name === 'TokenExpiredError') {

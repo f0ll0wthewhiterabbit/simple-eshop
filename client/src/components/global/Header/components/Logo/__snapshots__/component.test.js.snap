@@ -2,7 +2,7 @@
 
 exports[`Logo component should render correctly 1`] = `
 <styled.div
-  data-justify="flex-start"
+  justify="flex-start"
 >
   <Styled(Link)
     to="/"

@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { TextField, Typography } from '@material-ui/core'
+import { TextField, Typography, FormControlLabel, Checkbox } from '@material-ui/core'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import { StyledForm, SubmitButton, Progress } from './styles'
 
 const SignInForm = ({ signIn, error }) => {
+  const [rememberMe, setRememberMe] = useState(false)
+
+  const hangleRememberMeChange = () => {
+    setRememberMe(!rememberMe)
+  }
+
   const handleFormSubmit = (values, formMethods) => {
     signIn(
       {
         email: values.email,
         password: values.password,
+        rememberMe,
       },
       formMethods.setSubmitting
     )
@@ -61,6 +68,13 @@ const SignInForm = ({ signIn, error }) => {
             value={values.password}
             error={errors.password && touched.password}
             helperText={errors.password && touched.password && errors.password}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox value="remember" color="primary" onChange={hangleRememberMeChange} />
+            }
+            label="Remember me"
+            checked={rememberMe}
           />
           <SubmitButton
             type="submit"

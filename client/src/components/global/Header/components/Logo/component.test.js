@@ -24,13 +24,13 @@ describe('Logo component', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it(`should contain 'data-justify=flex-start' prop`, () => {
-    expect(wrapper.prop('data-justify')).toBe('flex-start')
+  it(`should contain 'justify=flex-start' prop`, () => {
+    expect(wrapper.prop('justify')).toBe('flex-start')
   })
 
-  it(`should contain 'data-justify=center' prop in admin mode`, () => {
+  it(`should contain 'justify=center' prop in admin mode`, () => {
     wrapper = generateWrapper({ isAdmin: true })
 
-    expect(wrapper.prop('data-justify')).toBe('center')
+    expect(wrapper.prop('justify')).toBe('center')
   })
 })

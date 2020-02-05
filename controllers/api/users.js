@@ -1,9 +1,9 @@
 const { body, check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
 const UserService = require('../../services/user')
 const roles = require('../../constants/roles')
 const validationMethods = require('../../constants/validationMethods')
+const tokenUtils = require('../../utils/token')
 
 exports.getUsers = async (req, res) => {
   try {
@@ -53,24 +53,9 @@ exports.createUser = async (req, res) => {
 
     user = await UserService.createUser(firstName, lastName, email, hashedPassword)
 
-    const payload = {
-      user: {
-        id: user.id,
-      },
-    }
+    const accessToken = tokenUtils.generateAccessToken(user.id, false)
 
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: Number(process.env.JWT_TOKEN_LIFETIME) },
-      (err, token) => {
-        if (err) {
-          throw err
-        }
-
-        return res.status(201).json({ token })
-      }
-    )
+    return res.status(201).json({ accessToken })
   } catch (err) {
     console.error(err.message)
     return res.status(500).send('Server error')
