@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { takeEvery, put, call } from 'redux-saga/effects'
 
 import API from '../../utils/api'
@@ -141,10 +142,10 @@ export function* handleSignIn(action) {
 }
 
 export function* handleSignOut(action) {
-  try {
-    const { history, location } = action.payload
-    const refreshToken = yield call([localStorage, 'getItem'], STORAGE_FIELD_REFRESH_TOKEN)
+  const { history, location } = action.payload
+  const refreshToken = yield call([localStorage, 'getItem'], STORAGE_FIELD_REFRESH_TOKEN)
 
+  try {
     if (refreshToken) {
       const config = {
         data: JSON.stringify({ refreshToken }),
@@ -154,6 +155,11 @@ export function* handleSignOut(action) {
       }
 
       yield call(API.delete, '/auth/token', config)
+    }
+  } catch (err) {
+    console.err(err)
+  } finally {
+    if (refreshToken) {
       yield call([localStorage, 'removeItem'], STORAGE_FIELD_REFRESH_TOKEN)
     }
 
@@ -168,8 +174,6 @@ export function* handleSignOut(action) {
     ) {
       history.push(SIGN_IN_PAGE_PATH)
     }
-  } catch (err) {
-    return err
   }
 }
 

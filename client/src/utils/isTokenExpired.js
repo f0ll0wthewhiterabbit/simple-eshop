@@ -4,11 +4,7 @@ const isTokenExpired = token => {
   const decoded = jwtDecode(token)
   const currentTime = Date.now() / 1000
 
-  if (decoded.exp < currentTime) {
-    return true
-  }
-
-  return false
+  return decoded.exp < currentTime
 }
 
 export default isTokenExpired

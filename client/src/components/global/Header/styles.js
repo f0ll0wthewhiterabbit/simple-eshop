@@ -24,5 +24,14 @@ export const MenuButton = styled(IconButton)`
 `
 
 export const WarningMessage = styled(Typography)`
-  margin-right: 12px;
+  display: none;
+
+  ${props => props.theme.breakpoints.up('sm')} {
+    display: block;
+    text-align: right;
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+  }
 `
