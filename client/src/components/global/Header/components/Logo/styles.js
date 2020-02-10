@@ -1,56 +1,32 @@
 import styled from 'styled-components'
-import ExplicitIcon from '@material-ui/icons/Explicit'
-import { Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 export const Wrapper = styled.div`
-  flex-grow: 1;
-  display: flex;
-  justify-content: ${props => props.justify};
-  align-items: center;
+  width: 100%;
+  margin-bottom: ${props => props.theme.spacing(2)}px;
 
-  ${props => props.theme.breakpoints.up('lg')} {
-    justify-content: flex-start;
+  ${props => props.theme.breakpoints.up('md')} {
+    width: auto;
   }
 `
 
 export const SiteLink = styled(Link)`
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
   display: block;
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: ${props => props.theme.palette.primary.contrastText};
+  color: #1e1e1e;
+
+  ${props => props.theme.breakpoints.up('md')} {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `
 
-export const LogoIcon = styled(ExplicitIcon)`
-  margin-right: ${props => props.theme.spacing(1)}px;
-`
-
-export const LogoTitle = styled(Typography)`
-  display: block;
-  font-size: 1rem;
-  position: relative;
-
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 53px;
-    height: 2px;
-    background-color: #fff;
-    top: 13px;
-    left: -2px;
-  }
-
-  ${props => props.theme.breakpoints.up('sm')} {
-    display: block;
-    font-size: 1.25rem;
-
-    &::before {
-      content: '';
-      width: 66px;
-      top: 16px;
-      left: -3px;
-    }
-  }
+export const LogoImg = styled.img`
+  width: 100%;
+  height: auto;
 `

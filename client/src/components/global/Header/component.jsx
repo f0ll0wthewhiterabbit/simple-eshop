@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Toolbar, Container } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 
 import LogoContainer from './components/Logo'
 import UserMenuContainer from './components/UserMenu'
-import { Wrapper, MenuButton, WarningMessage } from './styles'
+import InfoSection from './components/InfoSection'
+import MainNavigation from './components/MainNavigation/component'
+import { Wrapper, MainSection, MenuButton, WarningMessage } from './styles'
 
 const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) => {
   const handleMenuButtonClick = () => {
@@ -13,28 +14,28 @@ const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) 
   }
 
   return (
-    <Wrapper position="static">
-      <Container maxWidth="lg">
-        <Toolbar>
-          {isAdmin && (
-            <MenuButton
-              color="secondary"
-              aria-label="open sidebar"
-              onClick={handleMenuButtonClick}
-              data-test="menuButton"
-            >
-              <MenuIcon />
-            </MenuButton>
-          )}
-          <LogoContainer />
-          {isAuthenticated && isDeleteRequestSent && (
-            <WarningMessage variant="body2" color="error" data-test="warningMessage">
-              Unfortunately, your account will be deleted soon.
-            </WarningMessage>
-          )}
-          {isAuthenticated && <UserMenuContainer data-test="userMenu" />}
-        </Toolbar>
-      </Container>
+    <Wrapper>
+      <MainSection>
+        {isAdmin && (
+          <MenuButton
+            color="secondary"
+            aria-label="open sidebar"
+            onClick={handleMenuButtonClick}
+            data-test="menuButton"
+          >
+            <MenuIcon />
+          </MenuButton>
+        )}
+        <LogoContainer />
+        <MainNavigation />
+        {isAuthenticated && isDeleteRequestSent && (
+          <WarningMessage data-test="warningMessage">
+            Unfortunately, your account will be deleted soon.
+          </WarningMessage>
+        )}
+        {isAuthenticated && <UserMenuContainer data-test="userMenu" />}
+      </MainSection>
+      <InfoSection />
     </Wrapper>
   )
 }

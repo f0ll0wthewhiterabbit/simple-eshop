@@ -25,27 +25,43 @@ export const ImageWrapper = styled(CardMedia)`
 export const Content = styled(CardContent)`
   flex-grow: 1;
   position: relative;
+  padding-bottom: 18px;
 `
 
 export const Title = styled(Typography)`
-  padding-right: ${props => props.theme.spacing(11)}px;
+  padding-right: 70px;
+  font-family: 'Montserrat', sans-serif;
+  color: #1e1e1e;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 20px;
 `
 
-export const PriceButton = styled(Button)`
+export const Price = styled(Typography)`
+  font-family: 'Montserrat', sans-serif;
+  color: #1e1e1e;
+  font-weight: 700;
+  text-transform: none;
+  font-size: 16px;
+  margin-bottom: 25px;
+`
+
+export const Description = styled(Typography)`
+  font-family: 'Montserrat', sans-serif;
+  color: #727272;
+  font-weight: 500;
+  text-transform: none;
+  font-size: 16px;
+`
+
+export const PurchaseButton = styled(Button)`
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
   position: absolute;
   top: 16px;
   right: 16px;
-
-  .MuiButton-startIcon {
-    display: none;
-  }
-
-  ${props => props.theme.breakpoints.up('lg')} {
-    .MuiButton-startIcon {
-      display: inherit;
-      margin-right: 4px;
-    }
-  }
+  margin-right: 4px;
 `
 
 export const TagsWrapper = styled(CardActions)`
@@ -57,6 +73,12 @@ export const TagsWrapper = styled(CardActions)`
     margin-left: 0;
     margin-right: 6px;
     margin-bottom: 2px;
+    padding: 5px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    background: #b0bcc2;
+    color: #fff;
+    border-radius: 40px;
   }
 `
 
@@ -64,7 +86,7 @@ export const RaitingsRoot = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${props => props.theme.spacing(1, 2, 2)};
+  padding: ${props => props.theme.spacing(2, 2)};
 `
 
 export const RaitingWrapper = styled(CardActions)`
@@ -86,15 +108,17 @@ export const Stars = styled(Rating)`
 `
 
 export const RaitingsCount = styled.span`
+  margin-left: 6px;
+  font-family: 'Montserrat', sans-serif;
   color: #bdbdbd;
-  font-size: 13px;
-  margin-left: 2px;
+  font-weight: 500;
+  font-size: 12px;
 `
 
 export const DeleteButton = styled(IconButton)`
   color: rgba(0, 0, 0, 0.26);
   position: absolute;
-  top: 20px;
+  top: 19px;
   left: 87px;
 
   && {
@@ -107,17 +131,25 @@ export const DeleteButton = styled(IconButton)`
 `
 
 export const RatingTitle = styled.span`
-  color: #bdbdbd;
-  font-size: 14px;
   width: 100%;
   margin-left: 2px;
+  font-family: 'Montserrat', sans-serif;
+  color: #bdbdbd;
+  font-weight: 500;
+  font-size: 12px;
 `
 
 export const LoadingLabel = styled(Typography)`
+  font-family: 'Montserrat', sans-serif;
   color: #bdbdbd;
+  font-weight: 500;
+  font-size: 12px;
   margin-left: 2px;
 `
 
 export const ErrorLabel = styled(Typography)`
   margin-left: 2px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
 `

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
-import { Typography, Chip } from '@material-ui/core'
+import { Chip } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import DeleteIcon from '@material-ui/icons/Delete'
 
@@ -12,7 +12,7 @@ import {
   ImageWrapper,
   Content,
   Title,
-  PriceButton,
+  PurchaseButton,
   TagsWrapper,
   Stars,
   RaitingsRoot,
@@ -22,6 +22,8 @@ import {
   RatingTitle,
   LoadingLabel,
   ErrorLabel,
+  Price,
+  Description,
 } from './styles'
 
 const ProductCard = ({
@@ -95,16 +97,18 @@ const ProductCard = ({
         <Title gutterBottom variant="h5" component="h2" data-test="title">
           {title}
         </Title>
-        <PriceButton
+        <Price gutterBottom variant="h5" component="h3" data-test="title">
+          {formatPrice(price)}
+        </Price>
+        <PurchaseButton
           size="small"
-          color="primary"
+          color="secondary"
           startIcon={<ShoppingCartOutlinedIcon />}
-          disabled
           data-test="price"
         >
-          {formatPrice(price)}
-        </PriceButton>
-        <Typography data-test="description">{description}</Typography>
+          Buy
+        </PurchaseButton>
+        <Description data-test="description">{description}</Description>
       </Content>
       <TagsWrapper>
         {tags.map(tag => (

@@ -4,18 +4,19 @@ import { withRouter, Link } from 'react-router-dom'
 import { withTheme } from 'styled-components'
 import { Menu, MenuItem, ListItemText, useMediaQuery } from '@material-ui/core'
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined'
-import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
+import { STORE_FIELD_CURRENT_USER, PROFILE_PAGE_PATH } from '../../../../../constants'
 import {
   Wrapper,
   UserMenuButtonNormal,
   UserMenuButtonSmall,
   ArrowIcon,
   IconWrapper,
+  SignOutButton,
 } from './styles'
-import { STORE_FIELD_CURRENT_USER, PROFILE_PAGE_PATH } from '../../../../../constants'
 
 export const UserMenu = ({
   theme,
@@ -74,6 +75,9 @@ export const UserMenu = ({
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
@@ -88,7 +92,7 @@ export const UserMenu = ({
           <IconWrapper>
             <PersonOutlineOutlinedIcon fontSize="small" />
           </IconWrapper>
-          <ListItemText primary={userName} />
+          <ListItemText primary="Profile" />
         </MenuItem>
         {!isAdmin && !isDeleteRequestSent && (
           <MenuItem onClick={handleDeleteAccountClick} data-test="deleteAccountButton">
@@ -98,13 +102,10 @@ export const UserMenu = ({
             <ListItemText primary="Delete Account" />
           </MenuItem>
         )}
-        <MenuItem onClick={handleSignOutClick} data-test="signOutButton">
-          <IconWrapper>
-            <ExitToAppOutlinedIcon fontSize="small" />
-          </IconWrapper>
-          <ListItemText primary="Sign Out" />
-        </MenuItem>
       </Menu>
+      <SignOutButton onClick={handleSignOutClick} data-test="signOutButton" aria-label="sign-out">
+        <ExitToAppIcon />
+      </SignOutButton>
     </Wrapper>
   )
 }

@@ -1,51 +1,77 @@
 import styled from 'styled-components'
 import { IconButton } from '@material-ui/core'
 
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: nowrap;
+`
+
 export const PaginationList = styled.ul`
   padding: 0;
   list-style: none;
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin: 0;
 `
 
 export const PaginationItem = styled.li`
-  border: 1px solid #aaa;
-  border-right: none;
-
-  &:first-child {
-    border-radius: 3px 0 0 3px;
-  }
+  margin-right: 18px;
 
   &:last-child {
-    border-radius: 0 3px 3px 0;
-    border-right: 1px solid #aaa;
+    margin-right: 0;
   }
 `
 
 export const PaginationButton = styled(IconButton)`
   border-radius: 0;
-  min-width: 30px;
+  min-width: 20px;
   height: 28px;
   padding: 0;
-  font-size: 1.05rem;
-  color: #aaa;
-  background-color: none;
+  background-color: transparent;
+  font-family: 'Montserrat', sans-serif;
+  color: #838383;
+  font-size: 12px;
+  font-weight: 500;
+  position: relative;
+
+  &::after {
+    display: block;
+    position: absolute;
+    left: 5px;
+    bottom: -5px;
+    width: 10px;
+    height: 2px;
+    background: #000;
+    content: '';
+    opacity: 0;
+    transition: all 0.3s;
+  }
 
   ${props =>
     props.active &&
     `
-    background-color: #aaa;
-    color: #fff;
-    cursor: default;
+    color: #000;
+
+    &::after {
+      opacity: 1;
+    }
   `}
 
   &:hover {
+    background-color: transparent;
+    color: #000;
+
+    &::after {
+      opacity: 1;
+    }
+
     ${props =>
       props.active &&
       `
-    background-color: #aaa;
-  `}
+      cursor: default;
+    `}
   }
 
   &:first-child {
@@ -61,4 +87,12 @@ export const PaginationButton = styled(IconButton)`
       height: 0.8em;
     }
   }
+`
+
+export const Label = styled.span`
+  font-family: 'Montserrat', sans-serif;
+  color: #838383;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 24px;
 `

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { StylesProvider } from '@material-ui/core/styles'
 import 'typeface-roboto'
+import 'typeface-montserrat'
 
 import getStore from './store'
 import AppContainer from './components/wrappers/App'

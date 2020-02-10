@@ -6,6 +6,7 @@ import { fetchProducts } from '../../../../store/actions'
 const mapStateToProps = state => ({
   currentPage: state.getIn(['products', 'currentPage']),
   totalPages: state.getIn(['products', 'totalPages']),
+  totalAmount: state.getIn(['products', 'totalAmount']),
   filter: state.getIn(['products', 'filter']),
 })
 

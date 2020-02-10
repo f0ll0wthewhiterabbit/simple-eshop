@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Select, MenuItem } from '@material-ui/core'
+import { Select } from '@material-ui/core'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import { Wrapper, SelectFormControl } from './styles'
 import { URL_FIELD_NO_FILTER, URL_FIELD_RATINGS_FILTER } from '../../../../constants'
+import { Wrapper, SelectFormControl, SelectItem } from './styles'
 
 const FilterSelect = ({ filter, fetchProducts, setProductsFilter }) => {
   const handleChange = event => {
@@ -20,9 +21,25 @@ const FilterSelect = ({ filter, fetchProducts, setProductsFilter }) => {
   return (
     <Wrapper>
       <SelectFormControl>
-        <Select value={filter} onChange={handleChange} data-test="select">
-          <MenuItem value={URL_FIELD_NO_FILTER}>All</MenuItem>
-          <MenuItem value={URL_FIELD_RATINGS_FILTER}>My ratings</MenuItem>
+        <Select
+          value={filter}
+          onChange={handleChange}
+          IconComponent={ExpandMoreIcon}
+          data-test="select"
+          MenuProps={{
+            anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'left',
+            },
+            transformOrigin: {
+              vertical: 'top',
+              horizontal: 'left',
+            },
+            getContentAnchorEl: null,
+          }}
+        >
+          <SelectItem value={URL_FIELD_NO_FILTER}>All</SelectItem>
+          <SelectItem value={URL_FIELD_RATINGS_FILTER}>My ratings</SelectItem>
         </Select>
       </SelectFormControl>
     </Wrapper>
