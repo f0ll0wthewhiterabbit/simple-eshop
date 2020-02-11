@@ -6,10 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 
 const theme = createMuiTheme({
   sizing: {
-    headerHeight: {
-      xs: '56px',
-      sm: '64px',
-    },
     sidebarWidth: '240px',
   },
 })

@@ -5,14 +5,14 @@ import {
   SIGN_IN_PAGE_PATH,
   ROLE_ADMIN,
   ROLE_USER,
-  MAIN_PAGE_PATH,
+  HOME_PAGE_PATH,
   ERROR_PAGE_PATH,
   ADMIN_PRODUCTS_PAGE_PATH,
   ADMIN_PAGE_PATH,
 } from '../../../constants'
 
 const PrivateRoute = ({ isAuthenticated, userRole, component: Component, location, ...rest }) => {
-  if (isAuthenticated && userRole === ROLE_ADMIN && location.pathname === MAIN_PAGE_PATH) {
+  if (isAuthenticated && userRole === ROLE_ADMIN && location.pathname === HOME_PAGE_PATH) {
     return (
       <Redirect
         to={{
@@ -39,7 +39,7 @@ const PrivateRoute = ({ isAuthenticated, userRole, component: Component, locatio
           state: {
             title: 'Forbidden',
             message: '',
-            backTo: MAIN_PAGE_PATH,
+            backTo: HOME_PAGE_PATH,
           },
         }}
       />

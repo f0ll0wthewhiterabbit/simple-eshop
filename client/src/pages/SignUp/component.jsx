@@ -7,7 +7,7 @@ import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded'
 import {
   SIGN_IN_PAGE_PATH,
   ROLE_ADMIN,
-  MAIN_PAGE_PATH,
+  HOME_PAGE_PATH,
   ADMIN_PRODUCTS_PAGE_PATH,
   ROLE_GUEST,
 } from '../../constants'
@@ -18,7 +18,7 @@ const SignUpPage = ({ isAuthenticated, userRole }) => {
   if (isAuthenticated && userRole !== ROLE_GUEST) {
     return (
       <Redirect
-        to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH}
+        to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : HOME_PAGE_PATH}
         data-test="redirect"
       />
     )

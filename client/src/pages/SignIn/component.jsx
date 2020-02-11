@@ -6,7 +6,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 import {
   SIGN_UP_PAGE_PATH,
-  MAIN_PAGE_PATH,
+  HOME_PAGE_PATH,
   ROLE_ADMIN,
   ADMIN_PRODUCTS_PAGE_PATH,
   ROLE_GUEST,
@@ -18,7 +18,7 @@ const SingInPage = ({ isAuthenticated, userRole }) => {
   if (isAuthenticated && userRole !== ROLE_GUEST) {
     return (
       <Redirect
-        to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH}
+        to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : HOME_PAGE_PATH}
         data-test="redirect"
       />
     )

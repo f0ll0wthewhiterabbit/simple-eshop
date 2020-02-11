@@ -6,7 +6,7 @@ import findByTestAttr from '../../utils/findByTestAttr'
 import {
   ROLE_GUEST,
   ROLE_USER,
-  MAIN_PAGE_PATH,
+  HOME_PAGE_PATH,
   ROLE_ADMIN,
   ADMIN_PRODUCTS_PAGE_PATH,
 } from '../../constants'
@@ -57,7 +57,7 @@ describe('SingInPage component', () => {
     })
     const redirect = findByTestAttr(wrapper, dataTestRedirect)
 
-    expect(redirect.props().to).toBe(MAIN_PAGE_PATH)
+    expect(redirect.props().to).toBe(HOME_PAGE_PATH)
   })
 
   it(`should redirect administrator to administrator's products page`, () => {

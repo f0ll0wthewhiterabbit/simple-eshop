@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { MAIN_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
+import { HOME_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
 import ErrorMessage from '../../components/global/ErrorMessage'
 import { Wrapper, LinkWrapper, BackLink } from './styles'
 
 const ErrorPage = ({ isAdmin, location }) => {
-  const defaultPagePath = isAdmin ? ADMIN_PRODUCTS_PAGE_PATH : MAIN_PAGE_PATH
+  const defaultPagePath = isAdmin ? ADMIN_PRODUCTS_PAGE_PATH : HOME_PAGE_PATH
   let title
   let backTo
   let message

@@ -43,11 +43,6 @@ export const SiteLink = styled(Link)`
   }
 `
 
-export const InfoWrapper = styled(Container)`
-  padding-top: ${props => props.theme.spacing(10)}px;
-  padding-bottom: ${props => props.theme.spacing(10)}px;
-`
-
 export const SocialLinksWrapper = styled.section`
   background: #222121;
 `
@@ -55,39 +50,6 @@ export const SocialLinksWrapper = styled.section`
 export const SocialLinksContainer = styled(Container)`
   padding-top: ${props => props.theme.spacing(6)}px;
   padding-bottom: ${props => props.theme.spacing(6)}px;
-`
-
-export const InfoHeading = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  color: #fff;
-  font-size: 26px;
-  margin-bottom: 44px;
-  text-align: center;
-
-  ${props => props.theme.breakpoints.up('md')} {
-    text-align: left;
-  }
-`
-
-export const InfoList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-align: center;
-
-  ${props => props.theme.breakpoints.up('md')} {
-    text-align: left;
-  }
-`
-
-export const InfoItem = styled.li`
-  font-family: 'Montserrat', sans-serif;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 36px;
-  opacity: 0.5;
 `
 
 export const SocialLinksList = styled.ul`

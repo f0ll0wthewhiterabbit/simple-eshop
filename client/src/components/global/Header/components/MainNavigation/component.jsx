@@ -1,26 +1,42 @@
 import React from 'react'
 
 import { Wrapper, NavigationList, NavigationItem, NavigationLink } from './styles'
-import { MAIN_PAGE_PATH } from '../../../../../constants'
+import {
+  HOME_PAGE_PATH,
+  CATALOG_PAGE_PATH,
+  ABOUT_PAGE_PATH,
+  BLOG_PAGE_PATH,
+  CONTACT_PAGE_PATH,
+} from '../../../../../constants'
 
 const MainNavigation = () => {
   return (
     <Wrapper>
       <NavigationList>
         <NavigationItem>
-          <NavigationLink to="/home">Home</NavigationLink>
+          <NavigationLink to={HOME_PAGE_PATH} exact>
+            Home
+          </NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to={MAIN_PAGE_PATH}>Shop</NavigationLink>
+          <NavigationLink to={CATALOG_PAGE_PATH} exact>
+            Shop
+          </NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/about">About</NavigationLink>
+          <NavigationLink to={ABOUT_PAGE_PATH} exact>
+            About
+          </NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/blog">Blog</NavigationLink>
+          <NavigationLink to={BLOG_PAGE_PATH} exact>
+            Blog
+          </NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/contact">Contact</NavigationLink>
+          <NavigationLink to={CONTACT_PAGE_PATH} exact>
+            Contact
+          </NavigationLink>
         </NavigationItem>
       </NavigationList>
     </Wrapper>

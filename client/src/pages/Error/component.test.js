@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import ErrorPage from './component'
 import findByTestAttr from '../../utils/findByTestAttr'
-import { MAIN_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH, SIGN_UP_PAGE_PATH } from '../../constants'
+import { HOME_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH, SIGN_UP_PAGE_PATH } from '../../constants'
 
 describe('ErrorPage component', () => {
   let wrapper
@@ -45,7 +45,7 @@ describe('ErrorPage component', () => {
   it(`should contain link to main page`, () => {
     const backLink = findByTestAttr(wrapper, dataTestBackLink)
 
-    expect(backLink.props().to).toBe(MAIN_PAGE_PATH)
+    expect(backLink.props().to).toBe(HOME_PAGE_PATH)
   })
 
   it(`should contain link to admin products page in admin mode`, () => {
