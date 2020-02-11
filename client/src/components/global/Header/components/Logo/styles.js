@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
 
   ${props => props.theme.breakpoints.up('md')} {
     width: auto;
+    margin-bottom: 0;
   }
 `
 

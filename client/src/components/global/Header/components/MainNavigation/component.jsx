@@ -1,25 +1,26 @@
 import React from 'react'
 
 import { Wrapper, NavigationList, NavigationItem, NavigationLink } from './styles'
+import { MAIN_PAGE_PATH } from '../../../../../constants'
 
 const MainNavigation = () => {
   return (
     <Wrapper>
       <NavigationList>
         <NavigationItem>
-          <NavigationLink href="!#">Home</NavigationLink>
+          <NavigationLink to="/home">Home</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink href="!#">Shop</NavigationLink>
+          <NavigationLink to={MAIN_PAGE_PATH}>Shop</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink href="!#">About</NavigationLink>
+          <NavigationLink to="/about">About</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink href="!#">Blog</NavigationLink>
+          <NavigationLink to="/blog">Blog</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink href="!#">Contact</NavigationLink>
+          <NavigationLink to="/contact">Contact</NavigationLink>
         </NavigationItem>
       </NavigationList>
     </Wrapper>

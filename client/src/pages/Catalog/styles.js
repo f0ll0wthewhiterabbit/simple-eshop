@@ -14,7 +14,7 @@ export const Heading = styled(Typography)`
   margin-bottom: ${props => props.theme.spacing(2)}px;
   font-family: 'Montserrat', sans-serif;
   color: #1e1e1e;
-  font-size: 42px;
+  font-size: 34px;
   font-weight: 600;
 
   span {
@@ -23,6 +23,7 @@ export const Heading = styled(Typography)`
 
   ${props => props.theme.breakpoints.up('sm')} {
     margin-bottom: ${props => props.theme.spacing(4)}px;
+    font-size: 42px;
   }
 `
 

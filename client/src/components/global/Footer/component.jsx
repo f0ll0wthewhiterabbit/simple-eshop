@@ -1,5 +1,6 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 import { MAIN_PAGE_PATH } from '../../../constants'
 import {
@@ -23,53 +24,55 @@ import {
   Copyright,
 } from './styles'
 
-const Footer = () => {
+const Footer = ({ isAdmin, isAuthenticated }) => {
   return (
     <Wrapper>
-      <InfoWrapper maxWidth="lg">
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <InfoHeading variant="h4">About Us</InfoHeading>
-            <InfoList>
-              <InfoItem>About Us</InfoItem>
-              <InfoItem>Community</InfoItem>
-              <InfoItem>Jobs</InfoItem>
-              <InfoItem>Shipping</InfoItem>
-              <InfoItem>Contact Us</InfoItem>
-            </InfoList>
+      {!isAdmin && isAuthenticated && (
+        <InfoWrapper maxWidth="lg">
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6} md={3}>
+              <InfoHeading variant="h4">About Us</InfoHeading>
+              <InfoList>
+                <InfoItem>About Us</InfoItem>
+                <InfoItem>Community</InfoItem>
+                <InfoItem>Jobs</InfoItem>
+                <InfoItem>Shipping</InfoItem>
+                <InfoItem>Contact Us</InfoItem>
+              </InfoList>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <InfoHeading variant="h4">Customer Care</InfoHeading>
+              <InfoList>
+                <InfoItem>Search</InfoItem>
+                <InfoItem>Privacy Policy</InfoItem>
+                <InfoItem>2019 Lookbook</InfoItem>
+                <InfoItem>Shipping &amp; Delivery</InfoItem>
+                <InfoItem>Gallery</InfoItem>
+              </InfoList>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <InfoHeading variant="h4">Our Services</InfoHeading>
+              <InfoList>
+                <InfoItem>Free Shipping</InfoItem>
+                <InfoItem>Free Returnes</InfoItem>
+                <InfoItem>Our Franchising</InfoItem>
+                <InfoItem>Terms and conditions</InfoItem>
+                <InfoItem>Privacy Policy</InfoItem>
+              </InfoList>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <InfoHeading variant="h4">Information</InfoHeading>
+              <InfoList>
+                <InfoItem>Payment methods</InfoItem>
+                <InfoItem>Times and shipping costs</InfoItem>
+                <InfoItem>Product Returns</InfoItem>
+                <InfoItem>Shipping methods</InfoItem>
+                <InfoItem>Conformity of the products</InfoItem>
+              </InfoList>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <InfoHeading variant="h4">Customer Care</InfoHeading>
-            <InfoList>
-              <InfoItem>Search</InfoItem>
-              <InfoItem>Privacy Policy</InfoItem>
-              <InfoItem>2019 Lookbook</InfoItem>
-              <InfoItem>Shipping &amp; Delivery</InfoItem>
-              <InfoItem>Gallery</InfoItem>
-            </InfoList>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <InfoHeading variant="h4">Our Services</InfoHeading>
-            <InfoList>
-              <InfoItem>Free Shipping</InfoItem>
-              <InfoItem>Free Returnes</InfoItem>
-              <InfoItem>Our Franchising</InfoItem>
-              <InfoItem>Terms and conditions</InfoItem>
-              <InfoItem>Privacy Policy</InfoItem>
-            </InfoList>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <InfoHeading variant="h4">Information</InfoHeading>
-            <InfoList>
-              <InfoItem>Payment methods</InfoItem>
-              <InfoItem>Times and shipping costs</InfoItem>
-              <InfoItem>Product Returns</InfoItem>
-              <InfoItem>Shipping methods</InfoItem>
-              <InfoItem>Conformity of the products</InfoItem>
-            </InfoList>
-          </Grid>
-        </Grid>
-      </InfoWrapper>
+        </InfoWrapper>
+      )}
 
       <SocialLinksWrapper>
         <SocialLinksContainer maxWidth="lg">
@@ -115,6 +118,11 @@ const Footer = () => {
       </SocialLinksWrapper>
     </Wrapper>
   )
+}
+
+Footer.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 }
 
 export default Footer

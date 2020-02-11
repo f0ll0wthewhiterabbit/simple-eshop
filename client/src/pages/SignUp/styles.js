@@ -3,11 +3,12 @@ import { Avatar } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 export const Wrapper = styled.div`
-  margin-top: ${props => props.theme.spacing(8)}px;
-  margin-bottom: ${props => props.theme.spacing(8)}px;
+  padding-top: ${props => props.theme.spacing(8)}px;
+  padding-bottom: ${props => props.theme.spacing(12)}px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `
 
 export const IconWrapper = styled(Avatar)`

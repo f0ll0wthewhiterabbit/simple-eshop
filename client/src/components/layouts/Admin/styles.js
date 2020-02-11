@@ -20,7 +20,7 @@ export const SidebarRoot = styled.div`
   padding: ${props => props.theme.spacing(2)}px;
 
   ${props => props.theme.breakpoints.up('lg')} {
-    padding-top: ${props => props.theme.spacing(8)}px;
+    padding-top: 104px;
   }
 `
 

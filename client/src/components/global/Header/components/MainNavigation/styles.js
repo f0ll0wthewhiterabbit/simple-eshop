@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 export const Wrapper = styled.nav`
   width: 100%;
@@ -36,7 +37,7 @@ export const NavigationItem = styled.li`
   }
 `
 
-export const NavigationLink = styled.a`
+export const NavigationLink = styled(NavLink)`
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
   color: #1e1e1e;
@@ -58,6 +59,12 @@ export const NavigationLink = styled.a`
 
   &:hover,
   &:focus {
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &.active {
     &::after {
       opacity: 1;
     }

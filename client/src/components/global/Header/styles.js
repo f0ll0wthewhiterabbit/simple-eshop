@@ -13,6 +13,7 @@ export const MainSection = styled.div`
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  border-bottom: 1px solid #b0bcc2;
 
   ${props => props.theme.breakpoints.up('md')} {
     padding-top: 0;
@@ -21,15 +22,28 @@ export const MainSection = styled.div`
   }
 `
 
-export const MenuButton = styled(IconButton)`
-  color: ${props => props.theme.palette.primary.contrastText};
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-  }
+export const MenuButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 16px;
+  left: 11px;
 
   ${props => props.theme.breakpoints.up('md')} {
+    position: static;
+    width: 200px;
+  }
+
+  ${props => props.theme.breakpoints.up('lg')} {
     display: none;
+  }
+`
+
+export const MenuButton = styled(IconButton)`
+  color: #1e1e1e;
+  transition: color 0.3s;
+
+  &:hover {
+    background-color: transparent;
+    color: ${props => props.theme.palette.secondary.main};
   }
 `
 
@@ -44,6 +58,7 @@ export const WarningMessage = styled(Typography)`
   font-weight: 500;
   color: ${props => props.theme.palette.secondary.main};
   text-align: center;
+  white-space: nowrap;
 
   ${props => props.theme.breakpoints.up('md')} {
     right: 32px;

@@ -6,7 +6,7 @@ import LogoContainer from './components/Logo'
 import UserMenuContainer from './components/UserMenu'
 import InfoSection from './components/InfoSection'
 import MainNavigation from './components/MainNavigation/component'
-import { Wrapper, MainSection, MenuButton, WarningMessage } from './styles'
+import { Wrapper, MainSection, MenuButtonWrapper, MenuButton, WarningMessage } from './styles'
 
 const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) => {
   const handleMenuButtonClick = () => {
@@ -15,19 +15,21 @@ const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) 
 
   return (
     <Wrapper>
-      <MainSection>
+      <MainSection isAdmin={isAdmin}>
         {isAdmin && (
-          <MenuButton
-            color="secondary"
-            aria-label="open sidebar"
-            onClick={handleMenuButtonClick}
-            data-test="menuButton"
-          >
-            <MenuIcon />
-          </MenuButton>
+          <MenuButtonWrapper>
+            <MenuButton
+              color="secondary"
+              aria-label="open sidebar"
+              onClick={handleMenuButtonClick}
+              data-test="menuButton"
+            >
+              <MenuIcon />
+            </MenuButton>
+          </MenuButtonWrapper>
         )}
         <LogoContainer />
-        <MainNavigation />
+        {isAuthenticated && !isAdmin && <MainNavigation />}
         {isAuthenticated && isDeleteRequestSent && (
           <WarningMessage data-test="warningMessage">
             Unfortunately, your account will be deleted soon.
@@ -35,7 +37,7 @@ const Header = ({ openSidebar, isAdmin, isAuthenticated, isDeleteRequestSent }) 
         )}
         {isAuthenticated && <UserMenuContainer data-test="userMenu" />}
       </MainSection>
-      <InfoSection />
+      {isAuthenticated && !isAdmin && <InfoSection />}
     </Wrapper>
   )
 }
