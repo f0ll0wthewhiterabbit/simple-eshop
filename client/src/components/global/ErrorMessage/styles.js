@@ -13,11 +13,19 @@ export const IconWrapper = styled(Avatar)`
 `
 
 export const Heading = styled(Typography)`
-  margin: ${props => props.theme.spacing(1)}px;
+  margin: ${props => props.theme.spacing(2)}px;
+  font-family: 'Montserrat', sans-serif;
+  color: #1e1e1e;
+  font-size: 22px;
   font-weight: 500;
+  line-height: 1.2;
 `
 
 export const Message = styled(Typography)`
   margin: ${props => props.theme.spacing(1)}px;
+  font-family: 'Montserrat', sans-serif;
+  color: #727272;
+  font-size: 18px;
   font-weight: 400;
+  line-height: 1.2;
 `

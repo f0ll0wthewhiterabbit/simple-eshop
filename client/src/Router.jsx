@@ -8,6 +8,9 @@ import PrivateRoute from './components/wrappers/PrivateRoute'
 import {
   HOME_PAGE_PATH,
   CATALOG_PAGE_PATH,
+  ABOUT_PAGE_PATH,
+  BLOG_PAGE_PATH,
+  CONTACT_PAGE_PATH,
   PROFILE_PAGE_PATH,
   SIGN_IN_PAGE_PATH,
   SIGN_UP_PAGE_PATH,
@@ -19,6 +22,9 @@ import {
 
 const HomePage = React.lazy(() => import('./pages/Home'))
 const CatalogPage = React.lazy(() => import('./pages/Catalog'))
+const AboutPage = React.lazy(() => import('./pages/About'))
+const BlogPage = React.lazy(() => import('./pages/Blog'))
+const ContactPage = React.lazy(() => import('./pages/Contact'))
 const ProfilePage = React.lazy(() => import('./pages/Profile'))
 const SignInPage = React.lazy(() => import('./pages/SignIn'))
 const SignUpPage = React.lazy(() => import('./pages/SignUp'))
@@ -37,6 +43,9 @@ export default () => {
           <Switch>
             <PrivateRoute exact path={HOME_PAGE_PATH} component={HomePage} />
             <PrivateRoute exact path={CATALOG_PAGE_PATH} component={CatalogPage} />
+            <PrivateRoute exact path={ABOUT_PAGE_PATH} component={AboutPage} />
+            <PrivateRoute exact path={BLOG_PAGE_PATH} component={BlogPage} />
+            <PrivateRoute exact path={CONTACT_PAGE_PATH} component={ContactPage} />
             <PrivateRoute exact path={PROFILE_PAGE_PATH} component={ProfilePage} />
             <Route exact path={SIGN_IN_PAGE_PATH} component={SignInPage} />
             <Route exact path={SIGN_UP_PAGE_PATH} component={SignUpPage} />
