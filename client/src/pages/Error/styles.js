@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: calc(100% - 24px * 2); /* minus double padding of parent <main /> */
 `
 
 export const LinkWrapper = styled(Typography)`
@@ -19,6 +20,10 @@ export const LinkWrapper = styled(Typography)`
 export const BackLink = styled(Link)`
   text-decoration: none;
   color: ${props => props.theme.palette.primary.main};
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
 
   &:hover {
     text-decoration: underline;

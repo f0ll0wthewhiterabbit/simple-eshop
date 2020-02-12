@@ -25,25 +25,25 @@ const Footer = () => {
         <SocialLinksContainer maxWidth="lg">
           <SocialLinksList>
             <SocialLinksItem>
-              <SocialLink href="https://www.instagram.com/itechart_official">
+              <SocialLink href="https://www.instagram.com/itechart_official" target="_blank">
                 <SocialIconInstagram className="instagram" />
                 <span className="social-links__title">Instagram</span>
               </SocialLink>
             </SocialLinksItem>
             <SocialLinksItem>
-              <SocialLink href="https://twitter.com/itechart">
+              <SocialLink href="https://twitter.com/itechart" target="_blank">
                 <SocialIconTwitter className="twitter" />
                 <span className="social-links__title">Twitter</span>
               </SocialLink>
             </SocialLinksItem>
             <SocialLinksItem>
-              <SocialLink href="https://www.youtube.com/user/iTechArt">
+              <SocialLink href="https://www.youtube.com/user/iTechArt" target="_blank">
                 <SocialIconYoutube className="youtube" />
                 <span className="social-links__title">Youtube</span>
               </SocialLink>
             </SocialLinksItem>
             <SocialLinksItem>
-              <SocialLink href="https://www.facebook.com/iTechArt.Group">
+              <SocialLink href="https://www.facebook.com/iTechArt.Group" target="_blank">
                 <SocialIconFacebook className="facebook" />
                 <span className="social-links__title">Facebook</span>
               </SocialLink>
@@ -51,7 +51,7 @@ const Footer = () => {
           </SocialLinksList>
 
           <Info variant="subtitle1" color="textSecondary" align="center" component="p">
-            <FooterLink color="inherit" href="https://www.itechart.by/">
+            <FooterLink color="inherit" href="https://www.itechart.by/" target="_blank">
               iTechArt
             </FooterLink>
             &nbsp;Students Lab Vitebsk

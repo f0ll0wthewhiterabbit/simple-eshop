@@ -48,24 +48,27 @@ export const NavigationLink = styled(NavLink)`
   &::after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: 7px;
-    width: 100%;
+    left: 50%;
+    bottom: 5px;
+    width: 0;
     height: 2px;
     background: #1e1e1e;
     opacity: 0;
-    transition: opacity 0.3s ease-in;
+    transition: all 0.15s linear;
+    transform: translateX(-50%);
   }
 
   &:hover,
   &:focus {
     &::after {
+      width: 100%;
       opacity: 1;
     }
   }
 
   &.active {
     &::after {
+      width: 100%;
       opacity: 1;
     }
   }

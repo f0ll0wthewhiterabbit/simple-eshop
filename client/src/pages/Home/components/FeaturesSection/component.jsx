@@ -34,8 +34,8 @@ const FeturesSection = () => {
             <ForumOutlinedIcon />
             <FeatureHeading variant="h4">Online support 24/7</FeatureHeading>
             <FeatureDescription variant="body1">
-              Our responsive and polite staff will assist you at any time convenient for you. Go to
-              the contact page to ask questions
+              Our responsive and polite staff will assist at any time convenient for you. Go to the
+              contact page to ask questions
             </FeatureDescription>
           </FeatureWrapper>
         </Grid>

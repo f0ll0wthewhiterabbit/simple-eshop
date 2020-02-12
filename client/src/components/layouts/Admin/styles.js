@@ -44,4 +44,5 @@ export const Main = styled.main`
   padding: ${props => props.theme.spacing(3)}px;
   position: relative;
   overflow-x: auto;
+  min-height: 250px;
 `

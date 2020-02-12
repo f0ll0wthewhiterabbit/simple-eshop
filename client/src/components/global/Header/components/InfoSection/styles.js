@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import LocalShippingIcon from '@material-ui/icons/LocalShipping'
-import SchoolIcon from '@material-ui/icons/School'
-import MoneyOffIcon from '@material-ui/icons/MoneyOff'
+import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined'
+import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined'
+import MoneyOffOutlinedIcon from '@material-ui/icons/MoneyOffOutlined'
 
 export const Wrapper = styled.div`
   background: #b0bcc2;
@@ -46,7 +46,7 @@ export const InfoText = styled.p`
   }
 `
 
-export const ShippingIcon = styled(LocalShippingIcon)`
+export const ShippingIcon = styled(LocalShippingOutlinedIcon)`
   color: #fff;
   margin-right: 0;
   font-size: 2rem;
@@ -56,7 +56,7 @@ export const ShippingIcon = styled(LocalShippingIcon)`
   }
 `
 
-export const StudentIcon = styled(SchoolIcon)`
+export const StudentIcon = styled(SchoolOutlinedIcon)`
   color: #fff;
   margin-right: 0;
   font-size: 2rem;
@@ -66,7 +66,7 @@ export const StudentIcon = styled(SchoolIcon)`
   }
 `
 
-export const MoneyIcon = styled(MoneyOffIcon)`
+export const MoneyIcon = styled(MoneyOffOutlinedIcon)`
   color: #fff;
   margin-right: 0;
   font-size: 2rem;
