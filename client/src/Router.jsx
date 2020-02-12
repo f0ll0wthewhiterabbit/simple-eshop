@@ -65,11 +65,7 @@ export default () => {
                 </Switch>
               )}
             />
-            <PrivateRoute
-              exact
-              path={ADMIN_PAGE_PATH}
-              component={<Redirect to={ADMIN_PRODUCTS_PAGE_PATH} />}
-            />
+            <Redirect from={ADMIN_PAGE_PATH} to={ADMIN_PRODUCTS_PAGE_PATH} />
             <Route exact path={ERROR_PAGE_PATH} render={props => <ErrorPage {...props} />} />
             <Redirect to={ERROR_PAGE_PATH} />
           </Switch>

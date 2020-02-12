@@ -12,14 +12,18 @@ import {
 } from '../../../constants'
 
 const PrivateRoute = ({ isAuthenticated, userRole, component: Component, location, ...rest }) => {
-  if (isAuthenticated && userRole === ROLE_ADMIN && location.pathname === HOME_PAGE_PATH) {
+  if (
+    isAuthenticated &&
+    userRole === ROLE_ADMIN &&
+    location.pathname.indexOf(ADMIN_PAGE_PATH) === -1
+  ) {
     return (
       <Redirect
         to={{
           pathname: ERROR_PAGE_PATH,
           state: {
             title: 'Forbidden',
-            message: 'Sign in as user if you want to see catalog page',
+            message: 'Sign in as user if you want to see content pages',
             backTo: ADMIN_PRODUCTS_PAGE_PATH,
           },
         }}
