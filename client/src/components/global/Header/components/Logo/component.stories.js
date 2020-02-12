@@ -6,13 +6,7 @@ import Logo from './component'
 export default {
   title: 'Logo',
   component: Logo,
-  decorators: [
-    story => (
-      <Router>
-        <div style={{ backgroundColor: 'dodgerblue' }}>{story()}</div>
-      </Router>
-    ),
-  ],
+  decorators: [story => <Router>{story()}</Router>],
 }
 
 export const normal = () => <Logo isAdmin={false} />
