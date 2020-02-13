@@ -5,5 +5,6 @@ export const Wrapper = styled.section`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding-bottom: 35px;
+  padding: 0 24px 35px;
+  width: 100%;
 `

@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { TextField, Typography, FormControlLabel, Checkbox } from '@material-ui/core'
+import { Checkbox } from '@material-ui/core'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
-import { StyledForm, SubmitButton, Progress } from './styles'
+import {
+  StyledForm,
+  SubmitButton,
+  Progress,
+  InputField,
+  CheckboxLabel,
+  ErrorMessage,
+} from './styles'
 
 const SignInForm = ({ signIn, error }) => {
   const [rememberMe, setRememberMe] = useState(false)
@@ -37,9 +44,8 @@ const SignInForm = ({ signIn, error }) => {
     >
       {({ handleChange, handleBlur, values, errors, touched, isSubmitting }) => (
         <StyledForm as={Form} noValidate>
-          <TextField
+          <InputField
             autoFocus
-            variant="outlined"
             margin="normal"
             required
             fullWidth
@@ -52,9 +58,11 @@ const SignInForm = ({ signIn, error }) => {
             value={values.email}
             error={errors.email && touched.email}
             helperText={errors.email && touched.email && errors.email}
+            InputProps={{ className: 'text-input' }}
+            FormHelperTextProps={{ className: 'helper-text' }}
+            InputLabelProps={{ className: 'input-label' }}
           />
-          <TextField
-            variant="outlined"
+          <InputField
             margin="normal"
             required
             fullWidth
@@ -68,8 +76,11 @@ const SignInForm = ({ signIn, error }) => {
             value={values.password}
             error={errors.password && touched.password}
             helperText={errors.password && touched.password && errors.password}
+            InputProps={{ className: 'text-input' }}
+            FormHelperTextProps={{ className: 'helper-text' }}
+            InputLabelProps={{ className: 'input-label' }}
           />
-          <FormControlLabel
+          <CheckboxLabel
             control={
               <Checkbox value="remember" color="primary" onChange={hangleRememberMeChange} />
             }
@@ -86,9 +97,9 @@ const SignInForm = ({ signIn, error }) => {
             {isSubmitting ? <Progress size={20} /> : 'Sign In'}
           </SubmitButton>
           {error && (
-            <Typography color="error" variant="body1" align="center" gutterBottom>
+            <ErrorMessage color="error" variant="body1" align="center" gutterBottom>
               {error}
-            </Typography>
+            </ErrorMessage>
           )}
         </StyledForm>
       )}

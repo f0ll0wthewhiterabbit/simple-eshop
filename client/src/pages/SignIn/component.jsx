@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
-import { Typography, Container } from '@material-ui/core'
+import { Container } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 import {
@@ -12,7 +12,7 @@ import {
   ROLE_GUEST,
 } from '../../constants'
 import SignInFormContainer from './components/SignInForm'
-import { Wrapper, IconWrapper, SignUpLink } from './styles'
+import { Wrapper, IconWrapper, SignUpLink, Heading, LinkInfo } from './styles'
 
 const SingInPage = ({ isAuthenticated, userRole }) => {
   if (isAuthenticated && userRole !== ROLE_GUEST) {
@@ -30,13 +30,13 @@ const SingInPage = ({ isAuthenticated, userRole }) => {
         <IconWrapper>
           <LockOutlinedIcon />
         </IconWrapper>
-        <Typography component="h1" variant="h5">
+        <Heading component="h1" variant="h5">
           Sign in
-        </Typography>
+        </Heading>
         <SignInFormContainer />
-        <Typography color="textSecondary" variant="body2" align="center">
+        <LinkInfo color="textSecondary" variant="body2" align="center">
           Don&apos;t have an account? <SignUpLink to={SIGN_UP_PAGE_PATH}>Sign Up</SignUpLink>
-        </Typography>
+        </LinkInfo>
       </Wrapper>
     </Container>
   )

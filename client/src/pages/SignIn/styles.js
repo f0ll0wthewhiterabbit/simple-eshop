@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Avatar } from '@material-ui/core'
+import { Avatar, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 export const Wrapper = styled.div`
@@ -22,4 +22,13 @@ export const SignUpLink = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
+`
+
+export const Heading = styled(Typography)`
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+`
+
+export const LinkInfo = styled(Typography)`
+  font-family: 'Montserrat', sans-serif;
 `

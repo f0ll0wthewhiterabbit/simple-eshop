@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TextField, Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
-import { StyledForm, SubmitButton, Progress } from './styles'
+import { StyledForm, SubmitButton, Progress, ErrorMessage, InputField } from './styles'
 
 const SignUpForm = ({ signUp, error }) => {
   const handleFormSubmit = (values, formMethods) => {
@@ -45,12 +45,11 @@ const SignUpForm = ({ signUp, error }) => {
         <StyledForm as={Form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <InputField
                 autoFocus
                 name="firstName"
                 id="firstName"
                 label="First Name"
-                variant="outlined"
                 required
                 fullWidth
                 autoComplete="fname"
@@ -59,14 +58,16 @@ const SignUpForm = ({ signUp, error }) => {
                 value={values.firstName}
                 error={errors.firstName && touched.firstName}
                 helperText={errors.firstName && touched.firstName && errors.firstName}
+                InputProps={{ className: 'text-input' }}
+                FormHelperTextProps={{ className: 'helper-text' }}
+                InputLabelProps={{ className: 'input-label' }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <InputField
                 name="lastName"
                 id="lastName"
                 label="Last Name"
-                variant="outlined"
                 required
                 fullWidth
                 autoComplete="lname"
@@ -75,14 +76,16 @@ const SignUpForm = ({ signUp, error }) => {
                 value={values.lastName}
                 error={errors.lastName && touched.lastName}
                 helperText={errors.lastName && touched.lastName && errors.lastName}
+                InputProps={{ className: 'text-input' }}
+                FormHelperTextProps={{ className: 'helper-text' }}
+                InputLabelProps={{ className: 'input-label' }}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <InputField
                 name="email"
                 id="email"
                 label="Email Address"
-                variant="outlined"
                 required
                 fullWidth
                 autoComplete="email"
@@ -91,14 +94,16 @@ const SignUpForm = ({ signUp, error }) => {
                 value={values.email}
                 error={errors.email && touched.email}
                 helperText={errors.email && touched.email && errors.email}
+                InputProps={{ className: 'text-input' }}
+                FormHelperTextProps={{ className: 'helper-text' }}
+                InputLabelProps={{ className: 'input-label' }}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <InputField
                 name="password"
                 id="password"
                 label="Password"
-                variant="outlined"
                 required
                 fullWidth
                 type="password"
@@ -108,14 +113,16 @@ const SignUpForm = ({ signUp, error }) => {
                 value={values.password}
                 error={errors.password && touched.password}
                 helperText={errors.password && touched.password && errors.password}
+                InputProps={{ className: 'text-input' }}
+                FormHelperTextProps={{ className: 'helper-text' }}
+                InputLabelProps={{ className: 'input-label' }}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <InputField
                 name="passwordConfirm"
                 id="password-confirm"
                 label="Confirm Password"
-                variant="outlined"
                 required
                 fullWidth
                 type="password"
@@ -127,6 +134,9 @@ const SignUpForm = ({ signUp, error }) => {
                 helperText={
                   errors.passwordConfirm && touched.passwordConfirm && errors.passwordConfirm
                 }
+                InputProps={{ className: 'text-input' }}
+                FormHelperTextProps={{ className: 'helper-text' }}
+                InputLabelProps={{ className: 'input-label' }}
               />
             </Grid>
           </Grid>
@@ -140,9 +150,9 @@ const SignUpForm = ({ signUp, error }) => {
             {isSubmitting ? <Progress size={20} /> : 'Sign Up'}
           </SubmitButton>
           {error && (
-            <Typography color="error" variant="body1" align="center" gutterBottom>
+            <ErrorMessage color="error" variant="body1" align="center" gutterBottom>
               {error}
-            </Typography>
+            </ErrorMessage>
           )}
         </StyledForm>
       )}
