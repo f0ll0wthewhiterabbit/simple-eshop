@@ -10,8 +10,17 @@ exports[`CatalogPage component should render correctly 1`] = `
     variant="h4"
   >
     Catalog
+    <span>
+      .
+    </span>
   </Styled(WithStyles(ForwardRef(Typography)))>
-  <Connect(FilterSelect) />
+  <styled.div>
+    <Connect(FilterSelect) />
+    <Connect(Pagination)
+      withLabel={true}
+      withNumbers={false}
+    />
+  </styled.div>
   <styled.div>
     <Styled(WithStyles(ForwardRef(Grid)))
       container={true}

@@ -9,14 +9,14 @@ exports[`SignUpPage component should render correctly 1`] = `
     <Styled(WithStyles(ForwardRef(Avatar)))>
       <PersonAddRoundedIcon />
     </Styled(WithStyles(ForwardRef(Avatar)))>
-    <WithStyles(ForwardRef(Typography))
+    <Styled(WithStyles(ForwardRef(Typography)))
       component="h1"
       variant="h5"
     >
       Sign up
-    </WithStyles(ForwardRef(Typography))>
+    </Styled(WithStyles(ForwardRef(Typography)))>
     <Connect(SignUpForm) />
-    <WithStyles(ForwardRef(Typography))
+    <Styled(WithStyles(ForwardRef(Typography)))
       align="center"
       color="textSecondary"
       variant="body2"
@@ -27,7 +27,7 @@ exports[`SignUpPage component should render correctly 1`] = `
       >
         Sign In
       </Styled(Link)>
-    </WithStyles(ForwardRef(Typography))>
+    </Styled(WithStyles(ForwardRef(Typography)))>
   </styled.div>
 </WithStyles(ForwardRef(Container))>
 `;

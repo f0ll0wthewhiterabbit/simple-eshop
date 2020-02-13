@@ -97,15 +97,10 @@ const ProductCard = ({
         <Title gutterBottom variant="h5" component="h2" data-test="title">
           {title}
         </Title>
-        <Price gutterBottom variant="h5" component="h3" data-test="title">
+        <Price gutterBottom variant="h5" component="h3" data-test="price">
           {formatPrice(price)}
         </Price>
-        <PurchaseButton
-          size="small"
-          color="secondary"
-          startIcon={<ShoppingCartOutlinedIcon />}
-          data-test="price"
-        >
+        <PurchaseButton size="small" color="secondary" startIcon={<ShoppingCartOutlinedIcon />}>
           Buy
         </PurchaseButton>
         <Description data-test="description">{description}</Description>

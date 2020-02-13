@@ -2,40 +2,98 @@
 
 exports[`Footer component should render correctly 1`] = `
 <styled.footer>
-  <WithStyles(ForwardRef(Container))
-    maxWidth="lg"
-  >
-    <Styled(WithStyles(ForwardRef(Typography)))
-      align="center"
-      color="textSecondary"
-      component="p"
-      variant="subtitle1"
+  <styled.section>
+    <Styled(WithStyles(ForwardRef(Container)))
+      maxWidth="lg"
     >
-      <WithStyles(ForwardRef(Link))
-        color="inherit"
-        href="https://www.itechart.by/"
+      <styled.ul>
+        <styled.li>
+          <styled.a
+            href="https://www.instagram.com/itechart_official"
+            target="_blank"
+          >
+            <Styled(InstagramIcon)
+              className="instagram"
+            />
+            <span
+              className="social-links__title"
+            >
+              Instagram
+            </span>
+          </styled.a>
+        </styled.li>
+        <styled.li>
+          <styled.a
+            href="https://twitter.com/itechart"
+            target="_blank"
+          >
+            <Styled(TwitterIcon)
+              className="twitter"
+            />
+            <span
+              className="social-links__title"
+            >
+              Twitter
+            </span>
+          </styled.a>
+        </styled.li>
+        <styled.li>
+          <styled.a
+            href="https://www.youtube.com/user/iTechArt"
+            target="_blank"
+          >
+            <Styled(YouTubeIcon)
+              className="youtube"
+            />
+            <span
+              className="social-links__title"
+            >
+              Youtube
+            </span>
+          </styled.a>
+        </styled.li>
+        <styled.li>
+          <styled.a
+            href="https://www.facebook.com/iTechArt.Group"
+            target="_blank"
+          >
+            <Styled(FacebookIcon)
+              className="facebook"
+            />
+            <span
+              className="social-links__title"
+            >
+              Facebook
+            </span>
+          </styled.a>
+        </styled.li>
+      </styled.ul>
+      <Styled(WithStyles(ForwardRef(Typography)))
+        align="center"
+        color="textSecondary"
+        component="p"
+        variant="subtitle1"
       >
-        <styled.img
-          alt="iTechArt"
-          src="/itechart-logo.png"
-        />
-      </WithStyles(ForwardRef(Link))>
-      Students Lab Vitebsk
-    </Styled(WithStyles(ForwardRef(Typography)))>
-    <WithStyles(ForwardRef(Typography))
-      align="center"
-      color="textSecondary"
-      variant="body2"
-    >
-      © 
-      <Styled(Link)
-        to="/"
-      >
-        simple eShop
-      </Styled(Link)>
-       
-      2020
-    </WithStyles(ForwardRef(Typography))>
-  </WithStyles(ForwardRef(Container))>
+        <styled.a
+          color="inherit"
+          href="https://www.itechart.by/"
+          target="_blank"
+        >
+          iTechArt
+        </styled.a>
+         Students Lab Vitebsk
+      </Styled(WithStyles(ForwardRef(Typography)))>
+      <Styled(WithStyles(ForwardRef(Typography)))>
+        © 
+        <Styled(Link)
+          to="/"
+        >
+          simple eShop
+        </Styled(Link)>
+         
+        2020
+      </Styled(WithStyles(ForwardRef(Typography)))>
+    </Styled(WithStyles(ForwardRef(Container)))>
+  </styled.section>
 </styled.footer>
 `;

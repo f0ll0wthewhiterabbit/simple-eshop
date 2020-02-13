@@ -15,20 +15,26 @@ exports[`ProductCard component should render correctly 1`] = `
     >
       TestTitle
     </Styled(WithStyles(ForwardRef(Typography)))>
-    <Styled(WithStyles(ForwardRef(Button)))
-      color="primary"
+    <Styled(WithStyles(ForwardRef(Typography)))
+      component="h3"
       data-test="price"
-      disabled={true}
+      gutterBottom={true}
+      variant="h5"
+    >
+      US$ 99.00
+    </Styled(WithStyles(ForwardRef(Typography)))>
+    <Styled(WithStyles(ForwardRef(Button)))
+      color="secondary"
       size="small"
       startIcon={<Memo(ShoppingCartOutlinedIcon) />}
     >
-      US$ 99.00
+      Buy
     </Styled(WithStyles(ForwardRef(Button)))>
-    <WithStyles(ForwardRef(Typography))
+    <Styled(WithStyles(ForwardRef(Typography)))
       data-test="description"
     >
       TestDescription
-    </WithStyles(ForwardRef(Typography))>
+    </Styled(WithStyles(ForwardRef(Typography)))>
   </Styled(WithStyles(ForwardRef(CardContent)))>
   <Styled(WithStyles(ForwardRef(CardActions)))>
     <WithStyles(ForwardRef(Chip))

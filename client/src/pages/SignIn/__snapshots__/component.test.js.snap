@@ -8,14 +8,14 @@ exports[`SingInPage component should render correctly 1`] = `
     <Styled(WithStyles(ForwardRef(Avatar)))>
       <LockOutlinedIcon />
     </Styled(WithStyles(ForwardRef(Avatar)))>
-    <WithStyles(ForwardRef(Typography))
+    <Styled(WithStyles(ForwardRef(Typography)))
       component="h1"
       variant="h5"
     >
       Sign in
-    </WithStyles(ForwardRef(Typography))>
+    </Styled(WithStyles(ForwardRef(Typography)))>
     <Connect(SignInForm) />
-    <WithStyles(ForwardRef(Typography))
+    <Styled(WithStyles(ForwardRef(Typography)))
       align="center"
       color="textSecondary"
       variant="body2"
@@ -26,7 +26,7 @@ exports[`SingInPage component should render correctly 1`] = `
       >
         Sign Up
       </Styled(Link)>
-    </WithStyles(ForwardRef(Typography))>
+    </Styled(WithStyles(ForwardRef(Typography)))>
   </styled.div>
 </WithStyles(ForwardRef(Container))>
 `;

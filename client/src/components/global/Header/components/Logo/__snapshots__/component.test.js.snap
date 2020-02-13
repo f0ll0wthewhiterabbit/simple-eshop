@@ -7,15 +7,10 @@ exports[`Logo component should render correctly 1`] = `
   <Styled(Link)
     to="/"
   >
-    <Styled(ExplicitIcon)
-      fontSize="large"
+    <styled.img
+      alt="Logo"
+      src="/logo.png"
     />
-    <Styled(WithStyles(ForwardRef(Typography)))
-      component="h2"
-      variant="h6"
-    >
-      simple eShop
-    </Styled(WithStyles(ForwardRef(Typography)))>
   </Styled(Link)>
 </styled.div>
 `;
