@@ -1,12 +1,15 @@
 import React from 'react'
 
 import ErrorMessage from '../../components/global/ErrorMessage'
-import { Wrapper } from './styles'
+import { Wrapper, Icon } from './styles'
 
 const BlogPage = () => {
   return (
     <Wrapper>
-      <ErrorMessage title="Blog is not ready yet">Work in progress...</ErrorMessage>
+      <Icon />
+      <ErrorMessage title="Blog is not ready yet" withoutIcon>
+        Work in progress...
+      </ErrorMessage>
     </Wrapper>
   )
 }

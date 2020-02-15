@@ -3,7 +3,8 @@ import { Avatar, Typography } from '@material-ui/core'
 import green from '@material-ui/core/colors/green'
 
 export const Wrapper = styled.div`
-  margin-top: ${props => props.theme.spacing(8)}px;
+  padding-top: ${props => props.theme.spacing(8)}px;
+  padding-bottom: ${props => props.theme.spacing(12)}px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +13,8 @@ export const Wrapper = styled.div`
 export const Heading = styled(Typography)`
   margin-bottom: ${props => props.theme.spacing(3)}px;
   font-size: 1.85rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
 `
 
 export const IconWrapper = styled(Avatar)`

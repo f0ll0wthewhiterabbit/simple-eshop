@@ -4,12 +4,14 @@ import PriorityHighOutlinedIcon from '@material-ui/icons/PriorityHighOutlined'
 
 import { Wrapper, IconWrapper, Heading, Message } from './styles'
 
-const ErrorMessage = ({ children, title }) => {
+const ErrorMessage = ({ withoutIcon, children, title }) => {
   return (
     <Wrapper>
-      <IconWrapper>
-        <PriorityHighOutlinedIcon />
-      </IconWrapper>
+      {!withoutIcon && (
+        <IconWrapper>
+          <PriorityHighOutlinedIcon />
+        </IconWrapper>
+      )}
       {title && (
         <Heading variant="h5" component="h1" data-test="heading">
           {title}
@@ -25,11 +27,13 @@ const ErrorMessage = ({ children, title }) => {
 }
 
 ErrorMessage.defaultProps = {
+  withoutIcon: false,
   children: '',
   title: '',
 }
 
 ErrorMessage.propTypes = {
+  withoutIcon: PropTypes.bool,
   children: PropTypes.string,
   title: PropTypes.string,
 }

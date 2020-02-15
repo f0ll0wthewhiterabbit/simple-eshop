@@ -5,6 +5,7 @@ exports[`ErrorPage component should render correctly 1`] = `
   <ErrorMessage
     data-test="errorMessage"
     title="Page not found"
+    withoutIcon={false}
   />
   <Styled(WithStyles(ForwardRef(Typography)))>
     <Styled(Link)

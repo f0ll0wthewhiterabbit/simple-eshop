@@ -46,7 +46,6 @@ const SignUpForm = ({ signUp, error }) => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <InputField
-                autoFocus
                 name="firstName"
                 id="firstName"
                 label="First Name"

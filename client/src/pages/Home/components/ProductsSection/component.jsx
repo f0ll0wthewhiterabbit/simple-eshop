@@ -21,7 +21,7 @@ import {
 
 const ProductsSection = ({ products, error, isLoading, fetchProducts }) => {
   useEffect(() => {
-    fetchProducts(1)
+    fetchProducts(1, 3)
   }, [fetchProducts])
 
   let content

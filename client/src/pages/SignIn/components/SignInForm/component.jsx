@@ -45,7 +45,6 @@ const SignInForm = ({ signIn, error }) => {
       {({ handleChange, handleBlur, values, errors, touched, isSubmitting }) => (
         <StyledForm as={Form} noValidate>
           <InputField
-            autoFocus
             margin="normal"
             required
             fullWidth

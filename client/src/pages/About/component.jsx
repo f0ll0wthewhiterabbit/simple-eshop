@@ -1,12 +1,15 @@
 import React from 'react'
 
 import ErrorMessage from '../../components/global/ErrorMessage'
-import { Wrapper } from './styles'
+import { Wrapper, Icon } from './styles'
 
 const AboutPage = () => {
   return (
     <Wrapper>
-      <ErrorMessage title="About page is not ready yet">Coming soon...</ErrorMessage>
+      <Icon />
+      <ErrorMessage title="About page is not ready yet" withoutIcon>
+        Coming soon...
+      </ErrorMessage>
     </Wrapper>
   )
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { TextField, Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
-import { StyledForm, SubmitButton, Progress } from './styles'
+import { StyledForm, SubmitButton, Progress, InputField, ErrorMessage } from './styles'
 
 const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
   const handleFormSubmit = (values, formMethods) => {
@@ -47,12 +47,11 @@ const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
         <StyledForm as={Form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField
+              <InputField
                 autoFocus
                 name="firstName"
                 id="firstName"
                 label="First Name"
-                variant="outlined"
                 required
                 fullWidth
                 autoComplete="fname"
@@ -61,14 +60,16 @@ const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
                 value={values.firstName}
                 error={errors.firstName && touched.firstName}
                 helperText={errors.firstName && touched.firstName && errors.firstName}
+                InputProps={{ className: 'text-input' }}
+                FormHelperTextProps={{ className: 'helper-text' }}
+                InputLabelProps={{ className: 'input-label' }}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <InputField
                 name="lastName"
                 id="lastName"
                 label="Last Name"
-                variant="outlined"
                 required
                 fullWidth
                 autoComplete="lname"
@@ -77,6 +78,9 @@ const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
                 value={values.lastName}
                 error={errors.lastName && touched.lastName}
                 helperText={errors.lastName && touched.lastName && errors.lastName}
+                InputProps={{ className: 'text-input' }}
+                FormHelperTextProps={{ className: 'helper-text' }}
+                InputLabelProps={{ className: 'input-label' }}
               />
             </Grid>
           </Grid>
@@ -90,9 +94,9 @@ const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
             {isSubmitting ? <Progress size={20} /> : 'Save changes'}
           </SubmitButton>
           {error && (
-            <Typography color="error" variant="body1" align="center" gutterBottom>
+            <ErrorMessage color="error" variant="body1" align="center" gutterBottom>
               {error}
-            </Typography>
+            </ErrorMessage>
           )}
         </StyledForm>
       )}

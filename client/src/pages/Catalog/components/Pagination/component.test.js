@@ -11,6 +11,7 @@ describe('Pagination component', () => {
   const initialProps = {
     currentPage: 5,
     totalPages: 10,
+    totalAmount: 85,
     filter: URL_FIELD_RATINGS_FILTER,
     fetchProducts: jest.fn(),
   }

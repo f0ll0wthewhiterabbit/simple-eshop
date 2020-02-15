@@ -1,12 +1,13 @@
 import React from 'react'
 
 import ErrorMessage from '../../components/global/ErrorMessage'
-import { Wrapper } from './styles'
+import { Wrapper, Icon } from './styles'
 
 const ContactPage = () => {
   return (
     <Wrapper>
-      <ErrorMessage title="Contact page is not ready yet">
+      <Icon />
+      <ErrorMessage title="Contact page is not ready yet" withoutIcon>
         Sorry for the inconvenience...
       </ErrorMessage>
     </Wrapper>
