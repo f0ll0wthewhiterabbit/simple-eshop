@@ -38,9 +38,9 @@ export const NavigationItem = styled.li`
 `
 
 export const NavigationLink = styled(NavLink)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   text-decoration: none;
-  color: #1e1e1e;
+  color: ${props => props.theme.colors.font.bold};
   font-size: 16px;
   font-weight: 500;
   line-height: 42px;
@@ -52,7 +52,7 @@ export const NavigationLink = styled(NavLink)`
     bottom: 5px;
     width: 0;
     height: 2px;
-    background: #1e1e1e;
+    background: ${props => props.theme.colors.font.bold};
     opacity: 0;
     transition: all 0.15s linear;
     transform: translateX(-50%);

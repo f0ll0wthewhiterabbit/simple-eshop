@@ -13,8 +13,9 @@ export const Wrapper = styled.div`
 export const Heading = styled(Typography)`
   margin-bottom: ${props => props.theme.spacing(3)}px;
   font-size: 1.85rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-weight: 500;
+  color: ${props => props.theme.colors.font.bold};
 `
 
 export const IconWrapper = styled(Avatar)`

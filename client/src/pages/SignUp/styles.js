@@ -26,10 +26,12 @@ export const SignInLink = styled(Link)`
 `
 
 export const Heading = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-weight: 500;
+  color: ${props => props.theme.colors.font.bold};
 `
 
 export const LinkInfo = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.regular};
 `

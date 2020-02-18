@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, ListItemIcon, IconButton } from '@material-ui/core'
+import { Button, ListItemIcon, IconButton, Menu } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 export const Wrapper = styled.div`
@@ -13,11 +13,21 @@ export const Wrapper = styled.div`
   }
 `
 
+export const UserMenuWrapper = styled(Menu)`
+  .MuiMenu-paper {
+    background-color: ${props => props.theme.colors.background.userMenu};
+  }
+
+  .MuiListItem-root:hover {
+    background-color: ${props => props.theme.colors.font.extraLight};
+  }
+`
+
 export const UserMenuButtonNormal = styled(Button)`
   margin-right: ${props => props.theme.spacing(1)}px;
-  color: #1e1e1e;
+  color: ${props => props.theme.colors.font.bold};
   text-transform: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-size: 16px;
   font-weight: 500;
   transition: color 0.3s;
@@ -29,7 +39,7 @@ export const UserMenuButtonNormal = styled(Button)`
 `
 
 export const UserMenuButtonSmall = styled(IconButton)`
-  color: #1e1e1e;
+  color: ${props => props.theme.colors.font.bold};
 `
 
 export const ArrowIcon = styled(ExpandMoreIcon)`
@@ -38,11 +48,12 @@ export const ArrowIcon = styled(ExpandMoreIcon)`
 
 export const IconWrapper = styled(ListItemIcon)`
   min-width: 35px;
+  color: ${props => props.theme.colors.font.bold};
 
   & + .MuiListItemText-root {
     .MuiListItemText-primary {
-      color: #1e1e1e;
-      font-family: 'Montserrat', sans-serif;
+      color: ${props => props.theme.colors.font.bold};
+      font-family: ${props => props.theme.font.family};
       font-size: 16px;
       font-weight: 500;
     }
@@ -51,6 +62,8 @@ export const IconWrapper = styled(ListItemIcon)`
 
 export const SignOutButton = styled(IconButton)`
   margin-right: 0;
+  color: ${props => props.theme.colors.font.bold};
+  opacity: 0.6;
   transition: color 0.3s;
 
   &:hover {

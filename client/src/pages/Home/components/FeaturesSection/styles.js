@@ -7,7 +7,7 @@ export const FeatureWrapper = styled.div`
   padding-bottom: 10px;
 
   svg {
-    color: #dfe2e3;
+    color: ${props => props.theme.colors.font.extraLight};
     font-size: 75px;
   }
 
@@ -18,8 +18,8 @@ export const FeatureWrapper = styled.div`
 `
 
 export const FeatureHeading = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  color: #1e1e1e;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.bold};
   font-size: 22px;
   font-weight: 700;
   line-height: 50px;
@@ -27,8 +27,8 @@ export const FeatureHeading = styled(Typography)`
 `
 
 export const FeatureDescription = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  color: #727272;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.regular};
   font-size: 14px;
   line-height: 27px;
   font-weight: 500;

@@ -20,7 +20,7 @@ export const LinkWrapper = styled(Typography)`
 export const BackLink = styled(Link)`
   text-decoration: none;
   color: ${props => props.theme.palette.primary.main};
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-size: 18px;
   font-weight: 500;
   line-height: 1.2;

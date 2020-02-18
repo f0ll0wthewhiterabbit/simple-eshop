@@ -12,13 +12,13 @@ export const Wrapper = styled(Container)`
 
 export const Heading = styled(Typography)`
   margin-bottom: ${props => props.theme.spacing(2)}px;
-  font-family: 'Montserrat', sans-serif;
-  color: #1e1e1e;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.bold};
   font-size: 34px;
   font-weight: 600;
 
   span {
-    color: #b0bcc2;
+    color: ${props => props.theme.colors.accent};
   }
 
   ${props => props.theme.breakpoints.up('sm')} {

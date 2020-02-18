@@ -8,8 +8,8 @@ export const Wrapper = styled(Container)`
 `
 
 export const Heading = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  color: #1e1e1e;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.bold};
   font-size: 32px;
   font-weight: 700;
   line-height: 1.2;
@@ -17,7 +17,7 @@ export const Heading = styled(Typography)`
   margin-top: 80px;
 
   span {
-    color: #aebcc1;
+    color: ${props => props.theme.colors.accent};
   }
 
   ${props => props.theme.breakpoints.up('sm')} {
@@ -49,8 +49,8 @@ export const ProductImage = styled.img`
 `
 
 export const ProductHeading = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  color: #727272;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.regular};
   font-size: 16px;
   line-height: 1.2;
   font-weight: 500;
@@ -58,8 +58,8 @@ export const ProductHeading = styled(Typography)`
 `
 
 export const ProductPrice = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  color: #1e1e1e;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.bold};
   font-size: 18px;
   font-weight: 700;
   line-height: 1.2;
@@ -71,20 +71,20 @@ export const ProductsWrapper = styled(Grid)`
 `
 
 export const ProductsLink = styled(Link)`
-  font-family: 'Montserrat', sans-serif;
-  color: #1e1e1e;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.bold};
   font-weight: 700;
   display: inline-block;
   font-size: 14px;
   padding: 16px 40px;
-  border: 2px solid #d0d7db;
+  border: 2px solid ${props => props.theme.colors.font.extraLight};
   border-radius: 50px;
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: #1e1e1e;
+    border-color: ${props => props.theme.colors.font.bold};
   }
 `
 

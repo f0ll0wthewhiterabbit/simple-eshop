@@ -19,7 +19,7 @@ export const SiteLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #1e1e1e;
+  color: ${props => props.theme.colors.font.bold};
 
   ${props => props.theme.breakpoints.up('md')} {
     margin-left: 0;

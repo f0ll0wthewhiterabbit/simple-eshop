@@ -12,6 +12,6 @@ export const Wrapper = styled.section`
 `
 
 export const Icon = styled(BuildIcon)`
-  color: #dfe2e3;
+  color: ${props => props.theme.colors.font.extraLight};
   font-size: 75px;
 `

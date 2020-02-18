@@ -15,8 +15,8 @@ export const IconWrapper = styled(Avatar)`
 
 export const Heading = styled(Typography)`
   margin: ${props => props.theme.spacing(2)}px;
-  font-family: 'Montserrat', sans-serif;
-  color: #1e1e1e;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.bold};
   font-size: 22px;
   font-weight: 500;
   line-height: 1.2;
@@ -24,8 +24,8 @@ export const Heading = styled(Typography)`
 
 export const Message = styled(Typography)`
   margin: ${props => props.theme.spacing(1)}px;
-  font-family: 'Montserrat', sans-serif;
-  color: #727272;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.regular};
   font-size: 18px;
   font-weight: 400;
   line-height: 1.2;

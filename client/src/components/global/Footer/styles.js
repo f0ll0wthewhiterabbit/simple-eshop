@@ -10,11 +10,11 @@ export const Wrapper = styled.footer`
   margin-top: auto;
   position: relative;
   z-index: 2;
-  background-color: #262626;
+  background-color: ${props => props.theme.colors.background.footer};
 `
 
 export const Info = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-size: 15px;
   color: #7b7b7b;
   font-weight: 400;
@@ -25,7 +25,7 @@ export const Info = styled(Typography)`
   margin-bottom: ${props => props.theme.spacing(1)}px;
 `
 export const Copyright = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-size: 15px;
   color: #7b7b7b;
   font-weight: 400;
@@ -44,7 +44,7 @@ export const SiteLink = styled(Link)`
 `
 
 export const SocialLinksWrapper = styled.section`
-  background: #222121;
+  background: ${props => props.theme.colors.background.footer};
 `
 
 export const SocialLinksContainer = styled(Container)`
@@ -78,7 +78,7 @@ export const SocialLink = styled.a`
   align-items: center;
 
   .social-links__title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: ${props => props.theme.font.family};
     font-size: 12px;
     font-weight: 400;
     text-transform: uppercase;

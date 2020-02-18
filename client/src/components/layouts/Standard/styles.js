@@ -13,4 +13,5 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   min-height: 250px;
+  background-color: ${props => props.theme.colors.background.main};
 `

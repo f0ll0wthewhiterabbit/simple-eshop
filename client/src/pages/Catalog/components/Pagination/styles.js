@@ -25,13 +25,17 @@ export const PaginationItem = styled.li`
 `
 
 export const PaginationButton = styled(IconButton)`
+  && {
+    color: ${props => props.theme.colors.font.regular};
+    opacity: ${props => (props.disabled ? 0.5 : 1)};
+  }
+
   border-radius: 0;
   min-width: 20px;
   height: 28px;
   padding: 0;
   background-color: transparent;
-  font-family: 'Montserrat', sans-serif;
-  color: #838383;
+  font-family: ${props => props.theme.font.family};
   font-size: 12px;
   font-weight: 500;
   position: relative;
@@ -43,7 +47,7 @@ export const PaginationButton = styled(IconButton)`
     bottom: -5px;
     width: 10px;
     height: 2px;
-    background: #000;
+    background-color: ${props => props.theme.colors.font.regular};
     content: '';
     opacity: 0;
     transition: all 0.3s;
@@ -52,7 +56,7 @@ export const PaginationButton = styled(IconButton)`
   ${props =>
     props.active &&
     `
-    color: #000;
+    color: ${props.theme.colors.font.regular};
 
     &::after {
       opacity: 1;
@@ -61,10 +65,11 @@ export const PaginationButton = styled(IconButton)`
 
   &:hover {
     background-color: transparent;
-    color: #000;
+    color: ${props => props.theme.colors.font.bold};
 
     &::after {
       opacity: 1;
+      background-color: ${props => props.theme.colors.font.bold};
     }
 
     ${props =>
@@ -90,8 +95,8 @@ export const PaginationButton = styled(IconButton)`
 `
 
 export const Label = styled.span`
-  font-family: 'Montserrat', sans-serif;
-  color: #838383;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.regular};
   font-size: 12px;
   font-weight: 500;
   margin-right: 24px;

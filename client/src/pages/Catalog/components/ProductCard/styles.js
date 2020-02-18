@@ -14,6 +14,7 @@ export const Wrapper = styled(Card)`
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: ${props => props.theme.colors.background.productCard};
 `
 /**
  * 16:9 ratio - 56.25%
@@ -30,16 +31,16 @@ export const Content = styled(CardContent)`
 
 export const Title = styled(Typography)`
   padding-right: 70px;
-  font-family: 'Montserrat', sans-serif;
-  color: #1e1e1e;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.bold};
   font-weight: 700;
   text-transform: none;
   font-size: 20px;
 `
 
 export const Price = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  color: #1e1e1e;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.bold};
   font-weight: 700;
   text-transform: none;
   font-size: 16px;
@@ -47,15 +48,15 @@ export const Price = styled(Typography)`
 `
 
 export const Description = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  color: #727272;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.regular};
   font-weight: 500;
   text-transform: none;
   font-size: 16px;
 `
 
 export const PurchaseButton = styled(Button)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-size: 13px;
   font-weight: 600;
   position: absolute;
@@ -74,10 +75,10 @@ export const TagsWrapper = styled(CardActions)`
     margin-right: 6px;
     margin-bottom: 2px;
     padding: 5px 10px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: ${props => props.theme.font.family};
     font-size: 12px;
-    background: #b0bcc2;
-    color: #fff;
+    background: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.font.contrast};
     border-radius: 40px;
   }
 `
@@ -102,6 +103,10 @@ export const RaitingWrapper = styled(CardActions)`
 export const Stars = styled(Rating)`
   min-height: 18px;
 
+  .MuiRating-iconEmpty {
+    color: ${props => props.theme.colors.font.light};
+  }
+
   && {
     margin-left: 0;
   }
@@ -109,14 +114,14 @@ export const Stars = styled(Rating)`
 
 export const RaitingsCount = styled.span`
   margin-left: 6px;
-  font-family: 'Montserrat', sans-serif;
-  color: #bdbdbd;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.light};
   font-weight: 500;
   font-size: 12px;
 `
 
 export const DeleteButton = styled(IconButton)`
-  color: rgba(0, 0, 0, 0.26);
+  color: ${props => props.theme.colors.font.light};
   position: absolute;
   top: 19px;
   left: 87px;
@@ -126,22 +131,22 @@ export const DeleteButton = styled(IconButton)`
   }
 
   &:hover {
-    color: rgba(0, 0, 0, 0.54);
+    color: ${props => props.theme.colors.font.regular};
   }
 `
 
 export const RatingTitle = styled.span`
   width: 100%;
   margin-left: 2px;
-  font-family: 'Montserrat', sans-serif;
-  color: #bdbdbd;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.light};
   font-weight: 500;
   font-size: 12px;
 `
 
 export const LoadingLabel = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
-  color: #bdbdbd;
+  font-family: ${props => props.theme.font.family};
+  color: ${props => props.theme.colors.font.light};
   font-weight: 500;
   font-size: 12px;
   margin-left: 2px;
@@ -149,7 +154,7 @@ export const LoadingLabel = styled(Typography)`
 
 export const ErrorLabel = styled(Typography)`
   margin-left: 2px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-weight: 500;
   font-size: 12px;
 `

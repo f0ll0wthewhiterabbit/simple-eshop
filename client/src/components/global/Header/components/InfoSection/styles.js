@@ -4,7 +4,7 @@ import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined'
 import MoneyOffOutlinedIcon from '@material-ui/icons/MoneyOffOutlined'
 
 export const Wrapper = styled.div`
-  background: #b0bcc2;
+  background: ${props => props.theme.colors.accent};
   overflow: hidden;
   padding: 10px 45px;
 `
@@ -36,7 +36,7 @@ export const InfoItem = styled.li`
 export const InfoText = styled.p`
   line-height: 1;
   font-size: 14px;
-  color: #fff;
+  color: ${props => props.theme.colors.font.contrast};
   font-weight: 500;
   margin: 0;
   display: none;
@@ -47,7 +47,7 @@ export const InfoText = styled.p`
 `
 
 export const ShippingIcon = styled(LocalShippingOutlinedIcon)`
-  color: #fff;
+  color: ${props => props.theme.colors.font.contrast};
   margin-right: 0;
   font-size: 2rem;
 
@@ -57,7 +57,7 @@ export const ShippingIcon = styled(LocalShippingOutlinedIcon)`
 `
 
 export const StudentIcon = styled(SchoolOutlinedIcon)`
-  color: #fff;
+  color: ${props => props.theme.colors.font.contrast};
   margin-right: 0;
   font-size: 2rem;
 
@@ -67,7 +67,7 @@ export const StudentIcon = styled(SchoolOutlinedIcon)`
 `
 
 export const MoneyIcon = styled(MoneyOffOutlinedIcon)`
-  color: #fff;
+  color: ${props => props.theme.colors.font.contrast};
   margin-right: 0;
   font-size: 2rem;
 

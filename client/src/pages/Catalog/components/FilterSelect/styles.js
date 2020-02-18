@@ -18,26 +18,37 @@ export const SelectFormControl = styled(FormControl)`
     font-size: 1.2rem;
 
     &::after {
-      border-bottom-color: #b0bcc2;
+      border-bottom-color: ${props => props.theme.colors.font.bold};
+    }
+
+    &::before {
+      border-bottom-color: ${props => props.theme.colors.font.regular};
+    }
+
+    &:hover {
+      &::before {
+        border-bottom-color: ${props => props.theme.colors.font.bold};
+      }
     }
   }
 
   .MuiSelect-root {
     padding-left: 8px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: ${props => props.theme.font.family};
     font-size: 14px;
     font-weight: 500;
-    color: #838383;
+    color: ${props => props.theme.colors.font.regular};
   }
 
   .MuiSelect-icon {
     transition: transform 0.3s ease;
+    color: ${props => props.theme.colors.font.regular};
   }
 `
 
 export const SelectItem = styled(MenuItem)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-weight: 500;
   font-size: 14px;
-  color: #838383;
+  color: ${props => props.theme.colors.font.regular};
 `

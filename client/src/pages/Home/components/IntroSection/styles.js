@@ -13,18 +13,18 @@ export const IntroWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: ${props => props.theme.colors.font.contrast};
 `
 
 export const Heading = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-size: 40px;
   font-weight: 700;
   line-height: 1.2;
   text-transform: uppercase;
 
   span {
-    color: #b0bcc2;
+    color: ${props => props.theme.colors.accent};
   }
 
   ${props => props.theme.breakpoints.up('sm')} {
@@ -38,7 +38,7 @@ export const Heading = styled(Typography)`
 `
 
 export const Subheading = styled(Typography)`
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-size: 32px;
   font-weight: 400;
   line-height: 1.2;
@@ -57,7 +57,7 @@ export const Subheading = styled(Typography)`
 export const Slogan = styled.p`
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: ${props => props.theme.font.family};
   font-size: 18px;
   font-weight: 400;
   line-height: 1;
