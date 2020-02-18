@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import App from './component'
-import { authenticate } from '../../../store/actions'
+import { initialize } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   isAuthenticated: state.getIn(['auth', 'isAuthenticated']),
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  authenticate,
+  initialize,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

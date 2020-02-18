@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import ThemeProviderWrapper from '../ThemeProvider'
+import ThemeProviderContainer from '../ThemeProvider'
 import Router from '../../../Router'
 import Loader from '../../global/Loader'
 
-const App = ({ isAuthenticated, error, authenticate }) => {
+const App = ({ isAuthenticated, error, initialize }) => {
   useEffect(() => {
-    authenticate()
-  }, [authenticate])
+    initialize()
+  }, [initialize])
 
   if (isAuthenticated || error !== null) {
     return (
-      <ThemeProviderWrapper>
+      <ThemeProviderContainer>
         <Router />
-      </ThemeProviderWrapper>
+      </ThemeProviderContainer>
     )
   }
 
@@ -28,7 +28,7 @@ App.defaultProps = {
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
-  authenticate: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
 }
 
 export default App

@@ -8,6 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
+import ThemeSwitcherContainer from './components/ThemeSwitcher'
 import { STORE_FIELD_CURRENT_USER, PROFILE_PAGE_PATH } from '../../../../../constants'
 import {
   Wrapper,
@@ -104,6 +105,7 @@ export const UserMenu = ({
           </MenuItem>
         )}
       </UserMenuWrapper>
+      <ThemeSwitcherContainer />
       <SignOutButton onClick={handleSignOutClick} data-test="signOutButton" aria-label="sign-out">
         <ExitToAppIcon />
       </SignOutButton>

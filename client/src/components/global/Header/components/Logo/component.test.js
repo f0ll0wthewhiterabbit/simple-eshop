@@ -7,6 +7,7 @@ describe('Logo component', () => {
   let wrapper
   const initialProps = {
     isAdmin: false,
+    isDarkTheme: false,
   }
 
   const generateWrapper = passedProps => {

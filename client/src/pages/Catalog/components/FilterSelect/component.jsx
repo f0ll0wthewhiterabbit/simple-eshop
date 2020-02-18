@@ -6,7 +6,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { URL_FIELD_NO_FILTER, URL_FIELD_RATINGS_FILTER } from '../../../../constants'
 import { Wrapper, SelectFormControl, SelectItem } from './styles'
 
-const FilterSelect = ({ filter, fetchProducts, setProductsFilter }) => {
+const FilterSelect = ({ filter, isDarkTheme, fetchProducts, setProductsFilter }) => {
+  const listProps = isDarkTheme ? { style: { backgroundColor: '#687579' } } : {}
+
   const handleChange = event => {
     const { value } = event.target
     if (value === filter) {
@@ -36,6 +38,7 @@ const FilterSelect = ({ filter, fetchProducts, setProductsFilter }) => {
               horizontal: 'left',
             },
             getContentAnchorEl: null,
+            MenuListProps: listProps,
           }}
         >
           <SelectItem value={URL_FIELD_NO_FILTER}>All</SelectItem>
@@ -48,6 +51,7 @@ const FilterSelect = ({ filter, fetchProducts, setProductsFilter }) => {
 
 FilterSelect.propTypes = {
   filter: PropTypes.string.isRequired,
+  isDarkTheme: PropTypes.bool.isRequired,
   fetchProducts: PropTypes.func.isRequired,
   setProductsFilter: PropTypes.func.isRequired,
 }

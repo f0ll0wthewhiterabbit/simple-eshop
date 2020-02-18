@@ -1,5 +1,8 @@
 export const STORAGE_FIELD_ACCESS_TOKEN = 'accessToken'
 export const STORAGE_FIELD_REFRESH_TOKEN = 'refreshToken'
+export const STORAGE_FIELD_THEME = 'theme'
+export const FIELD_THEME_DEFAULT = 'default'
+export const FIELD_THEME_DARK = 'dark'
 export const STORE_FIELD_PRODUCTS = 'products'
 export const STORE_FIELD_USERS = 'users'
 export const STORE_FIELD_CURRENT_USER = 'usersCurrent'

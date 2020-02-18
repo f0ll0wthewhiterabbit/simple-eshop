@@ -14,7 +14,8 @@ export const Wrapper = styled(Card)`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: ${props => props.theme.colors.background.productCard};
+  background-color: ${props => props.theme.colors.background.productCard};
+  transition: background-color 0.3s ease-in;
 `
 /**
  * 16:9 ratio - 56.25%

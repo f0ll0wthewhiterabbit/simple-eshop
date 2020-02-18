@@ -1,19 +1,22 @@
 import styled from 'styled-components'
 import { IconButton, Typography } from '@material-ui/core'
 
-export const Wrapper = styled.header``
+export const Wrapper = styled.header`
+  background-color: ${props => props.theme.colors.background.header};
+`
 
 export const MainSection = styled.div`
   padding: ${props => props.theme.spacing(4, 5, 2)};
   position: relative;
   z-index: 2;
-  background-color: ${props => props.theme.colors.background.header};
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
   border-bottom: 1px solid ${props => props.theme.colors.accent};
+  background-color: ${props => props.theme.colors.background.header};
+  transition: background-color 0.3s ease-out;
 
   ${props => props.theme.breakpoints.up('md')} {
     padding-top: 0;

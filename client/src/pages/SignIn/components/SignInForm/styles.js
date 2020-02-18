@@ -31,7 +31,7 @@ export const SubmitButton = styled(Button)`
 `
 
 export const Progress = styled(CircularProgress)`
-  color: rgba(0, 0, 0, 0.26);
+  color: ${props => props.theme.colors.font.light};
 `
 
 export const InputField = styled(TextField)`

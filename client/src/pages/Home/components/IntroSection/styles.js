@@ -25,6 +25,7 @@ export const Heading = styled(Typography)`
 
   span {
     color: ${props => props.theme.colors.accent};
+    transition: color 0.3s ease-out;
   }
 
   ${props => props.theme.breakpoints.up('sm')} {

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   margin-bottom: ${props => props.theme.spacing(2)}px;
 
   ${props => props.theme.breakpoints.up('md')} {
-    width: auto;
+    width: 250px;
     margin-bottom: 0;
   }
 `
@@ -30,4 +30,11 @@ export const SiteLink = styled(Link)`
 export const LogoImg = styled.img`
   width: 100%;
   height: auto;
+  transition: filter 0.3s ease-in;
+
+  ${props =>
+    props.isDarkTheme &&
+    `
+      filter: brightness(4);
+  `}
 `

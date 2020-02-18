@@ -10,7 +10,7 @@ exports[`UserMenu component should render correctly 1`] = `
   >
     <AccountBoxIcon />
   </Styled(WithStyles(ForwardRef(IconButton)))>
-  <WithStyles(ForwardRef(Menu))
+  <Styled(WithStyles(ForwardRef(Menu)))
     anchorEl={null}
     anchorOrigin={
       Object {
@@ -72,7 +72,8 @@ exports[`UserMenu component should render correctly 1`] = `
         primary="Delete Account"
       />
     </WithStyles(ForwardRef(MenuItem))>
-  </WithStyles(ForwardRef(Menu))>
+  </Styled(WithStyles(ForwardRef(Menu)))>
+  <Connect(ThemeSwitcher) />
   <Styled(WithStyles(ForwardRef(IconButton)))
     aria-label="sign-out"
     data-test="signOutButton"

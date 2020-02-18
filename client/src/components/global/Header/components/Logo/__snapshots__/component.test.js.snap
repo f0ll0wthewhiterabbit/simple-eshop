@@ -9,6 +9,7 @@ exports[`Logo component should render correctly 1`] = `
   >
     <styled.img
       alt="Logo"
+      isDarkTheme={false}
       src="/logo.png"
     />
   </Styled(Link)>

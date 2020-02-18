@@ -4,9 +4,10 @@ import SchoolOutlinedIcon from '@material-ui/icons/SchoolOutlined'
 import MoneyOffOutlinedIcon from '@material-ui/icons/MoneyOffOutlined'
 
 export const Wrapper = styled.div`
-  background: ${props => props.theme.colors.accent};
   overflow: hidden;
   padding: 10px 45px;
+  background-color: ${props => props.theme.colors.accent};
+  transition: background-color 0.3s ease-out;
 `
 
 export const InfoList = styled.ul`

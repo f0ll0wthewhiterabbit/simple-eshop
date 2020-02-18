@@ -1,5 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FilterSelect component should change select menu background color in dark mode 1`] = `
+<styled.div>
+  <Styled(WithStyles(ForwardRef(FormControl)))>
+    <WithStyles(ForwardRef(Select))
+      IconComponent={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "compare": null,
+          "displayName": "ExpandMoreIcon",
+          "muiName": "SvgIcon",
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "render": [Function],
+          },
+        }
+      }
+      MenuProps={
+        Object {
+          "MenuListProps": Object {
+            "style": Object {
+              "backgroundColor": "#687579",
+            },
+          },
+          "anchorOrigin": Object {
+            "horizontal": "left",
+            "vertical": "bottom",
+          },
+          "getContentAnchorEl": null,
+          "transformOrigin": Object {
+            "horizontal": "left",
+            "vertical": "top",
+          },
+        }
+      }
+      data-test="select"
+      onChange={[Function]}
+      value="all"
+    >
+      <Styled(WithStyles(ForwardRef(MenuItem)))
+        value="all"
+      >
+        All
+      </Styled(WithStyles(ForwardRef(MenuItem)))>
+      <Styled(WithStyles(ForwardRef(MenuItem)))
+        value="myRatings"
+      >
+        My ratings
+      </Styled(WithStyles(ForwardRef(MenuItem)))>
+    </WithStyles(ForwardRef(Select))>
+  </Styled(WithStyles(ForwardRef(FormControl)))>
+</styled.div>
+`;
+
 exports[`FilterSelect component should render correctly 1`] = `
 <styled.div>
   <Styled(WithStyles(ForwardRef(FormControl)))>
@@ -18,6 +71,7 @@ exports[`FilterSelect component should render correctly 1`] = `
       }
       MenuProps={
         Object {
+          "MenuListProps": Object {},
           "anchorOrigin": Object {
             "horizontal": "left",
             "vertical": "bottom",

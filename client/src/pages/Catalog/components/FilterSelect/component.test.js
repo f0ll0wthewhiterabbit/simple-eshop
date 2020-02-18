@@ -9,6 +9,7 @@ describe('FilterSelect component', () => {
   let wrapper
   const initialProps = {
     filter: URL_FIELD_NO_FILTER,
+    isDarkTheme: false,
     fetchProducts: jest.fn(),
     setProductsFilter: jest.fn(),
   }
@@ -48,5 +49,11 @@ describe('FilterSelect component', () => {
     expect(initialProps.setProductsFilter).toHaveBeenCalledWith(URL_FIELD_RATINGS_FILTER)
     expect(initialProps.fetchProducts).toHaveBeenCalledTimes(1)
     expect(initialProps.fetchProducts).toHaveBeenCalledWith(1, null, URL_FIELD_RATINGS_FILTER)
+  })
+
+  it('should change select menu background color in dark mode', () => {
+    wrapper = generateWrapper({ isDarkTheme: true })
+
+    expect(wrapper).toMatchSnapshot()
   })
 })

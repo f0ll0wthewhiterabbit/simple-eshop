@@ -17,6 +17,7 @@ import {
   watchUpdateUser,
 } from './users'
 import { watchAuthenticate, watchSignUp, watchSignIn, watchSignOut } from './auth'
+import { watchToggleTheme, watchGetThemeFromStorage, watchInitialize } from './app'
 
 export default function*() {
   yield all([
@@ -36,5 +37,8 @@ export default function*() {
     watchSignUp(),
     watchSignIn(),
     watchSignOut(),
+    watchToggleTheme(),
+    watchGetThemeFromStorage(),
+    watchInitialize(),
   ])
 }
