@@ -1,8 +1,37 @@
 const User = require('../models/User')
 
-exports.getUsers = async (page, perPage) => {
+exports.getUsers = async (page, perPage, searchText) => {
   try {
-    const users = await User.find()
+    let partialTextSearchQuery
+
+    if (searchText) {
+      partialTextSearchQuery = {
+        $or: [
+          {
+            firstName: {
+              $regex: searchText,
+              $options: 'i',
+            },
+          },
+          {
+            lastName: {
+              $regex: searchText,
+              $options: 'i',
+            },
+          },
+          {
+            email: {
+              $regex: searchText,
+              $options: 'i',
+            },
+          },
+        ],
+      }
+    } else {
+      partialTextSearchQuery = {}
+    }
+
+    const users = await User.find(partialTextSearchQuery)
       .skip(page === 1 ? 0 : page * perPage - perPage)
       .limit(perPage)
       .select('-password -__v')
@@ -34,9 +63,38 @@ exports.getUserById = async userId => {
   }
 }
 
-exports.getNumberOfUsers = async () => {
+exports.getNumberOfUsers = async searchText => {
   try {
-    const numberOfUsers = await User.estimatedDocumentCount()
+    let query
+
+    if (searchText) {
+      query = {
+        $or: [
+          {
+            firstName: {
+              $regex: searchText,
+              $options: 'i',
+            },
+          },
+          {
+            lastName: {
+              $regex: searchText,
+              $options: 'i',
+            },
+          },
+          {
+            email: {
+              $regex: searchText,
+              $options: 'i',
+            },
+          },
+        ],
+      }
+    } else {
+      query = {}
+    }
+
+    const numberOfUsers = await User.countDocuments(query)
 
     return numberOfUsers
   } catch (err) {

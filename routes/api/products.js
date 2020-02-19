@@ -7,8 +7,9 @@ const ProductsController = require('../../controllers/api/products')
 const router = express.Router()
 
 /**
- * @route   GET api/products?page=1&limit=3&filter=myRatings
- * @desc    Get products. Optional - page number, limit, filter=myRatings
+ * @route   GET api/products?page=1&limit=3&filter=myRatings&q=text
+ * @desc    Get products. Optional - page number, limit, filter=myRatings, q
+ *            q - query for full text search by tags
  * @access  Private
  */
 router.get('/', auth, ProductsController.getProducts)

@@ -6,8 +6,9 @@ const UsersController = require('../../controllers/api/users')
 const router = express.Router()
 
 /**
- * @route   GET api/users?page=1&limit=3
- * @desc    Get users. Optional - page number and limit
+ * @route   GET api/users?page=1&limit=3&q=text
+ * @desc    Get users. Optional - page number, limit, q
+ *            q - query for partial text search by firstName, lastName & email
  * @access  Private - admin only
  */
 router.get('/', auth, UsersController.getUsers)

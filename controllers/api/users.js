@@ -13,11 +13,12 @@ exports.getUsers = async (req, res) => {
 
     const DEFAULT_ITEMS_PER_PAGE = 9
     const queryPage = req.query.page
-    const total = await UserService.getNumberOfUsers()
+    const searchText = req.query.q
+    const total = await UserService.getNumberOfUsers(searchText)
     const page = queryPage ? parseInt(queryPage, 10) : 1
     const perPage = queryPage ? parseInt(req.query.limit, 10) || DEFAULT_ITEMS_PER_PAGE : total
     const totalPages = Math.ceil(total / perPage)
-    const users = await UserService.getUsers(page, perPage)
+    const users = await UserService.getUsers(page, perPage, searchText)
 
     return res.json({
       page,

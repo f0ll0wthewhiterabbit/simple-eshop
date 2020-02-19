@@ -93,4 +93,6 @@ ProductSchema.path('price').get(num => Number((num / 100).toFixed(2)))
 // Price setter
 ProductSchema.path('price').set(num => num * 100)
 
+ProductSchema.index({ tags: 'text' })
+
 module.exports = mongoose.model('Product', ProductSchema)

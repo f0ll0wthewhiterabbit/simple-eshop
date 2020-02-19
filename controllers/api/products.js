@@ -12,8 +12,12 @@ exports.getProducts = async (req, res) => {
     const queryPage = req.query.page
     const queryLimit = req.query.limit
     const queryFilter = req.query.filter
+    const searchText = req.query.q
     const isRatingFilter = queryFilter && queryFilter === 'myRatings'
-    const total = await ProductService.getNumberOfProducts(isRatingFilter ? userId : undefined)
+    const total = await ProductService.getNumberOfProducts(
+      isRatingFilter ? userId : undefined,
+      searchText
+    )
     const page = queryPage ? parseInt(queryPage, 10) : 1
 
     let perPage
@@ -21,11 +25,17 @@ exports.getProducts = async (req, res) => {
     if (queryPage || queryLimit) {
       perPage = parseInt(queryLimit, 10) || DEFAULT_ITEMS_PER_PAGE
     } else {
-      perPage = total
+      perPage = total || 1
     }
 
     const totalPages = Math.ceil(total / perPage)
-    const products = await ProductService.getProducts(page, perPage, userId, isRatingFilter)
+    const products = await ProductService.getProducts(
+      page,
+      perPage,
+      userId,
+      isRatingFilter,
+      searchText
+    )
 
     return res.json({
       page,

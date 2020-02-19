@@ -1,10 +1,11 @@
 const Product = require('../models/Product')
 
-exports.getProducts = async (page, perPage, userId, isRatingFilter = false) => {
+exports.getProducts = async (page, perPage, userId, isRatingFilter = false, searchText) => {
   try {
-    const filter = isRatingFilter ? { rating: { $elemMatch: { user: userId } } } : {}
+    const filterQuery = isRatingFilter ? { rating: { $elemMatch: { user: userId } } } : {}
+    const fullTextSearchQuery = searchText ? { $text: { $search: searchText } } : {}
     const products = await Product.aggregate([
-      { $match: filter },
+      { $match: { ...filterQuery, ...fullTextSearchQuery } },
       { $sort: { createdAt: -1 } },
       { $skip: page === 1 ? 0 : page * perPage - perPage },
       { $limit: perPage },
@@ -51,6 +52,7 @@ exports.getProducts = async (page, perPage, userId, isRatingFilter = false) => {
 
     return productsWithChangedPrices
   } catch (err) {
+    console.log(err)
     throw Error('Error while getting products')
   }
 }
@@ -65,10 +67,14 @@ exports.getProduct = async productId => {
   }
 }
 
-exports.getNumberOfProducts = async userId => {
+exports.getNumberOfProducts = async (userId, searchText) => {
   try {
-    const filter = userId ? { rating: { $elemMatch: { user: userId } } } : {}
-    const numberOfProducts = await Product.countDocuments({ ...filter })
+    const filterQuery = userId ? { rating: { $elemMatch: { user: userId } } } : {}
+    const searchTextQuery = searchText ? { $text: { $search: searchText } } : {}
+    const numberOfProducts = await Product.countDocuments({
+      ...filterQuery,
+      ...searchTextQuery,
+    })
 
     return numberOfProducts
   } catch (err) {
