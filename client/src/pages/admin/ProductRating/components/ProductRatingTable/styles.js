@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Paper, Table, Toolbar, Typography, TablePagination } from '@material-ui/core'
+import Rating from '@material-ui/lab/Rating'
 
 export const Root = styled.div`
   width: 100%;
@@ -10,6 +11,8 @@ export const Wrapper = styled(Paper)`
   width: 100%;
   margin-bottom: ${props => props.theme.spacing(2)}px;
   position: relative;
+  background-color: ${props => props.theme.colors.background.table};
+  transition: background-color 0.3s ease-out;
 `
 
 export const TableWrapper = styled.div`
@@ -18,19 +21,21 @@ export const TableWrapper = styled.div`
 
 export const TableRoot = styled(Table)`
   min-width: 750px;
+
+  .MuiTableCell-head {
+    color: ${props => props.theme.colors.font.bold};
+  }
+
+  .MuiTableCell-body {
+    color: ${props => props.theme.colors.font.regular};
+  }
 `
 
 export const ToolbarRoot = styled(Toolbar)`
   padding-top: ${props => props.theme.spacing(2)}px;
   padding-left: ${props => props.theme.spacing(2)}px;
   padding-right: ${props => props.theme.spacing(1)}px;
-
-  ${props =>
-    props['data-highlighted'] &&
-    css`
-      color: #f50057;
-      background-color: #fedfe9;
-    `}
+  color: ${props => props.theme.colors.font.bold};
 `
 
 export const ToolbarTitleWrapper = styled.div`
@@ -57,6 +62,16 @@ export const Comment = styled(Typography)`
 `
 
 export const TablePaginationPanel = styled(TablePagination)`
+  color: ${props => props.theme.colors.font.bold};
+
+  .MuiTablePagination-input svg {
+    color: ${props => props.theme.colors.font.bold};
+  }
+
+  .MuiTablePagination-actions .Mui-disabled {
+    color: ${props => props.theme.colors.font.light};
+  }
+
   .MuiToolbar-root {
     justify-content: space-around;
   }
@@ -81,5 +96,11 @@ export const TablePaginationPanel = styled(TablePagination)`
     .MuiTablePagination-spacer {
       display: block;
     }
+  }
+`
+
+export const Stars = styled(Rating)`
+  .MuiRating-iconEmpty {
+    color: ${props => props.theme.colors.font.light};
   }
 `

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { TextField, Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import ImageIcon from '@material-ui/icons/Image'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
@@ -15,6 +15,7 @@ import {
   FileInputWrapper,
   UploadButton,
   Progress,
+  InputField,
 } from './styles'
 
 const ProductAddForm = ({ error, addProduct, history }) => {
@@ -82,8 +83,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
         <StyledForm as={Form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={8}>
-              <TextField
-                autoFocus
+              <InputField
                 name="title"
                 id="title"
                 label="Title"
@@ -99,7 +99,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
             </Grid>
 
             <Grid item xs={12} sm={4}>
-              <TextField
+              <InputField
                 name="price"
                 id="price"
                 label="Price, $"
@@ -116,7 +116,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
             </Grid>
 
             <Grid item xs={12}>
-              <TextField
+              <InputField
                 name="description"
                 id="description"
                 label="Description"

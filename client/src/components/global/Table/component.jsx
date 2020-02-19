@@ -35,6 +35,7 @@ import {
 } from './styles'
 
 const Table = ({
+  isDarkTheme,
   rows,
   rowsPerPage,
   currentPage,
@@ -261,6 +262,11 @@ const Table = ({
           }}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
+          SelectProps={{
+            MenuProps: {
+              MenuListProps: isDarkTheme ? { style: { backgroundColor: '#687579' } } : {},
+            },
+          }}
         />
       </Wrapper>
     </Root>
@@ -268,6 +274,7 @@ const Table = ({
 }
 
 Table.propTypes = {
+  isDarkTheme: PropTypes.bool.isRequired,
   rows: ImmutablePropTypes.listOf(ImmutablePropTypes.record).isRequired,
   rowsPerPage: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,

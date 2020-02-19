@@ -8,8 +8,8 @@ import Footer from '../../global/Footer'
 import ProfileContainer from './components/Profile'
 import SidebarNavContainer from './components/SidebarNav'
 import AlertDialogContainer from '../../global/AlertDialog'
-import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 import { STORE_FIELD_USERS, STORE_FIELD_PRODUCTS } from '../../../constants'
+import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 
 export const AdminLayout = ({
   isSidebarOpened,

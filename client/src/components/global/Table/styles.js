@@ -9,6 +9,8 @@ export const Root = styled.div`
 export const Wrapper = styled(Paper)`
   width: 100%;
   margin-bottom: ${props => props.theme.spacing(2)}px;
+  background-color: ${props => props.theme.colors.background.table};
+  transition: background-color 0.3s ease-out;
 `
 
 export const TableWrapper = styled.div`
@@ -17,18 +19,47 @@ export const TableWrapper = styled.div`
 
 export const TableRoot = styled(Table)`
   min-width: 750px;
+
+  .MuiTableCell-head {
+    color: ${props => props.theme.colors.font.bold};
+  }
+
+  .MuiTableCell-body {
+    color: ${props => props.theme.colors.font.regular};
+  }
+
+  .MuiCheckbox-root {
+    color: ${props => props.theme.colors.font.regular};
+
+    &.Mui-disabled {
+      color: ${props => props.theme.colors.font.light};
+    }
+
+    &.Mui-checked {
+      color: #f50057;
+    }
+  }
+
+  .MuiLink-underlineHover {
+    color: ${props => props.theme.colors.font.link};
+  }
 `
 
 export const ToolbarRoot = styled(Toolbar)`
   padding-left: ${props => props.theme.spacing(2)}px;
   padding-right: ${props => props.theme.spacing(1)}px;
+  color: ${props => props.theme.colors.font.bold};
 
   ${props =>
     props['data-highlighted'] &&
     css`
       color: #f50057;
-      background-color: #fedfe9;
+      background-color: ${props.theme.colors.background.toolbar.highlighted};
     `}
+
+  button {
+    color: ${props => props.theme.colors.background.toolbar.button};
+  }
 `
 
 export const ToolbarTitle = styled(Typography)`
@@ -41,6 +72,16 @@ export const Image = styled.img`
 `
 
 export const TablePaginationPanel = styled(TablePagination)`
+  color: ${props => props.theme.colors.font.bold};
+
+  .MuiTablePagination-input svg {
+    color: ${props => props.theme.colors.font.bold};
+  }
+
+  .MuiTablePagination-actions .Mui-disabled {
+    color: ${props => props.theme.colors.font.light};
+  }
+
   .MuiToolbar-root {
     justify-content: space-around;
   }

@@ -31,6 +31,7 @@ export const Sidebar = styled(Drawer)`
 
   .MuiDrawer-paper {
     width: ${props => props.theme.sizing.sidebarWidth};
+    background-color: ${props => props.theme.colors.background.sidebar};
 
     ${props => props.theme.breakpoints.up('lg')} {
       z-index: 1;
@@ -45,4 +46,6 @@ export const Main = styled.main`
   position: relative;
   overflow-x: auto;
   min-height: 250px;
+  background-color: ${props => props.theme.colors.background.adminMain};
+  transition: background-color 0.3s ease-out;
 `

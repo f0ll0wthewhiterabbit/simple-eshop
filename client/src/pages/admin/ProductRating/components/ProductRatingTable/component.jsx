@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
-import Rating from '@material-ui/lab/Rating'
 
 import {
   ADMIN_LOW_PER_PAGE_LIMIT,
@@ -20,6 +19,7 @@ import {
   SubHeading,
   Comment,
   TablePaginationPanel,
+  Stars,
 } from './styles'
 
 const ProductRatingTable = ({
@@ -27,6 +27,7 @@ const ProductRatingTable = ({
   itemsPerPage,
   currentPage,
   totalAmount,
+  isDarkTheme,
   setProductsPerPage,
   fetchProductRating,
 }) => {
@@ -66,7 +67,7 @@ const ProductRatingTable = ({
     }
 
     if (id === 'rating') {
-      return <Rating value={row.stars} name="simple-uncontrolled-average" readOnly size="small" />
+      return <Stars value={row.stars} name="simple-uncontrolled-average" readOnly size="small" />
     }
 
     return row[id]
@@ -140,6 +141,11 @@ const ProductRatingTable = ({
           }}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeItemsPerPage}
+          SelectProps={{
+            MenuProps: {
+              MenuListProps: isDarkTheme ? { style: { backgroundColor: '#687579' } } : {},
+            },
+          }}
         />
       </Wrapper>
     </Root>
@@ -169,6 +175,7 @@ ProductRatingTable.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   totalAmount: PropTypes.number.isRequired,
+  isDarkTheme: PropTypes.bool.isRequired,
   fetchProductRating: PropTypes.func.isRequired,
   setProductsPerPage: PropTypes.func.isRequired,
 }

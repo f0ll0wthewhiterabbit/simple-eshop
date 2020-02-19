@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { List, ListItemIcon, ListItemText, ListItem } from '@material-ui/core'
-import blueGrey from '@material-ui/core/colors/blueGrey'
 import { NavLink } from 'react-router-dom'
 
 export const PagesList = styled(List)`
@@ -21,11 +20,11 @@ export const NavigationLink = styled(NavLink)`
   align-items: center;
   justify-content: flex-start;
   text-decoration: none;
-  color: ${blueGrey[500]};
+  color: ${props => props.theme.colors.font.regular};
 
   &.active {
-    color: ${blueGrey[800]};
-    text-decoration: underline;
+    color: ${props => props.theme.colors.font.bold};
+    background-color: ${props => props.theme.colors.background.sidebarActiveMenu};
   }
 `
 

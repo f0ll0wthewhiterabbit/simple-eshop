@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   align-items: center;
   padding-top: ${props => props.theme.spacing(4)}px;
   padding-bottom: ${props => props.theme.spacing(4)}px;
+  color: ${props => props.theme.colors.font.bold};
 `
 
 export const ProfileAvatar = styled(Avatar)`

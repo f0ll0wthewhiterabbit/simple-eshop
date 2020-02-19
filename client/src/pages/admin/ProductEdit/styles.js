@@ -3,6 +3,7 @@ import { Container, Avatar, Typography } from '@material-ui/core'
 
 export const Root = styled(Container)`
   max-width: 550px;
+  padding-bottom: 50px;
 `
 
 export const Wrapper = styled.div`
@@ -19,4 +20,5 @@ export const IconWrapper = styled(Avatar)`
 
 export const Heading = styled(Typography)`
   margin-bottom: ${props => props.theme.spacing(3)}px;
+  color: ${props => props.theme.colors.font.bold};
 `
