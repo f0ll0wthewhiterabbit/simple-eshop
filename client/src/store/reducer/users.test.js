@@ -13,6 +13,7 @@ import {
   updateUserError,
   setUsersPerPage,
   startUsersLoading,
+  setUsersSearchQuery,
 } from '../actions'
 import { DEFAULT_ADMIN_PER_PAGE_LIMIT } from '../../constants'
 
@@ -24,6 +25,7 @@ describe('Users reducer', () => {
     currentPage: 1,
     totalPages: 1,
     selected: List(),
+    lastSearchQuery: '',
     isLoading: true,
     error: null,
   })()
@@ -169,5 +171,12 @@ describe('Users reducer', () => {
     const recievedState = usersReducer(undefined, setUsersPerPage(amount))
 
     expect(recievedState.itemsPerPage).toBe(amount)
+  })
+
+  it('should handle [setUsersSearchQuery] action', () => {
+    const testQuery = 'test'
+    const recievedState = usersReducer(undefined, setUsersSearchQuery(testQuery))
+
+    expect(recievedState.lastSearchQuery).toBe(testQuery)
   })
 })

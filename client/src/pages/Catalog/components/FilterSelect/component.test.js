@@ -48,7 +48,12 @@ describe('FilterSelect component', () => {
     expect(initialProps.setProductsFilter).toHaveBeenCalledTimes(1)
     expect(initialProps.setProductsFilter).toHaveBeenCalledWith(URL_FIELD_RATINGS_FILTER)
     expect(initialProps.fetchProducts).toHaveBeenCalledTimes(1)
-    expect(initialProps.fetchProducts).toHaveBeenCalledWith(1, null, URL_FIELD_RATINGS_FILTER)
+    expect(initialProps.fetchProducts).toHaveBeenCalledWith(
+      1,
+      null,
+      undefined,
+      URL_FIELD_RATINGS_FILTER
+    )
   })
 
   it('should change select menu background color in dark mode', () => {

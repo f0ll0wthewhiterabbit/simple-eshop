@@ -2,9 +2,10 @@ import { createAction } from 'redux-actions'
 
 export const fetchProducts = createAction(
   'PRODUCTS/FETCH_PRODUCTS',
-  (page, itemsPerPage, filter) => ({
+  (page, itemsPerPage, searchText, filter) => ({
     page,
     itemsPerPage,
+    searchText,
     filter,
   })
 )
@@ -119,3 +120,9 @@ export const setProductsFilter = createAction('PRODUCTS/SET_PRODUCTS_FILTER', fi
   filter,
 }))
 export const startProductsLoading = createAction('PRODUCTS/START_PRODUCTS_LOADING')
+export const setProductsSearchQuery = createAction(
+  'PRODUCTS/SET_PRODUCTS_SEARCH_QUERY',
+  searchQuery => ({
+    searchQuery,
+  })
+)

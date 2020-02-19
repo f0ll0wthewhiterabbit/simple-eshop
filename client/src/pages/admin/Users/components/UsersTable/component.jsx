@@ -11,6 +11,7 @@ const UsersTable = ({
   currentPage,
   totalAmount,
   selectedUsers,
+  lastSearchQuery,
   setSelectedUsers,
   fetchUsers,
   setUsersPerPage,
@@ -20,6 +21,8 @@ const UsersTable = ({
     { id: 'lastName', label: 'Last Name', isNumeric: false },
     { id: 'email', label: 'Email', isNumeric: false },
   ]
+  const titleAddition = lastSearchQuery !== '' ? ` - result for "${lastSearchQuery}"` : ''
+  const title = `Users${titleAddition}`
 
   return (
     <TableContainer
@@ -28,7 +31,7 @@ const UsersTable = ({
       currentPage={currentPage}
       totalAmount={totalAmount}
       headCells={headCells}
-      title="Users"
+      title={title}
       storeFieldName={STORE_FIELD_USERS}
       selectedItems={selectedUsers}
       setSelectedItems={setSelectedUsers}
@@ -53,6 +56,7 @@ UsersTable.propTypes = {
   currentPage: PropTypes.number.isRequired,
   totalAmount: PropTypes.number.isRequired,
   selectedUsers: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
+  lastSearchQuery: PropTypes.string.isRequired,
   setSelectedUsers: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
   setUsersPerPage: PropTypes.func.isRequired,

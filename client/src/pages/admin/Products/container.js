@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ProductsPage from './component'
-import { fetchProducts } from '../../../store/actions'
+import { fetchProducts, setProductsSearchQuery } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   itemsPerPage: state.getIn(['products', 'itemsPerPage']),
@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchProducts: (page, itemsPerPage) => fetchProducts(page, itemsPerPage),
+  setProductsSearchQuery: searchQuery => setProductsSearchQuery(searchQuery),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage)

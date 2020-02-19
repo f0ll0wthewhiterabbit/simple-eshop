@@ -23,6 +23,7 @@ import {
   setProductsPerPage,
   setProductsFilter,
   startProductsLoading,
+  setProductsSearchQuery,
 } from '../actions'
 import { DEFAULT_CATALOG_PER_PAGE_LIMIT, URL_FIELD_NO_FILTER } from '../../constants'
 
@@ -45,6 +46,7 @@ const initialState = Record({
     tags: List(),
     rating: List(),
   })(),
+  lastSearchQuery: '',
   isLoading: true,
   error: null,
 })()
@@ -152,6 +154,9 @@ const products = handleActions(
     [setProductsPerPage]: (state, action) => state.set('itemsPerPage', action.payload.amount),
 
     [setProductsFilter]: (state, action) => state.set('filter', action.payload.filter),
+
+    [setProductsSearchQuery]: (state, action) =>
+      state.set('lastSearchQuery', action.payload.searchQuery),
   },
   initialState
 )

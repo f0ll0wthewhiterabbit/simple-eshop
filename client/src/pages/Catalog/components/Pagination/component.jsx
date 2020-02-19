@@ -17,14 +17,14 @@ const Pagination = ({
   const pageNumbers = Array.from({ length: totalPages }, (v, k) => k + 1)
 
   const handlePageNumberClick = evt => {
-    fetchProducts(Number(evt.target.innerText), null, filter)
+    fetchProducts(Number(evt.target.innerText), null, undefined, filter)
   }
 
   const handlePreviousPageClick = () => {
-    fetchProducts(currentPage - 1, null, filter)
+    fetchProducts(currentPage - 1, null, undefined, filter)
   }
   const handleNextPageClick = () => {
-    fetchProducts(currentPage + 1, null, filter)
+    fetchProducts(currentPage + 1, null, undefined, filter)
   }
 
   const isPageNumberInPagination = pageNumber => {

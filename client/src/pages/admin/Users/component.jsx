@@ -4,8 +4,13 @@ import PropTypes from 'prop-types'
 import ErrorMessage from '../../../components/global/ErrorMessage'
 import Loader from '../../../components/global/Loader'
 import UsersTableContainer from './components/UsersTable'
+import UsersToolbarContainer from './components/UsersToolbar'
 
-const UsersPage = ({ itemsPerPage, isLoading, error, fetchUsers }) => {
+const UsersPage = ({ itemsPerPage, isLoading, error, fetchUsers, setUsersSearchQuery }) => {
+  useEffect(() => {
+    setUsersSearchQuery('')
+  }, [setUsersSearchQuery])
+
   useEffect(() => {
     fetchUsers(1, itemsPerPage)
   }, [fetchUsers, itemsPerPage])
@@ -18,7 +23,12 @@ const UsersPage = ({ itemsPerPage, isLoading, error, fetchUsers }) => {
     return <Loader />
   }
 
-  return <UsersTableContainer />
+  return (
+    <>
+      <UsersToolbarContainer />
+      <UsersTableContainer />
+    </>
+  )
 }
 
 UsersPage.defaultProps = {
@@ -30,6 +40,7 @@ UsersPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   fetchUsers: PropTypes.func.isRequired,
+  setUsersSearchQuery: PropTypes.func.isRequired,
 }
 
 export default UsersPage

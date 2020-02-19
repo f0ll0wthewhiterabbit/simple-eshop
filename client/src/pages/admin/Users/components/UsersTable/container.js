@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
   currentPage: state.getIn(['users', 'currentPage']),
   totalAmount: state.getIn(['users', 'totalAmount']),
   selectedUsers: state.getIn(['users', 'selected']),
+  lastSearchQuery: state.getIn(['users', 'lastSearchQuery']),
 })
 
 const mapDispatchToProps = {

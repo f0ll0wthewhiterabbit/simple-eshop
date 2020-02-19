@@ -23,6 +23,7 @@ import {
   setProductsPerPage,
   setProductsFilter,
   startProductsLoading,
+  setProductsSearchQuery,
 } from '../actions'
 import {
   DEFAULT_CATALOG_PER_PAGE_LIMIT,
@@ -50,6 +51,7 @@ describe('Products reducer', () => {
       tags: List(),
       rating: List(),
     })(),
+    lastSearchQuery: '',
     isLoading: true,
     error: null,
   })()
@@ -383,5 +385,12 @@ describe('Products reducer', () => {
     const recievedState = productsReducer(undefined, setProductsFilter(URL_FIELD_RATINGS_FILTER))
 
     expect(recievedState.filter).toBe(URL_FIELD_RATINGS_FILTER)
+  })
+
+  it('should handle [setProductsSearchQuery] action', () => {
+    const testQuery = 'test'
+    const recievedState = productsReducer(undefined, setProductsSearchQuery(testQuery))
+
+    expect(recievedState.lastSearchQuery).toBe(testQuery)
   })
 })

@@ -30,8 +30,17 @@ export const getRole = state => state.getIn(['auth', 'user', 'role'])
 export function* handleFetchUsers(action) {
   try {
     yield put(startUsersLoading())
-    const { currentPage: page, itemsPerPage: limit } = action.payload
-    const url = limit ? `/users/?page=${page}&limit=${limit}` : `/users/?page=${page}`
+    const { currentPage: page, itemsPerPage: limit, searchText } = action.payload
+    let url = `/users/?page=${page}`
+
+    if (limit) {
+      url += `&limit=${limit}`
+    }
+
+    if (searchText) {
+      url += `&q=${searchText}`
+    }
+
     const response = yield call(API.get, url)
     const usersList = convertToRecord(response.data.data)
     const {

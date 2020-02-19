@@ -17,7 +17,7 @@ const FilterSelect = ({ filter, isDarkTheme, fetchProducts, setProductsFilter })
 
     setProductsFilter(value)
 
-    fetchProducts(1, null, value)
+    fetchProducts(1, null, undefined, value)
   }
 
   return (

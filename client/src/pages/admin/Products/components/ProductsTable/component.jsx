@@ -11,6 +11,7 @@ const ProductsTable = ({
   currentPage,
   totalAmount,
   selectedProducts,
+  lastSearchQuery,
   setSelectedProducts,
   fetchProducts,
   setProductsPerPage,
@@ -23,6 +24,8 @@ const ProductsTable = ({
     { id: 'tags', label: 'Tags', isNumeric: false },
     { id: 'image', label: 'Picture', isNumeric: false },
   ]
+  const titleAddition = lastSearchQuery !== '' ? ` - result for "${lastSearchQuery}" tags` : ''
+  const title = `Products${titleAddition}`
 
   return (
     <TableContainer
@@ -31,7 +34,7 @@ const ProductsTable = ({
       currentPage={currentPage}
       totalAmount={totalAmount}
       headCells={headCells}
-      title="Products"
+      title={title}
       storeFieldName={STORE_FIELD_PRODUCTS}
       selectedItems={selectedProducts}
       setSelectedItems={setSelectedProducts}
@@ -64,6 +67,7 @@ ProductsTable.propTypes = {
   currentPage: PropTypes.number.isRequired,
   totalAmount: PropTypes.number.isRequired,
   selectedProducts: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
+  lastSearchQuery: PropTypes.string.isRequired,
   setSelectedProducts: PropTypes.func.isRequired,
   fetchProducts: PropTypes.func.isRequired,
   setProductsPerPage: PropTypes.func.isRequired,

@@ -1,9 +1,13 @@
 import { createAction } from 'redux-actions'
 
-export const fetchUsers = createAction('USERS/FETCH_USERS', (currentPage, itemsPerPage) => ({
-  currentPage,
-  itemsPerPage,
-}))
+export const fetchUsers = createAction(
+  'USERS/FETCH_USERS',
+  (currentPage, itemsPerPage, searchText) => ({
+    currentPage,
+    itemsPerPage,
+    searchText,
+  })
+)
 export const fetchUsersSuccess = createAction(
   'USERS/FETCH_USERS_SUCCESS',
   (usersList, totalAmount, currentPage, itemsPerPage, totalPages) => ({
@@ -50,3 +54,6 @@ export const setUsersPerPage = createAction('USERS/SET_USERS_PER_PAGE', amount =
   amount,
 }))
 export const startUsersLoading = createAction('USERS/START_USERS_LOADING')
+export const setUsersSearchQuery = createAction('USERS/SET_USERS_SEARCH_QUERY', searchQuery => ({
+  searchQuery,
+}))

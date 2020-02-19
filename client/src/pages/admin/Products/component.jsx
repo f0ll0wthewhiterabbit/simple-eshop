@@ -1,12 +1,22 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import ProductsToolbar from './components/ProductsToolbar'
+import ProductsToolbarContainer from './components/ProductsToolbar'
 import ProductsTableContainer from './components/ProductsTable'
 import Loader from '../../../components/global/Loader'
 import ErrorMessage from '../../../components/global/ErrorMessage'
 
-const ProductsPage = ({ itemsPerPage, isLoading, error, fetchProducts }) => {
+const ProductsPage = ({
+  itemsPerPage,
+  isLoading,
+  error,
+  fetchProducts,
+  setProductsSearchQuery,
+}) => {
+  useEffect(() => {
+    setProductsSearchQuery('')
+  }, [setProductsSearchQuery])
+
   useEffect(() => {
     fetchProducts(1, itemsPerPage)
   }, [fetchProducts, itemsPerPage])
@@ -21,7 +31,7 @@ const ProductsPage = ({ itemsPerPage, isLoading, error, fetchProducts }) => {
 
   return (
     <>
-      <ProductsToolbar />
+      <ProductsToolbarContainer />
       <ProductsTableContainer />
     </>
   )
@@ -36,6 +46,7 @@ ProductsPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   fetchProducts: PropTypes.func.isRequired,
+  setProductsSearchQuery: PropTypes.func.isRequired,
 }
 
 export default ProductsPage

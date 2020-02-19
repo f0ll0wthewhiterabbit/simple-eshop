@@ -13,6 +13,7 @@ import {
   updateUserError,
   setUsersPerPage,
   startUsersLoading,
+  setUsersSearchQuery,
 } from '../actions'
 import { DEFAULT_ADMIN_PER_PAGE_LIMIT } from '../../constants'
 
@@ -23,6 +24,7 @@ const initialState = Record({
   currentPage: 1,
   totalPages: 1,
   selected: List(),
+  lastSearchQuery: '',
   isLoading: true,
   error: null,
 })()
@@ -80,6 +82,9 @@ const users = handleActions(
     [setSelectedUsers]: (state, action) => state.set('selected', action.payload.selectedUsersList),
 
     [setUsersPerPage]: (state, action) => state.set('itemsPerPage', action.payload.amount),
+
+    [setUsersSearchQuery]: (state, action) =>
+      state.set('lastSearchQuery', action.payload.searchQuery),
   },
   initialState
 )

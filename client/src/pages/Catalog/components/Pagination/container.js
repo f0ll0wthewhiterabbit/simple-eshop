@@ -11,7 +11,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchProducts: (page, itemsPerPage, filter) => fetchProducts(page, itemsPerPage, filter),
+  fetchProducts: (page, itemsPerPage, searchText, filter) =>
+    fetchProducts(page, itemsPerPage, searchText, filter),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pagination)

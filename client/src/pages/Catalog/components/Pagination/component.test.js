@@ -92,7 +92,7 @@ describe('Pagination component', () => {
     const paginationButton = findByTestAttr(wrapper, `paginationButton${pageNumber}`)
     paginationButton.simulate('click', { target: { innerText: pageNumber.toString() } })
 
-    expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(pageNumber, null, filter)
+    expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(pageNumber, null, undefined, filter)
   })
 
   it('should handle previous page click', () => {
@@ -102,6 +102,7 @@ describe('Pagination component', () => {
     expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(
       initialProps.currentPage - 1,
       null,
+      undefined,
       filter
     )
   })
@@ -113,6 +114,7 @@ describe('Pagination component', () => {
     expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(
       initialProps.currentPage + 1,
       null,
+      undefined,
       filter
     )
   })
