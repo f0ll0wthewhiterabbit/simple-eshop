@@ -3,7 +3,7 @@ import { takeEvery, call, put } from 'redux-saga/effects'
 import { toggleTheme, getThemeFromStorage, initialize, authenticate } from '../actions'
 import { STORAGE_FIELD_THEME, FIELD_THEME_DARK } from '../../constants'
 
-export function* handleToggleThme(action) {
+export function* handleToggleTheme(action) {
   const { theme } = action.payload
 
   yield call([localStorage, 'setItem'], STORAGE_FIELD_THEME, theme)
@@ -23,7 +23,7 @@ export function* handleInitialize() {
 }
 
 function* watchToggleTheme() {
-  yield takeEvery(toggleTheme, handleToggleThme)
+  yield takeEvery(toggleTheme, handleToggleTheme)
 }
 
 function* watchGetThemeFromStorage() {
