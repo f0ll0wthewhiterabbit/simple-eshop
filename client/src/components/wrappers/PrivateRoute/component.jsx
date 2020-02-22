@@ -9,12 +9,14 @@ import {
   ERROR_PAGE_PATH,
   ADMIN_PRODUCTS_PAGE_PATH,
   ADMIN_PAGE_PATH,
+  PROFILE_PAGE_PATH,
 } from '../../../constants'
 
 const PrivateRoute = ({ isAuthenticated, userRole, component: Component, location, ...rest }) => {
   if (
     isAuthenticated &&
     userRole === ROLE_ADMIN &&
+    location.pathname !== PROFILE_PAGE_PATH &&
     location.pathname.indexOf(ADMIN_PAGE_PATH) === -1
   ) {
     return (

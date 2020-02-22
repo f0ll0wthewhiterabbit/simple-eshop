@@ -106,7 +106,12 @@ export const UserMenu = ({
         )}
       </UserMenuWrapper>
       <ThemeSwitcherContainer />
-      <SignOutButton onClick={handleSignOutClick} data-test="signOutButton" aria-label="sign-out">
+      <SignOutButton
+        onClick={handleSignOutClick}
+        data-test="signOutButton"
+        aria-label="sign-out"
+        disableRipple
+      >
         <ExitToAppIcon />
       </SignOutButton>
     </Wrapper>

@@ -157,7 +157,7 @@ export function* handleSignOut(action) {
       yield call(API.delete, '/auth/token', config)
     }
   } catch (err) {
-    console.err(err)
+    console.error(err)
   } finally {
     if (refreshToken) {
       yield call([localStorage, 'removeItem'], STORAGE_FIELD_REFRESH_TOKEN)
