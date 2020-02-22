@@ -1,6 +1,7 @@
 const { body, check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const UserService = require('../../services/user')
+const EmailService = require('../../services/email')
 const roles = require('../../constants/roles')
 const validationMethods = require('../../constants/validationMethods')
 const tokenUtils = require('../../utils/token')
@@ -54,6 +55,10 @@ exports.createUser = async (req, res) => {
 
     user = await UserService.createUser(firstName, lastName, email, hashedPassword)
 
+    if (process.env.NODE_ENV === 'production') {
+      await EmailService.sendRegistrationEmail(user)
+    }
+
     const accessToken = tokenUtils.generateAccessToken(user.id, false)
 
     return res.status(201).json({ accessToken })
@@ -89,6 +94,10 @@ exports.updateUser = async (req, res) => {
       }
 
       userFields.isRemovable = true
+
+      if (process.env.NODE_ENV === 'production') {
+        await EmailService.sendDeleteAccountEmail(req.user.email)
+      }
     }
 
     const updatedUser = await UserService.updateUser(req.user.id, userFields)
