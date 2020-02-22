@@ -12,7 +12,7 @@ exports.validateUser = async (req, res) => {
 
     return res.json(user)
   } catch (err) {
-    console.err(err.message)
+    console.error(err.message)
     return res.status(500).send('Server error')
   }
 }

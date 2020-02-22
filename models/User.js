@@ -35,10 +35,16 @@ const UserSchema = new mongoose.Schema(
       default: roles.USER,
       enum: [roles.ADMIN, roles.USER, roles.GUEST],
     },
+    expireAt: {
+      type: Date,
+      default: undefined,
+    },
   },
   {
     timestamps: true,
   }
 )
+
+UserSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 })
 
 module.exports = mongoose.model('User', UserSchema)

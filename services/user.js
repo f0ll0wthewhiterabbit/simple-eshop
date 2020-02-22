@@ -133,7 +133,19 @@ exports.createUser = async (firstName, lastName, email, password) => {
 
 exports.updateUser = async (id, fieldsToUpdate) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, { $set: fieldsToUpdate }, { new: true })
+    let query
+
+    if ('isRemovable' in fieldsToUpdate && fieldsToUpdate.isRemovable === true) {
+      // automatic user deletion after 30 days
+      const now = new Date()
+      const expireDate = now.setSeconds(now.getSeconds() + 60 * 60 * 24 * 30)
+
+      query = { $set: fieldsToUpdate, expireAt: expireDate }
+    } else {
+      query = { $set: fieldsToUpdate }
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(id, { ...query }, { new: true })
 
     return updatedUser
   } catch (err) {
