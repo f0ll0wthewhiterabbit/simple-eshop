@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const logger = require('morgan')
+const mongooseLogger = require('mongoose-morgan')
 const cors = require('cors')
 const path = require('path')
 const connectDB = require('./db/mongoose')
@@ -11,6 +12,16 @@ connectDB()
 
 app.use(cors())
 app.use(logger('dev'))
+app.use(
+  mongooseLogger(
+    {
+      connectionString: `${process.env.MONGO_URI}`,
+    },
+    {
+      skip: (req, res) => res.statusCode < 400,
+    }
+  )
+)
 app.use(express.json())
 app.use('/api/products', require('./routes/api/products'))
 app.use('/api/users', require('./routes/api/users'))
