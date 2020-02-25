@@ -1,5 +1,6 @@
 import { addDecorator, addParameters } from '@storybook/react'
 import { jsxDecorator } from 'storybook-addon-jsx'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import './storybook.css'
 import StylesDecorator from './styles-decorator'
@@ -17,4 +18,7 @@ addParameters({
     { name: 'grey', value: '#b0bcc2' },
     { name: 'blue', value: '#00aced' },
   ],
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
+  },
 })
