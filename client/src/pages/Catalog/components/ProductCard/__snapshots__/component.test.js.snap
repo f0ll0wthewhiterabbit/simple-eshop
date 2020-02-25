@@ -17,12 +17,9 @@ exports[`ProductCard component should render correctly 1`] = `
     </Styled(WithStyles(ForwardRef(Typography)))>
     <Styled(WithStyles(ForwardRef(Typography)))
       component="h3"
-      data-test="price"
       gutterBottom={true}
       variant="h5"
-    >
-      US$ 99.00
-    </Styled(WithStyles(ForwardRef(Typography)))>
+    />
     <Styled(WithStyles(ForwardRef(Button)))
       color="secondary"
       size="small"

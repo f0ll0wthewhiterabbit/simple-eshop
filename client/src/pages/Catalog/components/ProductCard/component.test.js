@@ -4,7 +4,8 @@ import { Record, List } from 'immutable'
 
 import ProductCard from './component'
 import findByTestAttr from '../../../../utils/findByTestAttr'
-import formatPrice from '../../../../utils/formatPrice'
+
+jest.mock('../../../../utils/formatPrice')
 
 describe('ProductCard component', () => {
   let wrapper
@@ -31,7 +32,6 @@ describe('ProductCard component', () => {
   const dataTestTitle = 'title'
   const dataTestDescription = 'description'
   const dataTestTag = 'tag'
-  const dataTestPrice = 'price'
   const dataTestAverageRating = 'averageRating'
   const dataTestRatingsCount = 'ratingsCount'
   const dataTestUserRating = 'userRating'
@@ -69,13 +69,6 @@ describe('ProductCard component', () => {
     const description = findByTestAttr(wrapper, dataTestDescription)
 
     expect(description.text()).toBe(productData.description)
-  })
-
-  it('should contain correct price', () => {
-    const price = findByTestAttr(wrapper, dataTestPrice)
-    const expectedPrice = formatPrice(productData.price)
-
-    expect(price.text()).toBe(expectedPrice)
   })
 
   it('should contain correct tags', () => {

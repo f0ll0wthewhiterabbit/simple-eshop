@@ -77,6 +77,7 @@ exports[`UserMenu component should render correctly 1`] = `
   <Styled(WithStyles(ForwardRef(IconButton)))
     aria-label="sign-out"
     data-test="signOutButton"
+    disableRipple={true}
     onClick={[Function]}
   >
     <ExitToAppIcon />

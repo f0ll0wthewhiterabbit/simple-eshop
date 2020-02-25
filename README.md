@@ -1,5 +1,7 @@
 # Simple eShop
 
+[![Build Status](https://travis-ci.org/f0ll0wthewhiterabbit/simple-eshop.svg?branch=master)](https://travis-ci.org/f0ll0wthewhiterabbit/simple-eshop)
+
 Training project. Powered by [iTechArt](https://itechart.by) Students Lab 2019
 
 https://simple-e-shop.herokuapp.com/
