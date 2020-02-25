@@ -4,8 +4,14 @@ import SearchIcon from '@material-ui/icons/Search'
 
 import { Wrapper, Input, IconWrapper } from './styles'
 
-const SearchForm = ({ placeholder, itemsPerPage, searchMethod, setSearchQueryMethod }) => {
-  const [inputValue, setInputValue] = useState('')
+const SearchForm = ({
+  placeholder,
+  itemsPerPage,
+  initialValue,
+  searchMethod,
+  setSearchQueryMethod,
+}) => {
+  const [inputValue, setInputValue] = useState(initialValue)
 
   const handleInputChange = evt => {
     setInputValue(evt.target.value)
@@ -24,6 +30,7 @@ const SearchForm = ({ placeholder, itemsPerPage, searchMethod, setSearchQueryMet
         inputProps={{ 'aria-label': placeholder.toLowerCase() }}
         value={inputValue}
         onChange={handleInputChange}
+        autoFocus={inputValue !== ''}
       />
       <IconWrapper type="submit" aria-label="search">
         <SearchIcon />
@@ -35,6 +42,7 @@ const SearchForm = ({ placeholder, itemsPerPage, searchMethod, setSearchQueryMet
 SearchForm.propTypes = {
   placeholder: PropTypes.string.isRequired,
   itemsPerPage: PropTypes.number.isRequired,
+  initialValue: PropTypes.string.isRequired,
   searchMethod: PropTypes.func.isRequired,
   setSearchQueryMethod: PropTypes.func.isRequired,
 }

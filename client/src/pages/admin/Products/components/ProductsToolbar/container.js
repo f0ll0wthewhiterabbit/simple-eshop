@@ -5,6 +5,7 @@ import { fetchProducts, setProductsSearchQuery } from '../../../../../store/acti
 
 const mapStateToProps = state => ({
   itemsPerPage: state.getIn(['products', 'itemsPerPage']),
+  lastSearchQuery: state.getIn(['products', 'lastSearchQuery']),
 })
 
 const mapDispatchToProps = {

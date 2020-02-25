@@ -5,6 +5,7 @@ import { fetchUsers, setUsersSearchQuery } from '../../../../../store/actions'
 
 const mapStateToProps = state => ({
   itemsPerPage: state.getIn(['users', 'itemsPerPage']),
+  lastSearchQuery: state.getIn(['users', 'lastSearchQuery']),
 })
 
 const mapDispatchToProps = {

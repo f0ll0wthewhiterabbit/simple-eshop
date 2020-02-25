@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import SearchForm from '../../../../../components/global/SearchForm'
 import Wrapper from './styles'
 
-const UsersToolbar = ({ itemsPerPage, fetchUsers, setUsersSearchQuery }) => {
+const UsersToolbar = ({ itemsPerPage, lastSearchQuery, fetchUsers, setUsersSearchQuery }) => {
   return (
     <Wrapper>
       <SearchForm
@@ -12,6 +12,7 @@ const UsersToolbar = ({ itemsPerPage, fetchUsers, setUsersSearchQuery }) => {
         itemsPerPage={itemsPerPage}
         searchMethod={fetchUsers}
         setSearchQueryMethod={setUsersSearchQuery}
+        initialValue={lastSearchQuery}
       />
     </Wrapper>
   )
@@ -19,6 +20,7 @@ const UsersToolbar = ({ itemsPerPage, fetchUsers, setUsersSearchQuery }) => {
 
 UsersToolbar.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
+  lastSearchQuery: PropTypes.string.isRequired,
   fetchUsers: PropTypes.func.isRequired,
   setUsersSearchQuery: PropTypes.func.isRequired,
 }
