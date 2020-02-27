@@ -84,7 +84,9 @@ exports.getNumberOfProducts = async (userId, searchText) => {
 
 exports.getNumberOfRemovableProducts = async productsIdList => {
   try {
-    const numberOfRemovableProducts = await Product.countDocuments({ _id: { $in: productsIdList } })
+    const numberOfRemovableProducts = await Product.countDocuments({
+      _id: { $in: productsIdList },
+    })
 
     return numberOfRemovableProducts
   } catch (err) {

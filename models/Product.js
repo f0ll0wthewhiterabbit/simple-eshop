@@ -1,3 +1,4 @@
+/* eslint-disable space-before-function-paren, func-names */
 const mongoose = require('mongoose')
 
 const { Schema } = mongoose

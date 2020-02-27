@@ -17,5 +17,8 @@ export const signIn = createAction('AUTH/SIGN_IN', (userData, setFormSubmitting)
 }))
 export const signInSuccess = createAction('AUTH/SIGN_IN_SUCCESS', token => ({ token }))
 export const signInError = createAction('AUTH/SIGN_IN_ERROR', error => ({ error }))
-export const signOut = createAction('AUTH/SIGN_OUT', (history, location) => ({ history, location }))
+export const signOut = createAction('AUTH/SIGN_OUT', (history, location) => ({
+  history,
+  location,
+}))
 export const signOutSuccess = createAction('AUTH/SIGN_OUT_SUCCESS')
