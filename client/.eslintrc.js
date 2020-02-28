@@ -59,4 +59,4 @@ module.exports = {
     'no-underscore-dangle': 'off',
     semi: 'off',
   },
-};
+}

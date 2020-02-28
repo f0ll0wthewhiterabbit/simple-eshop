@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
+const DEVELOPMENT_URL = 'http://localhost:3000'
 
 describe('Simple eShop (e2e)', () => {
   jest.setTimeout(200000)
 
   beforeEach(async () => {
-    await page.goto('http://localhost:3000/')
+    await page.goto(`${DEVELOPMENT_URL}/`)
   })
 
   afterEach(async () => {
@@ -28,7 +29,7 @@ describe('Simple eShop (e2e)', () => {
       await page.waitFor('main h1')
       const headingText = await page.$eval('main h1', heading => heading.textContent)
 
-      expect(page.url()).toBe('http://localhost:3000/')
+      expect(page.url()).toBe(`${DEVELOPMENT_URL}/`)
       expect(headingText).toBe('Simpleshop.')
     })
   })
@@ -52,7 +53,7 @@ describe('Simple eShop (e2e)', () => {
       await page.waitFor('main h1')
       const headingText = await page.$eval('main h1', heading => heading.textContent)
 
-      expect(page.url()).toBe('http://localhost:3000/profile')
+      expect(page.url()).toBe(`${DEVELOPMENT_URL}/profile`)
       expect(headingText).toBe('Profile')
     })
 
@@ -62,7 +63,7 @@ describe('Simple eShop (e2e)', () => {
       await page.waitFor('main h1')
       const headingText = await page.$eval('main h1', heading => heading.textContent)
 
-      expect(page.url()).toBe('http://localhost:3000/catalog')
+      expect(page.url()).toBe(`${DEVELOPMENT_URL}/catalog`)
       expect(headingText).toBe('Catalog.')
     })
 
@@ -72,7 +73,7 @@ describe('Simple eShop (e2e)', () => {
       await page.waitFor('main h1')
       const headingText = await page.$eval('main h1', heading => heading.textContent)
 
-      expect(page.url()).toBe('http://localhost:3000/sign-in')
+      expect(page.url()).toBe(`${DEVELOPMENT_URL}/sign-in`)
       expect(headingText).toBe('Sign in')
     })
   })
