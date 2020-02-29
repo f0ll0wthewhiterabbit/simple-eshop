@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Switch } from '@material-ui/core'
 
-import { FIELD_THEME_DEFAULT, FIELD_THEME_DARK } from '../../../../../../../constants'
+import { FIELDS } from '../../../../../../../constants'
 import { Wrapper } from './styles'
 
 const ThemeSwitcher = ({ isDarkTheme, toggleTheme }) => {
   const handleThemeChange = () => {
-    const nextTheme = isDarkTheme ? FIELD_THEME_DEFAULT : FIELD_THEME_DARK
+    const nextTheme = isDarkTheme ? FIELDS.THEME_DEFAULT : FIELDS.THEME_DARK
     toggleTheme(nextTheme)
   }
 

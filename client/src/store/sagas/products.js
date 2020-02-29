@@ -3,7 +3,7 @@ import { List } from 'immutable'
 
 import API from '../../utils/api'
 import convertToRecord from '../../utils/convertToRecord'
-import { ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
+import { PAGE_PATHS } from '../../constants'
 import {
   fetchProducts,
   fetchProductsSuccess,
@@ -187,7 +187,7 @@ export function* handleAddProduct(action) {
     const product = convertToRecord(response.data)
 
     yield put(addProductSuccess(product))
-    history.push(ADMIN_PRODUCTS_PAGE_PATH)
+    history.push(PAGE_PATHS.ADMIN_PRODUCTS)
   } catch (error) {
     const message = error.response.data.errors
       ? error.response.data.errors[0].msg
@@ -211,7 +211,7 @@ export function* handleEditProduct(action) {
     const product = convertToRecord(response.data)
 
     yield put(editProductSuccess(product))
-    history.push(ADMIN_PRODUCTS_PAGE_PATH)
+    history.push(PAGE_PATHS.ADMIN_PRODUCTS)
   } catch (error) {
     const message = error.response.data.errors
       ? error.response.data.errors[0].msg

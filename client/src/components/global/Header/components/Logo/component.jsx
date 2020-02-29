@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { HOME_PAGE_PATH } from '../../../../../constants'
+import { PAGE_PATHS } from '../../../../../constants'
 import { Wrapper, SiteLink, LogoImg } from './styles'
 
 const Logo = ({ isAdmin, isDarkTheme }) => {
   return (
     <Wrapper justify={isAdmin ? 'center' : 'flex-start'}>
-      <SiteLink to={HOME_PAGE_PATH}>
+      <SiteLink to={PAGE_PATHS.HOME}>
         <LogoImg src="/logo.png" alt="Logo" isDarkTheme={isDarkTheme} />
       </SiteLink>
     </Wrapper>

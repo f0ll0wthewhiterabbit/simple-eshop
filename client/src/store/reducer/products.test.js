@@ -25,23 +25,19 @@ import {
   startProductsLoading,
   setProductsSearchQuery,
 } from '../actions'
-import {
-  DEFAULT_CATALOG_PER_PAGE_LIMIT,
-  URL_FIELD_NO_FILTER,
-  URL_FIELD_RATINGS_FILTER,
-} from '../../constants'
+import { PAGE_LIMITS, FIELDS } from '../../constants'
 
 describe('Products reducer', () => {
   const initialState = Record({
     data: List(),
     totalAmount: 0,
-    itemsPerPage: DEFAULT_CATALOG_PER_PAGE_LIMIT,
+    itemsPerPage: PAGE_LIMITS.CATALOG_DEFAULT,
     currentPage: 1,
     totalPages: 1,
     selected: List(),
     ratingsLoadingList: List(),
     ratingsErrorList: List(),
-    filter: URL_FIELD_NO_FILTER,
+    filter: FIELDS.URL_NO_FILTER,
     currentProduct: Record({
       id: '',
       title: '',
@@ -382,9 +378,9 @@ describe('Products reducer', () => {
   })
 
   it('should handle [setProductsFilter] action', () => {
-    const recievedState = productsReducer(undefined, setProductsFilter(URL_FIELD_RATINGS_FILTER))
+    const recievedState = productsReducer(undefined, setProductsFilter(FIELDS.URL_RATINGS_FILTER))
 
-    expect(recievedState.filter).toBe(URL_FIELD_RATINGS_FILTER)
+    expect(recievedState.filter).toBe(FIELDS.URL_RATINGS_FILTER)
   })
 
   it('should handle [setProductsSearchQuery] action', () => {

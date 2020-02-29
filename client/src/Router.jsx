@@ -5,20 +5,7 @@ import Layout from './components/wrappers/Layout'
 import Loader from './components/global/Loader'
 import PrivateRoute from './components/wrappers/PrivateRoute'
 
-import {
-  HOME_PAGE_PATH,
-  CATALOG_PAGE_PATH,
-  ABOUT_PAGE_PATH,
-  BLOG_PAGE_PATH,
-  CONTACT_PAGE_PATH,
-  PROFILE_PAGE_PATH,
-  SIGN_IN_PAGE_PATH,
-  SIGN_UP_PAGE_PATH,
-  ADMIN_PAGE_PATH,
-  ADMIN_USERS_PAGE_PATH,
-  ADMIN_PRODUCTS_PAGE_PATH,
-  ERROR_PAGE_PATH,
-} from './constants'
+import { PAGE_PATHS } from './constants'
 
 const HomePage = React.lazy(() => import('./pages/Home'))
 const CatalogPage = React.lazy(() => import('./pages/Catalog'))
@@ -41,17 +28,17 @@ export default () => {
       <Layout>
         <React.Suspense fallback={<Loader />}>
           <Switch>
-            <PrivateRoute exact path={HOME_PAGE_PATH} component={HomePage} />
-            <PrivateRoute exact path={CATALOG_PAGE_PATH} component={CatalogPage} />
-            <PrivateRoute exact path={ABOUT_PAGE_PATH} component={AboutPage} />
-            <PrivateRoute exact path={BLOG_PAGE_PATH} component={BlogPage} />
-            <PrivateRoute exact path={CONTACT_PAGE_PATH} component={ContactPage} />
-            <PrivateRoute exact path={PROFILE_PAGE_PATH} component={ProfilePage} />
-            <Route exact path={SIGN_IN_PAGE_PATH} component={SignInPage} />
-            <Route exact path={SIGN_UP_PAGE_PATH} component={SignUpPage} />
-            <PrivateRoute exact path={ADMIN_USERS_PAGE_PATH} component={AdminUsersPage} />
+            <PrivateRoute exact path={PAGE_PATHS.HOME} component={HomePage} />
+            <PrivateRoute exact path={PAGE_PATHS.CATALOG} component={CatalogPage} />
+            <PrivateRoute exact path={PAGE_PATHS.ABOUT} component={AboutPage} />
+            <PrivateRoute exact path={PAGE_PATHS.BLOG} component={BlogPage} />
+            <PrivateRoute exact path={PAGE_PATHS.CONTACT} component={ContactPage} />
+            <PrivateRoute exact path={PAGE_PATHS.PROFILE} component={ProfilePage} />
+            <Route exact path={PAGE_PATHS.SIGN_IN} component={SignInPage} />
+            <Route exact path={PAGE_PATHS.SIGN_UP} component={SignUpPage} />
+            <PrivateRoute exact path={PAGE_PATHS.ADMIN_USERS} component={AdminUsersPage} />
             <Route
-              path={ADMIN_PRODUCTS_PAGE_PATH}
+              path={PAGE_PATHS.ADMIN_PRODUCTS}
               render={({ match: { url } }) => (
                 <Switch>
                   <PrivateRoute path={`${url}/`} component={AdminProductsPage} exact />
@@ -65,9 +52,9 @@ export default () => {
                 </Switch>
               )}
             />
-            <Redirect from={ADMIN_PAGE_PATH} to={ADMIN_PRODUCTS_PAGE_PATH} />
-            <Route exact path={ERROR_PAGE_PATH} render={props => <ErrorPage {...props} />} />
-            <Redirect to={ERROR_PAGE_PATH} />
+            <Redirect from={PAGE_PATHS.ADMIN} to={PAGE_PATHS.ADMIN_PRODUCTS} />
+            <Route exact path={PAGE_PATHS.ERROR} render={props => <ErrorPage {...props} />} />
+            <Redirect to={PAGE_PATHS.ERROR} />
           </Switch>
         </React.Suspense>
       </Layout>

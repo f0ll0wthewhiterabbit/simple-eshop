@@ -22,7 +22,7 @@ import {
   authenticate,
   startUsersLoading,
 } from '../actions'
-import { HOME_PAGE_PATH, ROLE_ADMIN, ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
+import { ROLES, PAGE_PATHS } from '../../constants'
 
 export const getUsers = state => state.getIn(['users', 'selected'])
 export const getRole = state => state.getIn(['auth', 'user', 'role'])
@@ -115,10 +115,10 @@ export function* handleUpdateUser(action) {
     yield put(updateUserSuccess(user))
     yield put(authenticate())
 
-    if (userRole === ROLE_ADMIN) {
-      history.push(ADMIN_PRODUCTS_PAGE_PATH)
+    if (userRole === ROLES.ADMIN) {
+      history.push(PAGE_PATHS.ADMIN_PRODUCTS)
     } else {
-      history.push(HOME_PAGE_PATH)
+      history.push(PAGE_PATHS.HOME)
     }
   } catch (error) {
     yield put(updateUserError('User update error!'))

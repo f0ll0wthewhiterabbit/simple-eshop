@@ -16,12 +16,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete'
 
 import formatPrice from '../../../utils/formatPrice'
-import {
-  ADMIN_PRODUCTS_PAGE_PATH,
-  ADMIN_HIGH_PER_PAGE_LIMIT,
-  DEFAULT_ADMIN_PER_PAGE_LIMIT,
-  ADMIN_LOW_PER_PAGE_LIMIT,
-} from '../../../constants'
+import { PAGE_PATHS, PAGE_LIMITS } from '../../../constants'
 import { BASE_URL } from '../../../utils/api'
 import {
   Root,
@@ -110,7 +105,7 @@ const Table = ({
   const mapRowToTableCellContent = (id, row) => {
     if (id === 'title') {
       return (
-        <MuiLink component={Link} to={`${ADMIN_PRODUCTS_PAGE_PATH}/${row._id}`}>
+        <MuiLink component={Link} to={`${PAGE_PATHS.ADMIN_PRODUCTS}/${row._id}`}>
           {row.title}
         </MuiLink>
       )
@@ -136,7 +131,7 @@ const Table = ({
       const averageRating = Math.round(row.ratingInfo.average)
 
       return (
-        <MuiLink component={Link} to={`${ADMIN_PRODUCTS_PAGE_PATH}/${row._id}/rating`}>
+        <MuiLink component={Link} to={`${PAGE_PATHS.ADMIN_PRODUCTS}/${row._id}/rating`}>
           {averageRating}
         </MuiLink>
       )
@@ -246,9 +241,9 @@ const Table = ({
         </TableWrapper>
         <TablePaginationPanel
           rowsPerPageOptions={[
-            ADMIN_LOW_PER_PAGE_LIMIT,
-            DEFAULT_ADMIN_PER_PAGE_LIMIT,
-            ADMIN_HIGH_PER_PAGE_LIMIT,
+            PAGE_LIMITS.ADMIN_LOW,
+            PAGE_LIMITS.ADMIN_DEFAULT,
+            PAGE_LIMITS.ADMIN_HIGH,
           ]}
           component="div"
           count={totalAmount}

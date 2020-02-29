@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Layout from './component'
-import { ROLE_GUEST, ROLE_ADMIN, ROLE_USER } from '../../../constants'
+import { ROLES } from '../../../constants'
 import findByTestAttr from '../../../utils/findByTestAttr'
 
 describe('Layout component', () => {
@@ -10,7 +10,7 @@ describe('Layout component', () => {
   const testContent = 'test content'
   const initialProps = {
     isAuthenticated: false,
-    userRole: ROLE_GUEST,
+    userRole: ROLES.GUEST,
     children: <p>{testContent}</p>,
   }
   const dataTestStandardLayout = 'standardLayout'
@@ -44,14 +44,14 @@ describe('Layout component', () => {
   })
 
   it('should render adminLayout for administrator', () => {
-    wrapper = generateWrapper({ isAuthenticated: true, userRole: ROLE_ADMIN })
+    wrapper = generateWrapper({ isAuthenticated: true, userRole: ROLES.ADMIN })
     const adminLayout = findByTestAttr(wrapper, dataTestAdminLayout)
 
     expect(adminLayout).toHaveLength(1)
   })
 
   it(`shouldn't render adminLayout for authenticated user`, () => {
-    wrapper = generateWrapper({ isAuthenticated: true, userRole: ROLE_USER })
+    wrapper = generateWrapper({ isAuthenticated: true, userRole: ROLES.USER })
     const adminLayout = findByTestAttr(wrapper, dataTestAdminLayout)
 
     expect(adminLayout).toHaveLength(0)

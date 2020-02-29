@@ -38,7 +38,7 @@ import {
   handleEditProduct,
   handleDeleteProducts,
 } from './products'
-import { ADMIN_PRODUCTS_PAGE_PATH } from '../../constants'
+import { PAGE_PATHS } from '../../constants'
 
 jest.mock('../../utils/convertToRecord', () => jest.fn(() => [1, 2, 3]))
 
@@ -241,7 +241,7 @@ describe('Products sagas', () => {
         .run()
 
       expect(action.payload.history.push).toHaveBeenCalledTimes(1)
-      expect(action.payload.history.push).toHaveBeenCalledWith(ADMIN_PRODUCTS_PAGE_PATH)
+      expect(action.payload.history.push).toHaveBeenCalledWith(PAGE_PATHS.ADMIN_PRODUCTS)
     })
 
     it('should handle error case', () => {
@@ -282,7 +282,7 @@ describe('Products sagas', () => {
         .run()
 
       expect(action.payload.history.push).toHaveBeenCalledTimes(1)
-      expect(action.payload.history.push).toHaveBeenCalledWith(ADMIN_PRODUCTS_PAGE_PATH)
+      expect(action.payload.history.push).toHaveBeenCalledWith(PAGE_PATHS.ADMIN_PRODUCTS)
     })
 
     it('should handle error case', () => {

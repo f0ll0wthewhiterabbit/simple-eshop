@@ -26,7 +26,7 @@ import {
   handleRequestUserDeletion,
   handleUpdateUser,
 } from './users'
-import { ROLE_USER } from '../../constants'
+import { ROLES } from '../../constants'
 
 jest.mock('../../utils/convertToRecord', () => jest.fn(() => [1, 2, 3]))
 
@@ -112,7 +112,7 @@ describe('Users sagas', () => {
           firstName: 'John',
           lastName: 'Doe',
           email: 'jd@email.com',
-          role: ROLE_USER,
+          role: ROLES.USER,
           isRemovable: false,
         },
       }
@@ -164,7 +164,7 @@ describe('Users sagas', () => {
       expectSaga(handleUpdateUser, action)
         .provide([
           [matchers.call.fn(API.patch), [1, 2, 3]],
-          [select(getRole), ROLE_USER],
+          [select(getRole), ROLES.USER],
         ])
         .put(startUsersLoading())
         .put(updateUserSuccess([1, 2, 3]))

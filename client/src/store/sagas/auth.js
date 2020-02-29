@@ -2,15 +2,7 @@
 import { takeEvery, put, call } from 'redux-saga/effects'
 
 import API from '../../utils/api'
-import {
-  STORAGE_FIELD_ACCESS_TOKEN,
-  STORAGE_FIELD_REFRESH_TOKEN,
-  ADMIN_PAGE_PATH,
-  SIGN_IN_PAGE_PATH,
-  ERROR_PAGE_PATH,
-  ROLE_ADMIN,
-  DEFAULT_ADMIN_PER_PAGE_LIMIT,
-} from '../../constants'
+import { FIELDS, PAGE_PATHS, ROLES, PAGE_LIMITS } from '../../constants'
 import {
   signUpSuccess,
   signUpError,
@@ -30,7 +22,7 @@ import isTokenExpired from '../../utils/isTokenExpired'
 
 export function* handleAuthenticate() {
   try {
-    const accessToken = yield call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
+    const accessToken = yield call([localStorage, 'getItem'], FIELDS.STORAGE_ACCESS_TOKEN)
 
     if (accessToken) {
       const isExpired = yield call(isTokenExpired, accessToken)
@@ -38,7 +30,7 @@ export function* handleAuthenticate() {
       if (!isExpired) {
         yield call(setAuthToken, accessToken)
       } else {
-        const refreshToken = yield call([localStorage, 'getItem'], STORAGE_FIELD_REFRESH_TOKEN)
+        const refreshToken = yield call([localStorage, 'getItem'], FIELDS.STORAGE_REFRESH_TOKEN)
         const config = {
           headers: {
             'Content-Type': 'application/json',
@@ -49,8 +41,8 @@ export function* handleAuthenticate() {
         const response = yield call(API.post, '/auth/token', body, config)
         const { accessToken: newAccessToken, refreshToken: newRefreshToken } = response.data
 
-        yield call([localStorage, 'setItem'], STORAGE_FIELD_ACCESS_TOKEN, newAccessToken)
-        yield call([localStorage, 'setItem'], STORAGE_FIELD_REFRESH_TOKEN, newRefreshToken)
+        yield call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, newAccessToken)
+        yield call([localStorage, 'setItem'], FIELDS.STORAGE_REFRESH_TOKEN, newRefreshToken)
         yield call(setAuthToken, newAccessToken)
       }
     } else {
@@ -62,8 +54,8 @@ export function* handleAuthenticate() {
     const { _id: id, firstName, lastName, email, role, isRemovable } = response.data
     const userData = { id, firstName, lastName, email, role, isRemovable }
 
-    if (role === ROLE_ADMIN) {
-      yield put(setProductsPerPage(DEFAULT_ADMIN_PER_PAGE_LIMIT))
+    if (role === ROLES.ADMIN) {
+      yield put(setProductsPerPage(PAGE_LIMITS.ADMIN_DEFAULT))
     }
 
     yield put(authenticateSuccess(userData))
@@ -71,13 +63,13 @@ export function* handleAuthenticate() {
     const errorMessage = error.response.data.errors
       ? error.response.data.errors[0].msg
       : 'Authentication failed!'
-    const refreshToken = yield call([localStorage, 'getItem'], STORAGE_FIELD_REFRESH_TOKEN)
+    const refreshToken = yield call([localStorage, 'getItem'], FIELDS.STORAGE_REFRESH_TOKEN)
 
     if (refreshToken) {
       yield put(signOut())
     }
 
-    yield call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
+    yield call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
     yield put(authenticateError(errorMessage))
   }
 }
@@ -95,7 +87,7 @@ export function* handleSignUp(action) {
     const response = yield call(API.post, '/users', body, config)
     const { accessToken } = response.data
 
-    yield call([localStorage, 'setItem'], STORAGE_FIELD_ACCESS_TOKEN, accessToken)
+    yield call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, accessToken)
     yield put(signUpSuccess(accessToken))
     yield put(authenticate())
   } catch (error) {
@@ -103,7 +95,7 @@ export function* handleSignUp(action) {
       ? error.response.data.errors[0].msg
       : 'Registration failed! Something went wrong.'
 
-    yield call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
+    yield call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
     yield put(signUpError(errorMessage))
     yield action.payload.setFormSubmitting(false)
   }
@@ -122,10 +114,10 @@ export function* handleSignIn(action) {
     const response = yield call(API.post, '/auth', body, config)
     const { accessToken, refreshToken } = response.data
 
-    yield call([localStorage, 'setItem'], STORAGE_FIELD_ACCESS_TOKEN, accessToken)
+    yield call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, accessToken)
 
     if (refreshToken) {
-      yield call([localStorage, 'setItem'], STORAGE_FIELD_REFRESH_TOKEN, refreshToken)
+      yield call([localStorage, 'setItem'], FIELDS.STORAGE_REFRESH_TOKEN, refreshToken)
     }
 
     yield put(signInSuccess(accessToken))
@@ -135,7 +127,7 @@ export function* handleSignIn(action) {
       ? error.response.data.errors[0].msg
       : 'Unable to login! Something went wrong!'
 
-    yield call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
+    yield call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
     yield put(signInError(errorMessage))
     yield action.payload.setFormSubmitting(false)
   }
@@ -143,7 +135,7 @@ export function* handleSignIn(action) {
 
 export function* handleSignOut(action) {
   const { history, location } = action.payload
-  const refreshToken = yield call([localStorage, 'getItem'], STORAGE_FIELD_REFRESH_TOKEN)
+  const refreshToken = yield call([localStorage, 'getItem'], FIELDS.STORAGE_REFRESH_TOKEN)
 
   try {
     if (refreshToken) {
@@ -160,19 +152,19 @@ export function* handleSignOut(action) {
     console.error(err)
   } finally {
     if (refreshToken) {
-      yield call([localStorage, 'removeItem'], STORAGE_FIELD_REFRESH_TOKEN)
+      yield call([localStorage, 'removeItem'], FIELDS.STORAGE_REFRESH_TOKEN)
     }
 
-    yield call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
+    yield call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
     yield put(signOutSuccess())
 
     if (
       location &&
       history &&
-      (location.pathname.indexOf(ADMIN_PAGE_PATH) !== -1 ||
-        location.pathname.indexOf(ERROR_PAGE_PATH) !== -1)
+      (location.pathname.indexOf(PAGE_PATHS.ADMIN) !== -1 ||
+        location.pathname.indexOf(PAGE_PATHS.ERROR) !== -1)
     ) {
-      history.push(SIGN_IN_PAGE_PATH)
+      history.push(PAGE_PATHS.SIGN_IN)
     }
   }
 }

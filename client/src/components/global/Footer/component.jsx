@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HOME_PAGE_PATH } from '../../../constants'
+import { PAGE_PATHS } from '../../../constants'
 import {
   Wrapper,
   Info,
@@ -59,7 +59,7 @@ const Footer = () => {
 
           <Copyright>
             {'© '}
-            <SiteLink to={HOME_PAGE_PATH}>simple eShop</SiteLink> {new Date().getFullYear()}
+            <SiteLink to={PAGE_PATHS.HOME}>simple eShop</SiteLink> {new Date().getFullYear()}
           </Copyright>
         </SocialLinksContainer>
       </SocialLinksWrapper>

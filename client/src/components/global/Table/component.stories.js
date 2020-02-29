@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions'
 import { List, Record } from 'immutable'
 
 import Table from './component'
-import { ROLE_USER, STORE_FIELD_USERS } from '../../../constants'
+import { ROLES, FIELDS } from '../../../constants'
 
 export default {
   title: 'Table',
@@ -18,7 +18,7 @@ const usersListData = List([
     lastName: 'Doe',
     email: 'john@email.com',
     isRemovable: false,
-    role: ROLE_USER,
+    role: ROLES.USER,
   })(),
   Record({
     _id: '1',
@@ -26,7 +26,7 @@ const usersListData = List([
     lastName: 'Doe',
     email: 'jane@email.com',
     isRemovable: true,
-    role: ROLE_USER,
+    role: ROLES.USER,
   })(),
 ])
 
@@ -43,7 +43,7 @@ export const tableData = {
   totalAmount: 2,
   headCells: headCellsData,
   title: 'Users',
-  storeFieldName: STORE_FIELD_USERS,
+  storeFieldName: FIELDS.STORE_USERS,
   selectedItems: [],
 }
 

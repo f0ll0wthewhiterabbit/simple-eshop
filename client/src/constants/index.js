@@ -1,4 +1,4 @@
-export * from './paths'
+export * from './pagePaths'
 export * from './endpoints'
 export * from './fields'
 export * from './roles'

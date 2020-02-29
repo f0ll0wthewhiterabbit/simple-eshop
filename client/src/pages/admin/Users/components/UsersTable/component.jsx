@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
 import TableContainer from '../../../../../components/global/Table'
-import { STORE_FIELD_USERS } from '../../../../../constants'
+import { FIELDS } from '../../../../../constants'
 
 const UsersTable = ({
   usersList,
@@ -32,7 +32,7 @@ const UsersTable = ({
       totalAmount={totalAmount}
       headCells={headCells}
       title={title}
-      storeFieldName={STORE_FIELD_USERS}
+      storeFieldName={FIELDS.STORE_USERS}
       selectedItems={selectedUsers}
       setSelectedItems={setSelectedUsers}
       fetchData={fetchUsers}

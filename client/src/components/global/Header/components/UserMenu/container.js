@@ -2,11 +2,11 @@ import { connect } from 'react-redux'
 
 import UserMenuComponent from './component'
 import { showModal, signOut } from '../../../../../store/actions'
-import { ROLE_ADMIN } from '../../../../../constants'
+import { ROLES } from '../../../../../constants'
 
 const mapStateToProps = state => ({
   userName: state.getIn(['auth', 'user', 'firstName']),
-  isAdmin: state.getIn(['auth', 'user', 'role']) === ROLE_ADMIN,
+  isAdmin: state.getIn(['auth', 'user', 'role']) === ROLES.ADMIN,
   isDeleteRequestSent: state.getIn(['auth', 'user', 'isRemovable']),
 })
 

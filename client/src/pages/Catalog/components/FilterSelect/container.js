@@ -2,11 +2,11 @@ import { connect } from 'react-redux'
 
 import FilterSelect from './component'
 import { fetchProducts, setProductsFilter } from '../../../../store/actions'
-import { FIELD_THEME_DARK } from '../../../../constants'
+import { FIELDS } from '../../../../constants'
 
 const mapStateToProps = state => ({
   filter: state.getIn(['products', 'filter']),
-  isDarkTheme: state.getIn(['app', 'theme']) === FIELD_THEME_DARK,
+  isDarkTheme: state.getIn(['app', 'theme']) === FIELDS.THEME_DARK,
 })
 
 const mapDispatchToProps = {

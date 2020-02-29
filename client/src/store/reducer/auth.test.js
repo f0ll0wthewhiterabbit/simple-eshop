@@ -10,7 +10,7 @@ import {
   signInError,
   signOutSuccess,
 } from '../actions'
-import { ROLE_GUEST, ROLE_USER } from '../../constants'
+import { ROLES } from '../../constants'
 
 describe('Auth reducer', () => {
   const initialState = Record({
@@ -21,7 +21,7 @@ describe('Auth reducer', () => {
       firstName: '',
       lastName: '',
       email: '',
-      role: ROLE_GUEST,
+      role: ROLES.GUEST,
       isRemovable: false,
     })(),
     error: null,
@@ -31,7 +31,7 @@ describe('Auth reducer', () => {
     firstName: 'testName',
     lastName: 'testLastName',
     email: 'test@email.com',
-    role: ROLE_USER,
+    role: ROLES.USER,
     isRemovable: false,
   }
   const testError = 'test error message'

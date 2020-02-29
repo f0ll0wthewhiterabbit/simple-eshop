@@ -3,12 +3,12 @@ import { shallow } from 'enzyme'
 
 import FilterSelect from './component'
 import findByTestAttr from '../../../../utils/findByTestAttr'
-import { URL_FIELD_NO_FILTER, URL_FIELD_RATINGS_FILTER } from '../../../../constants'
+import { FIELDS } from '../../../../constants'
 
 describe('FilterSelect component', () => {
   let wrapper
   const initialProps = {
-    filter: URL_FIELD_NO_FILTER,
+    filter: FIELDS.URL_NO_FILTER,
     isDarkTheme: false,
     fetchProducts: jest.fn(),
     setProductsFilter: jest.fn(),
@@ -38,21 +38,21 @@ describe('FilterSelect component', () => {
   it('should render filter from props', () => {
     const select = findByTestAttr(wrapper, dataTestSelect)
 
-    expect(select.props().value).toBe(URL_FIELD_NO_FILTER)
+    expect(select.props().value).toBe(FIELDS.URL_NO_FILTER)
   })
 
   it('should handle filter change', () => {
     const select = findByTestAttr(wrapper, dataTestSelect)
-    select.simulate('change', { target: { value: URL_FIELD_RATINGS_FILTER } })
+    select.simulate('change', { target: { value: FIELDS.URL_RATINGS_FILTER } })
 
     expect(initialProps.setProductsFilter).toHaveBeenCalledTimes(1)
-    expect(initialProps.setProductsFilter).toHaveBeenCalledWith(URL_FIELD_RATINGS_FILTER)
+    expect(initialProps.setProductsFilter).toHaveBeenCalledWith(FIELDS.URL_RATINGS_FILTER)
     expect(initialProps.fetchProducts).toHaveBeenCalledTimes(1)
     expect(initialProps.fetchProducts).toHaveBeenCalledWith(
       1,
       null,
       undefined,
-      URL_FIELD_RATINGS_FILTER
+      FIELDS.URL_RATINGS_FILTER
     )
   })
 

@@ -25,18 +25,18 @@ import {
   startProductsLoading,
   setProductsSearchQuery,
 } from '../actions'
-import { DEFAULT_CATALOG_PER_PAGE_LIMIT, URL_FIELD_NO_FILTER } from '../../constants'
+import { PAGE_LIMITS, FIELDS } from '../../constants'
 
 const initialState = Record({
   data: List(),
   totalAmount: 0,
-  itemsPerPage: DEFAULT_CATALOG_PER_PAGE_LIMIT,
+  itemsPerPage: PAGE_LIMITS.CATALOG_DEFAULT,
   currentPage: 1,
   totalPages: 1,
   selected: List(),
   ratingsLoadingList: List(),
   ratingsErrorList: List(),
-  filter: URL_FIELD_NO_FILTER,
+  filter: FIELDS.URL_NO_FILTER,
   currentProduct: Record({
     id: '',
     title: '',

@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes'
 import { Grid } from '@material-ui/core'
 
 import Loader from '../../../../components/global/Loader/component'
-import { CATALOG_PAGE_PATH } from '../../../../constants'
+import { PAGE_PATHS } from '../../../../constants'
 import { BASE_URL } from '../../../../utils/api'
 import formatPrice from '../../../../utils/formatPrice'
 import {
@@ -54,7 +54,7 @@ const ProductsSection = ({ products, error, isLoading, fetchProducts }) => {
       <ProductsWrapper container spacing={3}>
         {content}
       </ProductsWrapper>
-      <ProductsLink to={CATALOG_PAGE_PATH}>Show All</ProductsLink>
+      <ProductsLink to={PAGE_PATHS.CATALOG}>Show All</ProductsLink>
     </Wrapper>
   )
 }

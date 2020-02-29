@@ -1,0 +1,15 @@
+export const PAGE_PATHS = {
+  HOME: '/',
+  CATALOG: '/catalog',
+  ABOUT: '/about',
+  BLOG: '/blog',
+  CONTACT: '/contact',
+  PROFILE: '/profile',
+  SIGN_IN: '/sign-in',
+  SIGN_UP: '/sign-up',
+  ADMIN: '/admin',
+  ADMIN_USERS: '/admin/users',
+  ADMIN_PRODUCTS: '/admin/products',
+  ADMIN_PRODUCT_ADD: '/admin/products/add',
+  ERROR: '/error',
+}

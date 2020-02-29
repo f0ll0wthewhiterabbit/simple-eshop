@@ -15,12 +15,12 @@ import {
   startUsersLoading,
   setUsersSearchQuery,
 } from '../actions'
-import { DEFAULT_ADMIN_PER_PAGE_LIMIT } from '../../constants'
+import { PAGE_LIMITS } from '../../constants'
 
 const initialState = Record({
   data: List(),
   totalAmount: 0,
-  itemsPerPage: DEFAULT_ADMIN_PER_PAGE_LIMIT,
+  itemsPerPage: PAGE_LIMITS.ADMIN_DEFAULT,
   currentPage: 1,
   totalPages: 1,
   selected: List(),

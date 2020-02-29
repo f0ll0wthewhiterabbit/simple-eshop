@@ -4,21 +4,15 @@ import { Redirect } from 'react-router-dom'
 import { Container } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
-import {
-  SIGN_UP_PAGE_PATH,
-  HOME_PAGE_PATH,
-  ROLE_ADMIN,
-  ADMIN_PRODUCTS_PAGE_PATH,
-  ROLE_GUEST,
-} from '../../constants'
+import { ROLES, PAGE_PATHS } from '../../constants'
 import SignInFormContainer from './components/SignInForm'
 import { Wrapper, IconWrapper, SignUpLink, Heading, LinkInfo } from './styles'
 
 const SingInPage = ({ isAuthenticated, userRole }) => {
-  if (isAuthenticated && userRole !== ROLE_GUEST) {
+  if (isAuthenticated && userRole !== ROLES.GUEST) {
     return (
       <Redirect
-        to={userRole === ROLE_ADMIN ? ADMIN_PRODUCTS_PAGE_PATH : HOME_PAGE_PATH}
+        to={userRole === ROLES.ADMIN ? PAGE_PATHS.ADMIN_PRODUCTS : PAGE_PATHS.HOME}
         data-test="redirect"
       />
     )
@@ -35,7 +29,7 @@ const SingInPage = ({ isAuthenticated, userRole }) => {
         </Heading>
         <SignInFormContainer />
         <LinkInfo color="textSecondary" variant="body2" align="center">
-          Don&apos;t have an account? <SignUpLink to={SIGN_UP_PAGE_PATH}>Sign Up</SignUpLink>
+          Don&apos;t have an account? <SignUpLink to={PAGE_PATHS.SIGN_UP}>Sign Up</SignUpLink>
         </LinkInfo>
       </Wrapper>
     </Container>

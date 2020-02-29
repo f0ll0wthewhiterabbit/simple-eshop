@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import AdminLayoutContainer from '../../layouts/Admin'
 import StandardLayoutContainer from '../../layouts/Standard'
-import { ROLE_ADMIN } from '../../../constants'
+import { ROLES } from '../../../constants'
 
 const Layout = ({ isAuthenticated, userRole, children }) => {
-  if (isAuthenticated && userRole === ROLE_ADMIN) {
+  if (isAuthenticated && userRole === ROLES.ADMIN) {
     return <AdminLayoutContainer data-test="adminLayout">{children}</AdminLayoutContainer>
   }
 

@@ -3,11 +3,7 @@ import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 
-import {
-  ADMIN_LOW_PER_PAGE_LIMIT,
-  DEFAULT_ADMIN_PER_PAGE_LIMIT,
-  ADMIN_HIGH_PER_PAGE_LIMIT,
-} from '../../../../../constants'
+import { PAGE_LIMITS } from '../../../../../constants'
 import {
   Root,
   Wrapper,
@@ -125,9 +121,9 @@ const ProductRatingTable = ({
         <Comment variant="caption">&quot;--&quot; - for deleted users</Comment>
         <TablePaginationPanel
           rowsPerPageOptions={[
-            ADMIN_LOW_PER_PAGE_LIMIT,
-            DEFAULT_ADMIN_PER_PAGE_LIMIT,
-            ADMIN_HIGH_PER_PAGE_LIMIT,
+            PAGE_LIMITS.ADMIN_LOW,
+            PAGE_LIMITS.ADMIN_DEFAULT,
+            PAGE_LIMITS.ADMIN_HIGH,
           ]}
           component="div"
           count={totalAmount}

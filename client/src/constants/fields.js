@@ -1,10 +1,12 @@
-export const STORAGE_FIELD_ACCESS_TOKEN = 'accessToken'
-export const STORAGE_FIELD_REFRESH_TOKEN = 'refreshToken'
-export const STORAGE_FIELD_THEME = 'theme'
-export const FIELD_THEME_DEFAULT = 'default'
-export const FIELD_THEME_DARK = 'dark'
-export const STORE_FIELD_PRODUCTS = 'products'
-export const STORE_FIELD_USERS = 'users'
-export const STORE_FIELD_CURRENT_USER = 'usersCurrent'
-export const URL_FIELD_RATINGS_FILTER = 'myRatings'
-export const URL_FIELD_NO_FILTER = 'all'
+export const FIELDS = {
+  STORAGE_ACCESS_TOKEN: 'accessToken',
+  STORAGE_REFRESH_TOKEN: 'refreshToken',
+  STORAGE_THEME: 'theme',
+  THEME_DEFAULT: 'default',
+  THEME_DARK: 'dark',
+  STORE_PRODUCTS: 'products',
+  STORE_USERS: 'users',
+  STORE_CURRENT_USER: 'usersCurrent',
+  URL_RATINGS_FILTER: 'myRatings',
+  URL_NO_FILTER: 'all',
+}

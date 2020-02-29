@@ -2,14 +2,14 @@ import { Record } from 'immutable'
 
 import appReducer from './app'
 import { showModal, closeModal, openSidebar, closeSidebar, toggleTheme } from '../actions'
-import { FIELD_THEME_DEFAULT, FIELD_THEME_DARK } from '../../constants'
+import { FIELDS } from '../../constants'
 
 describe('App reducer', () => {
   const initialState = Record({
     isModalOpened: false,
     storeFieldNameForModal: '',
     isSidebarOpened: false,
-    theme: FIELD_THEME_DEFAULT,
+    theme: FIELDS.THEME_DEFAULT,
   })()
   const testFieldName = 'test field name'
 
@@ -48,8 +48,8 @@ describe('App reducer', () => {
   })
 
   it('should handle [toggleTheme] action', () => {
-    const recievedState = appReducer(undefined, toggleTheme(FIELD_THEME_DARK))
+    const recievedState = appReducer(undefined, toggleTheme(FIELDS.THEME_DARK))
 
-    expect(recievedState.theme).toBe(FIELD_THEME_DARK)
+    expect(recievedState.theme).toBe(FIELDS.THEME_DARK)
   })
 })

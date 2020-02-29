@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
 import ErrorPage from './component'
-import { ROLE_ADMIN } from '../../constants'
+import { ROLES } from '../../constants'
 
 const mapStateToProps = state => ({
-  isAdmin: state.getIn(['auth', 'user', 'role']) === ROLE_ADMIN,
+  isAdmin: state.getIn(['auth', 'user', 'role']) === ROLES.ADMIN,
 })
 
 export default connect(mapStateToProps)(ErrorPage)

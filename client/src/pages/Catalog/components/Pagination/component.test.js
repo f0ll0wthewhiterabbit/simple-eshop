@@ -3,16 +3,16 @@ import { shallow } from 'enzyme'
 
 import Pagination from './component'
 import findByTestAttr from '../../../../utils/findByTestAttr'
-import { URL_FIELD_RATINGS_FILTER } from '../../../../constants'
+import { FIELDS } from '../../../../constants'
 
 describe('Pagination component', () => {
   let wrapper
-  const filter = URL_FIELD_RATINGS_FILTER
+  const filter = FIELDS.URL_RATINGS_FILTER
   const initialProps = {
     currentPage: 5,
     totalPages: 10,
     totalAmount: 85,
-    filter: URL_FIELD_RATINGS_FILTER,
+    filter: FIELDS.URL_RATINGS_FILTER,
     fetchProducts: jest.fn(),
   }
   const dataTestPaginationItem = 'paginationItem'

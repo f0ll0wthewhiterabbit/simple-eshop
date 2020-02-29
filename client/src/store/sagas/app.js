@@ -1,19 +1,19 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 
 import { toggleTheme, getThemeFromStorage, initialize, authenticate } from '../actions'
-import { STORAGE_FIELD_THEME, FIELD_THEME_DARK } from '../../constants'
+import { FIELDS } from '../../constants'
 
 export function* handleToggleTheme(action) {
   const { theme } = action.payload
 
-  yield call([localStorage, 'setItem'], STORAGE_FIELD_THEME, theme)
+  yield call([localStorage, 'setItem'], FIELDS.STORAGE_THEME, theme)
 }
 
 export function* handleGetThemeFromStorage() {
-  const theme = yield call([localStorage, 'getItem'], STORAGE_FIELD_THEME)
+  const theme = yield call([localStorage, 'getItem'], FIELDS.STORAGE_THEME)
 
-  if (theme === FIELD_THEME_DARK) {
-    yield put(toggleTheme(FIELD_THEME_DARK))
+  if (theme === FIELDS.THEME_DARK) {
+    yield put(toggleTheme(FIELDS.THEME_DARK))
   }
 }
 

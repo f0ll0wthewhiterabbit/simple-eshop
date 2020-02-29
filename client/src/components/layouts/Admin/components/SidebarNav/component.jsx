@@ -3,19 +3,19 @@ import PropTypes from 'prop-types'
 import PeopleIcon from '@material-ui/icons/People'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 
-import { ADMIN_USERS_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH } from '../../../../../constants'
+import { PAGE_PATHS } from '../../../../../constants'
 import { PagesList, NavigationLink, NavigationItem, PageIcon, PageText } from './styles'
 
 const SidebarNav = ({ isSidebarOpened, closeSidebar }) => {
   const pages = [
     {
       title: 'Users',
-      href: ADMIN_USERS_PAGE_PATH,
+      href: PAGE_PATHS.ADMIN_USERS,
       icon: <PeopleIcon />,
     },
     {
       title: 'Products',
-      href: ADMIN_PRODUCTS_PAGE_PATH,
+      href: PAGE_PATHS.ADMIN_PRODUCTS,
       icon: <ShoppingBasketIcon />,
     },
   ]

@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 import SearchForm from '../../../../../components/global/SearchForm'
-import { ADMIN_PRODUCT_ADD_PAGE_PATH } from '../../../../../constants'
+import { PAGE_PATHS } from '../../../../../constants'
 import Wrapper from './styles'
 
 const ProductsToolbar = ({
@@ -22,7 +22,12 @@ const ProductsToolbar = ({
         setSearchQueryMethod={setProductsSearchQuery}
         initialValue={lastSearchQuery}
       />
-      <Button component={Link} to={ADMIN_PRODUCT_ADD_PAGE_PATH} color="primary" variant="contained">
+      <Button
+        component={Link}
+        to={PAGE_PATHS.ADMIN_PRODUCT_ADD}
+        color="primary"
+        variant="contained"
+      >
         Add product
       </Button>
     </Wrapper>

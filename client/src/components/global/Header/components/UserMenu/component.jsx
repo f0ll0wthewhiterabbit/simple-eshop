@@ -9,7 +9,7 @@ import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
 import ThemeSwitcherContainer from './components/ThemeSwitcher'
-import { STORE_FIELD_CURRENT_USER, PROFILE_PAGE_PATH } from '../../../../../constants'
+import { FIELDS, PAGE_PATHS } from '../../../../../constants'
 import {
   Wrapper,
   UserMenuWrapper,
@@ -43,7 +43,7 @@ export const UserMenu = ({
   }
 
   const handleDeleteAccountClick = () => {
-    showModal(STORE_FIELD_CURRENT_USER)
+    showModal(FIELDS.STORE_CURRENT_USER)
     handleClose()
   }
 
@@ -87,7 +87,7 @@ export const UserMenu = ({
       >
         <MenuItem
           component={Link}
-          to={PROFILE_PAGE_PATH}
+          to={PAGE_PATHS.PROFILE}
           onClick={handleClose}
           data-test="profileButton"
         >

@@ -3,19 +3,13 @@ import { shallow } from 'enzyme'
 
 import SingInPage from './component'
 import findByTestAttr from '../../utils/findByTestAttr'
-import {
-  ROLE_GUEST,
-  ROLE_USER,
-  HOME_PAGE_PATH,
-  ROLE_ADMIN,
-  ADMIN_PRODUCTS_PAGE_PATH,
-} from '../../constants'
+import { ROLES, PAGE_PATHS } from '../../constants'
 
 describe('SingInPage component', () => {
   let wrapper
   const initialProps = {
     isAuthenticated: false,
-    userRole: ROLE_GUEST,
+    userRole: ROLES.GUEST,
   }
   const dataTestRedirect = 'redirect'
 
@@ -43,7 +37,7 @@ describe('SingInPage component', () => {
   it('should redirect authenticated users', () => {
     wrapper = generateWrapper({
       isAuthenticated: true,
-      userRole: ROLE_USER,
+      userRole: ROLES.USER,
     })
     const redirect = findByTestAttr(wrapper, dataTestRedirect)
 
@@ -53,20 +47,20 @@ describe('SingInPage component', () => {
   it('should redirect user to main page', () => {
     wrapper = generateWrapper({
       isAuthenticated: true,
-      userRole: ROLE_USER,
+      userRole: ROLES.USER,
     })
     const redirect = findByTestAttr(wrapper, dataTestRedirect)
 
-    expect(redirect.props().to).toBe(HOME_PAGE_PATH)
+    expect(redirect.props().to).toBe(PAGE_PATHS.HOME)
   })
 
   it(`should redirect administrator to administrator's products page`, () => {
     wrapper = generateWrapper({
       isAuthenticated: true,
-      userRole: ROLE_ADMIN,
+      userRole: ROLES.ADMIN,
     })
     const redirect = findByTestAttr(wrapper, dataTestRedirect)
 
-    expect(redirect.props().to).toBe(ADMIN_PRODUCTS_PAGE_PATH)
+    expect(redirect.props().to).toBe(PAGE_PATHS.ADMIN_PRODUCTS)
   })
 })

@@ -2,13 +2,13 @@ import { handleActions } from 'redux-actions'
 import { Record } from 'immutable'
 
 import { showModal, closeModal, openSidebar, closeSidebar, toggleTheme } from '../actions'
-import { FIELD_THEME_DEFAULT } from '../../constants'
+import { FIELDS } from '../../constants'
 
 const initialState = Record({
   isModalOpened: false,
   storeFieldNameForModal: '',
   isSidebarOpened: false,
-  theme: FIELD_THEME_DEFAULT,
+  theme: FIELDS.THEME_DEFAULT,
 })()
 
 const app = handleActions(

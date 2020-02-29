@@ -1,32 +1,24 @@
+/* eslint-disable react/jsx-curly-newline */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Redirect, withRouter } from 'react-router-dom'
-import {
-  SIGN_IN_PAGE_PATH,
-  ROLE_ADMIN,
-  ROLE_USER,
-  HOME_PAGE_PATH,
-  ERROR_PAGE_PATH,
-  ADMIN_PRODUCTS_PAGE_PATH,
-  ADMIN_PAGE_PATH,
-  PROFILE_PAGE_PATH,
-} from '../../../constants'
+import { ROLES, PAGE_PATHS } from '../../../constants'
 
 const PrivateRoute = ({ isAuthenticated, userRole, component: Component, location, ...rest }) => {
   if (
     isAuthenticated &&
-    userRole === ROLE_ADMIN &&
-    location.pathname !== PROFILE_PAGE_PATH &&
-    location.pathname.indexOf(ADMIN_PAGE_PATH) === -1
+    userRole === ROLES.ADMIN &&
+    location.pathname !== PAGE_PATHS.PROFILE &&
+    location.pathname.indexOf(PAGE_PATHS.ADMIN) === -1
   ) {
     return (
       <Redirect
         to={{
-          pathname: ERROR_PAGE_PATH,
+          pathname: PAGE_PATHS.ERROR,
           state: {
             title: 'Forbidden',
             message: 'Sign in as user if you want to see content pages',
-            backTo: ADMIN_PRODUCTS_PAGE_PATH,
+            backTo: PAGE_PATHS.ADMIN_PRODUCTS,
           },
         }}
       />
@@ -35,17 +27,17 @@ const PrivateRoute = ({ isAuthenticated, userRole, component: Component, locatio
 
   if (
     isAuthenticated &&
-    userRole === ROLE_USER &&
-    location.pathname.indexOf(ADMIN_PAGE_PATH) !== -1
+    userRole === ROLES.USER &&
+    location.pathname.indexOf(PAGE_PATHS.ADMIN) !== -1
   ) {
     return (
       <Redirect
         to={{
-          pathname: ERROR_PAGE_PATH,
+          pathname: PAGE_PATHS.ERROR,
           state: {
             title: 'Forbidden',
             message: '',
-            backTo: HOME_PAGE_PATH,
+            backTo: PAGE_PATHS.HOME,
           },
         }}
       />
@@ -56,7 +48,8 @@ const PrivateRoute = ({ isAuthenticated, userRole, component: Component, locatio
     <Route
       {...rest}
       render={props =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to={SIGN_IN_PAGE_PATH} />}
+        isAuthenticated ? <Component {...props} /> : <Redirect to={PAGE_PATHS.SIGN_IN} />
+      }
     />
   )
 }

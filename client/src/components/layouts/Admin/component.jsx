@@ -8,7 +8,7 @@ import Footer from '../../global/Footer'
 import ProfileContainer from './components/Profile'
 import SidebarNavContainer from './components/SidebarNav'
 import AlertDialogContainer from '../../global/AlertDialog'
-import { STORE_FIELD_USERS, STORE_FIELD_PRODUCTS } from '../../../constants'
+import { FIELDS } from '../../../constants'
 import { Root, Wrapper, Sidebar, SidebarRoot, Main } from './styles'
 
 export const AdminLayout = ({
@@ -24,9 +24,9 @@ export const AdminLayout = ({
   const shouldOpenSidebar = isDesktop ? true : isSidebarOpened
   let confirmMethod
 
-  if (storeFieldName === STORE_FIELD_PRODUCTS) {
+  if (storeFieldName === FIELDS.STORE_PRODUCTS) {
     confirmMethod = deleteProducts
-  } else if (storeFieldName === STORE_FIELD_USERS) {
+  } else if (storeFieldName === FIELDS.STORE_USERS) {
     confirmMethod = deleteUsers
   }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 
 import TableContainer from '../../../../../components/global/Table'
-import { STORE_FIELD_PRODUCTS } from '../../../../../constants'
+import { FIELDS } from '../../../../../constants'
 
 const ProductsTable = ({
   productsList,
@@ -35,7 +35,7 @@ const ProductsTable = ({
       totalAmount={totalAmount}
       headCells={headCells}
       title={title}
-      storeFieldName={STORE_FIELD_PRODUCTS}
+      storeFieldName={FIELDS.STORE_PRODUCTS}
       selectedItems={selectedProducts}
       setSelectedItems={setSelectedProducts}
       fetchData={fetchProducts}

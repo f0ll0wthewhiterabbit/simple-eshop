@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Select } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import { URL_FIELD_NO_FILTER, URL_FIELD_RATINGS_FILTER } from '../../../../constants'
+import { FIELDS } from '../../../../constants'
 import { Wrapper, SelectFormControl, SelectItem } from './styles'
 
 const FilterSelect = ({ filter, isDarkTheme, fetchProducts, setProductsFilter }) => {
@@ -41,8 +41,8 @@ const FilterSelect = ({ filter, isDarkTheme, fetchProducts, setProductsFilter })
             MenuListProps: listProps,
           }}
         >
-          <SelectItem value={URL_FIELD_NO_FILTER}>All</SelectItem>
-          <SelectItem value={URL_FIELD_RATINGS_FILTER}>My ratings</SelectItem>
+          <SelectItem value={FIELDS.URL_NO_FILTER}>All</SelectItem>
+          <SelectItem value={FIELDS.URL_RATINGS_FILTER}>My ratings</SelectItem>
         </Select>
       </SelectFormControl>
     </Wrapper>

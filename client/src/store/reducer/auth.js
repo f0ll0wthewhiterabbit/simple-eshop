@@ -10,7 +10,7 @@ import {
   signInError,
   signOutSuccess,
 } from '../actions'
-import { ROLE_GUEST } from '../../constants'
+import { ROLES } from '../../constants'
 
 const initialState = Record({
   isAuthenticated: false,
@@ -20,7 +20,7 @@ const initialState = Record({
     firstName: '',
     lastName: '',
     email: '',
-    role: ROLE_GUEST,
+    role: ROLES.GUEST,
     isRemovable: false,
   })(),
   error: null,

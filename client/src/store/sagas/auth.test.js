@@ -17,14 +17,7 @@ import {
   signOutSuccess,
 } from '../actions'
 import { handleAuthenticate, handleSignUp, handleSignIn, handleSignOut } from './auth'
-import {
-  ROLE_ADMIN,
-  DEFAULT_ADMIN_PER_PAGE_LIMIT,
-  ADMIN_PRODUCTS_PAGE_PATH,
-  SIGN_IN_PAGE_PATH,
-  STORAGE_FIELD_ACCESS_TOKEN,
-  STORAGE_FIELD_REFRESH_TOKEN,
-} from '../../constants'
+import { ROLES, PAGE_LIMITS, PAGE_PATHS, FIELDS } from '../../constants'
 
 describe('Auth sagas', () => {
   describe('authenticate', () => {
@@ -34,7 +27,7 @@ describe('Auth sagas', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'jd@email.com',
-        role: ROLE_ADMIN,
+        role: ROLES.ADMIN,
         isRemovable: false,
       },
     }
@@ -50,8 +43,8 @@ describe('Auth sagas', () => {
           [matchers.call.fn(API.get), testResponse],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
-        .put(setProductsPerPage(DEFAULT_ADMIN_PER_PAGE_LIMIT))
+        .call([localStorage, 'getItem'], FIELDS.STORAGE_ACCESS_TOKEN)
+        .put(setProductsPerPage(PAGE_LIMITS.ADMIN_DEFAULT))
         .put(authenticateSuccess(userData))
         .run()
     })
@@ -73,8 +66,8 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.removeItem), undefined],
           [matchers.call.fn(localStorage.setItem), undefined],
         ])
-        .call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
-        .put(setProductsPerPage(DEFAULT_ADMIN_PER_PAGE_LIMIT))
+        .call([localStorage, 'getItem'], FIELDS.STORAGE_ACCESS_TOKEN)
+        .put(setProductsPerPage(PAGE_LIMITS.ADMIN_DEFAULT))
         .put(authenticateSuccess(userData))
         .run()
     })
@@ -87,7 +80,7 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.getItem), null],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
+        .call([localStorage, 'getItem'], FIELDS.STORAGE_ACCESS_TOKEN)
         .put(authenticateError(''))
         .run()
     })
@@ -104,9 +97,9 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.getItem), 'testToken'],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'getItem'], STORAGE_FIELD_ACCESS_TOKEN)
+        .call([localStorage, 'getItem'], FIELDS.STORAGE_ACCESS_TOKEN)
         .put(authenticateError(errorMessage))
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
+        .call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
         .run()
     })
   })
@@ -141,7 +134,7 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.setItem), undefined],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'setItem'], STORAGE_FIELD_ACCESS_TOKEN, testResponse.data.accessToken)
+        .call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, testResponse.data.accessToken)
         .put(signUpSuccess(testResponse.data.accessToken))
         .put(authenticate())
         .run()
@@ -157,7 +150,7 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.setItem), undefined],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
+        .call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
         .put(signUpError(errorMessage))
         .run()
 
@@ -195,7 +188,7 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.setItem), undefined],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'setItem'], STORAGE_FIELD_ACCESS_TOKEN, testResponse.data.accessToken)
+        .call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, testResponse.data.accessToken)
         .put(signInSuccess(testResponse.data.accessToken))
         .put(authenticate())
         .run()
@@ -211,7 +204,7 @@ describe('Auth sagas', () => {
           [matchers.call.fn(localStorage.setItem), undefined],
           [matchers.call.fn(localStorage.removeItem), undefined],
         ])
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
+        .call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
         .put(signInError(errorMessage))
         .run()
 
@@ -227,7 +220,7 @@ describe('Auth sagas', () => {
           push: jest.fn(),
         },
         location: {
-          pathname: ADMIN_PRODUCTS_PAGE_PATH,
+          pathname: PAGE_PATHS.ADMIN_PRODUCTS,
         },
         setFormSubmitting: jest.fn(),
       },
@@ -241,17 +234,17 @@ describe('Auth sagas', () => {
       expectSaga(handleSignOut, action)
         .provide([
           [matchers.call.fn(localStorage.getItem), 'testToken'],
-          [matchers.call.fn(localStorage.removeItem, STORAGE_FIELD_REFRESH_TOKEN), undefined],
-          [matchers.call.fn(localStorage.removeItem, STORAGE_FIELD_ACCESS_TOKEN), undefined],
+          [matchers.call.fn(localStorage.removeItem, FIELDS.STORAGE_REFRESH_TOKEN), undefined],
+          [matchers.call.fn(localStorage.removeItem, FIELDS.STORAGE_ACCESS_TOKEN), undefined],
           [matchers.call.fn(API.delete), undefined],
         ])
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_REFRESH_TOKEN)
-        .call([localStorage, 'removeItem'], STORAGE_FIELD_ACCESS_TOKEN)
+        .call([localStorage, 'removeItem'], FIELDS.STORAGE_REFRESH_TOKEN)
+        .call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
         .put(signOutSuccess())
         .run()
 
       expect(action.payload.history.push).toHaveBeenCalledTimes(1)
-      expect(action.payload.history.push).toHaveBeenLastCalledWith(SIGN_IN_PAGE_PATH)
+      expect(action.payload.history.push).toHaveBeenLastCalledWith(PAGE_PATHS.SIGN_IN)
     })
   })
 })

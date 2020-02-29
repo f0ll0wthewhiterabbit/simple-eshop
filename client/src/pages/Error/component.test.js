@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import ErrorPage from './component'
 import findByTestAttr from '../../utils/findByTestAttr'
-import { HOME_PAGE_PATH, ADMIN_PRODUCTS_PAGE_PATH, SIGN_UP_PAGE_PATH } from '../../constants'
+import { PAGE_PATHS } from '../../constants'
 
 describe('ErrorPage component', () => {
   let wrapper
@@ -45,14 +45,14 @@ describe('ErrorPage component', () => {
   it(`should contain link to main page`, () => {
     const backLink = findByTestAttr(wrapper, dataTestBackLink)
 
-    expect(backLink.props().to).toBe(HOME_PAGE_PATH)
+    expect(backLink.props().to).toBe(PAGE_PATHS.HOME)
   })
 
   it(`should contain link to admin products page in admin mode`, () => {
     wrapper = generateWrapper({ isAdmin: true })
     const backLink = findByTestAttr(wrapper, dataTestBackLink)
 
-    expect(backLink.props().to).toBe(ADMIN_PRODUCTS_PAGE_PATH)
+    expect(backLink.props().to).toBe(PAGE_PATHS.ADMIN_PRODUCTS)
   })
 
   describe('passed location to props', () => {
@@ -64,7 +64,7 @@ describe('ErrorPage component', () => {
         location: {
           state: {
             title: locationTitle,
-            backTo: SIGN_UP_PAGE_PATH,
+            backTo: PAGE_PATHS.SIGN_UP,
             message: locationMessage,
           },
         },
@@ -86,7 +86,7 @@ describe('ErrorPage component', () => {
     it(`should contain link from location prop`, () => {
       const backLink = findByTestAttr(wrapper, dataTestBackLink)
 
-      expect(backLink.props().to).toBe(SIGN_UP_PAGE_PATH)
+      expect(backLink.props().to).toBe(PAGE_PATHS.SIGN_UP)
     })
   })
 })

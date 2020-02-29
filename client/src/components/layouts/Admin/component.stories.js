@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions'
 import { Map, Record } from 'immutable'
 
 import AdminLayoutWithTheme from './component'
-import { STORE_FIELD_USERS } from '../../../constants'
+import { FIELDS } from '../../../constants'
 
 // A simple mock of a redux store
 const store = {
@@ -38,7 +38,7 @@ export default {
 
 export const alertDialogData = {
   isSidebarOpened: false,
-  storeFieldName: STORE_FIELD_USERS,
+  storeFieldName: FIELDS.STORE_USERS,
 }
 
 export const actionsData = {
