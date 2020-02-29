@@ -13,7 +13,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: IgbqJWKQsxAOvAh+Skzub3ZJsmYkhYtC5rLW+gZ55UZOiPTuv93MQX4JSFztWq7SHui/QPJxmBumfUF1ce1isCMomWhQXTAWB+t33CJgO3ThBitc92gG3nt88yQ+H0BkQSsqdFJWdQPbCqcl8ItI++3KwLkDtrBySPLn9b6zusOmfTGGTG9UdG+81buXir+So7cXpJB8ymxoHB333FnYCoPpHGVTvzCHuFGWDET634QbeYtwKqf/3yoVilS8FsZYN/wnXaAbmt0e7ALTjoMhaxNzGQej2qXuwyQ2FP7F8BA3O/bzxfNEhBrd5T/jHzJeifRQ5UR5qqb8tjsITMXRtVRBHiTh//A9LiG1iOOEZKTXbKVfgYSrl7Z7wDcAeBPMe9pHYdftagrHvC0KDKRzoAzy3er3zhHGB5ylKIWQa3WurLpZyabttUCLMpGafNQv3GeaA/j38au6QBOybGKXNbANskKjIcsU3pOYwN/vq0ndMAtHDEADPwSVR3pPEbbntA61Yq8DJ57WwWzjHKMohVzRDv9+NoXkRRVZ6d7XHCP06ZW6GRSfyIGtxLSO5s/gKnGsuM6s0Z1T0sXZ5TtiHPeBnWHNmBhcXjqkc2Nn3z11SxWGMNFhf8R5hhj1dEF5baawiZWcBOio5PpXpKNLMctl1Hde58dWrVfLLDsyqzo=
+    secure: $HEROKU_API_KEY
   app: simple-e-shop
   on:
     repo: f0ll0wthewhiterabbit/simple-eshop

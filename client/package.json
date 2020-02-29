@@ -6,6 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "set CI=true&&react-scripts test --onlyChanged",
     "test:e2e": "jest -c e2e/jest.config.js",
     "test:e2eWatch": "jest -c e2e/jest.config.js --watch",
     "eject": "react-scripts eject",
