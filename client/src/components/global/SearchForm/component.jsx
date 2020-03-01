@@ -13,12 +13,12 @@ const SearchForm = ({
 }) => {
   const [inputValue, setInputValue] = useState(initialValue)
 
-  const handleInputChange = evt => {
-    setInputValue(evt.target.value)
+  const handleInputChange = event => {
+    setInputValue(event.target.value)
   }
 
-  const handleFormSubmit = evt => {
-    evt.preventDefault()
+  const handleFormSubmit = event => {
+    event.preventDefault()
     setSearchQueryMethod(inputValue)
     searchMethod(1, itemsPerPage, inputValue)
   }

@@ -16,8 +16,8 @@ const Pagination = ({
 }) => {
   const pageNumbers = Array.from({ length: totalPages }, (v, k) => k + 1)
 
-  const handlePageNumberClick = evt => {
-    fetchProductsRequest(Number(evt.target.innerText), null, undefined, filter)
+  const handlePageNumberClick = event => {
+    fetchProductsRequest(Number(event.target.innerText), null, undefined, filter)
   }
 
   const handlePreviousPageClick = () => {

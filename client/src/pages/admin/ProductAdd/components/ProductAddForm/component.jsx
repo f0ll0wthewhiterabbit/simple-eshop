@@ -30,13 +30,13 @@ const ProductAddForm = ({ error, addProductRequest, history }) => {
     setTags([...tags.slice(0, index), ...tags.slice(index + 1)])
   }
 
-  const handleButtonKeyDown = evt => {
+  const handleButtonKeyDown = event => {
     const KeyCode = {
       ENTER: 13,
       SPACE: 32,
     }
 
-    if (evt.keyCode === KeyCode.ENTER || evt.keyCode === KeyCode.SPACE) {
+    if (event.keyCode === KeyCode.ENTER || event.keyCode === KeyCode.SPACE) {
       hiddenFileInput.current.click()
     }
   }

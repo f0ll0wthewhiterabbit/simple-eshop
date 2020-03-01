@@ -46,18 +46,18 @@ const Table = ({
 }) => {
   const [page, setPage] = React.useState(0)
 
-  const numSelected = selectedItems.size
+  const selectedItemsAmount = selectedItems.size
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.size - page * rowsPerPage)
   const removableRowsCount = rows.filter(row => ('isRemovable' in row ? row.isRemovable : true))
     .size
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = rows
-        .filter(n => ('isRemovable' in n ? n.isRemovable : true))
-        .map(n => n._id)
+      const selectedIds = rows
+        .filter(row => ('isRemovable' in row ? row.isRemovable : true))
+        .map(row => row._id)
 
-      setSelectedItems(newSelecteds)
+      setSelectedItems(selectedIds)
       return
     }
 
@@ -149,10 +149,10 @@ const Table = ({
   }
 
   const tableToolbar = (
-    <ToolbarRoot data-highlighted={numSelected > 0}>
-      {numSelected > 0 ? (
+    <ToolbarRoot data-highlighted={selectedItemsAmount > 0}>
+      {selectedItemsAmount > 0 ? (
         <ToolbarTitle color="inherit" variant="subtitle1">
-          {numSelected} selected
+          {selectedItemsAmount} selected
         </ToolbarTitle>
       ) : (
         <ToolbarTitle variant="h6" id="tableTitle">
@@ -160,7 +160,7 @@ const Table = ({
         </ToolbarTitle>
       )}
 
-      {numSelected > 0 && (
+      {selectedItemsAmount > 0 && (
         <Tooltip title="Delete" onClick={handleDeleteButtonClick}>
           <IconButton aria-label="delete">
             <DeleteIcon />
@@ -180,8 +180,8 @@ const Table = ({
         ))}
         <TableCell padding="checkbox">
           <Checkbox
-            indeterminate={numSelected > 0 && numSelected < removableRowsCount}
-            checked={numSelected > 0 && numSelected === removableRowsCount}
+            indeterminate={selectedItemsAmount > 0 && selectedItemsAmount < removableRowsCount}
+            checked={selectedItemsAmount > 0 && selectedItemsAmount === removableRowsCount}
             onChange={handleSelectAllClick}
             inputProps={{ 'aria-label': 'select all' }}
             disabled={removableRowsCount === 0}
