@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions'
 import { Record } from 'immutable'
 
-import { showModal, closeModal, openSidebar, closeSidebar, toggleTheme } from '../actions'
+import { showModal, closeModal, openSidebar, closeSidebar, toggleThemeRequest } from '../actions'
 import { FIELDS } from '../../constants'
 
 const initialState = Record({
@@ -24,7 +24,7 @@ const app = handleActions(
 
     [closeSidebar]: state => state.delete('isSidebarOpened'),
 
-    [toggleTheme]: (state, action) => state.set('theme', action.payload.theme),
+    [toggleThemeRequest]: (state, action) => state.set('theme', action.payload.theme),
   },
   initialState
 )

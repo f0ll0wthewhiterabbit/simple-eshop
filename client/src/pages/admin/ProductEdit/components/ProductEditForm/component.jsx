@@ -18,7 +18,7 @@ import {
   InputField,
 } from './styles'
 
-const ProductEditForm = ({ product, error, editProduct, history }) => {
+const ProductEditForm = ({ product, error, editProductRequest, history }) => {
   const [tags, setTags] = useState(product.tags)
   const hiddenFileInput = useRef(null)
 
@@ -66,7 +66,7 @@ const ProductEditForm = ({ product, error, editProduct, history }) => {
       changedFieldsFormData.set('tags', tags)
     }
 
-    editProduct(id, changedFieldsFormData, history, formMethods.setSubmitting)
+    editProductRequest(id, changedFieldsFormData, history, formMethods.setSubmitting)
   }
 
   const isDataChanged = (newTitle, newPrice, newDescription, newImageName, newTags) => {
@@ -268,7 +268,7 @@ ProductEditForm.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
-  editProduct: PropTypes.func.isRequired,
+  editProductRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 }
 

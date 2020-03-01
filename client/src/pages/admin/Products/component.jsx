@@ -10,7 +10,7 @@ const ProductsPage = ({
   itemsPerPage,
   isLoading,
   error,
-  fetchProducts,
+  fetchProductsRequest,
   setProductsSearchQuery,
 }) => {
   useEffect(() => {
@@ -18,8 +18,8 @@ const ProductsPage = ({
   }, [setProductsSearchQuery])
 
   useEffect(() => {
-    fetchProducts(1, itemsPerPage)
-  }, [fetchProducts, itemsPerPage])
+    fetchProductsRequest(1, itemsPerPage)
+  }, [fetchProductsRequest, itemsPerPage])
 
   if (error) {
     return <ErrorMessage>{error}</ErrorMessage>
@@ -45,7 +45,7 @@ ProductsPage.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
-  fetchProducts: PropTypes.func.isRequired,
+  fetchProductsRequest: PropTypes.func.isRequired,
   setProductsSearchQuery: PropTypes.func.isRequired,
 }
 

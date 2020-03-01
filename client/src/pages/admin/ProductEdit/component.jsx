@@ -9,12 +9,12 @@ import ProductEditFormContainer from './components/ProductEditForm'
 import Loader from '../../../components/global/Loader'
 import { Root, Wrapper, IconWrapper, Heading } from './styles'
 
-const ProductEditPage = ({ isLoading, product, fetchProduct }) => {
+const ProductEditPage = ({ isLoading, product, fetchProductRequest }) => {
   const { id } = useParams()
 
   useEffect(() => {
-    fetchProduct(id)
-  }, [fetchProduct, id])
+    fetchProductRequest(id)
+  }, [fetchProductRequest, id])
 
   if (isLoading) {
     return <Loader />
@@ -64,7 +64,7 @@ ProductEditPage.propTypes = {
     price: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.oneOf([null]).isRequired]),
     tags: ImmutablePropTypes.listOf(PropTypes.string),
   }).isRequired,
-  fetchProduct: PropTypes.func.isRequired,
+  fetchProductRequest: PropTypes.func.isRequired,
 }
 
 export default ProductEditPage

@@ -13,7 +13,7 @@ describe('Pagination component', () => {
     totalPages: 10,
     totalAmount: 85,
     filter: FIELDS.URL_RATINGS_FILTER,
-    fetchProducts: jest.fn(),
+    fetchProductsRequest: jest.fn(),
   }
   const dataTestPaginationItem = 'paginationItem'
   const dataTestPerviousButton = 'previousButton'
@@ -31,7 +31,7 @@ describe('Pagination component', () => {
   })
 
   afterEach(() => {
-    initialProps.fetchProducts.mockClear()
+    initialProps.fetchProductsRequest.mockClear()
   })
 
   it('should render correctly', () => {
@@ -92,14 +92,19 @@ describe('Pagination component', () => {
     const paginationButton = findByTestAttr(wrapper, `paginationButton${pageNumber}`)
     paginationButton.simulate('click', { target: { innerText: pageNumber.toString() } })
 
-    expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(pageNumber, null, undefined, filter)
+    expect(initialProps.fetchProductsRequest).toHaveBeenLastCalledWith(
+      pageNumber,
+      null,
+      undefined,
+      filter
+    )
   })
 
   it('should handle previous page click', () => {
     const previousButton = findByTestAttr(wrapper, dataTestPerviousButton)
     previousButton.simulate('click')
 
-    expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(
+    expect(initialProps.fetchProductsRequest).toHaveBeenLastCalledWith(
       initialProps.currentPage - 1,
       null,
       undefined,
@@ -111,7 +116,7 @@ describe('Pagination component', () => {
     const nextButton = findByTestAttr(wrapper, dataTestNextButton)
     nextButton.simulate('click')
 
-    expect(initialProps.fetchProducts).toHaveBeenLastCalledWith(
+    expect(initialProps.fetchProductsRequest).toHaveBeenLastCalledWith(
       initialProps.currentPage + 1,
       null,
       undefined,
@@ -123,6 +128,6 @@ describe('Pagination component', () => {
     const paginationButton = findByTestAttr(wrapper, `paginationButton${initialProps.currentPage}`)
     paginationButton.simulate('click')
 
-    expect(initialProps.fetchProducts).toHaveBeenCalledTimes(0)
+    expect(initialProps.fetchProductsRequest).toHaveBeenCalledTimes(0)
   })
 })

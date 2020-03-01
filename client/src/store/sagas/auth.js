@@ -4,24 +4,24 @@ import { takeEvery, put, call } from 'redux-saga/effects'
 import API from '../../utils/api'
 import { FIELDS, PAGE_PATHS, ROLES, PAGE_LIMITS } from '../../constants'
 import {
-  signUpSuccess,
-  signUpError,
+  authenticateRequest,
   authenticateSuccess,
   authenticateError,
+  signUpRequest,
+  signUpSuccess,
+  signUpError,
+  signInRequest,
   signInSuccess,
   signInError,
+  signOutRequest,
   signOutSuccess,
-  authenticate,
-  signUp,
-  signIn,
-  signOut,
   setProductsPerPage,
 } from '../actions'
 import setAuthToken from '../../utils/setAuthToken'
 import isTokenExpired from '../../utils/isTokenExpired'
 import convertToRecord from '../../utils/convertToRecord'
 
-export function* handleAuthenticate() {
+export function* handleAuthenticateRequest() {
   try {
     const accessToken = yield call([localStorage, 'getItem'], FIELDS.STORAGE_ACCESS_TOKEN)
 
@@ -67,7 +67,7 @@ export function* handleAuthenticate() {
     const refreshToken = yield call([localStorage, 'getItem'], FIELDS.STORAGE_REFRESH_TOKEN)
 
     if (refreshToken) {
-      yield put(signOut())
+      yield put(signOutRequest())
     }
 
     yield call([localStorage, 'removeItem'], FIELDS.STORAGE_ACCESS_TOKEN)
@@ -75,7 +75,7 @@ export function* handleAuthenticate() {
   }
 }
 
-export function* handleSignUp(action) {
+export function* handleSignUpRequest(action) {
   const { firstName, lastName, email, password } = action.payload.userData
   const config = {
     headers: {
@@ -90,7 +90,7 @@ export function* handleSignUp(action) {
 
     yield call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, accessToken)
     yield put(signUpSuccess(accessToken))
-    yield put(authenticate())
+    yield put(authenticateRequest())
   } catch (error) {
     const errorMessage = error.response.data.errors
       ? error.response.data.errors[0].msg
@@ -102,7 +102,7 @@ export function* handleSignUp(action) {
   }
 }
 
-export function* handleSignIn(action) {
+export function* handleSignInRequest(action) {
   const { email, password, rememberMe } = action.payload.userData
   const config = {
     headers: {
@@ -122,7 +122,7 @@ export function* handleSignIn(action) {
     }
 
     yield put(signInSuccess(accessToken))
-    yield put(authenticate())
+    yield put(authenticateRequest())
   } catch (error) {
     const errorMessage = error.response.data.errors
       ? error.response.data.errors[0].msg
@@ -134,7 +134,7 @@ export function* handleSignIn(action) {
   }
 }
 
-export function* handleSignOut(action) {
+export function* handleSignOutRequest(action) {
   const { history, location } = action.payload
   const refreshToken = yield call([localStorage, 'getItem'], FIELDS.STORAGE_REFRESH_TOKEN)
 
@@ -170,20 +170,20 @@ export function* handleSignOut(action) {
   }
 }
 
-function* watchAuthenticate() {
-  yield takeEvery(authenticate, handleAuthenticate)
+function* watchAuthenticateRequest() {
+  yield takeEvery(authenticateRequest, handleAuthenticateRequest)
 }
 
-function* watchSignUp() {
-  yield takeEvery(signUp, handleSignUp)
+function* watchSignUpRequest() {
+  yield takeEvery(signUpRequest, handleSignUpRequest)
 }
 
-function* watchSignIn() {
-  yield takeEvery(signIn, handleSignIn)
+function* watchSignInRequest() {
+  yield takeEvery(signInRequest, handleSignInRequest)
 }
 
-function* watchSignOut() {
-  yield takeEvery(signOut, handleSignOut)
+function* watchSignOutRequest() {
+  yield takeEvery(signOutRequest, handleSignOutRequest)
 }
 
-export { watchAuthenticate, watchSignUp, watchSignIn, watchSignOut }
+export { watchAuthenticateRequest, watchSignUpRequest, watchSignInRequest, watchSignOutRequest }

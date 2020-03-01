@@ -11,7 +11,7 @@ describe('CatalogPage component', () => {
     products: List(),
     error: null,
     isLoading: false,
-    fetchProducts: jest.fn(),
+    fetchProductsRequest: jest.fn(),
   }
   const testProduct1 = Record({ _id: '1', title: 'First', imageName: 'imageName1', price: 77 })()
   const testProduct2 = Record({ _id: '2', title: 'Second', imageName: 'imageName2', price: 88 })()

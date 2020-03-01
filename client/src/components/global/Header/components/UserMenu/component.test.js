@@ -15,7 +15,7 @@ describe('UserMenu component', () => {
     isAdmin: false,
     isDeleteRequestSent: false,
     showModal: jest.fn(),
-    signOut: jest.fn(),
+    signOutRequest: jest.fn(),
     history: { push: jest.fn() },
     location: { pathname: '/testPathName' },
   }
@@ -42,7 +42,7 @@ describe('UserMenu component', () => {
 
   afterEach(() => {
     initialProps.showModal.mockClear()
-    initialProps.signOut.mockClear()
+    initialProps.signOutRequest.mockClear()
   })
 
   it('should render correctly', () => {
@@ -69,7 +69,7 @@ describe('UserMenu component', () => {
     expect(button).toHaveLength(0)
   })
 
-  it('should render button with user name on medium and large destop width', () => {
+  it('should render button with user name on medium and large desktop width', () => {
     useMediaQuery.mockImplementation(() => true)
     wrapper = generateWrapper()
     const button = findByTestAttr(wrapper, dataTestMenuButton)
@@ -77,7 +77,7 @@ describe('UserMenu component', () => {
     expect(button.text().indexOf(initialProps.userName)).not.toBe(-1)
   })
 
-  it('should render button without user name on small destop width', () => {
+  it('should render button without user name on small desktop width', () => {
     useMediaQuery.mockImplementation(() => false)
     wrapper = generateWrapper()
     const button = findByTestAttr(wrapper, dataTestMenuButton)
@@ -129,7 +129,7 @@ describe('UserMenu component', () => {
       const signOutButton = findByTestAttr(wrapper, dataTestSignOutButton)
       signOutButton.simulate('click')
 
-      expect(initialProps.signOut).toHaveBeenCalledTimes(1)
+      expect(initialProps.signOutRequest).toHaveBeenCalledTimes(1)
     })
   })
 })

@@ -12,19 +12,19 @@ const Pagination = ({
   filter,
   withLabel,
   withNumbers,
-  fetchProducts,
+  fetchProductsRequest,
 }) => {
   const pageNumbers = Array.from({ length: totalPages }, (v, k) => k + 1)
 
   const handlePageNumberClick = evt => {
-    fetchProducts(Number(evt.target.innerText), null, undefined, filter)
+    fetchProductsRequest(Number(evt.target.innerText), null, undefined, filter)
   }
 
   const handlePreviousPageClick = () => {
-    fetchProducts(currentPage - 1, null, undefined, filter)
+    fetchProductsRequest(currentPage - 1, null, undefined, filter)
   }
   const handleNextPageClick = () => {
-    fetchProducts(currentPage + 1, null, undefined, filter)
+    fetchProductsRequest(currentPage + 1, null, undefined, filter)
   }
 
   const isPageNumberInPagination = pageNumber => {
@@ -99,7 +99,7 @@ Pagination.propTypes = {
   filter: PropTypes.string.isRequired,
   withLabel: PropTypes.bool,
   withNumbers: PropTypes.bool,
-  fetchProducts: PropTypes.func.isRequired,
+  fetchProductsRequest: PropTypes.func.isRequired,
 }
 
 export default Pagination

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import FilterSelect from './component'
-import { fetchProducts, setProductsFilter } from '../../../../store/actions'
+import { fetchProductsRequest, setProductsFilter } from '../../../../store/actions'
 import { FIELDS } from '../../../../constants'
 
 const mapStateToProps = state => ({
@@ -10,8 +10,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchProducts: (page, itemsPerPage, searchText, filter) =>
-    fetchProducts(page, itemsPerPage, searchText, filter),
+  fetchProductsRequest: (page, itemsPerPage, searchText, filter) =>
+    fetchProductsRequest(page, itemsPerPage, searchText, filter),
   setProductsFilter: filter => setProductsFilter(filter),
 }
 

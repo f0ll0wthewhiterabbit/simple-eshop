@@ -6,7 +6,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { FIELDS } from '../../../../constants'
 import { Wrapper, SelectFormControl, SelectItem } from './styles'
 
-const FilterSelect = ({ filter, isDarkTheme, fetchProducts, setProductsFilter }) => {
+const FilterSelect = ({ filter, isDarkTheme, fetchProductsRequest, setProductsFilter }) => {
   const listProps = isDarkTheme ? { style: { backgroundColor: '#687579' } } : {}
 
   const handleChange = event => {
@@ -17,7 +17,7 @@ const FilterSelect = ({ filter, isDarkTheme, fetchProducts, setProductsFilter })
 
     setProductsFilter(value)
 
-    fetchProducts(1, null, undefined, value)
+    fetchProductsRequest(1, null, undefined, value)
   }
 
   return (
@@ -52,7 +52,7 @@ const FilterSelect = ({ filter, isDarkTheme, fetchProducts, setProductsFilter })
 FilterSelect.propTypes = {
   filter: PropTypes.string.isRequired,
   isDarkTheme: PropTypes.bool.isRequired,
-  fetchProducts: PropTypes.func.isRequired,
+  fetchProductsRequest: PropTypes.func.isRequired,
   setProductsFilter: PropTypes.func.isRequired,
 }
 

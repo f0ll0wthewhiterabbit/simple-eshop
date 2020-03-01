@@ -5,10 +5,10 @@ import { Switch } from '@material-ui/core'
 import { FIELDS } from '../../../../../../../constants'
 import { Wrapper } from './styles'
 
-const ThemeSwitcher = ({ isDarkTheme, toggleTheme }) => {
+const ThemeSwitcher = ({ isDarkTheme, toggleThemeRequest }) => {
   const handleThemeChange = () => {
     const nextTheme = isDarkTheme ? FIELDS.THEME_DEFAULT : FIELDS.THEME_DARK
-    toggleTheme(nextTheme)
+    toggleThemeRequest(nextTheme)
   }
 
   return (
@@ -20,7 +20,7 @@ const ThemeSwitcher = ({ isDarkTheme, toggleTheme }) => {
 
 ThemeSwitcher.propTypes = {
   isDarkTheme: PropTypes.bool.isRequired,
-  toggleTheme: PropTypes.func.isRequired,
+  toggleThemeRequest: PropTypes.func.isRequired,
 }
 
 export default ThemeSwitcher

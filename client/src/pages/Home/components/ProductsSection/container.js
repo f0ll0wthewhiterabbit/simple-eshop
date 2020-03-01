@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import CatalogPage from './component'
-import { fetchProducts } from '../../../../store/actions'
+import { fetchProductsRequest } from '../../../../store/actions'
 
 const mapStateToProps = state => ({
   products: state.getIn(['products', 'data']),
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchProducts: (page, itemsPerPage) => fetchProducts(page, itemsPerPage),
+  fetchProductsRequest: (page, itemsPerPage) => fetchProductsRequest(page, itemsPerPage),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CatalogPage)

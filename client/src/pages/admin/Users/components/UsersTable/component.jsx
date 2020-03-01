@@ -13,7 +13,7 @@ const UsersTable = ({
   selectedUsers,
   lastSearchQuery,
   setSelectedUsers,
-  fetchUsers,
+  fetchUsersRequest,
   setUsersPerPage,
 }) => {
   const headCells = [
@@ -35,7 +35,7 @@ const UsersTable = ({
       storeFieldName={FIELDS.STORE_USERS}
       selectedItems={selectedUsers}
       setSelectedItems={setSelectedUsers}
-      fetchData={fetchUsers}
+      fetchData={fetchUsersRequest}
       setRowsPerPage={setUsersPerPage}
     />
   )
@@ -58,7 +58,7 @@ UsersTable.propTypes = {
   selectedUsers: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
   lastSearchQuery: PropTypes.string.isRequired,
   setSelectedUsers: PropTypes.func.isRequired,
-  fetchUsers: PropTypes.func.isRequired,
+  fetchUsersRequest: PropTypes.func.isRequired,
   setUsersPerPage: PropTypes.func.isRequired,
 }
 

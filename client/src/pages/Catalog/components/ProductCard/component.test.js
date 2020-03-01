@@ -24,8 +24,8 @@ describe('ProductCard component', () => {
   })()
   const initialProps = {
     productData,
-    changeProductRating: jest.fn(),
-    deleteProductRating: jest.fn(),
+    changeProductRatingRequest: jest.fn(),
+    deleteProductRatingRequest: jest.fn(),
     ratingsLoadingList: List(),
     ratingsErrorList: List(),
   }
@@ -51,8 +51,8 @@ describe('ProductCard component', () => {
   })
 
   afterEach(() => {
-    initialProps.changeProductRating.mockReset()
-    initialProps.deleteProductRating.mockReset()
+    initialProps.changeProductRatingRequest.mockReset()
+    initialProps.deleteProductRatingRequest.mockReset()
   })
 
   it('should render correctly', () => {
@@ -106,8 +106,8 @@ describe('ProductCard component', () => {
     const deleteButton = findByTestAttr(wrapper, dataTestDeleteButton)
     deleteButton.simulate('click')
 
-    expect(initialProps.deleteProductRating).toHaveBeenCalledTimes(1)
-    expect(initialProps.deleteProductRating).toHaveBeenCalledWith(productData._id)
+    expect(initialProps.deleteProductRatingRequest).toHaveBeenCalledTimes(1)
+    expect(initialProps.deleteProductRatingRequest).toHaveBeenCalledWith(productData._id)
   })
 
   it('should handle change user rating', () => {
@@ -115,14 +115,14 @@ describe('ProductCard component', () => {
     const userRating = findByTestAttr(wrapper, dataTestUserRating)
     userRating.simulate('change', {}, newUserRating)
 
-    expect(initialProps.changeProductRating).toHaveBeenCalledTimes(1)
-    expect(initialProps.changeProductRating).toHaveBeenCalledWith({
+    expect(initialProps.changeProductRatingRequest).toHaveBeenCalledTimes(1)
+    expect(initialProps.changeProductRatingRequest).toHaveBeenCalledWith({
       productId: productData._id,
       userRating: newUserRating,
     })
   })
 
-  it('should contain correct raiting error message', () => {
+  it('should contain correct rating error message', () => {
     wrapper = generateWrapper({ ratingsErrorList: List([productData._id]) })
     const ratingError = findByTestAttr(wrapper, dataTestRatingError)
 
@@ -130,7 +130,7 @@ describe('ProductCard component', () => {
     expect(ratingError.text()).toBe('Something went wrong!')
   })
 
-  it('should contain correct raiting loading message', () => {
+  it('should contain correct rating loading message', () => {
     wrapper = generateWrapper({ ratingsLoadingList: List([productData._id]) })
     const ratingLoading = findByTestAttr(wrapper, dataTestRatingLoading)
 

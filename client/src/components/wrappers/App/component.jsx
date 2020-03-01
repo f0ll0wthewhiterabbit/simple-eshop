@@ -5,10 +5,10 @@ import ThemeProviderContainer from '../ThemeProvider'
 import Router from '../../../Router'
 import Loader from '../../global/Loader'
 
-const App = ({ isAuthenticated, error, initialize }) => {
+const App = ({ isAuthenticated, error, initializeRequest }) => {
   useEffect(() => {
-    initialize()
-  }, [initialize])
+    initializeRequest()
+  }, [initializeRequest])
 
   if (isAuthenticated || error !== null) {
     return (
@@ -28,7 +28,7 @@ App.defaultProps = {
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
-  initialize: PropTypes.func.isRequired,
+  initializeRequest: PropTypes.func.isRequired,
 }
 
 export default App

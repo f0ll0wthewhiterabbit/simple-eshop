@@ -10,7 +10,7 @@ describe('FilterSelect component', () => {
   const initialProps = {
     filter: FIELDS.URL_NO_FILTER,
     isDarkTheme: false,
-    fetchProducts: jest.fn(),
+    fetchProductsRequest: jest.fn(),
     setProductsFilter: jest.fn(),
   }
   const dataTestSelect = 'select'
@@ -27,7 +27,7 @@ describe('FilterSelect component', () => {
   })
 
   afterEach(() => {
-    initialProps.fetchProducts.mockClear()
+    initialProps.fetchProductsRequest.mockClear()
     initialProps.setProductsFilter.mockClear()
   })
 
@@ -47,8 +47,8 @@ describe('FilterSelect component', () => {
 
     expect(initialProps.setProductsFilter).toHaveBeenCalledTimes(1)
     expect(initialProps.setProductsFilter).toHaveBeenCalledWith(FIELDS.URL_RATINGS_FILTER)
-    expect(initialProps.fetchProducts).toHaveBeenCalledTimes(1)
-    expect(initialProps.fetchProducts).toHaveBeenCalledWith(
+    expect(initialProps.fetchProductsRequest).toHaveBeenCalledTimes(1)
+    expect(initialProps.fetchProductsRequest).toHaveBeenCalledWith(
       1,
       null,
       undefined,

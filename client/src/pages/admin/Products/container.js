@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ProductsPage from './component'
-import { fetchProducts, setProductsSearchQuery } from '../../../store/actions'
+import { fetchProductsRequest, setProductsSearchQuery } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   itemsPerPage: state.getIn(['products', 'itemsPerPage']),
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchProducts: (page, itemsPerPage) => fetchProducts(page, itemsPerPage),
+  fetchProductsRequest: (page, itemsPerPage) => fetchProductsRequest(page, itemsPerPage),
   setProductsSearchQuery: searchQuery => setProductsSearchQuery(searchQuery),
 }
 

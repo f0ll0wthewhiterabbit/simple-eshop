@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import UserMenuComponent from './component'
-import { showModal, signOut } from '../../../../../store/actions'
+import { showModal, signOutRequest } from '../../../../../store/actions'
 import { ROLES } from '../../../../../constants'
 
 const mapStateToProps = state => ({
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   showModal: storeFieldNameForModal => showModal(storeFieldNameForModal),
-  signOut: (history, location) => signOut(history, location),
+  signOutRequest: (history, location) => signOutRequest(history, location),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserMenuComponent)

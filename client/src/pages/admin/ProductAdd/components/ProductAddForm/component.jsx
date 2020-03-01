@@ -18,7 +18,7 @@ import {
   InputField,
 } from './styles'
 
-const ProductAddForm = ({ error, addProduct, history }) => {
+const ProductAddForm = ({ error, addProductRequest, history }) => {
   const [tags, setTags] = useState(['Foo', 'Bar'])
   const hiddenFileInput = useRef(null)
 
@@ -49,7 +49,7 @@ const ProductAddForm = ({ error, addProduct, history }) => {
     formData.set('tags', tags)
     formData.set('image', values.image, values.image.name)
 
-    addProduct(formData, history, formMethods.setSubmitting)
+    addProductRequest(formData, history, formMethods.setSubmitting)
   }
 
   return (
@@ -209,7 +209,7 @@ ProductAddForm.defaultProps = {
 
 ProductAddForm.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
-  addProduct: PropTypes.func.isRequired,
+  addProductRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 }
 

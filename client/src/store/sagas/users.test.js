@@ -11,27 +11,27 @@ import {
   closeModal,
   deleteUsersSuccess,
   deleteUsersError,
-  requestUserDeletionSuccess,
+  callForUserDeletionSuccess,
+  authenticateRequest,
   authenticateSuccess,
-  requestUserDeletionError,
+  callForUserDeletionError,
   updateUserSuccess,
-  authenticate,
   updateUserError,
 } from '../actions'
 import {
   getUsers,
   getRole,
-  handleFetchUsers,
-  handleDeleteUsers,
-  handleRequestUserDeletion,
-  handleUpdateUser,
+  handleFetchUsersRequest,
+  handleDeleteUsersRequest,
+  handleCallForUserDeletionRequest,
+  handleUpdateUserRequest,
 } from './users'
 import { ROLES } from '../../constants'
 
 jest.mock('../../utils/convertToRecord', () => jest.fn(() => [1, 2, 3]))
 
 describe('Users sagas', () => {
-  describe('fetchUsers', () => {
+  describe('fetchUsersRequest', () => {
     const action = { payload: { currentPage: 1, itemsPerPage: 10 } }
 
     it('should handle', () => {
@@ -52,7 +52,7 @@ describe('Users sagas', () => {
       } = testResponse.data
       const usersList = testResponse.data.data
 
-      return expectSaga(handleFetchUsers, action)
+      return expectSaga(handleFetchUsersRequest, action)
         .provide([[matchers.call.fn(API.get), testResponse]])
         .put(startUsersLoading())
         .put(fetchUsersSuccess(usersList, totalAmount, currentPage, itemsPerPage, totalPages))
@@ -63,7 +63,7 @@ describe('Users sagas', () => {
       const error = new Error('error')
       const errorMessage = 'Users data not recieved!'
 
-      return expectSaga(handleFetchUsers, action)
+      return expectSaga(handleFetchUsersRequest, action)
         .provide([[matchers.call.fn(API.get), throwError(error)]])
         .put(startUsersLoading())
         .put(fetchUsersError(errorMessage))
@@ -71,11 +71,11 @@ describe('Users sagas', () => {
     })
   })
 
-  describe('deleteUsers', () => {
+  describe('deleteUsersRequest', () => {
     const deletedUsers = ['1', '2']
 
     it('should handle', () => {
-      return expectSaga(handleDeleteUsers)
+      return expectSaga(handleDeleteUsersRequest)
         .provide([
           [matchers.call.fn(API.delete), () => jest.fn()],
           [select(getUsers), deletedUsers],
@@ -91,7 +91,7 @@ describe('Users sagas', () => {
       const error = new Error('error')
       const errorMessage = 'Users delete error!'
 
-      return expectSaga(handleDeleteUsers)
+      return expectSaga(handleDeleteUsersRequest)
         .provide([
           [matchers.call.fn(API.delete), throwError(error)],
           [select(getUsers), deletedUsers],
@@ -104,7 +104,7 @@ describe('Users sagas', () => {
     })
   })
 
-  describe('requestUserDeletion', () => {
+  describe('callForUserDeletionRequest', () => {
     it('should handle', () => {
       const testResponse = {
         data: {
@@ -119,11 +119,11 @@ describe('Users sagas', () => {
       const { _id: id, firstName, lastName, email, role, isRemovable } = testResponse.data
       const userData = { id, firstName, lastName, email, role, isRemovable }
 
-      return expectSaga(handleRequestUserDeletion)
+      return expectSaga(handleCallForUserDeletionRequest)
         .provide([[matchers.call.fn(API.patch), testResponse]])
         .put(closeModal())
         .put(startUsersLoading())
-        .put(requestUserDeletionSuccess(id))
+        .put(callForUserDeletionSuccess(id))
         .put(authenticateSuccess(userData))
         .run()
     })
@@ -132,16 +132,16 @@ describe('Users sagas', () => {
       const error = new Error('error')
       const errorMessage = 'Users delete error!'
 
-      return expectSaga(handleRequestUserDeletion)
+      return expectSaga(handleCallForUserDeletionRequest)
         .provide([[matchers.call.fn(API.patch), throwError(error)]])
         .put(closeModal())
         .put(startUsersLoading())
-        .put(requestUserDeletionError(errorMessage))
+        .put(callForUserDeletionError(errorMessage))
         .run()
     })
   })
 
-  describe('updateUser', () => {
+  describe('updateUserRequest', () => {
     const action = {
       payload: {
         userData: {
@@ -161,14 +161,14 @@ describe('Users sagas', () => {
     })
 
     it('should handle', () => {
-      expectSaga(handleUpdateUser, action)
+      expectSaga(handleUpdateUserRequest, action)
         .provide([
           [matchers.call.fn(API.patch), [1, 2, 3]],
           [select(getRole), ROLES.USER],
         ])
         .put(startUsersLoading())
         .put(updateUserSuccess([1, 2, 3]))
-        .put(authenticate())
+        .put(authenticateRequest())
         .run()
 
       expect(action.payload.history.push).toHaveBeenCalledTimes(1)
@@ -178,7 +178,7 @@ describe('Users sagas', () => {
       const error = new Error('error')
       const errorMessage = 'User update error!'
 
-      expectSaga(handleUpdateUser, action)
+      expectSaga(handleUpdateUserRequest, action)
         .provide([[matchers.call.fn(API.patch), throwError(error)]])
         .put(startUsersLoading())
         .put(updateUserError(errorMessage))

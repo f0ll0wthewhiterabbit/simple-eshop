@@ -5,28 +5,28 @@ import API from '../../utils/api'
 import convertToRecord from '../../utils/convertToRecord'
 import { PAGE_PATHS } from '../../constants'
 import {
-  fetchProducts,
+  fetchProductsRequest,
   fetchProductsSuccess,
   fetchProductsError,
-  fetchProduct,
+  fetchProductRequest,
   fetchProductSuccess,
   fetchProductError,
-  fetchProductRating,
+  fetchProductRatingRequest,
   fetchProductRatingSuccess,
   fetchProductRatingError,
-  changeProductRating,
+  changeProductRatingRequest,
   changeProductRatingSuccess,
   changeProductRatingError,
-  deleteProductRating,
+  deleteProductRatingRequest,
   deleteProductRatingSuccess,
   deleteProductRatingError,
-  addProduct,
+  addProductRequest,
   addProductSuccess,
   addProductError,
-  editProduct,
+  editProductRequest,
   editProductSuccess,
   editProductError,
-  deleteProducts,
+  deleteProductsRequest,
   deleteProductsSuccess,
   deleteProductsError,
   closeModal,
@@ -37,7 +37,7 @@ import {
 
 export const getSelectedProducts = state => state.getIn(['products', 'selected'])
 
-export function* handleFetchProducts(action) {
+export function* handleFetchProductsRequest(action) {
   try {
     yield put(startProductsLoading())
     const { page, itemsPerPage: limit, searchText, filter } = action.payload
@@ -72,7 +72,7 @@ export function* handleFetchProducts(action) {
   }
 }
 
-export function* handleFetchProduct(action) {
+export function* handleFetchProductRequest(action) {
   try {
     yield put(startProductsLoading())
     const response = yield call(API.get, `/products/${action.payload.id}`)
@@ -92,7 +92,7 @@ export function* handleFetchProduct(action) {
   }
 }
 
-export function* handleFetchProductRating(action) {
+export function* handleFetchProductRatingRequest(action) {
   try {
     yield put(startProductsLoading())
     const { productId, page, itemsPerPage: limit } = action.payload
@@ -130,7 +130,7 @@ export function* handleFetchProductRating(action) {
   }
 }
 
-export function* handleChangeProductRating(action) {
+export function* handleChangeProductRatingRequest(action) {
   const { productId, userRating } = action.payload.ratingData
 
   yield put(startRatingLoading(productId))
@@ -152,7 +152,7 @@ export function* handleChangeProductRating(action) {
   }
 }
 
-export function* handleDeleteProductRating(action) {
+export function* handleDeleteProductRatingRequest(action) {
   const { productId } = action.payload
 
   yield put(startRatingLoading(productId))
@@ -174,7 +174,7 @@ export function* handleDeleteProductRating(action) {
   }
 }
 
-export function* handleAddProduct(action) {
+export function* handleAddProductRequest(action) {
   const { productFormData, history } = action.payload
   const config = {
     headers: {
@@ -198,7 +198,7 @@ export function* handleAddProduct(action) {
   }
 }
 
-export function* handleEditProduct(action) {
+export function* handleEditProductRequest(action) {
   const { id, changedFieldsFormData, history } = action.payload
   const config = {
     headers: {
@@ -222,7 +222,7 @@ export function* handleEditProduct(action) {
   }
 }
 
-export function* handleDeleteProducts() {
+export function* handleDeleteProductsRequest() {
   try {
     yield put(closeModal())
     yield put(startProductsLoading())
@@ -244,45 +244,45 @@ export function* handleDeleteProducts() {
   yield put(setSelectedProducts(List()))
 }
 
-function* watchFetchProducts() {
-  yield takeEvery(fetchProducts, handleFetchProducts)
+function* watchFetchProductsRequest() {
+  yield takeEvery(fetchProductsRequest, handleFetchProductsRequest)
 }
 
-function* watchFetchProduct() {
-  yield takeEvery(fetchProduct, handleFetchProduct)
+function* watchFetchProductRequest() {
+  yield takeEvery(fetchProductRequest, handleFetchProductRequest)
 }
 
-function* watchFetchProductRating() {
-  yield takeEvery(fetchProductRating, handleFetchProductRating)
+function* watchFetchProductRatingRequest() {
+  yield takeEvery(fetchProductRatingRequest, handleFetchProductRatingRequest)
 }
 
-function* watchChangeProductRating() {
-  yield takeEvery(changeProductRating, handleChangeProductRating)
+function* watchChangeProductRatingRequest() {
+  yield takeEvery(changeProductRatingRequest, handleChangeProductRatingRequest)
 }
 
-function* watchDeleteProductRating() {
-  yield takeEvery(deleteProductRating, handleDeleteProductRating)
+function* watchDeleteProductRatingRequest() {
+  yield takeEvery(deleteProductRatingRequest, handleDeleteProductRatingRequest)
 }
 
-function* watchAddProduct() {
-  yield takeEvery(addProduct, handleAddProduct)
+function* watchAddProductRequest() {
+  yield takeEvery(addProductRequest, handleAddProductRequest)
 }
 
-function* watchEditProduct() {
-  yield takeEvery(editProduct, handleEditProduct)
+function* watchEditProductRequest() {
+  yield takeEvery(editProductRequest, handleEditProductRequest)
 }
 
-function* watchDeleteProducts() {
-  yield takeEvery(deleteProducts, handleDeleteProducts)
+function* watchDeleteProductsRequest() {
+  yield takeEvery(deleteProductsRequest, handleDeleteProductsRequest)
 }
 
 export {
-  watchFetchProducts,
-  watchFetchProduct,
-  watchFetchProductRating,
-  watchChangeProductRating,
-  watchDeleteProductRating,
-  watchAddProduct,
-  watchEditProduct,
-  watchDeleteProducts,
+  watchFetchProductsRequest,
+  watchFetchProductRequest,
+  watchFetchProductRatingRequest,
+  watchChangeProductRatingRequest,
+  watchDeleteProductRatingRequest,
+  watchAddProductRequest,
+  watchEditProductRequest,
+  watchDeleteProductsRequest,
 }

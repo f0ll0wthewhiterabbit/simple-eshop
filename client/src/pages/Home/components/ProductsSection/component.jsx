@@ -19,10 +19,10 @@ import {
   ErrorMessage,
 } from './styles'
 
-const ProductsSection = ({ products, error, isLoading, fetchProducts }) => {
+const ProductsSection = ({ products, error, isLoading, fetchProductsRequest }) => {
   useEffect(() => {
-    fetchProducts(1, 3)
-  }, [fetchProducts])
+    fetchProductsRequest(1, 3)
+  }, [fetchProductsRequest])
 
   let content
 
@@ -84,7 +84,7 @@ ProductsSection.propTypes = {
   ).isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   isLoading: PropTypes.bool.isRequired,
-  fetchProducts: PropTypes.func.isRequired,
+  fetchProductsRequest: PropTypes.func.isRequired,
 }
 
 export default ProductsSection

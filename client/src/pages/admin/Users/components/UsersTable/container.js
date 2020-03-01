@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import UsersTable from './component'
-import { setSelectedUsers, fetchUsers, setUsersPerPage } from '../../../../../store/actions'
+import { setSelectedUsers, fetchUsersRequest, setUsersPerPage } from '../../../../../store/actions'
 
 const mapStateToProps = state => ({
   usersList: state.getIn(['users', 'data']),
@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setSelectedUsers: selectedUsersList => setSelectedUsers(selectedUsersList),
-  fetchUsers: (currentPage, itemsPerPage) => fetchUsers(currentPage, itemsPerPage),
+  fetchUsersRequest: (currentPage, itemsPerPage) => fetchUsersRequest(currentPage, itemsPerPage),
   setUsersPerPage: amount => setUsersPerPage(amount),
 }
 

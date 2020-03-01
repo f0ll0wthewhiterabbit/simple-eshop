@@ -26,7 +26,7 @@ export const UserMenu = ({
   isAdmin,
   isDeleteRequestSent,
   showModal,
-  signOut,
+  signOutRequest,
   history,
   location,
 }) => {
@@ -48,7 +48,7 @@ export const UserMenu = ({
   }
 
   const handleSignOutClick = () => {
-    signOut(history, location)
+    signOutRequest(history, location)
   }
 
   const userMenuButton = isMobileDevice ? (
@@ -126,7 +126,7 @@ UserMenu.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   isDeleteRequestSent: PropTypes.bool.isRequired,
   showModal: PropTypes.func.isRequired,
-  signOut: PropTypes.func.isRequired,
+  signOutRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
 }

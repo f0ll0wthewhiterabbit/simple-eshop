@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ProductEditPage from './component'
-import { fetchProduct } from '../../../store/actions'
+import { fetchProductRequest } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   product: state.getIn(['products', 'currentProduct']),
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchProduct: id => fetchProduct(id),
+  fetchProductRequest: id => fetchProductRequest(id),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductEditPage)

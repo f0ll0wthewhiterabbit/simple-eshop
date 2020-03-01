@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ProfileForm from './component'
-import { updateUser } from '../../../../store/actions'
+import { updateUserRequest } from '../../../../store/actions'
 
 const mapStateToProps = state => ({
   firstName: state.getIn(['auth', 'user', 'firstName']),
@@ -10,8 +10,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  updateUser: (userData, history, setFormSubmitting) =>
-    updateUser(userData, history, setFormSubmitting),
+  updateUserRequest: (userData, history, setFormSubmitting) =>
+    updateUserRequest(userData, history, setFormSubmitting),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm)

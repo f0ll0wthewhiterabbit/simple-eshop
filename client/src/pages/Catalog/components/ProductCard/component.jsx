@@ -28,8 +28,8 @@ import {
 
 const ProductCard = ({
   productData,
-  changeProductRating,
-  deleteProductRating,
+  changeProductRatingRequest,
+  deleteProductRatingRequest,
   ratingsLoadingList,
   ratingsErrorList,
 }) => {
@@ -41,14 +41,14 @@ const ProductCard = ({
   const isErrorInLoad = ratingsErrorList.indexOf(id) !== -1
 
   const handleRatingChange = (event, userRating) => {
-    changeProductRating({
+    changeProductRatingRequest({
       productId: id,
       userRating,
     })
   }
 
   const handleDeleteButtonClick = () => {
-    deleteProductRating(id)
+    deleteProductRatingRequest(id)
   }
 
   let userRatingField
@@ -151,8 +151,8 @@ ProductCard.propTypes = {
       currentUserRating: PropTypes.number,
     }),
   }).isRequired,
-  changeProductRating: PropTypes.func.isRequired,
-  deleteProductRating: PropTypes.func.isRequired,
+  changeProductRatingRequest: PropTypes.func.isRequired,
+  deleteProductRatingRequest: PropTypes.func.isRequired,
   ratingsLoadingList: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
   ratingsErrorList: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
 }

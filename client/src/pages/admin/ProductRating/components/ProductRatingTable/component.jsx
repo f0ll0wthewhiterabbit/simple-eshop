@@ -25,7 +25,7 @@ const ProductRatingTable = ({
   totalAmount,
   isDarkTheme,
   setProductsPerPage,
-  fetchProductRating,
+  fetchProductRatingRequest,
 }) => {
   const [page, setPage] = React.useState(0)
 
@@ -40,7 +40,7 @@ const ProductRatingTable = ({
   const handleChangePage = (event, newPage) => {
     const term = currentPage === newPage ? 1 : -1
 
-    fetchProductRating(productId, currentPage + term, itemsPerPage)
+    fetchProductRatingRequest(productId, currentPage + term, itemsPerPage)
     setPage(newPage)
   }
 
@@ -172,7 +172,7 @@ ProductRatingTable.propTypes = {
   currentPage: PropTypes.number.isRequired,
   totalAmount: PropTypes.number.isRequired,
   isDarkTheme: PropTypes.bool.isRequired,
-  fetchProductRating: PropTypes.func.isRequired,
+  fetchProductRatingRequest: PropTypes.func.isRequired,
   setProductsPerPage: PropTypes.func.isRequired,
 }
 

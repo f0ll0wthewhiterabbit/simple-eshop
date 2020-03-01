@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ProductCard from './component'
-import { changeProductRating, deleteProductRating } from '../../../../store/actions'
+import { changeProductRatingRequest, deleteProductRatingRequest } from '../../../../store/actions'
 
 const mapStateToProps = state => ({
   ratingsLoadingList: state.getIn(['products', 'ratingsLoadingList']),
@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  changeProductRating: productData => changeProductRating(productData),
-  deleteProductRating: productId => deleteProductRating(productId),
+  changeProductRatingRequest: productData => changeProductRatingRequest(productData),
+  deleteProductRatingRequest: productId => deleteProductRatingRequest(productId),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)

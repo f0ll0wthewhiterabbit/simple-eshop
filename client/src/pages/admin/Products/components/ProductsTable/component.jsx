@@ -13,7 +13,7 @@ const ProductsTable = ({
   selectedProducts,
   lastSearchQuery,
   setSelectedProducts,
-  fetchProducts,
+  fetchProductsRequest,
   setProductsPerPage,
 }) => {
   const headCells = [
@@ -38,7 +38,7 @@ const ProductsTable = ({
       storeFieldName={FIELDS.STORE_PRODUCTS}
       selectedItems={selectedProducts}
       setSelectedItems={setSelectedProducts}
-      fetchData={fetchProducts}
+      fetchData={fetchProductsRequest}
       setRowsPerPage={setProductsPerPage}
     />
   )
@@ -69,7 +69,7 @@ ProductsTable.propTypes = {
   selectedProducts: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
   lastSearchQuery: PropTypes.string.isRequired,
   setSelectedProducts: PropTypes.func.isRequired,
-  fetchProducts: PropTypes.func.isRequired,
+  fetchProductsRequest: PropTypes.func.isRequired,
   setProductsPerPage: PropTypes.func.isRequired,
 }
 

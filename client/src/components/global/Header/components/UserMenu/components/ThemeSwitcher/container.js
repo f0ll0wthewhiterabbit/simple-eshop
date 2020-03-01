@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ThemeSwitcher from './component'
-import { toggleTheme } from '../../../../../../../store/actions'
+import { toggleThemeRequest } from '../../../../../../../store/actions'
 import { FIELDS } from '../../../../../../../constants'
 
 const mapStateToProps = state => ({
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  toggleTheme: theme => toggleTheme(theme),
+  toggleThemeRequest: theme => toggleThemeRequest(theme),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThemeSwitcher)

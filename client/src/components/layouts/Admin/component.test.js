@@ -11,8 +11,8 @@ describe('AdminLayout component', () => {
   let wrapper
   const testContent = 'test content'
   const initialProps = {
-    deleteUsers: jest.fn(),
-    deleteProducts: jest.fn(),
+    deleteUsersRequest: jest.fn(),
+    deleteProductsRequest: jest.fn(),
     children: <p>{testContent}</p>,
     isSidebarOpened: true,
     closeSidebar: jest.fn(),
@@ -48,7 +48,7 @@ describe('AdminLayout component', () => {
     expect(sidebar.props().open).toEqual(true)
   })
 
-  it(`should contain opened sidebar if'isSidebarOpened=true' and width not desktop`, () => {
+  it(`should contain opened sidebar if 'isSidebarOpened=true' and width not desktop`, () => {
     useMediaQuery.mockImplementation(() => false)
     wrapper = generateWrapper()
     const sidebar = findByTestAttr(wrapper, dataTestSidebar)

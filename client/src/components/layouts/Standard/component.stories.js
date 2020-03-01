@@ -29,7 +29,7 @@ export default {
 }
 
 export const standardLayoutData = {
-  requestUserDeletion: () => {},
+  callForUserDeletion: () => {},
 }
 
 export const normal = () => (

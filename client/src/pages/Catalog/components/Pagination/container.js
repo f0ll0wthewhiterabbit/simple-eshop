@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import Pagination from './component'
-import { fetchProducts } from '../../../../store/actions'
+import { fetchProductsRequest } from '../../../../store/actions'
 
 const mapStateToProps = state => ({
   currentPage: state.getIn(['products', 'currentPage']),
@@ -11,8 +11,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchProducts: (page, itemsPerPage, searchText, filter) =>
-    fetchProducts(page, itemsPerPage, searchText, filter),
+  fetchProductsRequest: (page, itemsPerPage, searchText, filter) =>
+    fetchProductsRequest(page, itemsPerPage, searchText, filter),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pagination)

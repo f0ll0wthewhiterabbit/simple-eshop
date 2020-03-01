@@ -6,9 +6,9 @@ import * as Yup from 'yup'
 
 import { StyledForm, SubmitButton, Progress, ErrorMessage, InputField } from './styles'
 
-const SignUpForm = ({ signUp, error }) => {
+const SignUpForm = ({ signUpRequest, error }) => {
   const handleFormSubmit = (values, formMethods) => {
-    signUp(
+    signUpRequest(
       {
         email: values.email,
         firstName: values.firstName,
@@ -164,7 +164,7 @@ SignUpForm.defaultProps = {
 }
 
 SignUpForm.propTypes = {
-  signUp: PropTypes.func.isRequired,
+  signUpRequest: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
 }
 

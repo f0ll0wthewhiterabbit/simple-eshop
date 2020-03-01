@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import UsersToolbar from './component'
-import { fetchUsers, setUsersSearchQuery } from '../../../../../store/actions'
+import { fetchUsersRequest, setUsersSearchQuery } from '../../../../../store/actions'
 
 const mapStateToProps = state => ({
   itemsPerPage: state.getIn(['users', 'itemsPerPage']),
@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchUsers: (currentPage, itemsPerPage, searchText) =>
-    fetchUsers(currentPage, itemsPerPage, searchText),
+  fetchUsersRequest: (currentPage, itemsPerPage, searchText) =>
+    fetchUsersRequest(currentPage, itemsPerPage, searchText),
   setUsersSearchQuery: searchQuery => setUsersSearchQuery(searchQuery),
 }
 

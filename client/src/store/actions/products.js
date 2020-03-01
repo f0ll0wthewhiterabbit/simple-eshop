@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 
-export const fetchProducts = createAction(
-  'PRODUCTS/FETCH_PRODUCTS',
+export const fetchProductsRequest = createAction(
+  'PRODUCTS/FETCH_PRODUCTS_REQUEST',
   (page, itemsPerPage, searchText, filter) => ({
     page,
     itemsPerPage,
@@ -22,15 +22,17 @@ export const fetchProductsSuccess = createAction(
 export const fetchProductsError = createAction('PRODUCTS/FETCH_PRODUCTS_ERROR', error => ({
   error,
 }))
-export const fetchProduct = createAction('PRODUCTS/FETCH_PRODUCT', id => ({ id }))
+
+export const fetchProductRequest = createAction('PRODUCTS/FETCH_PRODUCT_REQUEST', id => ({ id }))
 export const fetchProductSuccess = createAction('PRODUCTS/FETCH_PRODUCT_SUCCESS', product => ({
   product,
 }))
 export const fetchProductError = createAction('PRODUCTS/FETCH_PRODUCT_ERROR', error => ({
   error,
 }))
-export const fetchProductRating = createAction(
-  'PRODUCTS/FETCH_PRODUCT_RATING',
+
+export const fetchProductRatingRequest = createAction(
+  'PRODUCTS/FETCH_PRODUCT_RATING_REQUEST',
   (productId, page, itemsPerPage) => ({
     productId,
     page,
@@ -53,11 +55,8 @@ export const fetchProductRatingError = createAction(
     error,
   })
 )
-export const setSelectedProducts = createAction(
-  'PRODUCTS/SET_SELECTED_PRODUCTS',
-  selectedProductsList => ({ selectedProductsList })
-)
-export const deleteProducts = createAction('PRODUCTS/DELETE_PRODUCTS')
+
+export const deleteProductsRequest = createAction('PRODUCTS/DELETE_PRODUCTS_REQUEST')
 export const deleteProductsSuccess = createAction(
   'PRODUCTS/DELETE_PRODUCTS_SUCCESS',
   deletedProducts => ({ deletedProducts })
@@ -65,9 +64,13 @@ export const deleteProductsSuccess = createAction(
 export const deleteProductsError = createAction('PRODUCTS/DELETE_PRODUCTS_ERROR', error => ({
   error,
 }))
-export const changeProductRating = createAction('PRODUCTS/CHANGE_PRODUCT_RATING', ratingData => ({
-  ratingData,
-}))
+
+export const changeProductRatingRequest = createAction(
+  'PRODUCTS/CHANGE_PRODUCT_RATING_REQUEST',
+  ratingData => ({
+    ratingData,
+  })
+)
 export const changeProductRatingSuccess = createAction(
   'PRODUCTS/CHANGE_PRODUCT_RATING_SUCCESS',
   product => ({ product })
@@ -76,9 +79,13 @@ export const changeProductRatingError = createAction(
   'PRODUCTS/CHANGE_PRODUCT_RATING_ERROR',
   id => ({ id })
 )
-export const deleteProductRating = createAction('PRODUCTS/DELETE_PRODUCT_RATING', productId => ({
-  productId,
-}))
+
+export const deleteProductRatingRequest = createAction(
+  'PRODUCTS/DELETE_PRODUCT_RATING_REQUEST',
+  productId => ({
+    productId,
+  })
+)
 export const deleteProductRatingSuccess = createAction(
   'PRODUCTS/DELETE_PRODUCT_RATING_SUCCESS',
   product => ({ product })
@@ -87,8 +94,9 @@ export const deleteProductRatingError = createAction(
   'PRODUCTS/DELETE_PRODUCT_RATING_ERROR',
   id => ({ id })
 )
-export const addProduct = createAction(
-  'PRODUCTS/ADD_PRODUCT',
+
+export const addProductRequest = createAction(
+  'PRODUCTS/ADD_PRODUCT_REQUEST',
   (productFormData, history, setFormSubmitting) => ({
     productFormData,
     history,
@@ -99,9 +107,9 @@ export const addProductSuccess = createAction('PRODUCTS/ADD_PRODUCT_SUCCESS', pr
   product,
 }))
 export const addProductError = createAction('PRODUCTS/ADD_PRODUCT_ERROR', error => ({ error }))
-export const startRatingLoading = createAction('PRODUCTS/START_RATING_LOADING', id => ({ id }))
-export const editProduct = createAction(
-  'PRODUCTS/EDIT_PRODUCT',
+
+export const editProductRequest = createAction(
+  'PRODUCTS/EDIT_PRODUCT_REQUEST',
   (id, changedFieldsFormData, history, setFormSubmitting) => ({
     id,
     changedFieldsFormData,
@@ -113,16 +121,27 @@ export const editProductSuccess = createAction('PRODUCTS/EDIT_PRODUCT_SUCCESS', 
   product,
 }))
 export const editProductError = createAction('PRODUCTS/EDIT_PRODUCT_ERROR', error => ({ error }))
+
 export const setProductsPerPage = createAction('PRODUCTS/SET_PRODUCTS_PER_PAGE', amount => ({
   amount,
 }))
+
 export const setProductsFilter = createAction('PRODUCTS/SET_PRODUCTS_FILTER', filter => ({
   filter,
 }))
+
 export const startProductsLoading = createAction('PRODUCTS/START_PRODUCTS_LOADING')
+
 export const setProductsSearchQuery = createAction(
   'PRODUCTS/SET_PRODUCTS_SEARCH_QUERY',
   searchQuery => ({
     searchQuery,
   })
 )
+
+export const setSelectedProducts = createAction(
+  'PRODUCTS/SET_SELECTED_PRODUCTS',
+  selectedProductsList => ({ selectedProductsList })
+)
+
+export const startRatingLoading = createAction('PRODUCTS/START_RATING_LOADING', id => ({ id }))

@@ -10,7 +10,7 @@ import Wrapper from './styles'
 const ProductsToolbar = ({
   itemsPerPage,
   lastSearchQuery,
-  fetchProducts,
+  fetchProductsRequest,
   setProductsSearchQuery,
 }) => {
   return (
@@ -18,7 +18,7 @@ const ProductsToolbar = ({
       <SearchForm
         placeholder="Search products by tags"
         itemsPerPage={itemsPerPage}
-        searchMethod={fetchProducts}
+        searchMethod={fetchProductsRequest}
         setSearchQueryMethod={setProductsSearchQuery}
         initialValue={lastSearchQuery}
       />
@@ -37,7 +37,7 @@ const ProductsToolbar = ({
 ProductsToolbar.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   lastSearchQuery: PropTypes.string.isRequired,
-  fetchProducts: PropTypes.func.isRequired,
+  fetchProductsRequest: PropTypes.func.isRequired,
   setProductsSearchQuery: PropTypes.func.isRequired,
 }
 

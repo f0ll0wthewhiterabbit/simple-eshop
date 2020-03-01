@@ -4,22 +4,22 @@ import { List } from 'immutable'
 import API from '../../utils/api'
 import convertToRecord from '../../utils/convertToRecord'
 import {
+  fetchUsersRequest,
   fetchUsersSuccess,
   fetchUsersError,
+  deleteUsersRequest,
   deleteUsersSuccess,
   deleteUsersError,
-  requestUserDeletionSuccess,
-  requestUserDeletionError,
+  callForUserDeletionRequest,
+  callForUserDeletionSuccess,
+  callForUserDeletionError,
+  updateUserRequest,
+  updateUserSuccess,
+  updateUserError,
+  authenticateRequest,
   authenticateSuccess,
   closeModal,
   setSelectedUsers,
-  fetchUsers,
-  deleteUsers,
-  requestUserDeletion,
-  updateUser,
-  updateUserSuccess,
-  updateUserError,
-  authenticate,
   startUsersLoading,
 } from '../actions'
 import { ROLES, PAGE_PATHS } from '../../constants'
@@ -27,7 +27,7 @@ import { ROLES, PAGE_PATHS } from '../../constants'
 export const getUsers = state => state.getIn(['users', 'selected'])
 export const getRole = state => state.getIn(['auth', 'user', 'role'])
 
-export function* handleFetchUsers(action) {
+export function* handleFetchUsersRequest(action) {
   try {
     yield put(startUsersLoading())
     const { currentPage: page, itemsPerPage: limit, searchText } = action.payload
@@ -56,7 +56,7 @@ export function* handleFetchUsers(action) {
   }
 }
 
-export function* handleDeleteUsers() {
+export function* handleDeleteUsersRequest() {
   try {
     yield put(closeModal())
     yield put(startUsersLoading())
@@ -78,7 +78,7 @@ export function* handleDeleteUsers() {
   yield put(setSelectedUsers(List()))
 }
 
-export function* handleRequestUserDeletion() {
+export function* handleCallForUserDeletionRequest() {
   try {
     yield put(closeModal())
     yield put(startUsersLoading())
@@ -87,14 +87,14 @@ export function* handleRequestUserDeletion() {
     const { _id: id, firstName, lastName, email, role, isRemovable } = response.data
     const userData = { id, firstName, lastName, email, role, isRemovable }
 
-    yield put(requestUserDeletionSuccess(id))
+    yield put(callForUserDeletionSuccess(id))
     yield put(authenticateSuccess(userData))
   } catch (error) {
-    yield put(requestUserDeletionError('Users delete error!'))
+    yield put(callForUserDeletionError('Users delete error!'))
   }
 }
 
-export function* handleUpdateUser(action) {
+export function* handleUpdateUserRequest(action) {
   try {
     yield put(startUsersLoading())
     const { userData, history } = action.payload
@@ -113,7 +113,7 @@ export function* handleUpdateUser(action) {
     const userRole = yield select(getRole)
 
     yield put(updateUserSuccess(user))
-    yield put(authenticate())
+    yield put(authenticateRequest())
 
     if (userRole === ROLES.ADMIN) {
       history.push(PAGE_PATHS.ADMIN_PRODUCTS)
@@ -126,20 +126,25 @@ export function* handleUpdateUser(action) {
   }
 }
 
-function* watchFetchUsers() {
-  yield takeEvery(fetchUsers, handleFetchUsers)
+function* watchFetchUsersRequest() {
+  yield takeEvery(fetchUsersRequest, handleFetchUsersRequest)
 }
 
-function* watchDeleteUsers() {
-  yield takeEvery(deleteUsers, handleDeleteUsers)
+function* watchDeleteUsersRequest() {
+  yield takeEvery(deleteUsersRequest, handleDeleteUsersRequest)
 }
 
-function* watchRequestUserDeletion() {
-  yield takeEvery(requestUserDeletion, handleRequestUserDeletion)
+function* watchCallForUserDeletionRequest() {
+  yield takeEvery(callForUserDeletionRequest, handleCallForUserDeletionRequest)
 }
 
-function* watchUpdateUser() {
-  yield takeEvery(updateUser, handleUpdateUser)
+function* watchUpdateUserRequest() {
+  yield takeEvery(updateUserRequest, handleUpdateUserRequest)
 }
 
-export { watchFetchUsers, watchDeleteUsers, watchRequestUserDeletion, watchUpdateUser }
+export {
+  watchFetchUsersRequest,
+  watchDeleteUsersRequest,
+  watchCallForUserDeletionRequest,
+  watchUpdateUserRequest,
+}

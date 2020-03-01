@@ -16,8 +16,8 @@ export const AdminLayout = ({
   storeFieldName,
   theme,
   closeSidebar,
-  deleteUsers,
-  deleteProducts,
+  deleteUsersRequest,
+  deleteProductsRequest,
   children,
 }) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), { defaultMatches: true })
@@ -25,9 +25,9 @@ export const AdminLayout = ({
   let confirmMethod
 
   if (storeFieldName === FIELDS.STORE_PRODUCTS) {
-    confirmMethod = deleteProducts
+    confirmMethod = deleteProductsRequest
   } else if (storeFieldName === FIELDS.STORE_USERS) {
-    confirmMethod = deleteUsers
+    confirmMethod = deleteUsersRequest
   }
 
   const handleSidebarClose = () => {
@@ -71,8 +71,8 @@ AdminLayout.propTypes = {
   storeFieldName: PropTypes.string,
   theme: PropTypes.shape({ breakpoints: PropTypes.object.isRequired }).isRequired,
   closeSidebar: PropTypes.func.isRequired,
-  deleteUsers: PropTypes.func.isRequired,
-  deleteProducts: PropTypes.func.isRequired,
+  deleteUsersRequest: PropTypes.func.isRequired,
+  deleteProductsRequest: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 }
 

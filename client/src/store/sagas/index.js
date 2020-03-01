@@ -1,44 +1,53 @@
 import { all } from 'redux-saga/effects'
 
 import {
-  watchFetchProducts,
-  watchFetchProduct,
-  watchFetchProductRating,
-  watchChangeProductRating,
-  watchDeleteProductRating,
-  watchAddProduct,
-  watchEditProduct,
-  watchDeleteProducts,
+  watchFetchProductsRequest,
+  watchFetchProductRequest,
+  watchFetchProductRatingRequest,
+  watchChangeProductRatingRequest,
+  watchDeleteProductRatingRequest,
+  watchAddProductRequest,
+  watchEditProductRequest,
+  watchDeleteProductsRequest,
 } from './products'
 import {
-  watchFetchUsers,
-  watchDeleteUsers,
-  watchRequestUserDeletion,
-  watchUpdateUser,
+  watchFetchUsersRequest,
+  watchDeleteUsersRequest,
+  watchCallForUserDeletionRequest,
+  watchUpdateUserRequest,
 } from './users'
-import { watchAuthenticate, watchSignUp, watchSignIn, watchSignOut } from './auth'
-import { watchToggleTheme, watchGetThemeFromStorage, watchInitialize } from './app'
+import {
+  watchAuthenticateRequest,
+  watchSignUpRequest,
+  watchSignInRequest,
+  watchSignOutRequest,
+} from './auth'
+import {
+  watchToggleThemeRequest,
+  watchGetThemeFromStorageRequest,
+  watchInitializeRequest,
+} from './app'
 
 export default function*() {
   yield all([
-    watchFetchUsers(),
-    watchDeleteUsers(),
-    watchRequestUserDeletion(),
-    watchUpdateUser(),
-    watchFetchProducts(),
-    watchFetchProduct(),
-    watchFetchProductRating(),
-    watchChangeProductRating(),
-    watchDeleteProductRating(),
-    watchAddProduct(),
-    watchEditProduct(),
-    watchDeleteProducts(),
-    watchAuthenticate(),
-    watchSignUp(),
-    watchSignIn(),
-    watchSignOut(),
-    watchToggleTheme(),
-    watchGetThemeFromStorage(),
-    watchInitialize(),
+    watchFetchUsersRequest(),
+    watchDeleteUsersRequest(),
+    watchCallForUserDeletionRequest(),
+    watchUpdateUserRequest(),
+    watchFetchProductsRequest(),
+    watchFetchProductRequest(),
+    watchFetchProductRatingRequest(),
+    watchChangeProductRatingRequest(),
+    watchDeleteProductRatingRequest(),
+    watchAddProductRequest(),
+    watchEditProductRequest(),
+    watchDeleteProductsRequest(),
+    watchAuthenticateRequest(),
+    watchSignUpRequest(),
+    watchSignInRequest(),
+    watchSignOutRequest(),
+    watchToggleThemeRequest(),
+    watchGetThemeFromStorageRequest(),
+    watchInitializeRequest(),
   ])
 }

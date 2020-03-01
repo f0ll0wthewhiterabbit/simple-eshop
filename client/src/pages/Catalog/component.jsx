@@ -9,10 +9,10 @@ import FilterSelectContainer from './components/FilterSelect'
 import PaginationContainer from './components/Pagination'
 import { Wrapper, Heading, Toolbar, ContentWrapper, CardsWrapper } from './styles'
 
-const CatalogPage = ({ products, error, isLoading, fetchProducts }) => {
+const CatalogPage = ({ products, error, isLoading, fetchProductsRequest }) => {
   useEffect(() => {
-    fetchProducts(1)
-  }, [fetchProducts])
+    fetchProductsRequest(1)
+  }, [fetchProductsRequest])
 
   let content
 
@@ -80,7 +80,7 @@ CatalogPage.propTypes = {
   ).isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
   isLoading: PropTypes.bool.isRequired,
-  fetchProducts: PropTypes.func.isRequired,
+  fetchProductsRequest: PropTypes.func.isRequired,
 }
 
 export default CatalogPage

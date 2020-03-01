@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import ProductRatingTable from './component'
-import { setProductsPerPage, fetchProductRating } from '../../../../../store/actions'
+import { setProductsPerPage, fetchProductRatingRequest } from '../../../../../store/actions'
 import { FIELDS } from '../../../../../constants'
 
 const mapStateToProps = state => ({
@@ -13,8 +13,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setProductsPerPage: selectedProductsList => setProductsPerPage(selectedProductsList),
-  fetchProductRating: (productId, page, itemsPerPage) =>
-    fetchProductRating(productId, page, itemsPerPage),
+  fetchProductRatingRequest: (productId, page, itemsPerPage) =>
+    fetchProductRatingRequest(productId, page, itemsPerPage),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductRatingTable)

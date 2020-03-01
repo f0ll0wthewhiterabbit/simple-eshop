@@ -6,23 +6,28 @@ import API from '../../utils/api'
 import setAuthToken from '../../utils/setAuthToken'
 import isTokenExpired from '../../utils/isTokenExpired'
 import {
+  authenticateRequest,
   authenticateError,
   authenticateSuccess,
   setProductsPerPage,
   signUpSuccess,
-  authenticate,
   signUpError,
   signInSuccess,
   signInError,
   signOutSuccess,
 } from '../actions'
-import { handleAuthenticate, handleSignUp, handleSignIn, handleSignOut } from './auth'
+import {
+  handleAuthenticateRequest,
+  handleSignUpRequest,
+  handleSignInRequest,
+  handleSignOutRequest,
+} from './auth'
 import { ROLES, PAGE_LIMITS, PAGE_PATHS, FIELDS } from '../../constants'
 
 jest.mock('../../utils/convertToRecord', () => jest.fn(() => ({ id: 1 })))
 
 describe('Auth sagas', () => {
-  describe('authenticate', () => {
+  describe('authenticateRequest', () => {
     const testResponse = {
       data: {
         _id: '1',
@@ -36,7 +41,7 @@ describe('Auth sagas', () => {
     const userData = { id: 1 }
 
     it('should handle if token not expired', () => {
-      return expectSaga(handleAuthenticate)
+      return expectSaga(handleAuthenticateRequest)
         .provide([
           [matchers.call.fn(localStorage.getItem), 'testToken'],
           [matchers.call.fn(isTokenExpired), false],
@@ -57,7 +62,7 @@ describe('Auth sagas', () => {
           refreshToken: 'testRefreshToken',
         },
       }
-      return expectSaga(handleAuthenticate)
+      return expectSaga(handleAuthenticateRequest)
         .provide([
           [matchers.call.fn(localStorage.getItem), 'testToken'],
           [matchers.call.fn(isTokenExpired), true],
@@ -74,7 +79,7 @@ describe('Auth sagas', () => {
     })
 
     it('should handle error without token', () => {
-      return expectSaga(handleAuthenticate)
+      return expectSaga(handleAuthenticateRequest)
         .provide([
           [matchers.call.fn(setAuthToken), undefined],
           [matchers.call.fn(API.get), testResponse],
@@ -90,7 +95,7 @@ describe('Auth sagas', () => {
       const error = { response: { data: {} } }
       const errorMessage = 'Authentication failed!'
 
-      return expectSaga(handleAuthenticate)
+      return expectSaga(handleAuthenticateRequest)
         .provide([
           [matchers.call.fn(isTokenExpired), false],
           [matchers.call.fn(setAuthToken), undefined],
@@ -105,7 +110,7 @@ describe('Auth sagas', () => {
     })
   })
 
-  describe('signUp', () => {
+  describe('signUpRequest', () => {
     const action = {
       payload: {
         userData: {
@@ -129,7 +134,7 @@ describe('Auth sagas', () => {
         },
       }
 
-      return expectSaga(handleSignUp, action)
+      return expectSaga(handleSignUpRequest, action)
         .provide([
           [matchers.call.fn(API.post), testResponse],
           [matchers.call.fn(localStorage.setItem), undefined],
@@ -137,7 +142,7 @@ describe('Auth sagas', () => {
         ])
         .call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, testResponse.data.accessToken)
         .put(signUpSuccess(testResponse.data.accessToken))
-        .put(authenticate())
+        .put(authenticateRequest())
         .run()
     })
 
@@ -145,7 +150,7 @@ describe('Auth sagas', () => {
       const error = { response: { data: {} } }
       const errorMessage = 'Registration failed! Something went wrong.'
 
-      expectSaga(handleSignUp, action)
+      expectSaga(handleSignUpRequest, action)
         .provide([
           [matchers.call.fn(API.post), throwError(error)],
           [matchers.call.fn(localStorage.setItem), undefined],
@@ -160,7 +165,7 @@ describe('Auth sagas', () => {
     })
   })
 
-  describe('signIn', () => {
+  describe('signInRequest', () => {
     const action = {
       payload: {
         userData: {
@@ -183,7 +188,7 @@ describe('Auth sagas', () => {
         },
       }
 
-      return expectSaga(handleSignIn, action)
+      return expectSaga(handleSignInRequest, action)
         .provide([
           [matchers.call.fn(API.post), testResponse],
           [matchers.call.fn(localStorage.setItem), undefined],
@@ -191,7 +196,7 @@ describe('Auth sagas', () => {
         ])
         .call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, testResponse.data.accessToken)
         .put(signInSuccess(testResponse.data.accessToken))
-        .put(authenticate())
+        .put(authenticateRequest())
         .run()
     })
 
@@ -199,7 +204,7 @@ describe('Auth sagas', () => {
       const error = { response: { data: {} } }
       const errorMessage = 'Unable to login! Something went wrong!'
 
-      expectSaga(handleSignIn, action)
+      expectSaga(handleSignInRequest, action)
         .provide([
           [matchers.call.fn(API.post), throwError(error)],
           [matchers.call.fn(localStorage.setItem), undefined],
@@ -214,7 +219,7 @@ describe('Auth sagas', () => {
     })
   })
 
-  describe('signOut', () => {
+  describe('signOutRequest', () => {
     const action = {
       payload: {
         history: {
@@ -232,7 +237,7 @@ describe('Auth sagas', () => {
     })
 
     it('should handle', () => {
-      expectSaga(handleSignOut, action)
+      expectSaga(handleSignOutRequest, action)
         .provide([
           [matchers.call.fn(localStorage.getItem), 'testToken'],
           [matchers.call.fn(localStorage.removeItem, FIELDS.STORAGE_REFRESH_TOKEN), undefined],

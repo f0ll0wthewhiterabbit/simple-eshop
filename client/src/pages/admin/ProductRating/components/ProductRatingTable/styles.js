@@ -52,6 +52,7 @@ export const SubHeading = styled(Typography)`
 
 export const Comment = styled(Typography)`
   display: none;
+  color: ${props => props.theme.colors.font.regular};
 
   ${props => props.theme.breakpoints.up('sm')} {
     display: block;

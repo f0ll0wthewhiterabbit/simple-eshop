@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
 import StandardLayout from './component'
-import { requestUserDeletion } from '../../../store/actions'
+import { callForUserDeletionRequest } from '../../../store/actions'
 
 const mapDispatchToProps = {
-  requestUserDeletion,
+  callForUserDeletionRequest,
 }
 
 export default connect(null, mapDispatchToProps)(StandardLayout)

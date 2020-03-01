@@ -29,21 +29,21 @@ import {
 } from '../actions'
 import {
   getSelectedProducts,
-  handleFetchProducts,
-  handleFetchProduct,
-  handleFetchProductRating,
-  handleChangeProductRating,
-  handleDeleteProductRating,
-  handleAddProduct,
-  handleEditProduct,
-  handleDeleteProducts,
+  handleFetchProductsRequest,
+  handleFetchProductRequest,
+  handleFetchProductRatingRequest,
+  handleChangeProductRatingRequest,
+  handleDeleteProductRatingRequest,
+  handleAddProductRequest,
+  handleEditProductRequest,
+  handleDeleteProductsRequest,
 } from './products'
 import { PAGE_PATHS } from '../../constants'
 
 jest.mock('../../utils/convertToRecord', () => jest.fn(() => [1, 2, 3]))
 
 describe('Products sagas', () => {
-  describe('fetchProducts', () => {
+  describe('fetchProductsRequest', () => {
     const action = { payload: { page: 1, itemsPerPage: 10 } }
 
     it('should handle', () => {
@@ -64,7 +64,7 @@ describe('Products sagas', () => {
       } = testResponse.data
       const productsList = testResponse.data.data
 
-      return expectSaga(handleFetchProducts, action)
+      return expectSaga(handleFetchProductsRequest, action)
         .provide([[matchers.call.fn(API.get), testResponse]])
         .put(startProductsLoading())
         .put(fetchProductsSuccess(productsList, totalAmount, currentPage, itemsPerPage, totalPages))
@@ -75,7 +75,7 @@ describe('Products sagas', () => {
       const error = new Error('error')
       const errorMessage = 'Products data not recieved!'
 
-      return expectSaga(handleFetchProducts, action)
+      return expectSaga(handleFetchProductsRequest, action)
         .provide([[matchers.call.fn(API.get), throwError(error)]])
         .put(startProductsLoading())
         .put(fetchProductsError(errorMessage))
@@ -83,7 +83,7 @@ describe('Products sagas', () => {
     })
   })
 
-  describe('fetchProduct', () => {
+  describe('fetchProductRequest', () => {
     const action = { payload: { id: '1' } }
 
     it('should handle', () => {
@@ -98,7 +98,7 @@ describe('Products sagas', () => {
         },
       }
 
-      return expectSaga(handleFetchProduct, action)
+      return expectSaga(handleFetchProductRequest, action)
         .provide([[matchers.call.fn(API.get), testResponse]])
         .put(startProductsLoading())
         .put(fetchProductSuccess([1, 2, 3]))
@@ -109,7 +109,7 @@ describe('Products sagas', () => {
       const error = new Error('error')
       const errorMessage = 'Product not recieved!'
 
-      return expectSaga(handleFetchProduct, action)
+      return expectSaga(handleFetchProductRequest, action)
         .provide([[matchers.call.fn(API.get), throwError(error)]])
         .put(startProductsLoading())
         .put(fetchProductError(errorMessage))
@@ -117,7 +117,7 @@ describe('Products sagas', () => {
     })
   })
 
-  describe('fetchProductRating', () => {
+  describe('fetchProductRatingRequest', () => {
     const action = { payload: { productId: '1', page: 1, itemsPerPage: 10 } }
 
     it('should handle', () => {
@@ -138,7 +138,7 @@ describe('Products sagas', () => {
       } = testResponse.data
       const productRatingData = [1, 2, 3]
 
-      return expectSaga(handleFetchProductRating, action)
+      return expectSaga(handleFetchProductRatingRequest, action)
         .provide([[matchers.call.fn(API.get), testResponse]])
         .put(startProductsLoading())
         .put(
@@ -157,7 +157,7 @@ describe('Products sagas', () => {
       const error = new Error('error')
       const errorMessage = 'Product rating not recieved!'
 
-      return expectSaga(handleFetchProductRating, action)
+      return expectSaga(handleFetchProductRatingRequest, action)
         .provide([[matchers.call.fn(API.get), throwError(error)]])
         .put(startProductsLoading())
         .put(fetchProductRatingError(errorMessage))
@@ -165,7 +165,7 @@ describe('Products sagas', () => {
     })
   })
 
-  describe('changeProductRating', () => {
+  describe('changeProductRatingRequest', () => {
     const action = {
       payload: {
         ratingData: {
@@ -177,7 +177,7 @@ describe('Products sagas', () => {
     const { productId } = action.payload.ratingData
 
     it('should handle', () => {
-      return expectSaga(handleChangeProductRating, action)
+      return expectSaga(handleChangeProductRatingRequest, action)
         .provide([[matchers.call.fn(API.patch), [1, 2, 3]]])
         .put(startRatingLoading(productId))
         .put(changeProductRatingSuccess([1, 2, 3]))
@@ -187,7 +187,7 @@ describe('Products sagas', () => {
     it('should handle error case', () => {
       const error = new Error('error')
 
-      return expectSaga(handleChangeProductRating, action)
+      return expectSaga(handleChangeProductRatingRequest, action)
         .provide([[matchers.call.fn(API.patch), throwError(error)]])
         .put(startRatingLoading(productId))
         .put(changeProductRatingError(productId))
@@ -195,12 +195,12 @@ describe('Products sagas', () => {
     })
   })
 
-  describe('deleteProductRating', () => {
+  describe('deleteProductRatingRequest', () => {
     const action = { payload: { productId: '1' } }
     const { productId } = action.payload
 
     it('should handle', () => {
-      return expectSaga(handleDeleteProductRating, action)
+      return expectSaga(handleDeleteProductRatingRequest, action)
         .provide([[matchers.call.fn(API.patch), [1, 2, 3]]])
         .put(startRatingLoading(productId))
         .put(deleteProductRatingSuccess([1, 2, 3]))
@@ -210,7 +210,7 @@ describe('Products sagas', () => {
     it('should handle error case', () => {
       const error = new Error('error')
 
-      return expectSaga(handleDeleteProductRating, action)
+      return expectSaga(handleDeleteProductRatingRequest, action)
         .provide([[matchers.call.fn(API.patch), throwError(error)]])
         .put(startRatingLoading(productId))
         .put(deleteProductRatingError(productId))
@@ -218,7 +218,7 @@ describe('Products sagas', () => {
     })
   })
 
-  describe('addProduct', () => {
+  describe('addProductRequest', () => {
     const action = {
       payload: {
         productFormData: { foo: 'bar' },
@@ -235,7 +235,7 @@ describe('Products sagas', () => {
     })
 
     it('should handle', () => {
-      expectSaga(handleAddProduct, action)
+      expectSaga(handleAddProductRequest, action)
         .provide([[matchers.call.fn(API.post), [1, 2, 3]]])
         .put(addProductSuccess([1, 2, 3]))
         .run()
@@ -248,7 +248,7 @@ describe('Products sagas', () => {
       const error = { response: { data: {} } }
       const errorMessage = 'Product add error!'
 
-      expectSaga(handleAddProduct, action)
+      expectSaga(handleAddProductRequest, action)
         .provide([[matchers.call.fn(API.post), throwError(error)]])
         .put(addProductError(errorMessage))
         .run()
@@ -258,7 +258,7 @@ describe('Products sagas', () => {
     })
   })
 
-  describe('editProduct', () => {
+  describe('editProductRequest', () => {
     const action = {
       payload: {
         id: '1',
@@ -276,7 +276,7 @@ describe('Products sagas', () => {
     })
 
     it('should handle', () => {
-      expectSaga(handleEditProduct, action)
+      expectSaga(handleEditProductRequest, action)
         .provide([[matchers.call.fn(API.patch), [1, 2, 3]]])
         .put(editProductSuccess([1, 2, 3]))
         .run()
@@ -289,7 +289,7 @@ describe('Products sagas', () => {
       const error = { response: { data: {} } }
       const errorMessage = 'Product edit error!'
 
-      expectSaga(handleEditProduct, action)
+      expectSaga(handleEditProductRequest, action)
         .provide([[matchers.call.fn(API.patch), throwError(error)]])
         .put(editProductError(errorMessage))
         .run()
@@ -299,11 +299,11 @@ describe('Products sagas', () => {
     })
   })
 
-  describe('deleteProducts', () => {
+  describe('deleteProductsRequest', () => {
     const selectedProducts = ['1', '2']
 
     it('should handle', () => {
-      return expectSaga(handleDeleteProducts)
+      return expectSaga(handleDeleteProductsRequest)
         .provide([
           [matchers.call.fn(API.delete), [1, 2, 3]],
           [select(getSelectedProducts), selectedProducts],
@@ -319,7 +319,7 @@ describe('Products sagas', () => {
       const error = new Error('error')
       const errorMessage = 'Products delete error!'
 
-      return expectSaga(handleDeleteProducts)
+      return expectSaga(handleDeleteProductsRequest)
         .provide([[matchers.call.fn(API.delete), throwError(error)]])
         .put(deleteProductsError(errorMessage))
         .put(setSelectedProducts(List()))

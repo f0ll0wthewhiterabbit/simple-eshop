@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import AdminLayoutWithTheme from './component'
-import { closeSidebar, deleteUsers, deleteProducts } from '../../../store/actions'
+import { closeSidebar, deleteUsersRequest, deleteProductsRequest } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   isSidebarOpened: state.getIn(['app', 'isSidebarOpened']),
@@ -10,8 +10,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   closeSidebar,
-  deleteUsers,
-  deleteProducts,
+  deleteUsersRequest,
+  deleteProductsRequest,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminLayoutWithTheme)

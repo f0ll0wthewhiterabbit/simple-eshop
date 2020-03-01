@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ProductsTable from './component'
 import {
   setSelectedProducts,
-  fetchProducts,
+  fetchProductsRequest,
   setProductsPerPage,
 } from '../../../../../store/actions'
 
@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setSelectedProducts: selectedProductsList => setSelectedProducts(selectedProductsList),
-  fetchProducts: (page, itemsPerPage) => fetchProducts(page, itemsPerPage),
+  fetchProductsRequest: (page, itemsPerPage) => fetchProductsRequest(page, itemsPerPage),
   setProductsPerPage: amount => setProductsPerPage(amount),
 }
 

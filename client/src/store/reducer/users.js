@@ -7,8 +7,8 @@ import {
   setSelectedUsers,
   deleteUsersSuccess,
   deleteUsersError,
-  requestUserDeletionSuccess,
-  requestUserDeletionError,
+  callForUserDeletionSuccess,
+  callForUserDeletionError,
   updateUserSuccess,
   updateUserError,
   setUsersPerPage,
@@ -52,7 +52,7 @@ const users = handleActions(
         .set('isLoading', false)
         .delete('error'),
 
-    [requestUserDeletionSuccess]: (state, action) =>
+    [callForUserDeletionSuccess]: (state, action) =>
       state
         .update('data', data =>
           data.map(user =>
@@ -75,7 +75,7 @@ const users = handleActions(
     [combineActions(
       fetchUsersError,
       deleteUsersError,
-      requestUserDeletionError,
+      callForUserDeletionError,
       updateUserError
     )]: (state, action) => state.set('isLoading', false).set('error', action.payload.error),
 

@@ -8,7 +8,7 @@ describe('StandardLayout component', () => {
   let wrapper
   const testContent = 'test content'
   const initialProps = {
-    requestUserDeletion: jest.fn(),
+    callForUserDeletionRequest: jest.fn(),
     children: <p>{testContent}</p>,
   }
   const dataTestMain = 'main'

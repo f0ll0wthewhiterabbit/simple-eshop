@@ -7,9 +7,9 @@ import * as Yup from 'yup'
 
 import { StyledForm, SubmitButton, Progress, InputField, ErrorMessage } from './styles'
 
-const ProfileForm = ({ firstName, lastName, updateUser, error, history }) => {
+const ProfileForm = ({ firstName, lastName, updateUserRequest, error, history }) => {
   const handleFormSubmit = (values, formMethods) => {
-    updateUser(
+    updateUserRequest(
       {
         firstName: values.firstName,
         lastName: values.lastName,
@@ -112,7 +112,7 @@ ProfileForm.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
-  updateUser: PropTypes.func.isRequired,
+  updateUserRequest: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
 }
 

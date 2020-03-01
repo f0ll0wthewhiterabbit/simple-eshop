@@ -13,7 +13,7 @@ import {
   ErrorMessage,
 } from './styles'
 
-const SignInForm = ({ signIn, error }) => {
+const SignInForm = ({ signInRequest, error }) => {
   const [rememberMe, setRememberMe] = useState(false)
 
   const hangleRememberMeChange = () => {
@@ -21,7 +21,7 @@ const SignInForm = ({ signIn, error }) => {
   }
 
   const handleFormSubmit = (values, formMethods) => {
-    signIn(
+    signInRequest(
       {
         email: values.email,
         password: values.password,
@@ -111,7 +111,7 @@ SignInForm.defaultProps = {
 }
 
 SignInForm.propTypes = {
-  signIn: PropTypes.func.isRequired,
+  signInRequest: PropTypes.func.isRequired,
   error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
 }
 

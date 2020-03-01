@@ -15,13 +15,13 @@ const ProductRatingPage = ({
   currentProduct,
   isLoading,
   error,
-  fetchProductRating,
+  fetchProductRatingRequest,
 }) => {
   const { id } = useParams()
 
   useEffect(() => {
-    fetchProductRating(id, 1, itemsPerPage)
-  }, [fetchProductRating, id, itemsPerPage])
+    fetchProductRatingRequest(id, 1, itemsPerPage)
+  }, [fetchProductRatingRequest, id, itemsPerPage])
 
   if (error) {
     return <ErrorMessage>{error}</ErrorMessage>
@@ -75,7 +75,7 @@ ProductRatingPage.propTypes = {
       })
     ),
   }).isRequired,
-  fetchProductRating: PropTypes.func.isRequired,
+  fetchProductRatingRequest: PropTypes.func.isRequired,
 }
 
 export default ProductRatingPage

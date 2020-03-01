@@ -1,29 +1,33 @@
 import { call, put } from 'redux-saga/effects'
 
 import { FIELDS } from '../../constants'
-import { handleToggleTheme, handleGetThemeFromStorage, handleInitialize } from './app'
-import { toggleTheme, getThemeFromStorage, authenticate } from '../actions'
+import {
+  handleToggleThemeRequest,
+  handleGetThemeFromStorageRequest,
+  handleInitializeRequest,
+} from './app'
+import { toggleThemeRequest, getThemeFromStorageRequest, authenticateRequest } from '../actions'
 
 describe('App sagas', () => {
-  it('should handle toggleTheme', () => {
+  it('should handle toggleThemeRequest', () => {
     const action = { payload: { theme: FIELDS.THEME_DEFAULT } }
     const { theme } = action.payload
-    const gen = handleToggleTheme(action)
+    const gen = handleToggleThemeRequest(action)
 
     expect(gen.next().value).toEqual(call([localStorage, 'setItem'], FIELDS.STORAGE_THEME, theme))
   })
 
-  it('should handle getThemeFromStorage', () => {
-    const gen = handleGetThemeFromStorage()
+  it('should handle getThemeFromStorageRequest', () => {
+    const gen = handleGetThemeFromStorageRequest()
 
     expect(gen.next().value).toEqual(call([localStorage, 'getItem'], FIELDS.STORAGE_THEME))
-    expect(gen.next(FIELDS.THEME_DARK).value).toEqual(put(toggleTheme(FIELDS.THEME_DARK)))
+    expect(gen.next(FIELDS.THEME_DARK).value).toEqual(put(toggleThemeRequest(FIELDS.THEME_DARK)))
   })
 
-  it('should handle handleInitialize', () => {
-    const gen = handleInitialize()
+  it('should handle handleInitializeRequest', () => {
+    const gen = handleInitializeRequest()
 
-    expect(gen.next().value).toEqual(put(getThemeFromStorage()))
-    expect(gen.next().value).toEqual(put(authenticate()))
+    expect(gen.next().value).toEqual(put(getThemeFromStorageRequest()))
+    expect(gen.next().value).toEqual(put(authenticateRequest()))
   })
 })

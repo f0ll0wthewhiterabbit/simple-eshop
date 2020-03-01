@@ -7,8 +7,8 @@ import {
   setSelectedUsers,
   deleteUsersSuccess,
   deleteUsersError,
-  requestUserDeletionSuccess,
-  requestUserDeletionError,
+  callForUserDeletionSuccess,
+  callForUserDeletionError,
   updateUserSuccess,
   updateUserError,
   setUsersPerPage,
@@ -93,7 +93,7 @@ describe('Users reducer', () => {
     expect(recievedState.error).toEqual(initialState.error)
   })
 
-  it('should handle [requestUserDeletionSuccess] action', () => {
+  it('should handle [callForUserDeletionSuccess] action', () => {
     const expectedUser = Record({ _id: '2', isRemovable: true, firstName: 'Second' })()
     const stateAfterFetchUsers = usersReducer(
       undefined,
@@ -105,7 +105,7 @@ describe('Users reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = usersReducer(stateAfterFetchUsers, requestUserDeletionSuccess('2'))
+    const recievedState = usersReducer(stateAfterFetchUsers, callForUserDeletionSuccess('2'))
 
     expect(recievedState.isLoading).toEqual(false)
     expect(recievedState.error).toEqual(initialState.error)
@@ -145,8 +145,8 @@ describe('Users reducer', () => {
     expect(recievedState.isLoading).toEqual(false)
   })
 
-  it('should handle [requestUserDeletionError] action', () => {
-    const recievedState = usersReducer(undefined, requestUserDeletionError(testError))
+  it('should handle [callForUserDeletionError] action', () => {
+    const recievedState = usersReducer(undefined, callForUserDeletionError(testError))
 
     expect(recievedState.error).toEqual(testError)
     expect(recievedState.isLoading).toEqual(false)

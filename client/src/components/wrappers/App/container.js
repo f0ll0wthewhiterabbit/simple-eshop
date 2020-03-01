@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import App from './component'
-import { initialize } from '../../../store/actions'
+import { initializeRequest } from '../../../store/actions'
 
 const mapStateToProps = state => ({
   isAuthenticated: state.getIn(['auth', 'isAuthenticated']),
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  initialize,
+  initializeRequest,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
