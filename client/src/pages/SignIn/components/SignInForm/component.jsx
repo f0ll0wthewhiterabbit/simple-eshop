@@ -16,7 +16,7 @@ import {
 const SignInForm = ({ signInRequest, error }) => {
   const [rememberMe, setRememberMe] = useState(false)
 
-  const hangleRememberMeChange = () => {
+  const handleRememberMeChange = () => {
     setRememberMe(!rememberMe)
   }
 
@@ -81,7 +81,7 @@ const SignInForm = ({ signInRequest, error }) => {
           />
           <CheckboxLabel
             control={
-              <Checkbox value="remember" color="primary" onChange={hangleRememberMeChange} />
+              <Checkbox value="remember" color="primary" onChange={handleRememberMeChange} />
             }
             label="Remember me"
             checked={rememberMe}

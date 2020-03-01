@@ -73,7 +73,7 @@ describe('Products sagas', () => {
 
     it('should handle error case', () => {
       const error = new Error('error')
-      const errorMessage = 'Products data not recieved!'
+      const errorMessage = 'Products data not received!'
 
       return expectSaga(handleFetchProductsRequest, action)
         .provide([[matchers.call.fn(API.get), throwError(error)]])
@@ -107,7 +107,7 @@ describe('Products sagas', () => {
 
     it('should handle error case', () => {
       const error = new Error('error')
-      const errorMessage = 'Product not recieved!'
+      const errorMessage = 'Product not received!'
 
       return expectSaga(handleFetchProductRequest, action)
         .provide([[matchers.call.fn(API.get), throwError(error)]])
@@ -155,7 +155,7 @@ describe('Products sagas', () => {
 
     it('should handle error case', () => {
       const error = new Error('error')
-      const errorMessage = 'Product rating not recieved!'
+      const errorMessage = 'Product rating not received!'
 
       return expectSaga(handleFetchProductRatingRequest, action)
         .provide([[matchers.call.fn(API.get), throwError(error)]])

@@ -104,12 +104,12 @@ exports.getNumberOfUsers = async searchText => {
 
 exports.getNumberOfRemovableUsers = async usersIdList => {
   try {
-    const numberOfRemobableUsers = await User.countDocuments({
+    const numberOfRemovableUsers = await User.countDocuments({
       _id: { $in: usersIdList },
       isRemovable: true,
     })
 
-    return numberOfRemobableUsers
+    return numberOfRemovableUsers
   } catch (err) {
     throw Error('Error while calculating removable users')
   }

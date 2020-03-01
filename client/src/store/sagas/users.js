@@ -52,7 +52,7 @@ export function* handleFetchUsersRequest(action) {
 
     yield put(fetchUsersSuccess(usersList, totalAmount, currentPage, itemsPerPage, totalPages))
   } catch (error) {
-    yield put(fetchUsersError('Users data not recieved!'))
+    yield put(fetchUsersError('Users data not received!'))
   }
 }
 

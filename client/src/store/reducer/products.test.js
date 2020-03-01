@@ -55,19 +55,19 @@ describe('Products reducer', () => {
   const testError = 'test error message'
 
   it('should return the initial state', () => {
-    const recievedState = productsReducer(undefined, {})
+    const receivedState = productsReducer(undefined, {})
 
-    expect(recievedState.hashCode()).toBe(initialState.hashCode())
+    expect(receivedState.hashCode()).toBe(initialState.hashCode())
   })
 
   it('should start loading after [startProductsLoading] action', () => {
-    const recievedState = productsReducer(undefined, startProductsLoading())
+    const receivedState = productsReducer(undefined, startProductsLoading())
 
-    expect(recievedState.isLoading).toBe(true)
+    expect(receivedState.isLoading).toBe(true)
   })
 
   it('should handle [fetchProductsSuccess] action', () => {
-    const recievedState = productsReducer(
+    const receivedState = productsReducer(
       undefined,
       fetchProductsSuccess(
         testProductsList,
@@ -78,13 +78,13 @@ describe('Products reducer', () => {
       )
     )
 
-    expect(recievedState.data).toEqual(testProductsList)
-    expect(recievedState.totalAmount).toBe(testTotalAmount)
-    expect(recievedState.currentPage).toBe(testCurrentPage)
-    expect(recievedState.itemsPerPage).toBe(testItemsPerPage)
-    expect(recievedState.totalPages).toBe(testTotalPages)
-    expect(recievedState.isLoading).toBe(false)
-    expect(recievedState.error).toBe(initialState.error)
+    expect(receivedState.data).toEqual(testProductsList)
+    expect(receivedState.totalAmount).toBe(testTotalAmount)
+    expect(receivedState.currentPage).toBe(testCurrentPage)
+    expect(receivedState.itemsPerPage).toBe(testItemsPerPage)
+    expect(receivedState.totalPages).toBe(testTotalPages)
+    expect(receivedState.isLoading).toBe(false)
+    expect(receivedState.error).toBe(initialState.error)
   })
 
   it('should handle [fetchProductSuccess] action', () => {
@@ -96,17 +96,17 @@ describe('Products reducer', () => {
       imageName: 'testImageName.jpg',
       tags: List([1, 2, 3]),
     })()
-    const recievedState = productsReducer(undefined, fetchProductSuccess(testCurrentProduct))
+    const receivedState = productsReducer(undefined, fetchProductSuccess(testCurrentProduct))
 
-    expect(recievedState.currentProduct.id).toBe(testCurrentProduct.id)
-    expect(recievedState.currentProduct.title).toBe(testCurrentProduct.title)
-    expect(recievedState.currentProduct.description).toBe(testCurrentProduct.description)
-    expect(recievedState.currentProduct.price).toBe(testCurrentProduct.price)
-    expect(recievedState.currentProduct.imageName).toBe(testCurrentProduct.imageName)
-    expect(recievedState.currentProduct.tags).toEqual(testCurrentProduct.tags)
-    expect(recievedState.currentProduct.rating).toEqual(initialState.currentProduct.rating)
-    expect(recievedState.isLoading).toBe(false)
-    expect(recievedState.error).toBe(initialState.error)
+    expect(receivedState.currentProduct.id).toBe(testCurrentProduct.id)
+    expect(receivedState.currentProduct.title).toBe(testCurrentProduct.title)
+    expect(receivedState.currentProduct.description).toBe(testCurrentProduct.description)
+    expect(receivedState.currentProduct.price).toBe(testCurrentProduct.price)
+    expect(receivedState.currentProduct.imageName).toBe(testCurrentProduct.imageName)
+    expect(receivedState.currentProduct.tags).toEqual(testCurrentProduct.tags)
+    expect(receivedState.currentProduct.rating).toEqual(initialState.currentProduct.rating)
+    expect(receivedState.isLoading).toBe(false)
+    expect(receivedState.error).toBe(initialState.error)
   })
 
   it('should handle [fetchProductRatingSuccess] action', () => {
@@ -114,7 +114,7 @@ describe('Products reducer', () => {
       id: '2',
       rating: List([4, 5, 6]),
     })()
-    const recievedState = productsReducer(
+    const receivedState = productsReducer(
       undefined,
       fetchProductRatingSuccess(
         testProductRatingData,
@@ -125,19 +125,19 @@ describe('Products reducer', () => {
       )
     )
 
-    expect(recievedState.currentProduct.id).toBe(testProductRatingData.id)
-    expect(recievedState.currentProduct.rating).toEqual(testProductRatingData.rating)
-    expect(recievedState.currentProduct.title).toBe(initialState.currentProduct.title)
-    expect(recievedState.currentProduct.description).toBe(initialState.currentProduct.description)
-    expect(recievedState.currentProduct.price).toBe(initialState.currentProduct.price)
-    expect(recievedState.currentProduct.imageName).toBe(initialState.currentProduct.imageName)
-    expect(recievedState.currentProduct.tags).toEqual(initialState.currentProduct.tags)
-    expect(recievedState.totalAmount).toBe(testTotalAmount)
-    expect(recievedState.currentPage).toBe(testCurrentPage)
-    expect(recievedState.itemsPerPage).toBe(testItemsPerPage)
-    expect(recievedState.totalPages).toBe(testTotalPages)
-    expect(recievedState.isLoading).toBe(false)
-    expect(recievedState.error).toBe(initialState.error)
+    expect(receivedState.currentProduct.id).toBe(testProductRatingData.id)
+    expect(receivedState.currentProduct.rating).toEqual(testProductRatingData.rating)
+    expect(receivedState.currentProduct.title).toBe(initialState.currentProduct.title)
+    expect(receivedState.currentProduct.description).toBe(initialState.currentProduct.description)
+    expect(receivedState.currentProduct.price).toBe(initialState.currentProduct.price)
+    expect(receivedState.currentProduct.imageName).toBe(initialState.currentProduct.imageName)
+    expect(receivedState.currentProduct.tags).toEqual(initialState.currentProduct.tags)
+    expect(receivedState.totalAmount).toBe(testTotalAmount)
+    expect(receivedState.currentPage).toBe(testCurrentPage)
+    expect(receivedState.itemsPerPage).toBe(testItemsPerPage)
+    expect(receivedState.totalPages).toBe(testTotalPages)
+    expect(receivedState.isLoading).toBe(false)
+    expect(receivedState.error).toBe(initialState.error)
   })
 
   it('should handle [deleteProductsSuccess] action', () => {
@@ -152,16 +152,16 @@ describe('Products reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = productsReducer(
+    const receivedState = productsReducer(
       stateAfterFetchProducts,
       deleteProductsSuccess(deleteProductsIdsList)
     )
     const expectedUsersList = List([testProduct2])
 
-    expect(recievedState.data).toEqual(expectedUsersList)
-    expect(recievedState.totalAmount).toEqual(testTotalAmount - deleteProductsIdsList.size)
-    expect(recievedState.isLoading).toEqual(false)
-    expect(recievedState.error).toEqual(initialState.error)
+    expect(receivedState.data).toEqual(expectedUsersList)
+    expect(receivedState.totalAmount).toEqual(testTotalAmount - deleteProductsIdsList.size)
+    expect(receivedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(initialState.error)
   })
 
   it('should handle [addProductSuccess] action', () => {
@@ -176,15 +176,15 @@ describe('Products reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = productsReducer(
+    const receivedState = productsReducer(
       stateAfterFetchProducts,
       addProductSuccess(newTestProduct)
     )
 
-    expect(recievedState.data.get(3)._id).toEqual(newTestProduct._id)
-    expect(recievedState.data.get(3).title).toEqual(newTestProduct.title)
-    expect(recievedState.isLoading).toEqual(false)
-    expect(recievedState.error).toEqual(initialState.error)
+    expect(receivedState.data.get(3)._id).toEqual(newTestProduct._id)
+    expect(receivedState.data.get(3).title).toEqual(newTestProduct.title)
+    expect(receivedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(initialState.error)
   })
 
   it('should handle [changeProductRatingSuccess] action', () => {
@@ -199,22 +199,22 @@ describe('Products reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = productsReducer(
+    const receivedState = productsReducer(
       stateAfterFetchProducts,
       changeProductRatingSuccess(changedTestProduct)
     )
 
     const isProductInRatingsLoadingLIst =
-      recievedState.ratingsLoadingList.findIndex(
+      receivedState.ratingsLoadingList.findIndex(
         productId => productId === changedTestProduct._id
       ) !== -1
     const isProductInRatingsErrorLIst =
-      recievedState.ratingsErrorList.findIndex(
+      receivedState.ratingsErrorList.findIndex(
         productId => productId === changedTestProduct._id
       ) !== -1
 
-    expect(recievedState.data.get(2)._id).toEqual(changedTestProduct._id)
-    expect(recievedState.data.get(2).title).toEqual(changedTestProduct.title)
+    expect(receivedState.data.get(2)._id).toEqual(changedTestProduct._id)
+    expect(receivedState.data.get(2).title).toEqual(changedTestProduct.title)
     expect(isProductInRatingsLoadingLIst).toBe(false)
     expect(isProductInRatingsErrorLIst).toBe(false)
   })
@@ -231,22 +231,22 @@ describe('Products reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = productsReducer(
+    const receivedState = productsReducer(
       stateAfterFetchProducts,
       deleteProductRatingSuccess(changedTestProduct)
     )
 
     const isProductInRatingsLoadingLIst =
-      recievedState.ratingsLoadingList.findIndex(
+      receivedState.ratingsLoadingList.findIndex(
         productId => productId === changedTestProduct._id
       ) !== -1
     const isProductInRatingsErrorLIst =
-      recievedState.ratingsErrorList.findIndex(
+      receivedState.ratingsErrorList.findIndex(
         productId => productId === changedTestProduct._id
       ) !== -1
 
-    expect(recievedState.data.get(1)._id).toEqual(changedTestProduct._id)
-    expect(recievedState.data.get(1).title).toEqual(changedTestProduct.title)
+    expect(receivedState.data.get(1)._id).toEqual(changedTestProduct._id)
+    expect(receivedState.data.get(1).title).toEqual(changedTestProduct.title)
     expect(isProductInRatingsLoadingLIst).toBe(false)
     expect(isProductInRatingsErrorLIst).toBe(false)
   })
@@ -263,69 +263,69 @@ describe('Products reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = productsReducer(
+    const receivedState = productsReducer(
       stateAfterFetchProducts,
       editProductSuccess(changedTestProduct)
     )
 
-    expect(recievedState.data.get(0)._id).toEqual(changedTestProduct._id)
-    expect(recievedState.data.get(0).title).toEqual(changedTestProduct.title)
-    expect(recievedState.isLoading).toEqual(false)
-    expect(recievedState.error).toEqual(initialState.error)
-    expect(recievedState.currentProduct.hashCode()).toEqual(initialState.currentProduct.hashCode())
+    expect(receivedState.data.get(0)._id).toEqual(changedTestProduct._id)
+    expect(receivedState.data.get(0).title).toEqual(changedTestProduct.title)
+    expect(receivedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(initialState.error)
+    expect(receivedState.currentProduct.hashCode()).toEqual(initialState.currentProduct.hashCode())
   })
 
   it('should handle [fetchProductsError] action', () => {
-    const recievedState = productsReducer(undefined, fetchProductsError(testError))
+    const receivedState = productsReducer(undefined, fetchProductsError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [fetchProductError] action', () => {
-    const recievedState = productsReducer(undefined, fetchProductError(testError))
+    const receivedState = productsReducer(undefined, fetchProductError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [fetchProductRatingError] action', () => {
-    const recievedState = productsReducer(undefined, fetchProductRatingError(testError))
+    const receivedState = productsReducer(undefined, fetchProductRatingError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [addProductError] action', () => {
-    const recievedState = productsReducer(undefined, addProductError(testError))
+    const receivedState = productsReducer(undefined, addProductError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [editProductError] action', () => {
-    const recievedState = productsReducer(undefined, editProductError(testError))
+    const receivedState = productsReducer(undefined, editProductError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [deleteProductsError] action', () => {
-    const recievedState = productsReducer(undefined, deleteProductsError(testError))
+    const receivedState = productsReducer(undefined, deleteProductsError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [changeProductRatingError] action', () => {
     const testProductId = '2'
 
-    const recievedState = productsReducer(undefined, changeProductRatingError(testProductId))
+    const receivedState = productsReducer(undefined, changeProductRatingError(testProductId))
 
     const isProductInRatingsLoadingLIst =
-      recievedState.ratingsLoadingList.findIndex(productId => productId === testProductId) !== -1
+      receivedState.ratingsLoadingList.findIndex(productId => productId === testProductId) !== -1
     const isProductInRatingsErrorLIst =
-      recievedState.ratingsErrorList.findIndex(productId => productId === testProductId) !== -1
+      receivedState.ratingsErrorList.findIndex(productId => productId === testProductId) !== -1
 
     expect(isProductInRatingsLoadingLIst).toBe(false)
     expect(isProductInRatingsErrorLIst).toBe(true)
@@ -334,52 +334,52 @@ describe('Products reducer', () => {
   it('should handle [deleteProductRatingError] action', () => {
     const testProductId = '3'
 
-    const recievedState = productsReducer(undefined, deleteProductRatingError(testProductId))
+    const receivedState = productsReducer(undefined, deleteProductRatingError(testProductId))
 
     const isProductInRatingsLoadingLIst =
-      recievedState.ratingsLoadingList.findIndex(productId => productId === testProductId) !== -1
+      receivedState.ratingsLoadingList.findIndex(productId => productId === testProductId) !== -1
     const isProductInRatingsErrorLIst =
-      recievedState.ratingsErrorList.findIndex(productId => productId === testProductId) !== -1
+      receivedState.ratingsErrorList.findIndex(productId => productId === testProductId) !== -1
 
     expect(isProductInRatingsLoadingLIst).toBe(false)
     expect(isProductInRatingsErrorLIst).toBe(true)
   })
 
   it('should handle [setSelectedProducts] action', () => {
-    const selectetProductsIds = ['1', '2']
-    const recievedState = productsReducer(undefined, setSelectedProducts(selectetProductsIds))
+    const selectedProductsIds = ['1', '2']
+    const receivedState = productsReducer(undefined, setSelectedProducts(selectedProductsIds))
 
-    expect(recievedState.selected).toEqual(selectetProductsIds)
+    expect(receivedState.selected).toEqual(selectedProductsIds)
   })
 
   it('should handle [startRatingLoading] action', () => {
     const testProductId = '1'
 
-    const recievedState = productsReducer(undefined, startRatingLoading(testProductId))
+    const receivedState = productsReducer(undefined, startRatingLoading(testProductId))
 
     const isProductInRatingsLoadingLIst =
-      recievedState.ratingsLoadingList.findIndex(productId => productId === testProductId) !== -1
+      receivedState.ratingsLoadingList.findIndex(productId => productId === testProductId) !== -1
 
     expect(isProductInRatingsLoadingLIst).toBe(true)
   })
 
   it('should handle [setProductsPerPage] action', () => {
     const amount = 5
-    const recievedState = productsReducer(undefined, setProductsPerPage(amount))
+    const receivedState = productsReducer(undefined, setProductsPerPage(amount))
 
-    expect(recievedState.itemsPerPage).toBe(amount)
+    expect(receivedState.itemsPerPage).toBe(amount)
   })
 
   it('should handle [setProductsFilter] action', () => {
-    const recievedState = productsReducer(undefined, setProductsFilter(FIELDS.URL_RATINGS_FILTER))
+    const receivedState = productsReducer(undefined, setProductsFilter(FIELDS.URL_RATINGS_FILTER))
 
-    expect(recievedState.filter).toBe(FIELDS.URL_RATINGS_FILTER)
+    expect(receivedState.filter).toBe(FIELDS.URL_RATINGS_FILTER)
   })
 
   it('should handle [setProductsSearchQuery] action', () => {
     const testQuery = 'test'
-    const recievedState = productsReducer(undefined, setProductsSearchQuery(testQuery))
+    const receivedState = productsReducer(undefined, setProductsSearchQuery(testQuery))
 
-    expect(recievedState.lastSearchQuery).toBe(testQuery)
+    expect(receivedState.lastSearchQuery).toBe(testQuery)
   })
 })

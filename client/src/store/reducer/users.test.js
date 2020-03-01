@@ -40,19 +40,19 @@ describe('Users reducer', () => {
   const testError = 'test error message'
 
   it('should return the initial state', () => {
-    const recievedState = usersReducer(undefined, {})
+    const receivedState = usersReducer(undefined, {})
 
-    expect(recievedState.hashCode()).toBe(initialState.hashCode())
+    expect(receivedState.hashCode()).toBe(initialState.hashCode())
   })
 
   it('should start loading after [startUsersLoading] action', () => {
-    const recievedState = usersReducer(undefined, startUsersLoading())
+    const receivedState = usersReducer(undefined, startUsersLoading())
 
-    expect(recievedState.isLoading).toBe(true)
+    expect(receivedState.isLoading).toBe(true)
   })
 
   it('should handle [fetchUsersSuccess] action', () => {
-    const recievedState = usersReducer(
+    const receivedState = usersReducer(
       undefined,
       fetchUsersSuccess(
         testUsersList,
@@ -63,13 +63,13 @@ describe('Users reducer', () => {
       )
     )
 
-    expect(recievedState.data).toEqual(testUsersList)
-    expect(recievedState.totalAmount).toBe(testTotalAmount)
-    expect(recievedState.currentPage).toBe(testCurrentPage)
-    expect(recievedState.itemsPerPage).toBe(testItemsPerPage)
-    expect(recievedState.totalPages).toBe(testTotalPages)
-    expect(recievedState.isLoading).toBe(false)
-    expect(recievedState.error).toBe(initialState.error)
+    expect(receivedState.data).toEqual(testUsersList)
+    expect(receivedState.totalAmount).toBe(testTotalAmount)
+    expect(receivedState.currentPage).toBe(testCurrentPage)
+    expect(receivedState.itemsPerPage).toBe(testItemsPerPage)
+    expect(receivedState.totalPages).toBe(testTotalPages)
+    expect(receivedState.isLoading).toBe(false)
+    expect(receivedState.error).toBe(initialState.error)
   })
 
   it('should handle [deleteUsersSuccess] action', () => {
@@ -84,13 +84,13 @@ describe('Users reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = usersReducer(stateAfterFetchUsers, deleteUsersSuccess(deleteUserIdsList))
+    const receivedState = usersReducer(stateAfterFetchUsers, deleteUsersSuccess(deleteUserIdsList))
     const expectedUsersList = List([testUser2])
 
-    expect(recievedState.data).toEqual(expectedUsersList)
-    expect(recievedState.totalAmount).toEqual(testTotalAmount - deleteUserIdsList.size)
-    expect(recievedState.isLoading).toEqual(false)
-    expect(recievedState.error).toEqual(initialState.error)
+    expect(receivedState.data).toEqual(expectedUsersList)
+    expect(receivedState.totalAmount).toEqual(testTotalAmount - deleteUserIdsList.size)
+    expect(receivedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(initialState.error)
   })
 
   it('should handle [callForUserDeletionSuccess] action', () => {
@@ -105,11 +105,11 @@ describe('Users reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = usersReducer(stateAfterFetchUsers, callForUserDeletionSuccess('2'))
+    const receivedState = usersReducer(stateAfterFetchUsers, callForUserDeletionSuccess('2'))
 
-    expect(recievedState.isLoading).toEqual(false)
-    expect(recievedState.error).toEqual(initialState.error)
-    expect(recievedState.data.get(1).isRemovable).toBe(expectedUser.isRemovable)
+    expect(receivedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(initialState.error)
+    expect(receivedState.data.get(1).isRemovable).toBe(expectedUser.isRemovable)
   })
 
   it('should handle [updateUserSuccess] action', () => {
@@ -124,59 +124,59 @@ describe('Users reducer', () => {
         testTotalPages
       )
     )
-    const recievedState = usersReducer(stateAfterFetchUsers, updateUserSuccess(expectedUser))
+    const receivedState = usersReducer(stateAfterFetchUsers, updateUserSuccess(expectedUser))
 
-    expect(recievedState.isLoading).toEqual(false)
-    expect(recievedState.error).toEqual(initialState.error)
-    expect(recievedState.data.get(1).firstName).toBe(expectedUser.firstName)
+    expect(receivedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(initialState.error)
+    expect(receivedState.data.get(1).firstName).toBe(expectedUser.firstName)
   })
 
   it('should handle [fetchUsersError] action', () => {
-    const recievedState = usersReducer(undefined, fetchUsersError(testError))
+    const receivedState = usersReducer(undefined, fetchUsersError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [deleteUsersError] action', () => {
-    const recievedState = usersReducer(undefined, deleteUsersError(testError))
+    const receivedState = usersReducer(undefined, deleteUsersError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [callForUserDeletionError] action', () => {
-    const recievedState = usersReducer(undefined, callForUserDeletionError(testError))
+    const receivedState = usersReducer(undefined, callForUserDeletionError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [updateUserError] action', () => {
-    const recievedState = usersReducer(undefined, updateUserError(testError))
+    const receivedState = usersReducer(undefined, updateUserError(testError))
 
-    expect(recievedState.error).toEqual(testError)
-    expect(recievedState.isLoading).toEqual(false)
+    expect(receivedState.error).toEqual(testError)
+    expect(receivedState.isLoading).toEqual(false)
   })
 
   it('should handle [setSelectedUsers] action', () => {
-    const selectetUsersIds = ['1', '2']
-    const recievedState = usersReducer(undefined, setSelectedUsers(selectetUsersIds))
+    const selectedUsersIds = ['1', '2']
+    const receivedState = usersReducer(undefined, setSelectedUsers(selectedUsersIds))
 
-    expect(recievedState.selected).toEqual(selectetUsersIds)
+    expect(receivedState.selected).toEqual(selectedUsersIds)
   })
 
   it('should handle [setUsersPerPage] action', () => {
     const amount = 5
-    const recievedState = usersReducer(undefined, setUsersPerPage(amount))
+    const receivedState = usersReducer(undefined, setUsersPerPage(amount))
 
-    expect(recievedState.itemsPerPage).toBe(amount)
+    expect(receivedState.itemsPerPage).toBe(amount)
   })
 
   it('should handle [setUsersSearchQuery] action', () => {
     const testQuery = 'test'
-    const recievedState = usersReducer(undefined, setUsersSearchQuery(testQuery))
+    const receivedState = usersReducer(undefined, setUsersSearchQuery(testQuery))
 
-    expect(recievedState.lastSearchQuery).toBe(testQuery)
+    expect(receivedState.lastSearchQuery).toBe(testQuery)
   })
 })

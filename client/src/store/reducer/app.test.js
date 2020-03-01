@@ -14,42 +14,42 @@ describe('App reducer', () => {
   const testFieldName = 'test field name'
 
   it('should return the initial state', () => {
-    const recievedState = appReducer(undefined, {})
+    const receivedState = appReducer(undefined, {})
 
-    expect(recievedState.hashCode()).toBe(initialState.hashCode())
+    expect(receivedState.hashCode()).toBe(initialState.hashCode())
   })
 
   it('should handle [showModal] action', () => {
-    const recievedState = appReducer(undefined, showModal(testFieldName))
+    const receivedState = appReducer(undefined, showModal(testFieldName))
 
-    expect(recievedState.storeFieldNameForModal).toBe(testFieldName)
-    expect(recievedState.isModalOpened).toBe(true)
+    expect(receivedState.storeFieldNameForModal).toBe(testFieldName)
+    expect(receivedState.isModalOpened).toBe(true)
   })
 
   it('should handle [closeModal] action', () => {
     const stateAfterModalOpen = appReducer(undefined, showModal(testFieldName))
-    const recievedState = appReducer(stateAfterModalOpen, closeModal())
+    const receivedState = appReducer(stateAfterModalOpen, closeModal())
 
-    expect(recievedState.storeFieldNameForModal).toBe(initialState.storeFieldNameForModal)
-    expect(recievedState.isModalOpened).toBe(initialState.isModalOpened)
+    expect(receivedState.storeFieldNameForModal).toBe(initialState.storeFieldNameForModal)
+    expect(receivedState.isModalOpened).toBe(initialState.isModalOpened)
   })
 
   it('should handle [openSidebar] action', () => {
-    const recievedState = appReducer(undefined, openSidebar())
+    const receivedState = appReducer(undefined, openSidebar())
 
-    expect(recievedState.isSidebarOpened).toBe(true)
+    expect(receivedState.isSidebarOpened).toBe(true)
   })
 
   it('should handle [closeSidebar] action', () => {
     const stateAfterSidebarOpen = appReducer(undefined, openSidebar(testFieldName))
-    const recievedState = appReducer(stateAfterSidebarOpen, closeSidebar())
+    const receivedState = appReducer(stateAfterSidebarOpen, closeSidebar())
 
-    expect(recievedState.isSidebarOpened).toBe(initialState.isSidebarOpened)
+    expect(receivedState.isSidebarOpened).toBe(initialState.isSidebarOpened)
   })
 
   it('should handle [toggleThemeRequest] action', () => {
-    const recievedState = appReducer(undefined, toggleThemeRequest(FIELDS.THEME_DARK))
+    const receivedState = appReducer(undefined, toggleThemeRequest(FIELDS.THEME_DARK))
 
-    expect(recievedState.theme).toBe(FIELDS.THEME_DARK)
+    expect(receivedState.theme).toBe(FIELDS.THEME_DARK)
   })
 })

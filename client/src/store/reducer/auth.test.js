@@ -31,9 +31,9 @@ describe('Auth reducer', () => {
   const testError = 'test error message'
 
   it('should return the initial state', () => {
-    const recievedState = authReducer(undefined, {})
+    const receivedState = authReducer(undefined, {})
 
-    expect(recievedState.hashCode()).toBe(initialState.hashCode())
+    expect(receivedState.hashCode()).toBe(initialState.hashCode())
   })
 
   it('should handle [authenticateSuccess] action', () => {
@@ -45,71 +45,71 @@ describe('Auth reducer', () => {
       role: testUserData.role,
       isRemovable: testUserData.isRemovable,
     })()
-    const recievedState = authReducer(undefined, authenticateSuccess(testUserData))
+    const receivedState = authReducer(undefined, authenticateSuccess(testUserData))
 
-    expect(recievedState.isAuthenticated).toBe(true)
-    expect(recievedState.error).toBe('')
-    expect(recievedState.user.hashCode()).toBe(expectedUser.hashCode())
+    expect(receivedState.isAuthenticated).toBe(true)
+    expect(receivedState.error).toBe('')
+    expect(receivedState.user.hashCode()).toBe(expectedUser.hashCode())
   })
 
   it('should handle [signUpSuccess] action', () => {
     const testToken = 123
-    const recievedState = authReducer(undefined, signUpSuccess(testToken))
+    const receivedState = authReducer(undefined, signUpSuccess(testToken))
 
-    expect(recievedState.isAuthenticated).toBe(true)
-    expect(recievedState.error).toBe('')
-    expect(recievedState.token).toBe(testToken)
+    expect(receivedState.isAuthenticated).toBe(true)
+    expect(receivedState.error).toBe('')
+    expect(receivedState.token).toBe(testToken)
   })
 
   it('should handle [signInSuccess] action', () => {
     const testToken = 123
-    const recievedState = authReducer(undefined, signInSuccess(testToken))
+    const receivedState = authReducer(undefined, signInSuccess(testToken))
 
-    expect(recievedState.isAuthenticated).toBe(true)
-    expect(recievedState.error).toBe('')
-    expect(recievedState.token).toBe(testToken)
+    expect(receivedState.isAuthenticated).toBe(true)
+    expect(receivedState.error).toBe('')
+    expect(receivedState.token).toBe(testToken)
   })
 
   it('should handle [authenticateError] action', () => {
-    const recievedState = authReducer(undefined, authenticateError(testError))
+    const receivedState = authReducer(undefined, authenticateError(testError))
 
-    expect(recievedState.error).toBe(testError)
-    expect(recievedState.isAuthenticated).toBe(initialState.isAuthenticated)
-    expect(recievedState.token).toBe(initialState.token)
-    expect(recievedState.user.hashCode()).toBe(initialState.user.hashCode())
+    expect(receivedState.error).toBe(testError)
+    expect(receivedState.isAuthenticated).toBe(initialState.isAuthenticated)
+    expect(receivedState.token).toBe(initialState.token)
+    expect(receivedState.user.hashCode()).toBe(initialState.user.hashCode())
   })
 
   it('should handle [signUpError] action', () => {
-    const recievedState = authReducer(undefined, signUpError(testError))
+    const receivedState = authReducer(undefined, signUpError(testError))
 
-    expect(recievedState.error).toBe(testError)
-    expect(recievedState.isAuthenticated).toBe(initialState.isAuthenticated)
-    expect(recievedState.token).toBe(initialState.token)
-    expect(recievedState.user.hashCode()).toBe(initialState.user.hashCode())
+    expect(receivedState.error).toBe(testError)
+    expect(receivedState.isAuthenticated).toBe(initialState.isAuthenticated)
+    expect(receivedState.token).toBe(initialState.token)
+    expect(receivedState.user.hashCode()).toBe(initialState.user.hashCode())
   })
 
   it('should handle [signInError] action', () => {
-    const recievedState = authReducer(undefined, signInError(testError))
+    const receivedState = authReducer(undefined, signInError(testError))
 
-    expect(recievedState.error).toBe(testError)
-    expect(recievedState.isAuthenticated).toBe(initialState.isAuthenticated)
-    expect(recievedState.token).toBe(initialState.token)
-    expect(recievedState.user.hashCode()).toBe(initialState.user.hashCode())
+    expect(receivedState.error).toBe(testError)
+    expect(receivedState.isAuthenticated).toBe(initialState.isAuthenticated)
+    expect(receivedState.token).toBe(initialState.token)
+    expect(receivedState.user.hashCode()).toBe(initialState.user.hashCode())
   })
 
   it('should change error to empty string after [signOutSuccess] action', () => {
-    const recievedState = authReducer(undefined, signOutSuccess())
+    const receivedState = authReducer(undefined, signOutSuccess())
 
-    expect(recievedState.error).toBe('')
+    expect(receivedState.error).toBe('')
   })
 
   it('should delete auth data after [signOutSuccess] action', () => {
     const stateAfterSignIn = authReducer(undefined, signInSuccess(123))
     const stateAfterAuthenticate = authReducer(stateAfterSignIn, authenticateSuccess(testUserData))
-    const recievedState = authReducer(stateAfterAuthenticate, signOutSuccess())
+    const receivedState = authReducer(stateAfterAuthenticate, signOutSuccess())
 
-    expect(recievedState.isAuthenticated).toBe(initialState.isAuthenticated)
-    expect(recievedState.token).toBe(initialState.token)
-    expect(recievedState.user.hashCode()).toBe(initialState.user.hashCode())
+    expect(receivedState.isAuthenticated).toBe(initialState.isAuthenticated)
+    expect(receivedState.token).toBe(initialState.token)
+    expect(receivedState.user.hashCode()).toBe(initialState.user.hashCode())
   })
 })

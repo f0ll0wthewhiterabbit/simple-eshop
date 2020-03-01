@@ -314,7 +314,7 @@ exports.validate = method => {
         check('title', 'Title should not be empty')
           .optional()
           .notEmpty(),
-        check('price', 'Price should be a numer')
+        check('price', 'Price should be a number')
           .optional()
           .isNumeric()
           .withMessage('Price should be numeric')
@@ -323,7 +323,7 @@ exports.validate = method => {
         check('description', 'Description should not be empty')
           .optional()
           .notEmpty(),
-        check('stars', 'Stars should be an integer numer between 0 and 5')
+        check('stars', 'Stars should be an integer number between 0 and 5')
           .optional()
           .isInt({ min: 0, max: 5 }),
       ]

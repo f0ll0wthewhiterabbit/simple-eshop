@@ -61,7 +61,7 @@ describe('Users sagas', () => {
 
     it('should handle error case', () => {
       const error = new Error('error')
-      const errorMessage = 'Users data not recieved!'
+      const errorMessage = 'Users data not received!'
 
       return expectSaga(handleFetchUsersRequest, action)
         .provide([[matchers.call.fn(API.get), throwError(error)]])

@@ -68,7 +68,7 @@ export function* handleFetchProductsRequest(action) {
       fetchProductsSuccess(productsList, totalAmount, currentPage, itemsPerPage, totalPages)
     )
   } catch (error) {
-    yield put(fetchProductsError('Products data not recieved!'))
+    yield put(fetchProductsError('Products data not received!'))
   }
 }
 
@@ -88,7 +88,7 @@ export function* handleFetchProductRequest(action) {
 
     yield put(fetchProductSuccess(product))
   } catch (error) {
-    yield put(fetchProductError('Product not recieved!'))
+    yield put(fetchProductError('Product not received!'))
   }
 }
 
@@ -126,7 +126,7 @@ export function* handleFetchProductRatingRequest(action) {
       )
     )
   } catch (error) {
-    yield put(fetchProductRatingError('Product rating not recieved!'))
+    yield put(fetchProductRatingError('Product rating not received!'))
   }
 }
 
