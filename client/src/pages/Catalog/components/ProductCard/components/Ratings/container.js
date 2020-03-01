@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
 
 import ProductCard from './component'
-import { changeProductRatingRequest, deleteProductRatingRequest } from '../../../../store/actions'
+import {
+  changeProductRatingRequest,
+  deleteProductRatingRequest,
+} from '../../../../../../store/actions'
 
 const mapStateToProps = state => ({
   ratingsLoadingList: state.getIn(['products', 'ratingsLoadingList']),

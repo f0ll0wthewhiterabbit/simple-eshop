@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import { Chip } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
-import DeleteIcon from '@material-ui/icons/Delete'
 
+import Ratings from './components/Ratings'
 import formatPrice from '../../../../utils/formatPrice'
 import { BASE_URL } from '../../../../utils/api'
 import {
@@ -14,81 +14,12 @@ import {
   Title,
   PurchaseButton,
   TagsWrapper,
-  Stars,
-  RaitingsRoot,
-  RaitingWrapper,
-  RaitingsCount,
-  DeleteButton,
-  RatingTitle,
-  LoadingLabel,
-  ErrorLabel,
   Price,
   Description,
 } from './styles'
 
-const ProductCard = ({
-  productData,
-  changeProductRatingRequest,
-  deleteProductRatingRequest,
-  ratingsLoadingList,
-  ratingsErrorList,
-}) => {
-  const { _id: id, title, description, tags, price, ratingInfo, imageName } = productData
-  const { average, votesAmount, currentUserRating } = ratingInfo
-  const averageRating = Math.round(average)
-  const isUserRatedProduct = Boolean(currentUserRating)
-  const isRatingLoading = ratingsLoadingList.indexOf(id) !== -1
-  const isErrorInLoad = ratingsErrorList.indexOf(id) !== -1
-
-  const handleRatingChange = (event, userRating) => {
-    changeProductRatingRequest({
-      productId: id,
-      userRating,
-    })
-  }
-
-  const handleDeleteButtonClick = () => {
-    deleteProductRatingRequest(id)
-  }
-
-  let userRatingField
-
-  if (isErrorInLoad) {
-    userRatingField = (
-      <ErrorLabel variant="caption" color="secondary" data-test="ratingError">
-        Something went wrong!
-      </ErrorLabel>
-    )
-  } else if (isRatingLoading) {
-    userRatingField = (
-      <LoadingLabel variant="caption" data-test="ratingLoading">
-        Loading...
-      </LoadingLabel>
-    )
-  } else {
-    userRatingField = (
-      <>
-        <Stars
-          value={isUserRatedProduct ? currentUserRating : 0}
-          name={`simple-controlled-user-${id}`}
-          size="small"
-          onChange={handleRatingChange}
-          readOnly={isUserRatedProduct}
-          data-test="userRating"
-        />
-        {isUserRatedProduct && (
-          <DeleteButton
-            aria-label="delete"
-            size="small"
-            onClick={handleDeleteButtonClick}
-            data-test="deleteButton"
-          >
-            <DeleteIcon fontSize="inherit" />
-          </DeleteButton>
-        )}
-      </>
-    )
-  }
+const ProductCard = ({ productData }) => {
+  const { _id: id, title, description, tags, price, imageName } = productData
 
   return (
     <Wrapper>
@@ -110,26 +41,7 @@ const ProductCard = ({
           <Chip key={tag} label={tag} color="secondary" size="small" data-test="tag" />
         ))}
       </TagsWrapper>
-      <RaitingsRoot>
-        <RaitingWrapper>
-          <RatingTitle>Your rating:</RatingTitle>
-          {userRatingField}
-        </RaitingWrapper>
-        <RaitingWrapper>
-          <RatingTitle>Average rating:</RatingTitle>
-          <Stars
-            value={averageRating}
-            name={`simple-controlled-average-${id}`}
-            onChange={handleRatingChange}
-            readOnly
-            size="small"
-            data-test="averageRating"
-          />
-          <RaitingsCount active data-test="ratingsCount">
-            ({votesAmount})
-          </RaitingsCount>
-        </RaitingWrapper>
-      </RaitingsRoot>
+      <Ratings productData={productData} />
     </Wrapper>
   )
 }
@@ -151,10 +63,6 @@ ProductCard.propTypes = {
       currentUserRating: PropTypes.number,
     }),
   }).isRequired,
-  changeProductRatingRequest: PropTypes.func.isRequired,
-  deleteProductRatingRequest: PropTypes.func.isRequired,
-  ratingsLoadingList: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
-  ratingsErrorList: ImmutablePropTypes.listOf(PropTypes.string).isRequired,
 }
 
 export default ProductCard

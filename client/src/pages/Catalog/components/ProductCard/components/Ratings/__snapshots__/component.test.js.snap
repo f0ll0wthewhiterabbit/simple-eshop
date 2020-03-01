@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ratings component should render correctly 1`] = `
+<styled.div>
+  <Styled(WithStyles(ForwardRef(CardActions)))>
+    <styled.span>
+      Your rating:
+    </styled.span>
+    <Styled(WithStyles(ForwardRef(Rating)))
+      data-test="userRating"
+      name="simple-controlled-user-1"
+      onChange={[Function]}
+      readOnly={true}
+      size="small"
+      value={5}
+    />
+    <Styled(WithStyles(ForwardRef(IconButton)))
+      aria-label="delete"
+      data-test="deleteButton"
+      onClick={[Function]}
+      size="small"
+    >
+      <DeleteIcon
+        fontSize="inherit"
+      />
+    </Styled(WithStyles(ForwardRef(IconButton)))>
+  </Styled(WithStyles(ForwardRef(CardActions)))>
+  <Styled(WithStyles(ForwardRef(CardActions)))>
+    <styled.span>
+      Average rating:
+    </styled.span>
+    <Styled(WithStyles(ForwardRef(Rating)))
+      data-test="averageRating"
+      name="simple-controlled-average-1"
+      onChange={[Function]}
+      readOnly={true}
+      size="small"
+      value={5}
+    />
+    <styled.span
+      active={true}
+      data-test="ratingsCount"
+    >
+      (
+      2
+      )
+    </styled.span>
+  </Styled(WithStyles(ForwardRef(CardActions)))>
+</styled.div>
+`;
