@@ -32,14 +32,7 @@ export function* handleAuthenticateRequest() {
         yield call(setAuthToken, accessToken)
       } else {
         const refreshToken = yield call([localStorage, 'getItem'], FIELDS.STORAGE_REFRESH_TOKEN)
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-        const body = JSON.stringify({ refreshToken })
-
-        const response = yield call(API.post, '/auth/token', body, config)
+        const response = yield call(API.post, '/auth/token', { refreshToken })
         const { accessToken: newAccessToken, refreshToken: newRefreshToken } = response.data
 
         yield call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, newAccessToken)
@@ -77,15 +70,9 @@ export function* handleAuthenticateRequest() {
 
 export function* handleSignUpRequest(action) {
   const { firstName, lastName, email, password } = action.payload.userData
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-  const body = JSON.stringify({ firstName, lastName, email, password })
 
   try {
-    const response = yield call(API.post, '/users', body, config)
+    const response = yield call(API.post, '/users', { firstName, lastName, email, password })
     const { accessToken } = response.data
 
     yield call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, accessToken)
@@ -104,15 +91,9 @@ export function* handleSignUpRequest(action) {
 
 export function* handleSignInRequest(action) {
   const { email, password, rememberMe } = action.payload.userData
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-  const body = JSON.stringify({ email, password, rememberMe })
 
   try {
-    const response = yield call(API.post, '/auth', body, config)
+    const response = yield call(API.post, '/auth', { email, password, rememberMe })
     const { accessToken, refreshToken } = response.data
 
     yield call([localStorage, 'setItem'], FIELDS.STORAGE_ACCESS_TOKEN, accessToken)
@@ -140,14 +121,7 @@ export function* handleSignOutRequest(action) {
 
   try {
     if (refreshToken) {
-      const config = {
-        data: JSON.stringify({ refreshToken }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-
-      yield call(API.delete, '/auth/token', config)
+      yield call(API.delete, '/auth/token', { data: { refreshToken } })
     }
   } catch (err) {
     console.error(err)

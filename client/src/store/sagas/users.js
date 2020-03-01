@@ -62,14 +62,8 @@ export function* handleDeleteUsersRequest() {
     yield put(startUsersLoading())
 
     const selectedUsers = yield select(getUsers)
-    const config = {
-      data: JSON.stringify(selectedUsers),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
 
-    yield call(API.delete, '/users', config)
+    yield call(API.delete, '/users', { data: selectedUsers })
     yield put(deleteUsersSuccess(selectedUsers))
   } catch (error) {
     yield put(deleteUsersError('Users delete error!'))
@@ -97,18 +91,13 @@ export function* handleCallForUserDeletionRequest() {
 export function* handleUpdateUserRequest(action) {
   try {
     yield put(startUsersLoading())
+
     const { userData, history } = action.payload
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-    const body = JSON.stringify({
+
+    const response = yield call(API.patch, '/users', {
       firstName: userData.firstName,
       lastName: userData.lastName,
     })
-
-    const response = yield call(API.patch, '/users', body, config)
     const user = convertToRecord(response.data)
     const userRole = yield select(getRole)
 

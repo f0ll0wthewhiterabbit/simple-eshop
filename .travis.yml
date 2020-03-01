@@ -12,8 +12,7 @@ script:
   - cd ..
 deploy:
   provider: heroku
-  api_key:
-    secure: SBBI6cA7Un2+kWJWyz8Pa4gHlOL/vNhWgPqX/bXRxGlNWf+Uo2j/FWFY31/iHLkqV0X4SFJCxqaxRCxLEmvZ74MbsivwSDE4uRe1wXvscCZVMaYNZOPMB637D0S3QmHt2MoaZGjwSJqyzQInYIV8kSMIBCt+vX+DTUgk489/ErcrCe8mUnnkLUl82rWwf8Ig8RMa2L0/tUYQBN2g39ft0YWUz2GG1NwMd3td8goNubiTrIue9IpFMPBBLIbb+NwFDmjl19prAs0C9fPwFcobn+DOdjclyoITogrN5nAvWnIzuQReuQU5MoY5n8zSiD3s0rUOzYzmmUW96Xg3dL5Vg/1TxBhZmAuTHQdSpIO9DEG+WV6Lpj2EkUIzutFDSEGjE7OMIvaV1vacTP9Tiwil+JbgGqxlaY1bBPPTFZ+P1Q/TebIiGMZuegArPHuJUnrlwaz9wOywb63tXLjungwkvjtYS3tMizp8vplw7okguzN5e16oMroawtEX3mlzxLPeeIWiAsdAYfK8h14xFrSk6KkxDvuniNiTHjZ2b5/9lpn0vL1VQJV+CKmQuGp3YqcY4B8pTW9CmE30qTrFXYR5T9zYV6FH6EHcHeYmYvSK+VhYcVh0M9wLoDj1430EMUV5b0HJWW9uPFKo/dAtadY9lVuqRlUh4yVjBfWd3DfyZfQ=
+  api_key: $HEROKU_API_KEY
   app: simple-e-shop
   on:
     repo: f0ll0wthewhiterabbit/simple-eshop

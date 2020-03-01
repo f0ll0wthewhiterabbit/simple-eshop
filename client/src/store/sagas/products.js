@@ -133,17 +133,10 @@ export function* handleFetchProductRatingRequest(action) {
 export function* handleChangeProductRatingRequest(action) {
   const { productId, userRating } = action.payload.ratingData
 
-  yield put(startRatingLoading(productId))
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-  const body = JSON.stringify({ stars: userRating })
-
   try {
-    const response = yield call(API.patch, `/products/${productId}`, body, config)
+    yield put(startRatingLoading(productId))
+
+    const response = yield call(API.patch, `/products/${productId}`, { stars: userRating })
     const product = convertToRecord(response.data)
 
     yield put(changeProductRatingSuccess(product))
@@ -155,17 +148,10 @@ export function* handleChangeProductRatingRequest(action) {
 export function* handleDeleteProductRatingRequest(action) {
   const { productId } = action.payload
 
-  yield put(startRatingLoading(productId))
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-  const body = JSON.stringify({ stars: 0 })
-
   try {
-    const response = yield call(API.patch, `/products/${productId}`, body, config)
+    yield put(startRatingLoading(productId))
+
+    const response = yield call(API.patch, `/products/${productId}`, { stars: 0 })
     const product = convertToRecord(response.data)
 
     yield put(deleteProductRatingSuccess(product))
@@ -176,14 +162,9 @@ export function* handleDeleteProductRatingRequest(action) {
 
 export function* handleAddProductRequest(action) {
   const { productFormData, history } = action.payload
-  const config = {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  }
 
   try {
-    const response = yield call(API.post, '/products', productFormData, config)
+    const response = yield call(API.post, '/products', productFormData)
     const product = convertToRecord(response.data)
 
     yield put(addProductSuccess(product))
@@ -200,14 +181,9 @@ export function* handleAddProductRequest(action) {
 
 export function* handleEditProductRequest(action) {
   const { id, changedFieldsFormData, history } = action.payload
-  const config = {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  }
 
   try {
-    const response = yield call(API.patch, `/products/${id}`, changedFieldsFormData, config)
+    const response = yield call(API.patch, `/products/${id}`, changedFieldsFormData)
     const product = convertToRecord(response.data)
 
     yield put(editProductSuccess(product))
@@ -228,14 +204,8 @@ export function* handleDeleteProductsRequest() {
     yield put(startProductsLoading())
 
     const selectedProducts = yield select(getSelectedProducts)
-    const config = {
-      data: JSON.stringify(selectedProducts),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
 
-    yield call(API.delete, '/products', config)
+    yield call(API.delete, '/products', { data: selectedProducts })
     yield put(deleteProductsSuccess(selectedProducts))
   } catch (error) {
     yield put(deleteProductsError('Products delete error!'))
