@@ -48,14 +48,10 @@ const ProductRatingPage = ({
   )
 }
 
-ProductRatingPage.defaultProps = {
-  error: null,
-}
-
 ProductRatingPage.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
   currentProduct: ImmutablePropTypes.recordOf({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

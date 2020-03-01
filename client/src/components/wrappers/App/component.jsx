@@ -21,13 +21,9 @@ const App = ({ isAuthenticated, error, initializeRequest }) => {
   return <Loader />
 }
 
-App.defaultProps = {
-  error: null,
-}
-
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
   initializeRequest: PropTypes.func.isRequired,
 }
 

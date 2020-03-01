@@ -18,7 +18,7 @@ describe('Auth reducer', () => {
     isAuthenticated: false,
     token: null,
     user: new UserRecord(),
-    error: null,
+    error: '',
   })()
   const testUserData = new UserRecord({
     id: '1',
@@ -48,7 +48,7 @@ describe('Auth reducer', () => {
     const recievedState = authReducer(undefined, authenticateSuccess(testUserData))
 
     expect(recievedState.isAuthenticated).toBe(true)
-    expect(recievedState.error).toBe(null)
+    expect(recievedState.error).toBe('')
     expect(recievedState.user.hashCode()).toBe(expectedUser.hashCode())
   })
 
@@ -57,7 +57,7 @@ describe('Auth reducer', () => {
     const recievedState = authReducer(undefined, signUpSuccess(testToken))
 
     expect(recievedState.isAuthenticated).toBe(true)
-    expect(recievedState.error).toBe(null)
+    expect(recievedState.error).toBe('')
     expect(recievedState.token).toBe(testToken)
   })
 
@@ -66,7 +66,7 @@ describe('Auth reducer', () => {
     const recievedState = authReducer(undefined, signInSuccess(testToken))
 
     expect(recievedState.isAuthenticated).toBe(true)
-    expect(recievedState.error).toBe(null)
+    expect(recievedState.error).toBe('')
     expect(recievedState.token).toBe(testToken)
   })
 

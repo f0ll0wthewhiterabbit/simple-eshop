@@ -203,12 +203,8 @@ const ProductAddForm = ({ error, addProductRequest, history }) => {
   )
 }
 
-ProductAddForm.defaultProps = {
-  error: null,
-}
-
 ProductAddForm.propTypes = {
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
   addProductRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 }

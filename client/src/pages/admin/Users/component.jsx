@@ -31,14 +31,10 @@ const UsersPage = ({ itemsPerPage, isLoading, error, fetchUsersRequest, setUsers
   )
 }
 
-UsersPage.defaultProps = {
-  error: null,
-}
-
 UsersPage.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
   fetchUsersRequest: PropTypes.func.isRequired,
   setUsersSearchQuery: PropTypes.func.isRequired,
 }

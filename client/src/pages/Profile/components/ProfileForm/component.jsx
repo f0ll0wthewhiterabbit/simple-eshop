@@ -104,16 +104,12 @@ const ProfileForm = ({ firstName, lastName, updateUserRequest, error, history })
   )
 }
 
-ProfileForm.defaultProps = {
-  error: null,
-}
-
 ProfileForm.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   updateUserRequest: PropTypes.func.isRequired,
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
 }
 
 export default withRouter(ProfileForm)

@@ -9,7 +9,7 @@ describe('CatalogPage component', () => {
   let wrapper
   const initialProps = {
     products: List(),
-    error: null,
+    error: '',
     isLoading: false,
     fetchProductsRequest: jest.fn(),
   }

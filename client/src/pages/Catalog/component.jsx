@@ -55,10 +55,6 @@ const CatalogPage = ({ products, error, isLoading, fetchProductsRequest }) => {
   )
 }
 
-CatalogPage.defaultProps = {
-  error: null,
-}
-
 CatalogPage.propTypes = {
   products: ImmutablePropTypes.listOf(
     ImmutablePropTypes.recordOf({
@@ -78,7 +74,7 @@ CatalogPage.propTypes = {
       }),
     })
   ).isRequired,
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   fetchProductsRequest: PropTypes.func.isRequired,
 }

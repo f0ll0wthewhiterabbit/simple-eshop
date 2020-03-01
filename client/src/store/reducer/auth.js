@@ -16,7 +16,7 @@ const initialState = Record({
   isAuthenticated: false,
   token: null,
   user: new UserRecord(),
-  error: null,
+  error: '',
 })()
 
 const auth = handleActions(

@@ -27,7 +27,7 @@ describe('Users reducer', () => {
     selected: List(),
     lastSearchQuery: '',
     isLoading: true,
-    error: null,
+    error: '',
   })()
   const testUser1 = Record({ _id: '1', isRemovable: false, firstName: 'First' })()
   const testUser2 = Record({ _id: '2', isRemovable: false, firstName: 'Second' })()

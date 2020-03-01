@@ -26,7 +26,7 @@ const initialState = Record({
   selected: List(),
   lastSearchQuery: '',
   isLoading: true,
-  error: null,
+  error: '',
 })()
 
 const users = handleActions(

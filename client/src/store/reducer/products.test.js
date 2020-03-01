@@ -42,7 +42,7 @@ describe('Products reducer', () => {
     currentProduct: new CurrentProductRecord(),
     lastSearchQuery: '',
     isLoading: true,
-    error: null,
+    error: '',
   })()
   const testProduct1 = Record({ _id: '1', title: 'First' })()
   const testProduct2 = Record({ _id: '2', title: 'Second' })()

@@ -41,7 +41,7 @@ const initialState = Record({
   currentProduct: new CurrentProductRecord(),
   lastSearchQuery: '',
   isLoading: true,
-  error: null,
+  error: '',
 })()
 
 const products = handleActions(

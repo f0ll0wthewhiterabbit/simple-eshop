@@ -59,10 +59,6 @@ const ProductsSection = ({ products, error, isLoading, fetchProductsRequest }) =
   )
 }
 
-ProductsSection.defaultProps = {
-  error: null,
-}
-
 ProductsSection.propTypes = {
   products: ImmutablePropTypes.listOf(
     ImmutablePropTypes.recordOf({
@@ -82,7 +78,7 @@ ProductsSection.propTypes = {
       }),
     })
   ).isRequired,
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   fetchProductsRequest: PropTypes.func.isRequired,
 }

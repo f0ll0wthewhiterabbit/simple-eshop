@@ -254,10 +254,6 @@ const ProductEditForm = ({ product, error, editProductRequest, history }) => {
   )
 }
 
-ProductEditForm.defaultProps = {
-  error: null,
-}
-
 ProductEditForm.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -267,7 +263,7 @@ ProductEditForm.propTypes = {
     price: PropTypes.number.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
   editProductRequest: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 }

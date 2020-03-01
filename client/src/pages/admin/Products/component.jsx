@@ -37,14 +37,10 @@ const ProductsPage = ({
   )
 }
 
-ProductsPage.defaultProps = {
-  error: null,
-}
-
 ProductsPage.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.oneOf([null]).isRequired]),
+  error: PropTypes.string.isRequired,
   fetchProductsRequest: PropTypes.func.isRequired,
   setProductsSearchQuery: PropTypes.func.isRequired,
 }
