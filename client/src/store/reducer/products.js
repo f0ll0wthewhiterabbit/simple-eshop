@@ -26,6 +26,7 @@ import {
   setProductsSearchQuery,
 } from '../actions'
 import { PAGE_LIMITS, FIELDS } from '../../constants'
+import { CurrentProductRecord } from './shared'
 
 const initialState = Record({
   data: List(),
@@ -37,15 +38,7 @@ const initialState = Record({
   ratingsLoadingList: List(),
   ratingsErrorList: List(),
   filter: FIELDS.URL_NO_FILTER,
-  currentProduct: Record({
-    id: '',
-    title: '',
-    description: '',
-    price: null,
-    imageName: '',
-    tags: List(),
-    rating: List(),
-  })(),
+  currentProduct: new CurrentProductRecord(),
   lastSearchQuery: '',
   isLoading: true,
   error: null,

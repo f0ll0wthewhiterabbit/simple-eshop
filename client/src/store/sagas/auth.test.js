@@ -19,6 +19,8 @@ import {
 import { handleAuthenticate, handleSignUp, handleSignIn, handleSignOut } from './auth'
 import { ROLES, PAGE_LIMITS, PAGE_PATHS, FIELDS } from '../../constants'
 
+jest.mock('../../utils/convertToRecord', () => jest.fn(() => ({ id: 1 })))
+
 describe('Auth sagas', () => {
   describe('authenticate', () => {
     const testResponse = {
@@ -31,8 +33,7 @@ describe('Auth sagas', () => {
         isRemovable: false,
       },
     }
-    const { _id: id, firstName, lastName, email, role, isRemovable } = testResponse.data
-    const userData = { id, firstName, lastName, email, role, isRemovable }
+    const userData = { id: 1 }
 
     it('should handle if token not expired', () => {
       return expectSaga(handleAuthenticate)

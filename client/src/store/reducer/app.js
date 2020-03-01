@@ -14,10 +14,9 @@ const initialState = Record({
 const app = handleActions(
   {
     [showModal]: (state, action) =>
-      state.merge({
-        isModalOpened: true,
-        storeFieldNameForModal: action.payload.storeFieldNameForModal,
-      }),
+      state
+        .set('isModalOpened', true)
+        .set('storeFieldNameForModal', action.payload.storeFieldNameForModal),
 
     [closeModal]: state => state.delete('isModalOpened').delete('storeFieldNameForModal'),
 

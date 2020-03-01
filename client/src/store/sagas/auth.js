@@ -19,6 +19,7 @@ import {
 } from '../actions'
 import setAuthToken from '../../utils/setAuthToken'
 import isTokenExpired from '../../utils/isTokenExpired'
+import convertToRecord from '../../utils/convertToRecord'
 
 export function* handleAuthenticate() {
   try {
@@ -52,7 +53,7 @@ export function* handleAuthenticate() {
 
     const response = yield call(API.get, '/auth')
     const { _id: id, firstName, lastName, email, role, isRemovable } = response.data
-    const userData = { id, firstName, lastName, email, role, isRemovable }
+    const userData = convertToRecord({ id, firstName, lastName, email, role, isRemovable })
 
     if (role === ROLES.ADMIN) {
       yield put(setProductsPerPage(PAGE_LIMITS.ADMIN_DEFAULT))

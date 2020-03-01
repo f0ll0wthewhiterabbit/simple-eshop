@@ -11,29 +11,23 @@ import {
   signOutSuccess,
 } from '../actions'
 import { ROLES } from '../../constants'
+import { UserRecord } from './shared'
 
 describe('Auth reducer', () => {
   const initialState = Record({
     isAuthenticated: false,
     token: null,
-    user: Record({
-      id: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      role: ROLES.GUEST,
-      isRemovable: false,
-    })(),
+    user: new UserRecord(),
     error: null,
   })()
-  const testUserData = {
+  const testUserData = new UserRecord({
     id: '1',
     firstName: 'testName',
     lastName: 'testLastName',
     email: 'test@email.com',
     role: ROLES.USER,
     isRemovable: false,
-  }
+  })
   const testError = 'test error message'
 
   it('should return the initial state', () => {

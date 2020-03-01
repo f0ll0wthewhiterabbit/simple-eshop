@@ -10,19 +10,12 @@ import {
   signInError,
   signOutSuccess,
 } from '../actions'
-import { ROLES } from '../../constants'
+import { UserRecord } from './shared'
 
 const initialState = Record({
   isAuthenticated: false,
   token: null,
-  user: Record({
-    id: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    role: ROLES.GUEST,
-    isRemovable: false,
-  })(),
+  user: new UserRecord(),
   error: null,
 })()
 
@@ -30,18 +23,14 @@ const auth = handleActions(
   {
     [authenticateSuccess]: (state, action) =>
       state
-        .mergeDeep({
-          isAuthenticated: true,
-          user: action.payload.userData,
-        })
+        .set('isAuthenticated', true)
+        .set('user', action.payload.userData)
         .delete('error'),
 
     [combineActions(signUpSuccess, signInSuccess)]: (state, action) =>
       state
-        .merge({
-          isAuthenticated: true,
-          token: action.payload.token,
-        })
+        .set('isAuthenticated', true)
+        .set('token', action.payload.token)
         .delete('error'),
 
     [combineActions(authenticateError, signUpError, signInError)]: (state, action) =>
