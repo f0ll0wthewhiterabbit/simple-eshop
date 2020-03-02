@@ -32,7 +32,14 @@ jest.mock('../../utils/convertToRecord', () => jest.fn(() => [1, 2, 3]))
 
 describe('Users sagas', () => {
   describe('fetchUsersRequest', () => {
-    const action = { payload: { currentPage: 1, itemsPerPage: 10 } }
+    const action = {
+      payload: {
+        currentPage: 1,
+        queryParams: {
+          itemsPerPage: 10,
+        },
+      },
+    }
 
     it('should handle', () => {
       const testResponse = {

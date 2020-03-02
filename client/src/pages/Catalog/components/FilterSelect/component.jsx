@@ -11,13 +11,14 @@ const FilterSelect = ({ filter, isDarkTheme, fetchProductsRequest, setProductsFi
 
   const handleChange = event => {
     const { value } = event.target
+
     if (value === filter) {
       return
     }
 
     setProductsFilter(value)
 
-    fetchProductsRequest(1, null, undefined, value)
+    fetchProductsRequest(1, { filter: value })
   }
 
   return (

@@ -30,7 +30,8 @@ export const getRole = state => state.getIn(['auth', 'user', 'role'])
 export function* handleFetchUsersRequest(action) {
   try {
     yield put(startUsersLoading())
-    const { currentPage: page, itemsPerPage: limit, searchText } = action.payload
+    const { currentPage: page, queryParams } = action.payload
+    const { itemsPerPage: limit, searchText } = queryParams
     let url = `/users/?page=${page}`
 
     if (limit) {

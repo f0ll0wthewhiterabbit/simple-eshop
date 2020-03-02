@@ -18,7 +18,7 @@ const ProductsPage = ({
   }, [setProductsSearchQuery])
 
   useEffect(() => {
-    fetchProductsRequest(1, itemsPerPage)
+    fetchProductsRequest(1, { itemsPerPage })
   }, [fetchProductsRequest, itemsPerPage])
 
   if (error) {

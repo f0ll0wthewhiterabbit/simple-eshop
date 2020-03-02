@@ -44,7 +44,14 @@ jest.mock('../../utils/convertToRecord', () => jest.fn(() => [1, 2, 3]))
 
 describe('Products sagas', () => {
   describe('fetchProductsRequest', () => {
-    const action = { payload: { page: 1, itemsPerPage: 10 } }
+    const action = {
+      payload: {
+        page: 1,
+        queryParams: {
+          itemsPerPage: 10,
+        },
+      },
+    }
 
     it('should handle', () => {
       const testResponse = {

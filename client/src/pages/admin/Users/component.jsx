@@ -12,7 +12,7 @@ const UsersPage = ({ itemsPerPage, isLoading, error, fetchUsersRequest, setUsers
   }, [setUsersSearchQuery])
 
   useEffect(() => {
-    fetchUsersRequest(1, itemsPerPage)
+    fetchUsersRequest(1, { itemsPerPage })
   }, [fetchUsersRequest, itemsPerPage])
 
   if (error) {

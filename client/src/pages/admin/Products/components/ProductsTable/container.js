@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setSelectedProducts: selectedProductsList => setSelectedProducts(selectedProductsList),
-  fetchProductsRequest: (page, itemsPerPage) => fetchProductsRequest(page, itemsPerPage),
+  fetchProductsRequest: (page, queryParams) => fetchProductsRequest(page, queryParams),
   setProductsPerPage: amount => setProductsPerPage(amount),
 }
 

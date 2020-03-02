@@ -2,10 +2,9 @@ import { createAction } from 'redux-actions'
 
 export const fetchUsersRequest = createAction(
   'USERS/FETCH_USERS_REQUEST',
-  (currentPage, itemsPerPage, searchText) => ({
+  (currentPage, queryParams) => ({
     currentPage,
-    itemsPerPage,
-    searchText,
+    queryParams,
   })
 )
 export const fetchUsersSuccess = createAction(

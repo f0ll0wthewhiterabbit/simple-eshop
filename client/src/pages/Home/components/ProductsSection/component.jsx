@@ -21,7 +21,7 @@ import {
 
 const ProductsSection = ({ products, error, isLoading, fetchProductsRequest }) => {
   useEffect(() => {
-    fetchProductsRequest(1, 3)
+    fetchProductsRequest(1, { itemsPerPage: 3 })
   }, [fetchProductsRequest])
 
   let content

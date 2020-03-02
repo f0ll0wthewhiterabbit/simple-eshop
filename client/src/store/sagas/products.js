@@ -40,7 +40,9 @@ export const getSelectedProducts = state => state.getIn(['products', 'selected']
 export function* handleFetchProductsRequest(action) {
   try {
     yield put(startProductsLoading())
-    const { page, itemsPerPage: limit, searchText, filter } = action.payload
+
+    const { page, queryParams } = action.payload
+    const { itemsPerPage: limit, searchText, filter } = queryParams
     let url = `/products/?page=${page}`
 
     if (limit) {

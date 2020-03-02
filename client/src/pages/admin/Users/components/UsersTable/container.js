@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setSelectedUsers: selectedUsersList => setSelectedUsers(selectedUsersList),
-  fetchUsersRequest: (currentPage, itemsPerPage) => fetchUsersRequest(currentPage, itemsPerPage),
+  fetchUsersRequest: (currentPage, queryParams) => fetchUsersRequest(currentPage, queryParams),
   setUsersPerPage: amount => setUsersPerPage(amount),
 }
 

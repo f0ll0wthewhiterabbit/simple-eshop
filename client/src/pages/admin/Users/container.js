@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchUsersRequest: (currentPage, itemsPerPage) => fetchUsersRequest(currentPage, itemsPerPage),
+  fetchUsersRequest: (currentPage, queryParams) => fetchUsersRequest(currentPage, queryParams),
   setUsersSearchQuery: searchQuery => setUsersSearchQuery(searchQuery),
 }
 

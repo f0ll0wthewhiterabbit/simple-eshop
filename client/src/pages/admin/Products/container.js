@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchProductsRequest: (page, itemsPerPage) => fetchProductsRequest(page, itemsPerPage),
+  fetchProductsRequest: (page, queryParams) => fetchProductsRequest(page, queryParams),
   setProductsSearchQuery: searchQuery => setProductsSearchQuery(searchQuery),
 }
 

@@ -91,7 +91,7 @@ const Table = ({
   const handleChangePage = (event, newPage) => {
     const term = currentPage === newPage ? 1 : -1
 
-    fetchData(currentPage + term, rowsPerPage)
+    fetchData(currentPage + term, { itemsPerPage: rowsPerPage })
     setPage(newPage)
   }
 

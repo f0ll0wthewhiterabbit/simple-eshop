@@ -2,11 +2,9 @@ import { createAction } from 'redux-actions'
 
 export const fetchProductsRequest = createAction(
   'PRODUCTS/FETCH_PRODUCTS_REQUEST',
-  (page, itemsPerPage, searchText, filter) => ({
+  (page, queryParams = {}) => ({
     page,
-    itemsPerPage,
-    searchText,
-    filter,
+    queryParams,
   })
 )
 export const fetchProductsSuccess = createAction(

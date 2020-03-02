@@ -20,7 +20,7 @@ const SearchForm = ({
   const handleFormSubmit = event => {
     event.preventDefault()
     setSearchQueryMethod(inputValue)
-    searchMethod(1, itemsPerPage, inputValue)
+    searchMethod(1, { itemsPerPage, searchText: inputValue })
   }
 
   return (
