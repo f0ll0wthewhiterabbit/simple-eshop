@@ -9,6 +9,7 @@
     "client": "yarn --cwd client start",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "lint": "eslint .",
+    "lint:staged": "eslint --fix",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --cwd client install && yarn --cwd client build"
   },
   "author": "followthewhiterabbit",
@@ -41,13 +42,14 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && yarn --cwd client test:ci"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn --cwd client test:ci"
     }
   },
   "lint-staged": {
-    "!(client)/**/*.js": "yarn lint",
-    "./*.js": "yarn lint",
-    "client/**/*.(js|jsx)": "yarn --cwd client lint",
-    "client/src/**/styles.js": "yarn --cwd client lint:css"
+    "!(client)/**/*.js": "yarn lint:staged",
+    "./*.js": "yarn lint:staged",
+    "client/**/*.(js|jsx)": "yarn --cwd client lint:staged",
+    "client/src/**/styles.js": "yarn --cwd client lint:css:staged"
   }
 }
